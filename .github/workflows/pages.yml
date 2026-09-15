@@ -1,0 +1,39 @@
+name: Deploy site to Pages
+
+# Publishes whatever is already committed under site/ — the generation
+# step happens offline, in arsene-cms's scripts/wix-archive/generate.ts
+# (real imports of that repo's own render.ts page shell and the
+# wix-import Ricos converter), not in this workflow. This workflow's only
+# job is the same one pronos/compos/DNP/groupes's own pages.yml does:
+# take a folder of static files and publish it.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - uses: actions/configure-pages@v5
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J16</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="« Il sera toujours temps de boire deux coupes de champagne le 1er janvier au soir si jamais on bat le PSG.» F Haise (décembre 2022) 1er..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J16"><figure class="hero"><img src="/media/a73c0f_b1ec35e4b44542e8a62db0ba8f340bcc_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Ligue 1, J16</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 27 décembre 2022</p><div class="body"><p>« <em>Il sera toujours temps de boire deux coupes de champagne le 1er janvier au soir si jamais on bat le PSG</em>.» F Haise (décembre 2022)</p><p>1er boxing day de l’Histoire, finale de coupe du monde déjà dans les mémoires et retour de Neymar: Player Picks de la saison LCDE, épisode 16</p><h2>Les matchs de la journée</h2><h3>Troyes – Nantes</h3><p>Passer en 10j d’une CDM éblouissante à un ESTAC – FCN, c’est faire perdurer la magie de Noël encore quelque temps. Et qu’on vienne pas me dire après que ce championnat ne nous fait pas vivre les montagnes russes de l’émotion ! J’ai toujours été d’un naturel à voir le verre à moitié plein. Alors quand on me dit que des joueurs de Brest, Auxerre et Nantes ont été punis en raison de paris sportifs, je me dis que c’est bien aussi car, si ça les avait pas arrangés, ils auraient pas été si nuls non ?</p><p><strong><span style="color:#1e73be">Score 1-1</span></strong></p><h3>Ajaccio – Angers</h3><p>Je comprends pas la fronde des supporters quant à la programmation des J16 et 17 de L1. Franchement à 15 comme à 20h, même si on m’offrait les places, j’irais jamais voir Troyes – Nantes ou Ajaccio – Angers ! C’est à se demander si le SCO était pas plus occupé à faire monter les enchères sur ses pépites marocaines qu’à trouver un nouveau coach pour la reprise. Une fois n’est pas coutume, je vais attribuer mon prono au seul effectif qui ait placé absolument aucun mondialiste. Les mecs sont frais</p><p><strong><span style="color:#1e73be">Score 3-1</span></strong></p><h3>Auxerre – Monaco</h3><p>Avec ces conneries de Mondial, j’en avais presque oublié que l’AJA était dans l’élite. Donc, dans ce match que tout oppose – un candidat européen contre un candidat au maintien, un grand attaquant contre un éternel futur talent et surtout un foot populaire face à un foot de mercenaires (no offence Robin) – je vais m’en remettre aux fondamentaux et parier sur l’une des meilleures formations en déplacement cette saison ; à savoir Monaco qui pourra compter sur le retour de ses internationaux</p><p><strong><span style="color:#1e73be">Score 0-1</span></strong></p><h3>Clermont – Lille</h3><p>L’opposition entre Clermont et Lille, si elle me rappelle un trajet blablacar interminable avec un complotiste du Pas-de-Calais, sonne surtout, pour tout un chacun, comme l’occasion de se rappeler aux bons souvenirs de Bayo, 14 réalisations en 2021-2022, et seulement 30 minutes de jeu sur le pré en 2022-23. Vu le nombre d’absents aux avants-postes lillois, je serais pas surpris de le voir rentrer à Montpied, retrouver ses volcans auvergnats et qui sait plus tard les sommets sur la 2e partie de L1</p><p><strong><span style="color:#1e73be">Score 0-1</span></strong></p><h3>Paris SG – Strasbourg</h3><p>On s’en est rejoué des scénarios dans notre tête avec le foot. Et si Gignac avait marqué ? Et si Kolo-Muani avait marqué ? Et si Diallo n’avait pas marqué ? Ben Stephan n’aura pas eu un mois pour préparer le déplacement de Strasbourg au Parc des Princes face à la meilleure défense et, tant qu’à faire ce peu, la meilleure attaque de notre championnat qui pourra aligner, à l’exception des blessés et Messi, une grosse partie de ses stars de retour avancé du Qatar. Vous avez donc le choix dans le supersub</p><p><strong><span style="color:#1e73be">Score 3-0</span></strong></p><h3>Brest – Lyon</h3><p>Ha l’OL seul club à avoir un champion du monde allemand, français et argentin dans ses rangs, coté en bourse et, enfin, aux mains d’un richissime actionnaire, pourtant 8e de la farmers league et pas foutu de battre en amical le 14e de Serie A (Monza pour ceux qui ont arrêté leur abonnement bein sports dimanche). Ha Brest, ce club dont Le Douaron est le joueur qui crée le plus d’occaz par match de France et de Navarre (derrière Ney mais devant Kylian), 16e et toujours sans entraîneur. Ça promet</p><p><strong><span style="color:#1e73be">Score 1-1</span></strong></p><h3>Lorient – Montpellier</h3><p>Bon, comme vous tous, me suis pas mal fait chier pendant les fêtes du coup, comme personne, me suis paluché – wait for it – la presse régionale. Unanime, il semblerait que le MHSC ait su tirer profiter de ce long – keep waiting –  intervalle qatarien pour se remettre tête et corps à l’endroit et, sur le modèle des grandes écuries européennes, faire venir à tous les étages de l’organigramme (Pitau et Mendy récemment) des anciennes légendes pailladines. Y a 0 Vannes (à part à 60 bornes de Lorient)</p><p><strong><span style="color:#1e73be">Score 2-2</span></strong></p><h3>Reims – Rennes</h3><p>Ce qui a de bien quand tu interromps le vrai football pendant un mois, c’est que tu prolonges de facto les séries en cours dans les différents championnats nationaux. Et ce, pour le meilleur – le Rennes de Genesio, sur le podium de ligue 1, est invaincu depuis le mois d’août – comme pour le pire – le Reims de Still, qui n’en manque pas, mais n’a pas réussi à enchaîner 2 succès depuis juillet et les matchs de préparation. C’est donc dire si le SR est favori face au SR pour ce gomistico !</p><p><strong><span style="color:#1e73be">Score 1-2</span></strong></p><h3>Nice – Lens</h3><p>Taper, en cours de saison, Ghisolfi – à Lens justement! - et Blanc à Paris c’est un signal fort qu’envoie Inéos. Attendez un peu que Ratcliffe capte que c’est de joueurs foot dont il a besoin, je serais pas étonné que l’OGCN se mette à jouer au foot tiens ! En espérant que Delort, l’homme de d’Europe en 2022, le pendant de Laborde et le dernier attaquant potable à Nice depuis les départs de Guessand, Kluivert, Gouiri et Dolberg, en soit encore sinon la saison, déjà historique pour Lens, sera longue</p><p><strong><span style="color:#1e73be">Score 0-2</span></strong></p><h3>Marseille – Toulouse</h3><p>Heureusement, dans ce monde chamboulé par une CDM en décembre, une guerre en Europe et pas de confinement en 2022, il reste des certitudes : match au Vel à 21h, rumeurs mercato exubérantes (Ounahi même à 20 millions signera jamais l’OM) et flotov en approche. Sinon, footballistiquement parlant, entre une équipe qui n’a toujours pas d’attaquant et une qui n’a plus de latéraux, on pourrait croire que cela s’équilibre mais le Tef est tellement aux fraises que je mise Marseille</p><p><strong><span style="color:#1e73be">Score 3-0</span></strong></p><p>On perd pas les bonnes habitudes et on attend comme chaque semaine <a href="https://www.fantasy-coach.fr/pronos-ligue1">vos petits pronos.</a></p><h2>Players Picks</h2><h3>Les bons tuyaux:</h3><p>A Lyon, y a tellement personne derrière que vous pouvez avoir <strong><span style="color:#1e73be">Da Silva</span></strong> (7,6) ou <strong><span style="color:#1e73be">Diomandé </span></strong>(5,9) pour le prix d’un vrai défenseur</p><p>Sous réserve que la rotation dans les cages troyennes ne reprenne pas, le portier polonais <strong><span style="color:#1e73be">M Lis </span></strong>(4,4) sera titu</p><h3>Les pépites:</h3><p>On le propose car on le suppose plus frais que le génie français : <strong><span style="color:#1e73be">Ney</span></strong> (21,8) supersub du 16e volet du Player Picks LCDE</p><p>Même une mi-temps sous les couleurs du SCO suffit pour évoquer la prophétie du buteur-tueur contre son ancien club : <strong><span style="color:#1e73be">Y Belaïli </span></strong>(11,6)</p><h3>Les incontournables:</h3><p>Si la Belgique a eu le seum de se voir sortir si tôt, l’Artois a eu la joie de le voir revenir plus tôt : <strong><span style="color:#1e73be">Loïs Openda</span></strong> (14,5)
+</p><p>The initials BB va venir faire l’anamour à Reims et mettre l’eau à la bouche de tous les Fantaisistes. <strong><span style="color:#1e73be">B Bourigeaud</span></strong> (15.5) est la tête d’affiche du Player Picks LCDE n°16</p><p>t34</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

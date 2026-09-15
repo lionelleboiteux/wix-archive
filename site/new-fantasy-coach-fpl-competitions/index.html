@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>New Fantasy Coach FPL competitions</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="This new season of Fantasy Premier League will offer us new sensations. The Fantasy Coach league recruitment campaign has been successful..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="New Fantasy Coach FPL competitions"><figure class="hero"><img src="/media/deb9b2_a24d29261c6b4fc6b6c15ccd672cb6a0_mv2.png" alt=""/><div class="scrim"></div><h1>New Fantasy Coach FPL competitions</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 8 août 2023</p><div class="body"><img src="/media/deb9b2_a24d29261c6b4fc6b6c15ccd672cb6a0_mv2.png" alt=""/><p>This new season of Fantasy Premier League will offer us new sensations. The Fantasy Coach league recruitment campaign has been successful and we thank you for it.</p><p>Last season we were 168 managers to compete for the league title and the Cup.</p><p>This season we are nearly 350 managers and the group continues to grow. To keep in touch with all of you and to make things interesting we want to offer you 2 new competitions in addition to the league and the Cup. These 2 new games will be managed by ourselves.</p><h3>Survivor</h3><p>For this competition, the game will take place from GW1 to GW37. The managers with the lowest scores for each Game Week will be eliminated.</p><img src="/media/deb9b2_32757984f3e24dca82ae280aa693982b_mv2.jpg" alt=""/><p>Depending on the number of managers in the league at the start of GW 1, between 9 and 11 will be eliminated. These will be the managers posting the lowest scores of the GW.</p><p>Survivors will qualify for next gameweek until there is only one left. The elimination schedule is as follow.</p><p>- GW1 to GW33: 9 to 11 worst scores of each gameweek eliminated.</p><p>- GW34: 50% of the survivors of GW33 will be eliminated.</p><p>-GW35: 50% of the survivors of GW34 will be eliminated.</p><p>-GW36: The 4 best scores of GW36 will be the ultimate survivors.</p><p>-GW37: The winer of this new competition will be the manager with the highest score of the GW.</p><p>We will try to post regular updates of the Survivor at the end of each Gameweek on our X (@FantasyCoach_FR).</p><h3>Fantasy Coach Winter Cup</h3><img src="/media/deb9b2_315b802533674c95a4d07d44c2053cfb_mv2.jpg" alt=""/><p>In short, it's a 2nd cup competition. The differences with the official FPL Cup are:</p><p>- the final will take place in GW19</p><p>- to allow us to publish the head-to-head schedule before the start of a round, there will be no competition on GW15 (midweek gameweek) and GW18 (short turn around before GW19).</p><p>There will be no draw, match-ups will be determined by the general ranking of managers at the start of each GW. The highest ranked will face the lowest ranked, the 2nd highest ranked will face the 2nd lowest ranked and so on.</p><p>Drawned Matches will be decided in the same way as the Classic Cup.</p><p>1- Most goals scored during the gameweek.</p><p>2- Fewest goals conceded during the gameweek.</p><p>3- Virtual toss.</p><p>The qualifying round will take place in GW9. The 256 managers who will achieve the best scores during this gameweek will be qualified for the 1st round which will take place in GW10. The cup rounds will be scheduled as follow:</p><h3>Cup rounds</h3><p>Qualifying round: GW9 (weekend 21st of October 2023)</p><p>Round 1: GW10 (weekend 28th of October 2023)</p><p>Round 2: GW11 (weekend 4th of November 2023)</p><p>Round 3: GW12 (weekend 11th of November 2023)</p><p>Round 4: GW13 (weekend 25th of November 2023)</p><p>Round 5: GW14 (weekend 2nd of December 2023)</p><p>Quarter finals: GW16 (weekend 9th of December 2023)</p><p>Semi finals: GW17 (weekend of 16th of December 2023)</p><p>Final: GW19 (Boxing Day 2023)</p><h3>If the league exceeds 512 managers there will be an extra round. The qualifying round would then take place in GW8.</h3><p>We hope that by offering you these 2 new games the interest for the Fantasy Coach league will be constant throughout the season.</p><p>We remind you that you can discuss FPL, football and more on our Discord:</p><p>To join the Fantasy Coach league register on https://fantasy.premierleague.com.</p><p>Select your team. Click on &quot;Join Leagues&quot;. Enter the code <strong>ckj76z.</strong></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

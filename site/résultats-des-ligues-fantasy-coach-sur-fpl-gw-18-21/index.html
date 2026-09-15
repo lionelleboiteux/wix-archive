@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Résultats des ligues Fantasy Coach sur FPL. GW 18-21.</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Après une petite pose dans l’écriture des articles résumant les résultats de nos ligues sur le jeu Fantasy Premier League, je reprends la..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Résultats des ligues Fantasy Coach sur FPL. GW 18-21."><figure class="hero"><img src="/media/deb9b2_b195796b4a044160a96f4d42630e0bbe_mv2.jpg" alt=""/><div class="scrim"></div><h1>Résultats des ligues Fantasy Coach sur FPL. GW 18-21.</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 17 janvier 2025</p><div class="body"><p>Après une petite pose dans l’écriture des articles résumant les résultats de nos ligues sur le jeu Fantasy Premier League, je reprends la suite de l’histoire de cette saison. Tout d’abord, comme pour beaucoup de personnes, je vous souhaite une bonne année 2025 avec du retard.</p><p>La Premier League ne s’est pas reposée lors de cette transition de l’année 2024 à l’année 2025.Liverpool avait fini l’année en trombe. Depuis le début 2025, c’est plus compliqué. Pour Arsenal, les problèmes en coupe, n’ont pas empêché de se rapprocher des Reds en championnat. Nottingham continue sa saison fantastique, par contre Chelsea a calé et ne redémarre pas.</p><p>Je vais essayer de faire un rapide tour de ce qui s’est passé lors des 4 dernières journées dans lesa différentes ligues et coupes Fantasy Coach.</p><p>La prochaine deadline est celle de la GW22. Elle est ce Samedi 18 Janvier 2025 à 12h00 CET (11h00 GMT).</p><h2>La Ligue Classique (code: gpojm8): </h2><img src="/media/deb9b2_d6e4a9dc2d224d49826f615e031f19e7_mv2.jpg" alt=""/><p><strong>Julien Cazenave</strong> est un peu comme Liverpool. Il est toujours en tête de notre ligue (depuis la GW15 quand même). Il a compté jusqu’à 28pts d’écart avec son dauphin en GW19. Cet écart est tombé à seulement 2 pts en 2 tours de jeu depuis le passage à 2025. <strong>Eric Trump</strong> grêce à un énorme score de 94pts est désormais le nouveau plus proche poursuivant de Julien. Le podium de notre ligue classique est complété par <strong>Axel Dancette</strong>.</p><p>L’écart dans le top 10 n’a pas énormément progressé depuis la dernière mise à jour. Il y a 35 pts de différence entre le 1er et le 10e du classement général.</p><p><strong>Arthur Simmonet</strong>, champion 2021,2022 et 2024, continue son chemin de croix dans la 2e partie du classement malgré une petite progression. En 4 journées il a gagné 7 places et il se classe désormais 371e.</p><p>Julien Cazenave, le vainqueur de la Cup 2024, est donc le leader de la ligue.</p><p><strong>Asare Daniel</strong>, le nouveau vainqueur de la Winter Cup, est 12e du classement général. Sa victoire dans la Winter Cup lui a permis de gagner plus de 100 places depuis le tour qualificatif de la GW7.</p><p><strong>Michael Akins</strong>, le vainqueur du Survivor 2024, progresse un peu comme Arthur. En 4 journées il gagne 13 places pour se classer 46e.</p><h2>Fantasy Coach’s FPL Survivor (code: gpojm8) </h2><p>Le Survivor est devenu très compliqué pour l’équipe Fantasy Coach. Après la perte de <strong>Marco Chupas</strong> en GW16, 3 nouveaux membres sont tombés lors des 3 dernières journées. <strong>Rwano Breizh</strong>, notre specialiste Buli et foot Breton, s’est arrêté en GW19 ; Arthur nous a dit au revoir en GW20. Enfin <strong>Robin Narguet-Magnier</strong>, notre spécialiste compo Ligue 1 et PP L1, nous a quitté lors de la dernière journée.</p><p>En dessous d’un score de 40pts, il devient très compliquer de continuer l’aventure Survivor. Surtout que depuis la GW21 il y a 16 éliminations par journée au lieu de 14. Ce nombre d’éliminations sera appliqué jusqu’en GW25.</p><p><strong>Michael Akins</strong>, le champion 2024, n’a pas vraiment tremblé lors de cette période. Il continue la défense de sa couronne avec panache.</p><p>Les meilleurs scores des journée 18 à 21 sont les suivants :</p><p>GW18 : 87pts par <strong>Tope Cole</strong></p><p>GW19 : 111pts par <strong>Ben Raskino</strong></p><p>GW20 : 98pts par <strong>Ahmed Algethami</strong></p><p>GW21 : 107pts par <strong>Shaw Guelph</strong>.</p><p><strong>Ben Kapindula</strong> est le nouveau manager avec le pire classement général encore en course dans le Survivor. Il est 486e. <strong>Michael Ogunyemi</strong> qui a longtemps échappé à l’élimination, est tombé en GW19.</p><p>La moyenne de point de la ligue pour sur les GW18 à 21 sont les suivantes :</p><p>GW18 : 55.6pts</p><p>GW19 : 70.3pts</p><p>GW20 : 64.9pts</p><p>GW21: 61.9pts.</p><p>Les résultats peuvent être consultés via les liens suivants:</p><p><a href="https://docs.google.com/spreadsheets/d/1GIS0HFDB43EMktA_MOltzL-4ooPKXSLzn3IGTdbK2NQ/edit?usp=drivesdk"><u>GW18</u></a></p><p><a href="https://docs.google.com/spreadsheets/d/1da4fCfbM082yTjxuTDU90VXZWQR3bSBuIw2iONFIMWA/edit?usp=drivesdk"><u>GW19</u></a></p><p><a href="https://docs.google.com/spreadsheets/d/1USJS2aNPIcfSg9N5FVcWcMsffQAHu4g5nP-xfhz68gs/edit?usp=drivesdk"><u>GW20</u></a></p><p><a href="https://docs.google.com/spreadsheets/d/1VQu3XV-joXhfhi9n5ImfnP_lZE1ANNzw-aqc8-pVvBs/edit?usp=drivesdk"><u>GW21</u></a></p><p><u>Les scores de qualification minimum:</u> </p><p><em>GW</em> <em>1</em>: 36pts                               <em>GW 19</em>: 51pts (1168pts OP)</p><p><em>GW</em> <em>2</em>: 41pts                               <em>GW 20</em>: 47pts</p><p><em>GW 3</em>: 38pts (159pts OP)     <em>GW 21</em>: 43pts (1261pts OP)</p><p><em>GW 4</em>: 24pts</p><p><em>GW</em> <em>5</em>: 38pts (275pts OP) </p><p><em>GW</em> <em>6</em>: 26pts </p><p><em>GW 7</em>: 25pts (428pts OP)</p><p><em>GW8</em>: 17pts (480pts OP)</p><p><em>GW9</em>: 39pts (471pts OP)</p><p><em>GW10</em>: 22pts (527pts OP)</p><p><em>GW 11</em> : 28pts (581pts OP) </p><p><em>GW 12</em>: 28pts (658pts OP) </p><p><em>GW 13</em>: 40pts (754pts OP) </p><p><em>GW 14</em>: 34pts (789pts OP) </p><p><em>GW 15</em>: 30pts (840pts OP) </p><p><em>GW 16</em>: 29pts (887pts OP) </p><p><em>GW 17:</em> 38pts (948pts OP)</p><p><em>GW 18</em>: 40pts (989pts OP) </p><h2>Fantasy Coach's Winter Cup (code: gpojm8)</h2><img src="/media/deb9b2_dba971c16c8b42fa9bc16701166f0204_mv2.jpg" alt=""/><p>En GW19 la finale de la Winter Cup a vu la victoire de <strong>Asare Daniel</strong> sur <strong>Paul</strong> <strong>MacAffray</strong> par 77pts à 71. L’absence de point de la part de Palmer que Paul avait choisi comme capitaine a jouée un rôle important dans sa défaite.</p><p>Asare succède donc à <strong>Sean Gardener</strong> après une finale qui fût plus serrée que celle de la saison dernière où <strong>Axel Dancette</strong> s’était complètement raté alors qu’il était favoris.</p><h2>Ligue H2H </h2><img src="/media/deb9b2_1d0e8314b0c446cda26cf977b97d92f3_mv2.jpg" alt=""/><p>À la fin de la GW21, il n’y a pas moins de 5 managers qui ont le même nombre de points, 48, et qui donc sont en tête de la ligue H2H de Fantasy Coach. Ceux qui ont les nombres de points FPL sur la saison les plus élevés forment le podium. À ce petit jeu c’est <strong>Tom Nettleton</strong> qui est en tête, suivi respectivement de <strong>Abdelhadi Aziz</strong> et <strong>Faloye Oluwaseyi</strong>. Avec 72 participants, cette égalité n’est pas surprenante car les adversaires des leaders sont différents et les confrontations directes sont plus rares.</p><p>La victoire avec la plus grande différence depoints (51) est l’œuvre de <strong>Arthuranking_the_3rd @ ig</strong>. Cette performance lui permet de prendre la 20e place du classement de la ligue. </p><h2>Ligue FPL Challenge (code 5n6fr5) </h2><p>Les 3 derniers challenges de l’évènement « Festive Fixtures » ont vu les victoires de <strong>Edem Cudjoe</strong> pour « Out of the Box » (GW18) ; de <strong>Michael de</strong> <strong>Salazar</strong> pour « Final Countdown » (GW19) ; et <strong>Martian Man</strong> pour « New Year, New Chance » (GW20).</p><img src="/media/deb9b2_4f78f0e5f1d84ed681600635fb28aee0_mv2.jpg" alt=""/><img src="/media/deb9b2_0c395da85ac24f1e844927aec7beb790_mv2.jpg" alt=""/><img src="/media/deb9b2_96975c644f864401b2bb45120da4f537_mv2.jpg" alt=""/><p>L’évènement « Festive Fixture est remporté par <strong>Zubail Kaweesi</strong> qui y devance <strong>Michael de Salazar</strong> de 3pts.<strong> </strong></p><img src="/media/deb9b2_4c9dea2df0814bdf991fe0389b21a287_mv2.jpg" alt=""/><p>En ce mois de mercato hivernal l’évènement qui se déroule de la GW21 à la GW23 se nomme « Transfer Window Special ». Il a commencé avec le challenge « Legends » où il fallait sélectionner 5 joueurs dont ceux présents depuis 5 ans et plus dans leur club voyaient leurs points doublés. <strong>Kareem Farah</strong> remporte ce challenge et prend la tête de l’évènement par la même occasion.</p><img src="/media/deb9b2_528861f3384748769197a4c1400dea85_mv2.jpg" alt=""/><p>Sur la saison, <strong>Michael De Salazar</strong> est le nouveau leader incontesté. Il devance <strong>Sebastian Przybylowski </strong>de 78pts. Le podium est complété par <strong>Aled Wilcox</strong>.</p><p><strong>Jesukorede Adelowokan</strong> qui avait gagné le premier évènement de la saison, ne joue plus depuis la GW17 et il est donc tombé dans le classement général à la 44e place. Je suis remonté à la 20e place.</p><p><strong>Zakaria El Manyani</strong> qui a gagné l’évènement « Goal Diggers » pointe à la 11e place. Il est suivi par <strong>Zubail Kaweesi</strong> qui a gagné le dernier évènement.</p><img src="/media/deb9b2_cb9f17e6a1484d5b9657b566467a3a16_mv2.jpg" alt=""/><p>Le challenge de la GW22 est « Restricted Budget ». Il vous faudra sélectionner 5 joueurs avec un budget riquiqui de 25M. Oubliez tous les joueurs de plus de 6M, c’est quasi impossible d’en sélectionner. </p><p>Bonne chance à tous pour la GW22. </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

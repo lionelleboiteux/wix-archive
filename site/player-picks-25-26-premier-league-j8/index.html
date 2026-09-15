@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J8</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="La septième journée de Premier League a confirmé la forte homogénéité du peloton de tête : Arsenal reste le plus constant, City reprend sa marche en avant, tandis que Liverpool et United stagnent. Le break international a permis à certains comme Saka, Haaland ou Trossard de briller, tandis que la fatigue et les blessures pèsent sur Liverpool et Chelsea. Le retour à la compétition ce week‑end promet un mois d’octobre décisif dans la lutte pour le titre et pour les places européennes..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J8"><figure class="hero"><img src="/media/449182_6f38fc3ff2e04ba29ff043d4ae53681b_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J8</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 16 octobre 2025</p><div class="body"><p>La septième journée de Premier League a confirmé la forte homogénéité du peloton de tête : Arsenal reste le plus constant, City reprend sa marche en avant, tandis que Liverpool et United stagnent. Le break international a permis à certains comme Saka, Haaland ou Trossard de briller, tandis que la fatigue et les blessures pèsent sur Liverpool et Chelsea. Le retour à la compétition ce week‑end promet un mois d’octobre décisif dans la lutte pour le titre et pour les places européennes...</p><h2>Le tour d'horizon</h2><h3>Arsenal</h3><p>Arsenal a parfaitement géré la J7 avec une victoire 2‑0 contre West Ham grâce à Rice et Saka. Les Gunners confirment leur statut de pretendent au titre grâce à leur constance défensive. En sélection, Saka a brillé avec l’Angleterre, consolidant une confiance collective déjà haute avant le retour de la Premier League.</p><h3>Liverpool</h3><p>Liverpool connaît un ralentissement inquiétant. Battus récemment en championnat et affaiblis par plusieurs blessures, les Reds préparent le choc face à Manchester United avec Wirtz et Isak pas encore en rythme et un Salah chafouin. L’équipe d’Arne Slot devra resserrer sa défense après des prestations en demi-teinte.</p><h3>Spurs</h3><p>Tottenham a mis fin à sa série de nuls en s’imposant 2‑1 à Leeds, Kudus inscrivant son premier but pour le club. En Ligue des champions avant la trêve, les Spurs avaient partagé les points face à Bodo/Glimt. Contre toutes attentes ils sont sur le podium de la Premier League malgré des performances inégales.</p><h3>Bournemouth</h3><p>Bournemouth a livré son match le plus abouti de la saison lors de la victoire 3‑1 face à Fulham. L’équipe d’Andoni Iraola a affiché une belle maîtrise tactique, marquant trois fois en 15 minutes. Les Cherries, mine de rien, sont en position de LdC en ce début de saison, mais il y a du lourd, du très lourd derrière...</p><h3>Manchester City</h3><p>City s’est remis dans le bon sens en remportant 1‑0 à Brentford grâce à Haaland. Pep Guardiola a retrouvé une rigueur collective qui avait manqué à ses troupes. Haaland a encore marqué trois buts avec la Norvège pendant la trêve.</p><h3>Manchester United</h3><p>Manchester United s’est imposé 2‑0 face à Sunderland à Old Trafford grâce à des buts de Mount et Šeško, offrant à Ruben Amorim une victoire solide pour son 50ᵉ match sur le banc. Cette performance complète, marquée par la rigueur défensive et la domination technique, relance United après un début de saison mitigé et allège la pression sur Amorim avant la reprise de la Ligue des  champions. </p><h3>Chelsea</h3><p>Chelsea enchaîne les déceptions malgré un effectif talentueux. Le revers 0-1 contre Nottingham Forest en J7 souligne le manque de réalisme offensif. Durant la trêve, João Pedro et Fernandez ont été les plus constants, alors que Maresca doit composer sans deux suspendus pour le retour du championnat. Après trois cartons rouges en trois matchs, Enzo Maresca a promis un “reset mental” de son effectif.</p><h2>Mes Pronos pour la J8 de Premier League:</h2><p>Nottingham 0 - 2 Chelsea</p><p>Brighton Hove 1 - 2 Newcastle</p><p>Crystal Palace 2 - 1 Bournemouth</p><p>Burnley 1 - 1 Leeds United</p><p>Man City 2 - 1 Everton</p><p>Sunderland 2 - 1 Wolverhampton</p><p>Fulham 0 - 2 Arsenal</p><p>Tottenham 1 - 1 Aston Villa</p><p>Liverpool 1 - 1 Man United</p><p>West Ham 1 - 2 Brentford</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p>Ça faisait longtemps qu'il n'y avait pas eu de Player Picks de Premier League sans joueurs de Liverpool. Étant donné leur forme en ce moment, je pense qu'il va falloir attendre un peu que le nouveau groupe de Slot se forme et recrée des automatismes. Pour l'instant, Wirtz, Isak, et Salah n'ont rien fait cette saison, Ekitiké très peu.</p><p>Le changement dans la team Raccoon: Cullen out, Saka in. Cyborg (c)</p><h3>Les Indispensables</h3><p><strong>Erling Haaland</strong> (14.5M) Meilleur buteur du championnat, en excellente forme, avec un calendrier favorable dans les prochains matchs. Un incontournable pour les points offensifs.</p><p><strong>Gabriel Magalhães</strong> (6.3M) Défenseur d’Arsenal avec une défense solide et un bon calendrier, menace constante sur coups de pied arrêtés.</p><p><strong>João Pedro</strong> (7.7M) Attaquant clé de Chelsea, qui devrait être titularisé régulièrement avec des opportunités de buts lors des prochaines journées.</p><p><strong>Bukayo Saka</strong> (9.9M) Milieu offensif d’Arsenal, très impliqué offensivement, notamment sur penalty, avec des matches abordables.</p><p><strong>Antoine Semenyo</strong> (7.9M) Attaquant de Bournemouth, à la fois auteur de buts et passeur, avec un calendrier favorable. Pour moi il est devenu indispensable.</p><h3>Les bons tuyaux</h3><p><strong>Jarrod Bowen</strong> (7.7M) Meneur de West Ham, impliqué dans une bonne partie des buts de son équipe, face à un calendrier favorable.</p><p><strong>Iliman Ndiaye</strong> (6.5M) Milieu offensif d’Everton, impliqué dans les coups de pied arrêtés et en bonne forme. Vu que Grealish ne peut pas jouer contre son club parent, on mise sur Ndiaye</p><p><strong>Kaoru Mitoma</strong> (6.4M) Milieu offensif de Brighton avec un fort potentiel offensif et des matches abordables.</p><p><strong>Sean Longstaff</strong> (5.9M) Milieu de Leeds, régulier et avec un calendrier favorable, opportunité pour gains défensifs et offensifs.</p><h3>Les pépites</h3><p><strong>Joachim Andersen</strong> (4.9M) Défenseur de Crystal Palace, solide défensivement et avec des chances de clean sheets.</p><p><strong>Matty Cash</strong> (4.6M) Latéral d’Aston Villa connu pour son implication offensive.</p><p><strong>Pascal Struijk</strong> (5.1M) Défenseur de Leeds, titulaire régulier avec un calendrier modéré.</p><p><strong>Omar Alderete</strong> (4.1M) Défenseur de Sunderland avec un rôle défensif fort dans une équipe qui doit performer en J8.</p><p>Il ne me reste plus qu'à vous souhaiter une bonne semaine....  🦝</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

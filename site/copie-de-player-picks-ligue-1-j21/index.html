@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J21</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="«  On peut jouer le match contre Rennes dans 10 minutes, je serai prêt .   » R De Zerbi (février 2026)   De Rennes, de règne mais pas de renne : Player Picks de la saison LCDE, épisode 21 Les matchs de la journée Metz – Lille On démarre en fanfare à 20 :45 (heure de Rennes) cette 21 e  journée post coupe de France par un match somme toute déséquilibrée entre la 3 e  attaque du championnat, même si on va pas se mentir elle n’en a vraiment pas la gueule, et la pire défense de France et de..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J21"><figure class="hero"><img src="/media/a73c0f_6468aaf59cfe4c23aefbfcca0cff9f04_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Ligue 1, J21</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 6 février 2026</p><div class="body"><p> « <em>On peut jouer le match contre Rennes dans 10 minutes, je serai prêt</em>.<em> </em>» R De Zerbi (février 2026)</p><p>De Rennes, de règne mais pas de renne : Player Picks de la saison LCDE, épisode 21</p><h2>Les matchs de la journée</h2><h3>Metz – Lille</h3><p>On démarre en fanfare à 20 :45 (heure de Rennes) cette 21e journée post coupe de France par un match somme toute déséquilibrée entre la 3e attaque du championnat, même si on va pas se mentir elle n’en a vraiment pas la gueule, et la pire défense de France et de Navarre. Du coup c’est encore plus la fête dans la capitale des Flandres en ce moment, d’autant plus que les Dogues ne pourront perdre une 4e fois de la saison contre l’Olympique lyonnais qu’en cas de demi-finale de ligue Europa et comme on dit au Vietnam ça leur fait un bien bien fou ! Du Groupama Stadium à Saint-Symphorien, il n’y a qu’un pas que le LOSC doit facilement gravir face à une formation mosellane en perdition et qui a changé de brassard</p><p><strong><span style="color:#1e73be">Score 0-1</span></strong></p><h3>Lens – Rennes</h3><p>On passe ensuite à un fofanico le bien nommé puisque ce dernier vient une nouvelle fois de plier les gaules de Gaule direction la Lusitanie. Pendant que le stade rennais réussissait à « trouver un pigeon comme Liverpool », il en prenait également 7 dans la semaine en coulant, une nouvelle fois face à une grosse cylindrée, mardi soir dans un Vélodrome qui a la délicatesse de siffler contre un des buteurs de la rencontre. Vu le climat délètere au sein du vestiaire des Rouge et Noir, peu probable de voir l’attaque un peu made in la Paillade de Bretagne se refasse la cerise à l’occasion de son déplacement en Artois chez des Sang et Or qui ont tenté, après Haidara et Thauvin, un nouveau coup pour la ligue des champions en la personne, je vous le donne Emile, de Saint-Maximin. Et c’est pas pour me déplaire</p><p><strong><span style="color:#1e73be">Score 2-1</span></strong></p><h3>Brest – Lorient</h3><p>Venons-en ensuite à un énième derby breton opposant Finistère et Morbihan (des alcooliques de l’Ouest face à des alcooliques du Sud en résumé pour les non-initiés à la géographie armoricaine). Sur le papier, la ville aux 5 ports noie, dans les grands largueurs, la cité du Ponant. Sur la dynamique sportive, même si on a pas senti les Merlus particulièrement frais le week-end dernier à Nantes, c’est tout pareil dans la mesure où les Lorientais viennent d’enchainer 9 sorties sans perdre et n’ont, tout simplement, plus goûté à la sobriét…défaite en 2026. En cas de victoire, le FCL sera officiellement couronné roi de Bretagne 2026</p><p><strong><span style="color:#1e73be">Score 2-2</span></strong></p><h3>Nantes – Lyon</h3><p>Poursuivons par le duel entre 2 formations qui ont clairement mieux réussi leur mercato d’hiver que leur mercato d’été. Rien que d’imaginer le 11 titulaire des Lyonnais – aka le gang des Lyonnais (ou alors c’est déjà pris ? ) – une fois l’infirmerie vidée et les recrues pleinement intégrées, j’en ai la pinède en feu (mais c’est mon petit côté méditerranéen que vous voudriez me pardonner). En attendant, ça n’a pas empêché l’OL d’enchainer 11 victoire d’affilé alors que le FC Nantes végète en queue de peloton et s’est fait reprendre au score par Lorient et un point au classement par Auxerre. Donc je vais vous épargner mes salades grecques et ne vais pas vous parler de technico-tactique : les Gones vont destroncher les Canaris d’un Junior Mwanga qui qui a senti le vent tourné et a rallié à nouveau l’Alsace et puis voilà</p><p><strong><span style="color:#1e73be">Score 1-2</span></strong></p><h3>Nice – Monaco</h3><p>On enchaîne – et c’est tant pis pour Kool Shen – par le derby de la Cote d’Azur entre 2 formations muy caliente qui vont un peu mieux depuis que les beaux jours commencent à se réchauffer. Des Aiglons, qui s’épanouissent à remonter 2 buts à leur adversaire en ce moment, reçoivent en effet des Monégasques devenus totalement hermétiques (exception faite de la CDF !). A ce propos, je sais pas ce qui m’a le plus fumé cette semaine : que Monaco marque 4 pions en un seul match ou qu’elle réussisse à vendre plus de 30 M€ le remplaçant (Biereth) du remplaçant (Fati) du remplaçant de Balogun. Le bon côté des choses c’est que ce derby ne devrait pas voir, une nouvelle fois, les supporters niçois se filer avec les supporters d’en face. C’est l’avantage quand tu reçois Monaco</p><p><strong><span style="color:#1e73be">Score 1-1</span></strong></p><h3>Le Havre – Strasbourg</h3><p>Passons maintenant à une rencontre placée sous le signe bienveillant de la cigogne. Dans ce cadre, la ville aux mille cheminées accueille la capitale de l’Alsace. Il semblerait que malgré des moyens pléthoriques, qui lui auront fait perdre définitivement néanmoins, dans un climat assez lunaire, son capitaine rappelé par la maison-mère londonienne et remplacé, contre son gré, par un mec de Dortmund, le Racing Club de Strasbourg se focus exclusivement désormais sur les deux coupes qui lui restent à jouer. Sans pour autant s’asseoir sur le championnat, le club doyen du football français aurait donc une bonne occasion à jouer au stade océane en vue de son maintien en fin de saison</p><p><strong><span style="color:#1e73be">Score 0-1</span></strong></p><h3>Angers – Toulouse</h3><p>On bouge ensuite du côté du côté de la capitale de l’Athènes de l’ouest – comme quoi y a vraiment des surnoms qui vous collent à la peau – pour une nouvelle rencontre du Téfécé face à une équipe pas vraiment top prestige et qui saura pourtant, comme Amiens et comme Auxerre il y a peu, sans doute poser des difficultés à des Violets complètement râpés. Et ce d’autant plus que le Sporting Club de l’Ouest est persuadé « dur comme fer ! » que Van Den Boomen + Koyapilou &gt; Abdelli + Chérif. Mais bon il y a anguille churos comme dirait un Ecossais d’origine espagnole</p><p><strong><span style="color:#1e73be">Score 2-1</span></strong></p><h3>Auxerre – Paris FC</h3><p>Dans le même temps, une rencontre éclatée au sol chassant l’autre le dimanche après-midi, on aura également le droit à une rencontre qui pue déjà la ligue. Alors que le Paris FC a arraché un bon point à l’ennemi marseillais en J20 et tente désespérément de relancer sa saison en recrutant à prix d’or des illustres inconnus ou des anciennes pépites, l’AJA prenait aussi (enfin !) un point avec clean-sheet en championnat mais dans le même temps « une Faivre » dans les dents de la part de son ancien chouchou Gaetan Perrin partit plutôt, et on le comprend tellement, exercer ses talents du côté du Nord plutôt qu’en Bourgogne. Face à une attaque vierge, on serait cons de pas miser parisiens en déplacement</p><p><strong><span style="color:#1e73be">Score 2-2</span></strong></p><h3>Paris SG – Marseille</h3><p>Et on boucle cette dernière journée par, cette fois, un vrai clasico entre un qualifié en coupe d’Europe et un qualifié en coupe de France. Au Parc du Prince, le Paris Saint Germain aura le privilège, l’honneur et je dirais même le plaisir d’accueillir une « équipe étrange : quand elle joue avec un défenseur de plus, elle prend trois buts. Quand elle joue avec 4 attaquants, elle ne concède pas un tir » selon les dires de son propre coach Mister De Zerbi. Peu importe la compo finalement, en championnat le champion sortant carbure plus même en infériorité numérique. Aussi vrai que j’aime pas le boulghour</p><p><strong><span style="color:#1e73be">Score 3-0</span></strong></p><h2>Players Picks</h2><p>Nos compositions probables des 18 équipes de Ligue 1 sont disponibles comme chaque semaine : </p><p><a href="https://www.fantasy-coach.fr/compos-probables"><u>Nos compositions probables</u></a></p><p>La liste des absents et des suspendus est également à jour : </p><p><a href="https://www.fantasy-coach.fr/indisponibles-dnp"><u>Les absents et les suspendus</u></a></p><p>Enfin, n’hésitez pas à nous suivre sur X pour avoir les dernières informations concernant les absents et les suspendus : </p><p><a href="https://x.com/FantasyCoach_FR"><u>Nous suivre sur X</u></a></p><h2>Clubs incontournables</h2><p>·         <strong>Lille :</strong> Ozer (G /10.9),  Tiago Santos (D/8.1), Correia (S/12.9)</p><p>·         <strong>Lens</strong> : Udol (D/16.6), Thauvin (A/14.1), Sima (S/8.9)</p><p>·         <strong>Lyon</strong> : Endrick (A/15), Nartey (M/10.5), Abner (D/15.1)</p><h2>Clubs jouables</h2><p>·         <strong>Paris </strong>: Nuno Mendes (D /16.2), Barcola (A /15.7), Ramos (S/14.6)</p><p>·         <strong>Strasbourg</strong> : Penders (G /12.2), Anselmino (D/11), Enciso (M/11.2)</p><p>·         <strong>Toulouse</strong> : Restes (G /14),  Donnum (M/11.9), Emersonn (A/9.8)</p><h2>Les paris </h2><p>·         <strong>Lorient :</strong> Makengo (M /11.3),  Adjei (D/3.9), Soumano (S/9)</p><p>Bonne composition d’équipe à tous et à la semaine prochaine pour la J21 !!! </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

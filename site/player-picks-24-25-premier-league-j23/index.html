@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J23</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="On garde le rythme, on ne flanche pas, le calendrier impitoyable de la Premier League continue à faire des victimes, sur les terrains et..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J23"><figure class="hero"><img src="/media/449182_2461ff639d6e4b53863c3fa34e1b31ce_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J23</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 23 janvier 2025</p><div class="body"><p>On garde le rythme, on ne flanche pas, le calendrier impitoyable de la Premier League continue à faire des victimes, sur les terrains et devant les écrans. Voici donc le Player Picks 23ème du nom pour essayer de vous faire monter dans vos mini-ligues.</p><h2>Le tour d'horizon</h2><p>Je le dis régulièrement et je le répète, tout va pour le mieux dans le meilleur des mondes pour Liverpool qui est largement en tête de la Premier League et de la Ligue des Champions. Même quand ils ont un coup de mou, les autres équipes de Premier League ont la bienveillance de ne pas en profiter. </p><p>Arsenal n'a plus beaucoup de joueurs valides et le peu qu'ils ont sont à bout de souffle, mais ils restent sur les talons de Liverpool en LdC comme en Premier League. La seule chose qui marche à plein régime en ce qui concerne Arsenal, c'est la machine à ragots sur les potentielles arrivées à l'Emirates en janvier, mais personne n'a encore griffonné en bas d'un contrat, donc on continue à espérer.</p><p>Certes, City a gagné 6-0 face à Ipswich en J22, mais ils se sont fait corriger par le PSG mercredi. City est mathématiquement toujours en course en Ligue des Champions… mais seulement de justesse. Petite stat : en signant l'Ouzbek Khusanov, City fait entrer une 122e nationalité en Premier League. Pep a aussi fait venir l'Égyptien Marmouch et le Brésilien Victor Reis, mais ce n'est pas une nouveauté et je ne suis pas sûr que cela suffise à redresser la barre.</p><p>L'adversaire des champions en titre est Chelsea dans ce qui est techniquement un clash des Titans. Une seule victoire en 5 matches de Premier League et les Blues sont quatrièmes, juste devant des Citadins très décevants. Ce match est un duel pour la quatrième place de Ligue des Champions la saison prochaine. On espère juste un beau match.</p><h2>Mes Pronos pour la J23 de Premier League:</h2><p>Brighton 2 - 2 Everton</p><p>Liverpool 3 - 0 Ipswich Town</p><p>Southampton 1 - 2 Newcastle</p><p>Wolves 1 - 2 Arsenal</p><p>Bournemouth 1 - 2 Nottm Forest</p><p>Man City 2 - 0 Chelsea</p><p>Tottenham 1 - 1 Leicester City</p><p>Crystal Palace 1 - 0 Brentford</p><p>Aston Villa 1 - 1 West Ham</p><p>Fulham 1 - 1 Man United</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p><strong>Nwaneri</strong> (£4.5M) Je suppose que lui et Sterling vont échanger de rôle par rapport au match de LdC, c'est-à-dire que Nwaneri jouera 70 min et Sterling finira le match. Une assists et une CS ne sont pas impossibles pour le jeune Gunner.</p><p><strong>Palmer</strong> (£11.4M) Il n'a pas fait grand-chose récemment, mais contre son club formateur, il pourrait faire des étincelles. Surtout qu'il sera un des rares à ne pas avoir joué cette semaine en LdC.</p><p><strong>Jackson</strong> (£7.9M) si même le PSG arrive à en planter 4 à City, il a des chances…</p><p><strong>Amad</strong> (£5.6M) de loin le meilleur joueur (pour les fantaisistes) à Man U </p><p>Palace est sur une rampe de lancement depuis Noël et a enchaîné six matches sans défaite. <strong>Mateta</strong> (£7.3M) ou <strong>Sarr</strong> (£5.8M)</p><p>Enfin, je ne vois pas pourquoi se priver d'avoir trois joueurs de Newcastle dans sa team vu les résultats qu'ils ont pour le moment et qu'ils jouent contre l'équipe la plus faible de l'histoire de la Premier League. <strong>Isak</strong> (£9.5M), <strong>Gordon</strong> (£7.7M), <strong>Hall</strong> (£5.1M) et <strong>Dubravka</strong> (£4.3M) sont bien entendu les choix les plus évidents. <strong>Guimarães</strong> (£6.1M) et <strong>Murphy</strong> (£5.1M) sont des différentiels intéressants.</p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

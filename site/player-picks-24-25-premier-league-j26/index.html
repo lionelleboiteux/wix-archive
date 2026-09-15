@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J26</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="L'affiche de la Journée est bien entendu le duel royal égyptien, Marmouch l'Egyptian Prince contre Salah the Egyptian King..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J26"><figure class="hero"><img src="/media/449182_0446e91595fa49e2ac70d9245da25666_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J26</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 20 février 2025</p><div class="body"><p>L'affiche de la Journée est bien entendu City contre Liverpool, le duel royal égyptien, Marmouch l'Egyptian Prince contre Salah the Egyptian King. Les deux ont eu une semaine torride, d'où mon prono pour un nul. Ce n'est pas pour ça qu'il faut s'attendre à un match pourri, je pense qu'il y aura plein de buts.</p><p>En J25, on a le droit à une des Moyes-Derby, Everton reçoit Man United. Le premier est en train de faire une remontée fracassante au classement de la Premier League, l'autre est en train de se fracasser les dents.</p><p>On a aussi le droit au Declan Rice-Derby, Arsenal se déplace du Nord de Londres vers l'est pour aller jouer un West Ham bien mal en point. Ça tombe assez bien pour des Gunners privés de tous leurs guns. En attendant une arrivée potentielle de Bobby Firmino, il va bien falloir que les milieux assurent. Rice contre son ancien club ? Merino le nouveau super-sub en avant-centre ? Nwaneri finalement buteur ? Arteta et les fans d'Arsenal sont preneurs…</p><h2>Le tour d'horizon</h2><p>Une grosse victoire des Citadins en J25, contre un Newcastle dont on espérait plus, les a remis dans la course à la LdC en s'installant (temporairement) à la 4ème place de la Premier League. C'est tant mieux vu qu'ils viennent de se faire sortir par le Real dans un choc des Titans avant l'heure de l'édition 24-25. Haaland était 'blessé' contre le Real, est-ce que Pep le gardait pour ce match contre Liverpool ?</p><p>Liverpool, justement, a conclu sa double double-week (4 matches en 2 semaines) avec un total de 8 points, deux victoires et deux nuls. Quatre points laissés sur la route du titre. Les Gunners apprécieront ce geste fair play de la part des Reds qui attendent un peu pendant que l'infirmerie des Gunners déborde.</p><p>Chelsea a du mal à s'en sortir en ce moment. Une double défaite contre Brighton les a sortis de la Cup et des places européennes. Palmer ne fait plus rien depuis un moment, ceux qui ont lu mon papier la semaine dernière se rappelleront que je l'ai sorti de ma team exactement pour son manque d'efficacité.</p><p>Arsenal a réussi un gros coup en J24, privé de tous ses attaquants, je ne compte bien entendu pas Sterling comme un attaquant, c'est déjà bien qu'on le considère comme un joueur de Premier League. Je reprends, donc privé de tous ses attaquants, Arteta fait rentrer Merino comme avant-centre et il plante 2 buts. Il devient comme ça le meilleur attaquant (statistiquement) de la Premier League, en 20 minutes de jeu il a mis deux buts pour un prix à £6M.</p><h2>Mes Pronos pour la J26 de Premier League:</h2><p>Leicester City 0 - 2 Brentford</p><p>Everton 2 - 1 Man United</p><p>Bournemouth 2 - 0 Wolves</p><p>Ipswich Town 1 - 1 Tottenham</p><p>Southampton 0 - 2 Brighton</p><p>Arsenal 2 - 0 West Ham</p><p>Fulham 2 - 1 Crystal Palace</p><p>Aston Villa 2 - 1 Chelsea</p><p>Newcastle 2 - 1 Nottm Forest</p><p>Man City 2 - 2 Liverpool</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p><strong>Nkunku</strong> (£5.7M) est le dernier attaquant dispo pour Chelsea et il est listé comme milieu. Ça peut faire un joli différentiel.</p><p><strong>Nwaneri</strong> (£4.5M) et <strong>Merino</strong> (£6M) semblent être les plus aptes à mettre des pions contre un West Ham qui n'est pas au mieux.</p><p><strong>Beto</strong> (£4.9M), depuis le retour de Moyes à Everton, et aussi peut-être parce qu'il est le dernier attaquant valide à la disposition de l'Écossais, mais 4 buts en trois matches en font une bonne affaire. Pour les 4 prochaines semaines. À partir de la J30, il faudrait réévaluer la situation. Une autre bonne affaire serait <strong>Tarkowski</strong> (£4.8M) qui lui aussi semble bien réussir sous les ordres de Moyes.</p><p>Les Cherries ont toujours le meilleur calendrier sur le papier jusqu'à la fin de la saison, il va donc falloir inclure certains d'entre eux. <strong>Kluivert</strong> (£6M), <strong>Ouattara</strong> (£5.1M), <strong>Semenyo</strong> (£5.7M) ou <strong>Kerkez</strong> (£5M).</p><p>Brentford a un match alléchant cette semaine mais Everton, Villa et Bournemouth juste derrière. Les deux premiers sont à la maison où Brentford fait la majorité de ses points, mais contre des équipes assez difficiles en ce moment. <strong>Mbeumo</strong> (£7.9M) et <strong>Wissa</strong> (£6.3M) sont les picks les plus intéressants.</p><p>Brighton a fait un carton contre Chelsea et, comme Brentford, a un match bien à leur portée cette semaine mais suivi d'une série plutôt difficile à négocier. <strong>Mitoma</strong> (£6.3M) et <strong>Welbeck</strong> (£5.5M) peuvent être de bons différentiels.</p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

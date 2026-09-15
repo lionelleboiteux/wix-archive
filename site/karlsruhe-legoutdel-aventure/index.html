@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Karlsruhe, le goût de l'aventure</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Karlsruhe
+2.Bundesliga"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Karlsruhe, le goût de l'aventure"><figure class="hero"><img src="/media/3448f3_82a96c79b0ec450897f8c640a9b67457_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Karlsruhe, le goût de l'aventure</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 2 août 2024</p><div class="body"><img src="/media/3448f3_9026aaaa001f49468b5e44733b39207a_mv2.jpeg" alt=""/><h2>Karlsruher SC</h2><p>A sa place en finissant cinquième à huit points du podium, Karlsruhe a vécu un dernier exercice qui pourra laisser des regrets car plombée par un départ complètement raté, la barre a été redressée grâce à une excellente seconde partie de saison après la trêve hivernale (10v, 4n, 3d).</p><p>Parti de trop loin pour se mêler à la lutte pour l’accession, le KSC a laissé dominer l’impression de ne pas déployer au maximum ses meilleurs atouts. Surtout que dans le même temps, depuis le départ il y a un an du directeur sportif <strong>Oliver Kreuzer</strong> (pourtant soutenu par les vice-présidents <strong>Martin Müller</strong> et <strong>Günter Pilarsky</strong>, ce dernier ayant prêté de l’argent au club), les dissensions faisaient rage en coulisse entre dirigeants. A défaut de la fin de l’agitation, c’est donc une accalmie au moins temporaire qui a pris fin avec l’élection de <strong>Mario Eggimann</strong>, ex international suisse et joueur du club, au poste de vice-président et le départ conjugué de Martin Müller.</p><p>Car, avec les choix opérés en matière d’orientation et de développement futur du club, le nouvel exercice s’annonce aventureux dans le Bade-Wurtemberg.</p><p>En effet, l’effectif est bouleversé dans les grandes largeurs : entre les départs de joueurs phares du club (<strong>Jérôme Gondorf</strong>, <strong>Lars Stindl</strong>, et <strong>Daniel Brosinski</strong> fins de carrière, <strong>Patrick Drewes</strong>, <strong>Marco Thiede</strong> et <strong>Philip Heise</strong> transférés) dont certains voulaient continuer et les retours de prêts (<strong>Paul Nebel</strong> à Mayence et<strong> Igor Matanovic</strong> à Francfort), c’est presque toute une ossature d’équipe à revoir.</p><p>Pour opérer ce renouvellement profond de l’effectif, les dirigeants imposent de procéder à un rajeunissement strict de ses composantes et demandent de rebâtir avec de jeunes joueurs, avec l’idée de renouer avec la dimension formatrice d’un club qui a vu passer dans ses catégories jeunes <strong>Oliver Kahn</strong> et <strong>Mehmet Scholl</strong>.</p><p>C’est donc <strong>Max Weiß</strong> (20 ans) qui sera intronisé gardien numéro un avec devant lui une défense amputée de deux latéraux et qu’il faut reconstruire avec <strong>Marcel Franke</strong> comme taulier, un milieu de terrain à remodeler autour de l’excellent <strong>Marvin Wanitzek</strong> et une ligne offensive dont les interrogations sur la compétitivité persisteront, le trio <strong>Fabian Schleusener</strong> (*ce dernier serait sur le départ), <strong>Budu Zivivadze</strong> et la recrue <strong>Andrin Hunziker</strong> manquant de références en haute altitude .</p><img src="/media/3448f3_82a96c79b0ec450897f8c640a9b67457_mv2.jpeg" alt=""/><p>Pour conduire ce changement, c’est <strong>Christian Eichner</strong> entraîneur de 41 ans et à la tête du club depuis près de quatre ans qui sera encore aux manettes. Sous contrat jusqu’en 2025, la qualité de son travail a fait que son nom a circulé cet été du côté de Cologne, du Hertha Berlin et surtout de Sankt Pauli. Et même s’il est loyal et fidèle à un club où il a commencé comme assistant coach des U17 en 2017, difficile de l’imaginer emballé à l’idée de perdre ses cadres techniques et de vestiaire, sans la contrepartie d’un mercato de remplaçants expérimentés. Surtout après avoir essuyé quelques critiques lorsque les résultats du début de saison étaient moins bons.</p><p>En effet, il est loin d’être sûr que cette orientation stratégique radicale, motivée au passage par quelques considérations financières (car si l’argument de l’augmentation du prix de location du stade rénové est avancé, on devine la volonté de faire reposer le modèle économique sur le trading de joueurs), permette au KSC de faire mieux que la cinquième place de la saison dernière (meilleure performance historique du club au passage) et donc de passer le pallier qui le sépare des toutes meilleures équipes de la division.</p><p>En progrès constants ces dernières années, Karlsruhe reste souvent placé mais jamais sur le podium. Or, tous les ans, il y a une équipe surprise en Zweite Buli : sur un malentendu, à eux d’être celle-ci. Ce qui serait un sacré tour de force au regard de la concurrence. Surtout la saison où l’équipe perd en qualité et en expérience...</p><p><strong><em>Pronostic 10</em></strong></p><img src="/media/3448f3_d78084cad52f489197de6c256f7be45c_mv2.jpeg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

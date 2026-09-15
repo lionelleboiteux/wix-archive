@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J13</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="« Ils me prennent pour un con. » A Kombouaré (octobre 2022) Gerson veut s’en aller, vente de l’OL (encore) reportée et retour de la..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J13"><h1 class="title-only">Player Picks, Ligue 1, J13</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 27 octobre 2022</p><div class="body"><p>« Ils me prennent pour un con. » A Kombouaré (octobre 2022)</p><p>Gerson veut s’en aller, vente de l’OL (encore) reportée et retour de la spéciale Mbappé : Player Picks de la saison LCDE, épisode 13</p><h2>Les matchs de la journée</h2><h3>Lens – Toulouse</h3><p>On démarre, une fois n’est pas coutume, par le néo-dauphin lensois (et c’est pas pour me déplaire après une semaine festive au parfum de Champions League) qui devra honorer le bal des fessées toulousaines de novembre ; Monaco et Rennes étant annoncées après le Racing. Je serais Lensois, je jouerais plus mes rencontres à domicile au stade Felix Bollaert (même si l’ambiance est belle) mais au Vélodrome car en plus de l’ambiance les Lensois y gagnent systématiquement</p><p>Score 2-0</p><h3>Paris SG – Troyes</h3><p>Le monde du foot est ainsi fait, on trouvera toujours à en dire sur le niveau de Paris par rapport à City ou au Real mais que Dieu bénisse le 4/3/3; synonyme de fin de pivot gang, de Marquinhos retrouvé et de MSN libérée. Bon connaissant un peu le PSG, on sera pas surpris qu’une nouvelle bombe apparaisse dans la presse d’ici la fin de semaine, tout comme le fait que Galtier fasse pas mal tourner ce week-end pour la réception tranquille des petits voisins troyens privés de 2 titus de poids en surcroît.</p><p>Score 3-1</p><h3>Strasbourg – Marseille</h3><p>Après 4 revers en 5 sorties, l’OM occupe actuellement – et naturellement – la dernière place de son groupe de LDC mais a également chuté de son piédestal estival au 5e rang de L1. Si on imagine aisément la troupe à Tudor focalisée sur la réception de Tottenham mardi, il va falloir se déplacer, malgré la fatigue, en qualité, malgré tout, de meilleure défense de France et de Navarre en déplacement à la Meinau avant où Strasbourg n’a pas encore goutté au succès. Jusqu’à présent ?</p><p>Score 1-1</p><h3>Auxerre – AC Ajaccio</h3><p>Bon maintenant qu’on a bien rigolé en bloquant le car parisien avant la rencontre, fait la fête alors qu’on prenait une br*nlée à François-Coty et fait des selfies avec Messi (et franchement on les comprend) il s’agirait quand même de se focaliser sur le foot et ce déplacement absolument fondamental à la survie ajaccienne puisqu’Auxerre est un concurrent direct bien à la peine ces dernières semaines. Depuis quand y a des matchs de ligue 2 le dimanche aprem, je vous le demande</p><p>Score 0-0</p><h3>Rennes – Montpellier</h3><p>Le 27 août dernier, alors que les Montpelliérains profitaient pleinement des douceurs sur les plages de Palavas les Flots, le Stade rennais subissait sa dernière défaite en date. Depuis le rouleur compresseur est lancé. Et quand je pense qu’avec les suspensions de Wahi et Mavididi, on va pouvoir aligner que Khazri fasse à Terrier, Kalimuendo, Gouiri, Sulemana, Abline et Doku je pleure du sang et en vient à me demander simplement combien on va en prendre au final à l’extérieur en l’absence d’Omlin</p><p>Score 4-2</p><h3>Monaco – Angers</h3><p>Ce qui est bien quand on est intermittent du spectacle comme Monaco c’est que tous les scenarii sont envisageables. Autant à la trêve, l’ASM est dernière de coupe d’Europe et larguée en L1 – scellant ainsi probablement le sort de Clément – autant elle est qualifiée 1e pour la phase d’élimination directe et en course pour le podium. Bon là c’est que la lanterne rouge angevine – qui va se faire souiller ensuite par Lens et Lille – donc ça va pas nous permettre d’y voir plus clair mais ça fera 3 points</p><p>Score 4-1</p><h3>Nantes – Clermont</h3><p>Franchement on peut parler du Letexiergate autant que vous voulez mais ça cachera pas vraiment le début de saison complètement indigent des Canaris toute compétition considérée. Sans entrer plus dans le détail des polémiques qui ont émaillées dernièrement l’actualité des 2 clubs, l’heure est plutôt au terrain et, ça me bute de l’écrire, le FC63 se présentera à la Beaujoire plus en confiance que son hôte expérimenté et tourmenté cette année. Donc je poserais bien une petite pièce sur l’Auvergne</p><p>Score 0-1</p><h3>Brest – Reims</h3><p>Décidément, dans le genre rencontres pourries du dimanche aprem, on est particulièrement vernis ce week-end! Alors qu’on a vanté pendant moultes années la qualité de l’arrière-garde champenoise, force est de constater que cette année le mérite reviendrait plutôt à son attaque qui, quand elle dispose conjointement des Ito et Balogun, fait des étincelles alors que l’avant-garde bretonne, qui a su se ressaisir à Clermont, est tellement dépourvue de solution qu’elle en appelle à Benoît Paire</p><p>Score 1-2</p><h3>Lorient – Nice</h3><p>Je ne sais pas pendant combien de temps encore la hype lorientaise va perdurer dans l’Hexagone mais il semblerait que ni les blessures – Kalulu, Moffi, Abergel et Koné – ni les scores défavorables n’endiguent le début de saison canon des Bretons. En revanche, si tout se goupille bien comme il faut côté niçois, normalement après la coupe du monde les Aiglons, largués en championnat et balourdés de ligue Europa Conférence, seront en vacances dès décembre pour au moins 6 mois</p><p>Score 1-0</p><h3>Lyon – Lille</h3><p>Il faudra donc attendre le coup des 21h – à l’horloge, ce que vous faites de vos soirées me regarde pas – pour voir un match de foot ce dimanche entre un Lyon qui retrouve des couleurs et un LOSC qui peut se permettre de donner 2 buts et terrasser quand même une grosse cylindrée de L1 uber eats Justement après Monaco et avant Rennes, j’espère que Lille offrira un show digne de la journée précédente et nous permettra de jauger véritablement la qualité de l’effectif quasi complet de Fonseca</p><p>Score 1-1</p><p>On perd pas les bonnes habitudes et on attend comme chaque semaine <a href="http://www.fantasy-coach.fr/pronostics-ligue-1/">vos petits pronos.</a></p><h2>Players Picks</h2><h3>Les bons tuyaux:</h3><p>En l’absence de Lafont, Kombouaré fera appel à son gardien remplaçant et ça tombe bien plus celui-ci est <strong>Petric</strong> (3) de talent</p><p>Si vous êtes du genre joueur, vous pouvez tenter le coup <strong>Da Silva</strong> (7,6) ou <strong>Boateng</strong> (9,7) côté lyonnais. Si vous êtes du genre joueur
+</p><h3>Les pépites:</h3><p>Genesio doit être satisfait car désormais il compte <strong>Doku</strong> (11,3) – aka Dark Tyranus – parmi ses possibilités et nous comme potentiel supersub du 13e volet du Player Picks LCDE</p><p>Le seul autre joueur autorisé à marquer des buts à Paris par Mbappé, Neymar et Messi : <strong>Carlos Soler</strong> (11,9)</p><h3>Les incontournables:</h3><p>L’heure du retour pour le Maestro <strong>Kimpembe</strong> (14)</p><p>7 matchs / 5 buts : il est grand temps de rendre à <strong>Amini Gouri</strong> (15,2) ses lettres de noblesse et par la-même la tête d’affiche du Player Picks LCDE n°13</p><p><em>t34</em></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

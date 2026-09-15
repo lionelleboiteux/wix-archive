@@ -1,0 +1,96 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J16</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Bon, il faut qu'on parle. La J15 a été... douloureuse. Perdre 2-1 à Villa Park, contre Emery, c'est le genre de scénario écrit d'avance qui énerve quand même. On a dominé, mais on a manqué de réalisme, tout l'inverse de Manchester United (oui, vous avez bien lu) qui a passé un 4-1 aux Wolves. Le monde à l'envers.
+
+Pendant ce temps, Liverpool et Leeds ont joué un match de tennis (3-3), City a écrasé Sunderland sans pitié, et Tottenham a... gagné ? "/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J16"><figure class="hero"><img src="/media/449182_58a1d801985d413a98f60a8f18b0defb_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J16</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 11 décembre 2025</p><div class="body"><p>Bon, il faut qu'on parle. La J15 a été... douloureuse. Perdre 2-1 à Villa Park, contre Emery, c'est le genre de scénario écrit d'avance qui énerve quand même. On a dominé, mais on a manqué de réalisme, tout l'inverse de Manchester United (oui, vous avez bien lu) qui a passé un 4-1 aux Wolves. Le monde à l'envers.</p><p>Pendant ce temps, Liverpool et Leeds ont joué un match de tennis (3-3), City a écrasé Sunderland sans pitié, et Tottenham a... gagné ? </p><p>La J16 est là, et avec elle, une opportunité stratégique énorme : la gestion du stock de transferts. Mais d'abord, place au terrain. Arsenal doit se venger sur les pauvres Loups, et Chelsea s'apprête à recevoir Everton dans un match qui sent la crise.</p><h2>Le tour d'horizon</h2><h3>Arsenal</h3><p>Retour à la maison. Après la déception à Birmingham, la réception de Wolverhampton est le remède idéal. Les Wolves viennent d'en prendre 4 contre United. Je prédis une réaction d'orgueil des Gunners : un 3-0 net, avec un retour au clean sheet et un festival offensif. Saka et Eze (ou Martinelli) sont des &quot;must-have&quot; absolus cette semaine.</p><h3>Manchester United</h3><p>Ils sont en feu. Mbeumo et Bruno Fernandes marchent sur l'eau. Mais attention, ils reçoivent Bournemouth. Les Cherries sont accrocheurs (ils ont fait 0-0 contre Chelsea). Je vois un match nul 1-1, un petit coup d'arrêt après l'euphorie, mais les actifs offensifs de United restent intéressants.</p><h3>Liverpool</h3><p>Leur défense est aux abonnés absents (3 buts encaissés contre Leeds !). Ils reçoivent Brighton, une autre équipe qui aime attaquer. Ça sent le but des deux côtés. Un nul 1-1 est probable, ce qui rend les défenseurs de Liverpool un peu moins attractifs pour les points de clean sheet, mais toujours dangereux offensivement.</p><h3>Spurs</h3><p>Ils vont à Nottingham Forest. Le City Ground est une forteresse. Forest vient de perdre à Everton mais voudra se racheter. Tottenham à l'extérieur, c'est souvent fragile. Je vois Forest gagner 2-0 et remettre les Spurs à leur place (le milieu de tableau).</p><h3>Chelsea</h3><p>Le 0-0 contre Bournemouth était d'un ennui mortel. Ils reçoivent Everton qui vient d'en mettre 3 à Forest. La dynamique est pour les Toffees. Je vois une victoire surprise d'Everton 1-2 à Stamford Bridge. La défense de Chelsea est à éviter.</p><h2>Mes Pronos pour la J16 de Premier League:</h2><p>Chelsea 1 - 2 Everton</p><p>Liverpool 1 - 1 Brighton Hove</p><p>Burnley 0 - 1 Fulham</p><p>Arsenal 3 - 0 Wolverhampton</p><p>Sunderland 2 - 2 Newcastle</p><p>Crystal Palace 1 - 2 Man City</p><p>Nottingham 2 - 0 Tottenham</p><p>West Ham 0 - 2 Aston Villa</p><p>Brentford 2 - 1 Leeds United</p><p>Man United 1 - 1 Bournemouth</p><p><span style="color:#1a1c1e">Envoyez nous vos pronos via </span><a href="https://www.google.com/url?sa=E&amp;q=#"><strong><u><span style="color:#2483e2">le jeu des pronos</span></u></strong></a></p><h2>Stratégie : Le &quot;Mini-Wildcard&quot; des 5 transferts</h2><p>C'est la grande nouveauté de la saison et c'est le moment d'en parler. Si vous avez été patients (et économes) ces dernières semaines, vous pouvez désormais cumuler jusqu'à 5 transferts gratuits. C'est une arme redoutable. C'est littéralement un &quot;Mini-Wildcard&quot;. Comment l'utiliser pour la J16 ?</p><ul><li><p>Ciblez les blessés et les bannis : Le calendrier de décembre est brutal. Virez les joueurs incertains. Vous avez le luxe de pouvoir nettoyer votre banc.</p></li><li><p>Visez le calendrier : Regardez les 3 prochains matchs. Arsenal (WOL, EVE, CRY) a un boulevard. Si vous n'avez pas 3 joueurs d'Arsenal, utilisez vos transferts maintenant.</p></li><li><p>Ne brûlez pas tout pour le plaisir : Si votre équipe est solide, gardez 2 ou 3 transferts sous le coude pour le Boxing Day. La flexibilité vaudra de l'or quand les rotations de Guardiola vont commencer.</p></li></ul><h3>Alerte CAN 2025 : La liste des départs</h3><p>La CAN au Maroc approche à grands pas (coup d'envoi fin décembre). Si vous avez gardé vos 5 transferts gratuits, c'est le moment de bénir votre patience. Des premiums vont partir, libérant un budget colossal, mais des pépites vont aussi nous manquer.</p><p>Voici les principaux joueurs de Premier League qui devraient s'envoler pour le Maroc après la J16 ou la J17 (dates de départ à confirmer selon les clubs) :</p><h3>Les Pertes &quot;Catastrophiques&quot;</h3><p><strong>Mohamed Salah (Liverpool / Égypte)</strong> : £14.1M sur le banc pendant un mois ? Impossible. C'est le transfert numéro 1 à prévoir. La bonne nouvelle ? Ça libère du cash pour renforcer votre milieu avec Saka/Palmer. Note : Avec le départ de Salah, Alexander Isak devrait prendre les penaltys à Liverpool. Gardez le Suédois précieusement !</p><p><strong>Bryan Mbeumo (Man United / Cameroun)</strong> : Il est en feu sous Amorim, mais les Lions Indomptables ont besoin de lui. Une perte immense pour United (et pour nous). Il faudra lui trouver un remplaçant (Eze ? Gordon ?).</p><p><strong>André Onana (Man United / Cameroun)</strong> : Si vous l'avez pris pour le calendrier favorable, il va falloir changer de gardien. United sans Onana et Mbeumo... ça sent les semaines difficiles.</p><h3>Les Pertes &quot;Notables&quot; </h3><p><strong>Antoine Semenyo (Bournemouth / Ghana)</strong> : Le chouchou des budgets serrés. Il réalise une super saison, mais il faudra s'en séparer.</p><p><strong>Mohammed Kudus (Spurs / Ghana), Yves Bissouma (Mali) &amp; Pape Matar Sarr (Sénégal)</strong> : Le milieu de terrain de Tottenham va être vidé. Déjà qu'ils ne défendent pas beaucoup avec eux, imaginez sans... </p><p><strong>Rayan Aït-Nouri (Man City / Algérie)</strong> : Un défenseur des plus offensif du jeu. </p><p><strong>Yoane Wissa (Brentford / RDC) </strong>: Toujours capable de marquer, son départ va laisser Mbeumo (ah non, il est à United)... va laisser Brentford un peu orphelin devant.</p><h2>Le Player Picks</h2><h3>Les Indispensables</h3><p><strong>Erling Haaland (£14.0m)</strong></p><p>Toujours la meilleure option capitaine, avec un match très favorable à Crystal Palace et de bonnes perspectives offensives sur les prochaines journées.​</p><p><strong>Bukayo Saka (£10.1m)</strong></p><p>Leader offensif d’Arsenal, très bien projeté par les modèles pour Wolves à domicile puis un run de fixtures où les Gunners partent souvent favoris.​</p><p><strong>Phil Foden (£8.2m)</strong></p><p>En grande forme et très haut dans les prédictions de points, avec Crystal Palace à l’extérieur puis un calendrier globalement positif pour l’attaque de City.​</p><p><strong>Bruno Fernandes (£9.0m)</strong></p><p>Meilleur milieu en points sur la saison selon certains modèles, avec Bournemouth à Old Trafford en GW16 et d’excellents chiffres de tirs et passes clés.</p><h3>Les bons tuyaux</h3><p><strong>Viktor Gyökeres (£9.0m)</strong></p><p>Avant-centre d’Arsenal avec Wolves à domicile puis une bonne série, capable de gros hauls quand Arsenal domine largement.​</p><p><strong>Cole Palmer (£10.5m)</strong></p><p>Option explosive de Chelsea, à domicile contre Everton en GW16, avec un rôle central (penalties, coups de pied arrêtés) et de bons signaux des modèles.​</p><p><strong>Dominik Szoboszlai (£6.6m)</strong></p><p>Milieu de Liverpool bien placé dans les projections, avec Brighton à domicile puis plusieurs matches ouverts où il peut cumuler tirs de loin et passes décisives.​</p><p><strong>Jurrien Timber (£5.5m)</strong></p><p>Défenseur d’Arsenal très bien noté pour Wolves à domicile, combinant forte probabilité de clean sheet et menace offensive (buts/passes déjà cette saison).​</p><p><strong>Matus Cunha (£7.9m)</strong></p><p>Attaquant de Manchester United mentionné dans les prédictions, avec Bournemouth à la maison et de solides stats de tirs sur les dernières J.</p><h3>Les pépites</h3><p><strong>Callum Wilson (£5.8m)</strong></p><p>Nouvelle recrue listée à 6.0m, avec un rôle important à West Ham et des matches corrects à moyen terme pour un attaquant à ce prix.​</p><p><strong>Jhon Arias (£5.5m)</strong></p><p>Milieu offensif de Wolves à prix doux, récemment ajouté au jeu, titulaire potentiel avec un calendrier qui lui offre des opportunités de retours.​</p><p><strong>Jorrel Hato (£5.0m)</strong></p><p>Défenseur de Chelsea bon marché, intéressant pour couvrir une défense qui peut viser le clean sheet à domicile contre Everton en GW16.​</p><p><strong>Lucas Perri (£4.5m)</strong></p><p>Gardien titulaire potentiel de Leeds à bas prix, utile comme rotation ou solution budget avec quelques fixtures jouables sur le moyen terme.​</p><p><span style="color:#1a1c1e">Bonne chance à tous pour cette J16...</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

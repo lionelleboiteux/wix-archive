@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Fantasy Coach FPL Survivor GW30 à 32</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="(You can find the english version in the 2nd half of the article.) Après quelques jours d'absence nous vous retrouvons pour vous rendre..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Fantasy Coach FPL Survivor GW30 à 32"><figure class="hero"><img src="/media/deb9b2_a24d29261c6b4fc6b6c15ccd672cb6a0_mv2.png" alt=""/><div class="scrim"></div><h1>Fantasy Coach FPL Survivor GW30 à 32</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 11 avril 2024</p><div class="body"><img src="/media/deb9b2_a24d29261c6b4fc6b6c15ccd672cb6a0_mv2.png" alt=""/><p>(<em>You can find the english version in the 2nd half of the article</em>.)</p><p>Après quelques jours d'absence nous vous retrouvons pour vous rendre compte des progrès dans la Fantasy Coach’s FPL Survivor. Ces dernières semaines beaucoup de chips ont été jouées; Pep et se confrères ont fait tourner leurs roulettes et il fallait donc avoir un banc solide et bien organisé pour s'en sortir.</p><p>En s'approchant de la fin de saison, les éliminations du Survivor se font de plus en plus nombreuses. À la fin de la J30 après l'élimination de 12 managers, il en restait 90 en course. </p><p>À la fin de la GW33, il faudra qu’il reste 50 managers. 13 ont été éliminés en GW31 ainsi qu’en GW32. 14 devrons être sacrifiés en GW33.</p><p>Comme en GW32,s’il y a des égalités de score au dernier échelon d’élimination, ce seront les managers avec les moins bons scores totaux qui passeront à la trappe.</p><p>Les scores minimums à réaliser pour survivre était 46pts en GW30, 49pts en GW31, et 54pts avec un score total minimum de 1786pts en GW32.</p><p>La prochaine GW de FPL se joue dès ce week-end. La deadline de la GW33 est ce Samedi 13 Avril 2024 à 12h00 CET (11.00am GMT).</p><p>Les détails des résultats sont à retrouver via ces liens:</p><p>GW30:</p><p><a href="https://docs.google.com/spreadsheets/d/1H14xMttVSELcXW5KkFxbghevBgK1lv2tcnsmNn2NevE/edit?usp=drivesdk"><u>https://docs.google.com/spreadsheets/d/1H14xMttVSELcXW5KkFxbghevBgK1lv2tcnsmNn2NevE/edit?usp=drivesdk</u></a></p><p>GW31:</p><p><a href="https://docs.google.com/spreadsheets/d/1eS204CQ_TpQ0sqEMloysUVuyMQCORHvGZJgAQir5pAI/edit?usp=drivesdk"><u>https://docs.google.com/spreadsheets/d/1eS204CQ_TpQ0sqEMloysUVuyMQCORHvGZJgAQir5pAI/edit?usp=drivesdk</u></a></p><p>GW32:</p><p><a href="https://docs.google.com/spreadsheets/d/1Fyc2kSlJHU_PStl2VdpNqQjUjeKe40yzZwkl3jny9QI/edit?usp=drivesdk"><u>https://docs.google.com/spreadsheets/d/1Fyc2kSlJHU_PStl2VdpNqQjUjeKe40yzZwkl3jny9QI/edit?usp=drivesdk</u></a></p><p>After few days off, we are back with some updates on how things are progressing with the Fantasy Coach's FPL Survivor. These past gameweeks saw a lot of chips played and a lot of rotations in the playing XI. Your bench quality put in a wise order was probably what got you through unscathed.</p><p>As we are approaching the business end of the season, things get tougher and tougher. 12 managers were eliminated in GW30 and we were left with 90 survivors. The plan is to have 50 managers left at the end of GW33. So 13 managers exited the competition in both GW31 and GW32. 14 will be chopped in GW33.</p><p>Like in GW32, if there are tied scores at the last level of elimination, the managers with the lowest season scores will leave the game.</p><p>The next gameweek will be played this weekend. THe dealine of this new gameweek is this saturday 30th March 2024 at 12h00 CET (11.00am GMT).</p><p>The results can be seen in the link above.</p><p>Scores minimum par journée / Safety scores per Game Week</p><p><u>GW1:</u> 49pts</p><p><u>GW2:</u> 24pts</p><p><u>GW3:</u> 28pts</p><p><u>GW4:</u> 53pts</p><p><u>GW5:</u> 27pts</p><p><u>GW6:</u> 48pts</p><p><u>GW7:</u> 29pts</p><p><u>GW8:</u> 28pts</p><p><u>GW9:</u> 51pts</p><p><u>GW10:</u> 47pts</p><p><u>GW11:</u> 16pts</p><p><u>GW12:</u> 44pts</p><p><u>GW13:</u> 32pts</p><p><u>GW14:</u> 41pts</p><p><u>GW15:</u> 24pts</p><p><u>GW16:</u> 23pts</p><p><u>GW17:</u> 32pts</p><p><u>GW18:</u> 25pts</p><p><u>GW19:</u> 26pts</p><p><u>GW20:</u> 48pts</p><p><u>GW21:</u> 32pts </p><p><u>GW22:</u> 34pts</p><p><u>GW23:</u> 47pts</p><p><u>GW24:</u> 43pts</p><p><u>GW25:</u> 59pts </p><p><u>GW26:</u> 38pts</p><p><u>GW27:</u> 61pts</p><p><u>GW28</u>: 37pts</p><p><u>GW29:</u> 10pts</p><p><u>GW30:</u> 46pts</p><p><u>GW31:</u> 49pts</p><p><u>GW32:</u> 54pts avec un score total minimum de 1786pts</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

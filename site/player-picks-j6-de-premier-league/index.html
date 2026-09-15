@@ -1,0 +1,96 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, J6 de Premier League</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Pas le temps de se reposer cette semaine avec déjà la J6 qui commence ce week-end alors que la J5 vient à peine de se terminer. Au terme..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, J6 de Premier League"><h1 class="title-only">Player Picks, J6 de Premier League</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 2 septembre 2022</p><div class="body"><p>Pas le temps de se reposer cette semaine avec déjà la J6 qui commence ce week-end alors que la J5 vient à peine de se terminer. Au terme de la J5, on a la confirmation que Aston Villa et Leicester sont en crise avec leurs nouvelles défaites respectives contre Arsenal et Manchester United. Haaland a lui marqué la journée de son empreinte avec un second triplé consécutif portant son total à 9 buts en 5 matchs de Premier League. On notera également la victoire dans les derniers instants de Liverpool qui se replace au classement, la nouvelle défaite à l’extérieur de Chelsea qui inquiète en ce début de saison et les nouveaux succès de Tottenham et Arsenal qui réalisent tout les deux un très bon début de saison. </p><p>Le choc de cette J6 aura lieu dimanche entre Manchester United et Arsenal, les Gunners voudront continuer leur début de saison parfait avec une sixième victoire en ligne de mire tandis que les Reds Devils viseront eux une quatrième victoire de rang, ça promet ! Pour le reste les autres membres du big 6 ont tous des matchs à leur portée et se devront de prendre trois points, on aura également deux belles confrontations avec Brentford-Leeds et Newcastle- Crystal Palace. </p><p>Je vous invite vivement à rejoindre le discord Fantasy Coach pour discuter du jeu avec des joueurs expérimentés qui ont tous obtenu de bons classements sur le jeu ces dernières années : </p><p><a href="https://discord.gg/dBv5QCft">Rejoindre le Discord FPL Fantasy Coach.</a> </p><p>(Retour de la rédaction pour cette partie lors de la J8, la courte période entre la J5 et la J6 n’offre pas assez de temps pour cela cette semaine). </p><p><strong>Everton 1-3 Liverpool</strong> </p><p><strong>Brentford 2-2 Leeds</strong> </p><p><strong>Chelsea 2-1 West Ham</strong> </p><p><strong>Newcastle 2-1 Crystal Palace</strong> </p><p><strong>Nottingham Forest 2-0 Bournemouth</strong> </p><p><strong>Tottenham 3-1 Fulham</strong> </p><p><strong>Wolves 1-1 Southampton</strong> </p><p><strong>Aston Villa 1-4 Manchester City</strong> </p><p><strong>Brighton 2-0 Leicester</strong> </p><p><strong>Manchester United 2-2 Arsenal</strong> </p><p>On attend comme chaque semaine <a href="http://www.fantasy-coach.fr/pronostics-prem/">vos petits pronos.</a> </p><h2>Player Picks </h2><p>Comme en J5, il faudra faire attention aux rotations d’effectif qui devraient encore être nombreuses ce week-end. Haaland qui sort de deux superbes matchs va-t-il être mis au repos avec la Ligue des Champions qui arrive, c’est surement la plus grosse question qu’on se pose au moment de faire notre équipe pour cette gameweek bien que la tendance semble plutôt à une titularisation. Au niveau des équipes à jouer dans les semaines à venir, cela ne bouge pas trop, Brentford, Brighton, Leeds et Newcastle ont des calendriers globalement abordables et sont de bons compléments aux indispensables Arsenal, Liverpool, Manchester City, Tottenham et Chelsea. Pour Manchester United, il faudra voir leur match contre Arsenal pour envisager de les jouer ou non. </p><h3>Les incontournables  </h3><p><strong>Salah (£13M), (52,9% TSB) :</strong> </p><p>Liverpool ne réalise pas un super début de saison mais Salah est tout de même dans la grande majorité des bons coups (hormis lors du 9-0 contre Bournemouth samedi dernier), face à une défense d’Everton assez friable, il devrait de nouveau être déterminant et marquer des points dans le derby. </p><p><strong>Kane (£11,4M), (17,0% TSB) :</strong> </p><p>5 matchs, 4 buts et 1 passe décisive, voilà le bilan de Kane en ce début de saison, il est très difficile à caser en raison de Haaland mais si vous ne possédez pas Salah, associer les deux au sein de votre attaque peut rapporter très gros. </p><p><strong>Haaland (£11,9M), (74,5% TSB) :</strong> </p><p>Le joueur INCONTOURNABLE, déjà 9 buts en 5 matchs pour le cyborg qui n’en finit plus de scorer pour ses débuts en Premier League. Au vue de ses performances samedi et mercredi ne pas l’avoir dans votre attaque est quasiment suicidaire d’autant qu’il devrait enchainer ce week-end d’après Pep. </p><p><strong>Cancelo (£7,0M), (46,2% TSB) :</strong> </p><p>Après quatre premiers matchs plus calmes que la saison passée, le latéral portugais a marqué cette semaine. Il ne devrait pas tourner ce week-end au vu des absents en défense du coté de City et pourrait de nouveau rapporter gros contre un Villa en pleine crise. </p><p><strong>Alexander-Arnold (£7,5M), (49,0% TSB) :</strong> </p><p>Lui aussi n’a pas brillé lors des premiers matchs mais s’était réveillé contre Bournemouth samedi dernier. C’est un petit peu la même logique que pour Cancelo, il va jouer contre des Toffees en méforme et devrait de nouveau débuter titulaire.  </p><h3>Les bons tuyaux  </h3><p><strong>Luis Diaz (£8,2M), (29,9% TSB) :</strong> </p><p>En complément de Salah, le colombien peut clairement être une belle option au milieu. Il a marqué 3 buts en 5 journées et devrait avoir l’occasion de scorer de nouveau ce week-end. </p><p><strong>Sterling (£10,0M), (8,7% TSB) :</strong> </p><p>Sterling est très peu joué en raison de son prix élevé, néanmoins il vient de marquer trois fois en même pas une semaine et c’est une option à considérer si vous n’avez pas Salah au milieu de terrain. </p><p><strong>Grob (£5,9M), (20,8% TSB) :</strong> </p><p>Brighton a un calendrier très favorable et Grob en profite avec un total de 37 points fantasy après seulement 5 matchs. Il joue souvent en attaque alors qu’il est classé milieu sur le jeu et risque encore de rapporter face à une équipe de Leicester catastrophique en ce début de championnat. </p><p><strong>Bernardo Silva (£6,9M), (10,1% TSB) :</strong> </p><p>Il devait partir lors du mercato mais il est toujours là et fera le bonheur de City au moins une saison de plus. Avec au minimum une action décisive lors de ses trois derniers matchs et un prix abordable, il peut être un super différentiel pour vous faire monter au classement.  </p><h3>Les pépites  </h3><p><strong>Awoniyi (£5,9M), (0,9% TSB) :</strong> </p><p>Vous n’êtes pas obligés de me suivre sur ce coup, Nottingham a un calendrier qui s’allège un petit peu ce qui devrait permettre au buteur des Tricky Trees de scorer. Il a déjà marqué en J2 et à ce prix c’est une belle opportunité pour compléter vos lignes d’attaque. </p><p><strong>Estupinan (£4,5M), (0,5% TSB) :</strong> </p><p>Un défenseur de Brighton titulaire pour ce prix c’est une vraie aubaine, Rwano me l’a conseillé cette semaine et il a déjà fait une passe décisive. Si vous cherchez un défenseur à bas coût pour compléter votre défense, c’est sur lui qu’il faut foncer. </p><p><strong>Isak (£7,0M), (2,7% TSB) :</strong> </p><p>Le nouveau buteur star des Magpies a marqué pour sa première cette semaine qui plus est à Anfield. Il devrait pouvoir enchainer contre les Eagles ce week-end, à ce prix là c’est une belle opportunité.  </p><h3>Les Experts FPL </h3><p>Comme chaque semaine, les conseils des experts FPL pour le choix du capitaine et de leur pépite de la journée, cette semaine : </p><p><strong>Arthur :</strong> Double vainqueur de la ligue Fantasy Coach lors des 2 dernières saisons en battant à chaque fois le record de point. </p><p><strong>Rwano :</strong> Vainqueur de la Cup fantasy-coach.fr et troisième de la ligue la saison dernière. Comme Arthur, il participe régulièrement aux discussions sur le Discord FPL. </p><h3>Arthur </h3><p><strong>Capitaine, Salah (£13M), (52,9% TSB) :</strong> Probablement que Haaland  jouera seulement 30min. Alors le meilleur capitaine pour la GW6 est Mo Salah. Malgré un Liverpool faible, il arrive toujours à tirer son épingle du jeu et rentrer des points en Fantasy. Option sécurité. </p><p><strong>Pépite, Alvarez (£6.2M), (1,5% TSB) :</strong> Vu son match contre Nottingham Forest, l’attaquant argentin va à nouveau être titulaire contre un Aston Villa faible et potentiellement être aligné à la pointe de l’attaque à la place d’Haaland. Quelques jours avant la ligue des champions. </p><h3>Rwano </h3><p><strong>Capitaine, Haaland (£11,9M), (74.5 % TSB) : </strong>Avec ses 9 buts en 5 matchs, le Cyborg est parti pour tout exploser. Et ce n’est pas l’avant-dernier Aston Villa qui a le profil pour stopper les Citizens dans leur frénésie offensive actuelle (19 buts en 5 matchs). Seule la Pep roulette me semble en capacité d’éventuellement freiner Haaland dans sa moisson de buts. </p><p><strong>Pépite, Trossard (£6,5M), (2.9% TSB) : </strong>Brighton réussit son début de saison et voudra reprendre sa marche avant après son premier revers enregistré lors de son dernier déplacement londonien. Le belge Trossard est un des hommes forts de l’animation offensive des Seagulls alors que le cancre Leicester vient poser ses valises à l’Amex Stadium. Il sera impliqué à la passe ou à la conclusion des actions de but. </p><p>Bonne chance à tous. </p><p>Pour rejoindre notre 'private league', utilisez le code:
+<strong>Classique : f6xuri</strong>
+   </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

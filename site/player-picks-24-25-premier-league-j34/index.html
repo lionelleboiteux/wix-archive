@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J34</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="La fin approche et on sait déjà que Southampton et Leicester sont relégués de la Premier League. On sait aussi que Leeds et Burnley prendront leurs places la saison prochaine. Tout est en place pour que le vainqueur de la Premier League soit couronné ce weekend, sans grande surprise, et que le troisième relégué soit aussi confirmé..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J34"><figure class="hero"><img src="/media/449182_631fe381a64c47569799a7d1c3ca5499_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J34</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 24 avril 2025</p><div class="body"><p>La fin approche et on sait déjà que Southampton et Leicester sont relégués de la Premier League. On sait aussi que Leeds et Burnley prendront leurs places la saison prochaine. Tout est en place pour que le vainqueur de la Premier League soit couronné ce weekend, sans grande surprise, et que le troisième relégué soit aussi confirmé</p><h2>Le tour d'horizon</h2><p>Les Reds ne sont plus qu'à un point du titre et cette semaine ils tombent contre des Spurs qui, maintenant qu'ils ont assuré le maintien, n'ont plus aucun intérêt en Premier League. Comme je le mets plus bas dans mon prono, je vois bien les hommes de Slot finir le championnat en beauté avec une grosse victoire à la maison.</p><p>Arsenal pour son compte essaie de maintenir sa place de dauphin tout en essayant de garder un maximum de joueurs frais et dispo pour les deux matchs de demi-finale de la Champions League contre le PSG. Il ne va pas falloir se rater en Champions League parce que les matchs de Premier League laissent un peu à désirer. </p><p>City a déjà joué son match de J34, une victoire à l'arrachée contre un Villa qui se bat pour retourner en Champions League la saison prochaine. Les Citadins ont donc un match d'avance sur la plupart de leurs concurrents directs mais sont, pour l'instant, installés sur la troisième marche du podium. Les hommes de Pep, malgré leur saison bien en-deçà du niveau attendu, devraient finir en force pour obtenir une place décente au classement avant un été qui promet beaucoup de changements. </p><p>Forest, Newcastle, Chelsea et Villa sont dans un mouchoir de poche mais pourraient tous se retrouver en Europe la saison prochaine suivant comment la FA Cup et les Coupes Européennes se terminent vu que Forest, City et Villa sont encore en lice pour la FA Cup et Chelsea en Conference League </p><p>Southampton, Leicester et très probablement Ipswich retournent donc de là où ils étaient venus la saison dernière. Ça fait maintenant trois saisons consécutives que les trois promus d'une saison sont aussi les trois relégués à la fin de la saison. Est-ce que la différence de niveau, ou de budget, entre le Championship et la Premier League est trop grande? Est-ce qu'il serait plus judicieux de réduire le nombre de clubs en Premier League? </p><h2>Mes Pronos pour la J34 de Premier League:</h2><p>Chelsea 2 - 1 Everton</p><p>Wolves 2 - 0 Leicester City</p><p>Newcastle 3 - 0 Ipswich Town</p><p>Brighton 2 - 1 West Ham</p><p>Southampton 0 - 2 Fulham</p><p>Bournemouth 1 - 1 Man United</p><p>Liverpool 3 - 0 Tottenham</p><p>Nottm Forest 2 - 0 Brentford</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p>Pour moi c'est le grand ménage, il est temps pour la Team Raccoon d'utiliser la Wild Card, donc comme je l'avais fait plus tôt dans la saison je vous prends en otage avec ce Player Picks que j'utilise pour faire mes choix. </p><p>Comme gardiens j'avais déjà <strong>Sels</strong> (£5.1M) que je garde et j'y rajoute <strong>Raya</strong> (£5.6M) un des rares Gunners dont on est à peu près sûr qu'il jouera. </p><p>Je me dis que Forest est un bon parti, je rajoute donc <strong>Elanga</strong> (£5.4M) et je reprends <strong>Wood</strong> (£6.9M) maintenant qu'il est de retour en forme. </p><p>J'ai maxé mon quota de Liverpool parce que je pense qu'ils vont faire de gros scores, tout au moins jusqu'à la J36 où les -probablement nouveaux champions- joueront contre leur dauphin dans un match que les dieux de la Premier League auraient pu nous mettre un chouilla plus tôt dans la saison et en faire un match pour la décision du titre. J'ai donc fait entrer <strong>TAA</strong> (£7.2M), <strong>Luis Diaz</strong> (£7.5M) qui s'ajoutent à l'indéboulonnable <strong>Salah</strong> (£13.8M) qui sera très certainement mon capitaine.</p><p>J'ai aussi maxé mon quota de Newcastlais avec <strong>Barnes</strong> (£6M) et <strong>Livramento</strong> (£4.6M) qui s'ajoutent à <strong>Murphy</strong> (£5.2M) que j'avais déjà. Pour ceux qui suivent mon parcours et je ne peux que supposer que vous êtes des millions, ça veut dire que j'ai dû sacrifier <strong>Isak</strong> (9.5M) qui reste tout de même un bon Pick. C'est juste qu'il fallait que je fasse des choix.</p><p>Pour remplacer Isak, j'ai pris <strong>Cunha</strong> (£6.9M) de Wolves qui s'ajoute au <strong>Aït-Nouri </strong>(£4.9M) que j'avais déjà. </p><p><strong>Robinson</strong> (£4.8M) est toujours dans ma team, mais il est pas du tout impossible qu'il se soit transformé en <strong>Sessegnon</strong> (£4.1M) d'ici la deadline…</p><p>Pour ceux qui sont forts en maths, il manque évidemment deux joueurs dans ma team et je garde <strong>Gvardiol</strong> (£6.3M) et <strong>Marmouch</strong> (£7.7M) qui n'ont pas de match cette semaine et iront donc avec Raya sur le banc en attendant les prochaines journées. </p><p>Ma team pour le reste de la saison*</p><img src="/media/449182_7e5ded6437ce4a398c60f90826ee4855_mv2.png" alt="Player Picks, Premier League, J34"/><p>*probablement</p><h3>Assistant manager</h3><p>Les gros bras ne sont pas vraiment à la fête cette semaine, Arteta et Pep ne jouent pas, Slot se retrouve avec une triplette Spurs-Chelsea-Arsenal certes son équipe est capable de gagner les trois matches, mais il y a des choix moins saugrenus. <strong>Nuno</strong> à Forest ou <strong>Howe</strong> à Newcastle sont les choix les plus accessibles.</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,100 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Résultats des ligues Fantasy Coach sur FPL. Gameweek 1.</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="(English version follows).  Dans cet article j’essaierai, après chaque tour de jeu (gameweek), de vous faire un point sur les différentes..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Résultats des ligues Fantasy Coach sur FPL. Gameweek 1."><figure class="hero"><img src="/media/deb9b2_6f0cd549dc3d49948189fc7ee0335cf2_mv2.jpg" alt=""/><div class="scrim"></div><h1>Résultats des ligues Fantasy Coach sur FPL. Gameweek 1.</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 20 août 2024</p><div class="body"><p>(English version follows). </p><p>Dans cet article j’essaierai, après chaque tour de jeu (gameweek), de vous faire un point sur les différentes competitions que nous vous proposons. </p><p>Je commence donc cette série suite à la 1ere journée de Premier League. En dehors de Tottenham qui s’est fait accroché par Leicester, et de Chelsea qui est tombé face à City, tous les gros ont gagné. Salah, le roi de la FPL a fait le plus gros score avec 14 pts. Saka, Havertz et Welbeck ne sont pas loin derrière avec 12pts. </p><h2>Les compétitions </h2><ul><li><p><strong>La</strong> <strong>Ligue</strong> <strong>Classique</strong> (code: <a href="https://fantasy.premierleague.com/leagues/auto-join/gpojm8"><u>gpojm8</u></a>): </p></li></ul><img src="/media/deb9b2_1ba8237927954c059e9e1bfc864c2a4f_mv2.jpg" alt=""/><p> Le top 10 se tient en 9pts ce qui est déjà un bel écart pour une 1ere journée. Biensûr les choses vont beaucoup évoluer mais tous ces scores ont été fait sans utilizer de chip.  </p><p><strong>Feyi</strong> <strong>Ajinni</strong> est le premier leader de notre ligue. Avec Salah capitaine, Saka, Havertz et Porro il avait déjà une bonne base. Arthur, le champion de la saison dernière a aussi fait un bon depart puisqu’il est 6e ex-aequo. Il va encore disputer la gagne cette saison. </p><ul><li><p><strong>La</strong> <strong>Cup</strong> <a href="http://Fantasy-coach.fr"><strong>Fantasy-coach.fr</strong></a> (code: <a href="https://fantasy.premierleague.com/leagues/auto-join/gpojm8
+
+"><u>gpojm8</u></a>):  </p></li></ul><p>Cette competition ne débutera qu,en fin de saison. Par contre grâce à votre intérêt dans notre ligue, il y aura 1 tour de plus qu’annoncé dans l’article de presentation des competitions. La Cup Fantsy-coach.fr commencera en GW28. </p><p>Le calendrier sera le suivant: </p><p>GW28: Tour qualificative </p><p>GW29: Tour préliminaire </p><p>GW30: Tour 1 </p><p>GW31: Tour 2 </p><p>GW32: Tour 3 </p><p>GW33: Tour 4 </p><p>GW34: 16e de finale </p><p>GW35: 8e de finale </p><p>GW36: ¼ de finale </p><p>GW37: ½ finale </p><p>GW38: Finale. </p><ul><li><p><strong>Fantsy</strong> <strong>Coach’s</strong> <strong>FPL</strong> <strong>Survivor</strong> (code: <a href="https://fantasy.premierleague.com/leagues/auto-join/gpojm8
+
+"><u>gpojm8</u></a>)  </p></li></ul><img src="/media/deb9b2_2dbe3f7ad7034dc28f4a94680c2a4432_mv2.png" alt=""/><p>Nous attendions de passer la deadline de la GW1 pour determiner comment se déroulerait les éliminations Avec 520 managers engages voici le programme. </p><p>Journées 1 à 10, 8 managers minimum seront éliminés par gameweek; </p><p>Journées 11 à 20, 12 managers minimum seront éliminés par gameweek; </p><p>Journées 21 à 25, 17 managers minimum seront éliminés par gameweek; </p><p>Journées 26 à 30, 22 managers minimum seront éliminés par gameweek; </p><p>A la fin de la GW30, il devrait rester aux alentours de 135 managers. De la journée 31 à 33, les éliminations permettront d’en conserver exactement 60 avant le début de la GW34. </p><p>30 seront éliminés en J34 </p><p>15 seront éliminés en J35. </p><p>Les 4 meilleurs scores de la J36 seront qualifies pour la finale qui se déroulera en GW37. </p><p>Pour la GW1 il fallait réaliser un score minimum de 36pts pour se qualifier pour la GW2. 8 managers ont fait un score inférieur et sont donc éliminés. </p><p><strong>Michael</strong> <strong>Akins</strong> le champion de la saison dernière passe sans encombre cette 1ere journée avec 67pts. </p><p>Le tableau des résultats de la GW1 via ce <a href="https://docs.google.com/spreadsheets/d/16jrR_0vjXyf62-lSDt4gTanguIKgriig80ed1CTuF7g/edit?usp=drivesdk"><u>lien</u></a>. </p><ul><li><p><strong>Fantasy</strong> <strong>Coach’s</strong> <strong>Winter</strong> <strong>Cup</strong> (code: <a href="https://fantasy.premierleague.com/leagues/auto-join/gpojm8
+
+"><u>gpojm8</u></a>)  </p></li></ul><img src="/media/deb9b2_0e3f459ee6124419acff06add36a3b91_mv2.jpg" alt=""/><p>Malgré un nombre plus importants d’inscrit dans notre ligue, pas de changement pour le déroulement de la Winter Cup. Par contre pour des raison personnel je suis oblige d’ajuster le calendrier. Celà n’affectera que le tour de qualification. </p><p>Le nouveau calendrier est le suivant: </p><p>GW7: Tour qualificative </p><p>GW10: Tour 1 </p><p>GW11: Tour 2 </p><p>GW12: Tour 3 </p><p>GW13: 16e de finale </p><p>GW15: 8e de finale </p><p>GW16: ¼ de finale </p><p>GW17: ½ finale </p><p>GW19: Finale. </p><p>Ligue H2H (code: <a href="https://fantasy.premierleague.com/leagues/auto-join/qijla4"><u>qijla4</u></a>) </p><img src="/media/deb9b2_7149f54121c34f66ae77546fa2cde70b_mv2.jpg" alt=""/><p>Les 36 matchs de la 1ere journée n’ont vu qu’un match nul. Au benefice du Meilleur score total réalisé c’est <strong>Tom</strong> <strong>Nettleton</strong> qui prend les commandes du championnat. </p><p>Nim nk remporte le match avec la plus grosse différence de points (41) et se classe 2e. </p><ul><li><p><strong>Ligue</strong> <strong>FPL</strong> <strong>Challenge</strong> (code: <a href="https://fplchallenge.premierleague.com/leagues/auto-join/5f6nr5"><u>5n6fr5</u></a>) </p></li></ul><img src="/media/deb9b2_3b99c158ab914c2da0dbe19a3a4e82bb_mv2.jpg" alt=""/><p>Cette saison le FPL Challenge va se dérouler par succession d’évènement. Le premier évènement et donc le 5-a-side. Le premier challenge de cet évènement demandait de constituer une équipe de 5 joueur avec un budget illimité. </p><p>Sur cette 1ere gameweek c’est <strong>Mahmoud</strong> <strong>Mohamed</strong> qui le remporte avec 66pts. Il prend la tête de l’évènement 5-a-side et du classement de la saison. </p><p>Pour la gameweek 2 le challenge sera “All out attack”. Il vous faudra constituer une équipe avec 1 gardien et 4 attaquants (FWD). Pour corser le tout le budget n’est que de 35M. Les buts marqués par vos joueurs compteront double: 20pts si c’est votre gardien qui marque et 8pts pour vos attaquants. </p><p>Bonne semaine et rappeler vous que ce n’est que le début du championnat. Il y a encore plein de point à prendre. Pas de panique si votre score de la GW1 vous a déçu. </p><p> In this article, after each round of play (gameweek), I will try to give you an update on the different competitions Fantasy Coach offers you. </p><p>I'm starting this series following the first matchday of the Premier League. Except Tottenham who were held to a draw by Leicester, and Chelsea who fell against City, all the big guns won. Salah, the king of FPL, posted the highest score with 14 pts. Saka, Havertz and Welbeck are not far behind with 12pts. </p><h2>Fantasy Coach’s League's &amp; Cups </h2><ul><li><p><strong>The</strong> <strong>Classic</strong> <strong>League</strong> (code: <a href="https://fantasy.premierleague.com/leagues/auto-join/gpojm8"><u>gpojm8</u></a>): </p></li></ul><img src="/media/deb9b2_3f0aefd9025e4dd2a6cc354e5780b0ae_mv2.jpg" alt=""/><p>The top 10 managers are within 9pts of each other’s. It’s already a fair gap after just 1 gameweek. Of course it still is early days and things will change. One thing to mention is that all these scores were done without using a chip. </p><p><strong>Feyi</strong> <strong>Ajinni</strong> is the first leader of our league. With Salah captain, Saka, Havertz and Porro he already had a good base. Arthur, last season's champion, also made a good start since he is tied in 6th place. He will be in the mix once again for the final victory. </p><ul><li><p><strong>The</strong> <a href="http://Fantasy-coach.fr"><strong><u>Fantasy</u></strong></a><a href="http://Fantasy-coach.fr"><u>-</u></a><a href="http://Fantasy-coach.fr"><strong><u>coach</u></strong></a><a href="http://Fantasy-coach.fr"><u>.</u></a><a href="http://Fantasy-coach.fr"><strong><u>fr</u></strong></a><strong>’s</strong> <strong>Cup</strong> (code: <a href="https://fantasy.premierleague.com/leagues/auto-join/gpojm8"><u>gpojm8</u></a>): </p></li></ul><p>This competition will not begin until the last 10 gameweeks of the season. But, thanks the larger number of mangers of our league, we will have one extra round of matches compared to last season. The Fantsy-coach.fr’s Cup will start in GW28. </p><p>The schedule will be as follows: </p><p>GW28: Qualifying round </p><p>GW29: Preliminary round </p><p>GW30: Round 1 </p><p>GW31: Round 2 </p><p>GW32: Round 3 </p><p>GW33: Round 4 </p><p>GW34: Round 5 </p><p>GW35: Round of 16 </p><p>GW36: Quarter finals </p><p>GW37: Semi finals </p><p>GW38: Final. </p><ul><li><p><strong>Fantasy</strong> <strong>Coach’s</strong> <strong>FPL</strong> <strong>Survivor</strong> (code: <a href="https://fantasy.premierleague.com/leagues/auto-join/gpojm8"><u>gpojm8</u></a>) </p></li></ul><img src="/media/deb9b2_8596ac2bc0fc4a7fa9d38a9df7a8c5d3_mv2.png" alt=""/><p>We were waiting GW1 deadline to determine how Survivor would pan out for this season. With 520 managers involved, here is the program. </p><p>Gameweek 1 to 10, a minimum of 8 managers will be eliminated per gameweek; </p><p>Gameweek 11 to 20, a minimum of 12 managers will be eliminated per gameweek; </p><p>Gameweek 21 to 25, a minimum of 17 managers will be eliminated per gameweek; </p><p>Gameweek 26 to 30, a minimum of 22 managers will be eliminated per gameweek; </p><p>At the end of GW30, there should be around 135 managers left. From gameweek 31 to 33, the group will be further trimmed to keep exactly 60 managers before the start of GW34. </p><p>30 managers will be eliminated on GW34 </p><p>15 managers will be eliminated on GW35. </p><p>The 4 best scores of GW36 will qualify for the final. The final four will take place in GW37. </p><p>For GW1 the safety score was 36 points. 8 managers had lower scores. They therefore exit the competition. </p><p><strong>Michael</strong> <strong>Akins</strong>, last season's champion, went through without breaking a sweat with 67pts. </p><p>The results table for GW1 via this <a href="https://docs.google.com/spreadsheets/d/16jrR_0vjXyf62-lSDt4gTanguIKgriig80ed1CTuF7g/edit?usp=drivesdk"><u>link</u></a>.</p><ul><li><p><strong>Fantasy</strong> <strong>Coach’s</strong> <strong>Winter</strong> <strong>Cup</strong> (code: <a href="https://fantasy.premierleague.com/leagues/auto-join/gpojm8"><u>gpojm8</u></a>) </p></li></ul><img src="/media/deb9b2_42cd857f919d407db2a90495b77abf00_mv2.jpg" alt=""/><p>Despite a larger number of managers in the league, we keep the format we used last season for the Winter Cup. </p><p>We only change the schedule for personal reasons. It only affects the qualifying round.  </p><p>The new schedule is as follows: </p><p>GW7: Qualifying round </p><p>GW10: Round 1 </p><p>GW11: Round 2 </p><p>GW12: Round 3 </p><p>GW13: Round 4 </p><p>GW15: Round of 16 </p><p>GW16: Quarter finals </p><p>GW17: Semi finals </p><p>GW19: Final. </p><ul><li><p><strong>H2H</strong> <strong>League</strong> (code: <a href="https://fantasy.premierleague.com/leagues/auto-join/qijla4"><u>qijla4</u></a>) </p></li></ul><img src="/media/deb9b2_ab5f86f8f15547f6867b6c882893b482_mv2.jpg" alt=""/><p>The 36 matches of the GW1 saw only one draw. <strong>Tom</strong> <strong>Nettleton</strong> takes the lead of the championship thanks to the best score achieved. </p><p>Nim nk won the match with the biggest point difference (41) and ranks 2nd. </p><ul><li><p><strong>FPL</strong> <strong>Challenge</strong> <strong>League</strong> (code: <a href="https://fplchallenge.premierleague.com/leagues/auto-join/5f6nr5"><u>5n6fr5</u></a>) </p></li></ul><img src="/media/deb9b2_157026f7e50f4dda987f74205f1f2512_mv2.jpg" alt=""/><p>This season the FPL Challenge is split in different event. For the first four gameweeks, the event is called 5-a-side. </p><p>The first challenge of this event required to build a team of 5 with unlimited budget. This challenge was won by <strong>Mahmoud</strong> <strong>Mohamed</strong> with 66pts. He takes the lead in the 5-a-side event. He also leads the season ranking. </p><p>For gameweek 2 the challenge will be “All out attack”. You will need to select a team with 1 goalkeeper (GK) and 4 forwards (FWD) with a 35M budget. </p><p>The goals scored by your players will count double: 20pts each if your goalkeeper nets one, 8pts each if it is your forwards. </p><p>Have a good week and remember that this is only the beginning of the game. There are still plenty of points to take. Don't panic if your GW1 score was not up to your expectations. </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J12</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Player Picks, Premier League, J12"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J12"><figure class="hero"><img src="/media/449182_0fa06bfddd384b62a6e3c07b20c23e01_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J12</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 21 novembre 2024</p><div class="body"><p><span style="color:#000000">La dernière trêve de l'année civile étant passée, on se refocus sur la Premier League jusqu'à mi-mars. Une fois n'est pas coutume, il semble ne pas y avoir eu trop de casse parmi nos joueurs de prédilection, et donc les fantasistes peuvent être sereins.</span></p><p><span style="color:#000000">Le gros changement pendant cette trêve, c'est l'arrivée de Ruben Amorim à Manchester United. Certains fans et commentateurs espèrent que ce jeune et talentueux manager portugais aura le même effet sur United que Mourinho a eu à Chelsea (la première fois). C'est déjà un petit malin d'avoir attendu la trêve pour arriver et avoir le temps de prendre ses marques avant un match contre Ipswich, qui ne compte qu'une victoire cette saison (contre les Spurs en J11). On suivra ce match avec intérêt pour voir à qui il va faire confiance et s'il va déployer son fameux 3-4-3. Il semblerait que Amad, Mainoo et Yoro, quand il sera de retour, soient le genre de joueurs que Ruben aime bien… On suppose aussi que Bruno Fernandez ait un avantage linguistique certain… à suivre.</span></p><p><span style="color:#000000">De l'autre côté de Manchester, l'humeur est bien plus glauque. Jamais Pep n'avait subi quatre défaites à la suite auparavant. Plus inquiétant pour les fantasistes qui ont toujours 15 millions investis dans Haaland, lui en est à six matches bien en deçà de ce qu'on peut attendre du Cyborg. Vu que son dernier match intéressant était contre Arsenal, on espère que de se retrouver contre le second club du North-London lui redonnera des ailes. Un triplé en Premier League lui ferait du bien ; il en a mis un avec la Norvège contre le Kazakhstan le week-end dernier, il est en jambes...</span></p><p><span style="color:#000000">Arsenal se retrouve contre un promu, mais un promu qui n'est derrière les Gunners que par une différence de but minimale d'un point en faveur des Londoniens. Pour ajouter de l'huile sur le feu, et j'en parlais dans le Player Picks de la J11, Edu, qui était directeur technique d'Arsenal, a quitté son poste pour aller travailler chez Evangelos Marinakis, qui possède Forest (entre autres). Au moment où j'écris cet article, Edu n'a pas été annoncé et son profil sur les réseaux indique toujours Arsenal, mais s'il est à l'Emirates ce week-end, ce sera chez les visiteurs. Pour les fantasistes, ce sera un match tendu et même moi, un fan assumé d'Arsenal, j'ai plus de joueurs de Forest dans ma team que de Gunners. En fait, j'ai Wood…</span></p><p><span style="color:#000000">Pour Liverpool, tout semble toujours au beau fixe. Premiers du championnat avec cinq points d'avance sur City, ils tombent cette semaine contre des Saints qui n'ont que quatre points en tout et pour tout. On s'attend donc à une large victoire des coéquipiers de Salah. Le problème, c'est que Salah, TAA et Van Dijk sont en fin de contrat et pourraient bien signer ailleurs en janvier. Si c'était le cas, la deuxième partie de la saison pourrait bien avoir une autre dimension. On verra bien. En attendant, les Reds sont hyper favoris cette semaine.</span></p><h2>Mes Pronos pour la J12 de Premier League:</h2><p><span style="color:#000000">- Leicester City 1 - 2 Chelsea</span></p><p><span style="color:#000000">- Fulham 2 - 1 Wolves</span></p><p><span style="color:#000000">- Everton 2 - 1 Brentford</span></p><p><span style="color:#000000">- Arsenal 2 - 1 Nottingham Forest</span></p><p><span style="color:#000000">- Bournemouth 1 - 2 Brighton</span></p><p><span style="color:#000000">- Aston Villa 2 - 0 Crystal Palace</span></p><p><span style="color:#000000">- Manchester City 2 - 0 Tottenham</span></p><p><span style="color:#000000">- Southampton 0 - 2 Liverpool</span></p><p><span style="color:#000000">- Ipswich Town 0 - 2 Manchester United</span></p><p><span style="color:#000000">- Newcastle 2 - 0 West Ham</span></p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><h3>Pourquoi pas ?</h3><p><span style="color:#000000">Une attaque internet (www) : Wood, Welbeck, Watkins?</span></p><h3>Les Pepites:</h3><p><strong><span style="color:#000000">Aina</span></strong><span style="color:#000000"> (£4.8M): J'espère que cette semaine ne sera pas sa semaine, mais il reste le troisième meilleur défenseur de Premier League avec un prix à ras les paquerettes. </span></p><p><strong><span style="color:#000000">Aït-Nouri</span></strong><span style="color:#000000"> (£4.7M): Avec le calendrier des Wolves jusqu'à Noël, il sera un pick intéressant. </span></p><p><strong><span style="color:#000000">Cunha</span></strong><span style="color:#000000"> (£6.8M): Comme son camarade au-dessus, un calendrier intéressant sachant qu'il a déjà 5 buts et 2 assists à son conteur. Un très bon choix comme troisième attaquant.</span></p><h3>Les Bon Tuyaux:</h3><p><strong><span style="color:#000000">Nwaneri</span></strong><span style="color:#000000"> (£4.5M): Il n'a pas encore joué beaucoup de minutes, mais il est très offensif et il devrait avoir plus de temps de jeu avec une succession de matches tous les trois jours pour les Gunners. </span></p><p><strong><span style="color:#000000">Amad</span></strong><span style="color:#000000"> (£4.9M): Il aurait impressionné Amorim cette semaine à l'entraînement et pourrait faire parti du nouveau 11 type de MU</span></p><p><strong><span style="color:#000000">Kovačić</span></strong><span style="color:#000000"> (£5.6M): En théorie, c'est pas le milieu de terrain Citizen auquel on pense en premier, mais on a tort vu que c'est lui qui a le plus de points pour le moment. </span></p><h3>Les Valeurs sures:</h3><p><strong><span style="color:#000000">Salah</span></strong><span style="color:#000000"> (£12.9M) Cette saison il a repris son titre de meilleur joueur de la Premier League en ce qui concerne les fantaisistes. </span></p><p><strong><span style="color:#000000">Wood</span></strong><span style="color:#000000"> (£6.6M) Il a mis autant de buts que Salah cette saison avec 8 au compteur (moins de points FPL) et il ne vaut que la moitié du prix de l'Egyptien… </span></p><p><strong><span style="color:#000000">Gvardiol</span></strong><span style="color:#000000"> (£6.3M) Il n'est pas là pour ses prouesses défensives, il est là parce qu'il a déjà mis 3 buts, faisant de lui le meilleur buteur des défenseurs, et qu'il est tout à fait probable qu'il en mette encore plusieurs. </span></p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

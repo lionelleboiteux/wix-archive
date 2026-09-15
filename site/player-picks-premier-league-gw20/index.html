@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, GW20</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Après un week-end de FA Cup, la Premier League reprend ses droits dès ce vendredi et la FPL avec elle bien entendu. Au sortir du Boxing..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, GW20"><h1 class="title-only">Player Picks, Premier League, GW20</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 13 janvier 2023</p><div class="body"><p>Après un week-end de FA Cup, la Premier League reprend ses droits dès ce vendredi et la FPL avec elle bien entendu. Au sortir du Boxing Day, on peut tirer quelques enseignements sur les équipes en forme ou non actuellement. En tête, Arsenal a réussi à conserver son avance sur Manchester City (5 points), les deux formations ont tour à tour concédé un match nul mais semblent destinées à se battre pour le titre probablement jusqu’à la fin du championnat, les quatre journées à venir seront décisives car il y aura pas mal de gros matchs pour les deux équipes avec en point d’orgue le choc au sommet lors de la GW23. Derrière les deux mastodontes du championnat, Newcastle continue de se montrer performant et semble bien parti pour une qualification en Ligue des champions, Manchester United a également réussi son Boxing Day avec 3 succès et s’est bien relancé avant de jouer Manchester City et Arsenal en GW20 et GW21. Les Spurs sont eux toujours aussi imprévisibles, capables de coller un carton à Crystal Palace ou bien de perdre à domicile face à Aston Villa, Kane est le seul joueur à rendement fixe de l’équipe. Enfin, Chelsea est clairement dans le dur, Potter ne trouve pas les solutions et les blessures ne l’aident pas non plus, Liverpool a rechuté face à Brentford tandis qu’Aston Villa et Fulham sont les belles surprises du moment en compagnie de Brentford. </p><p>Au programme de cette GW20, deux gros chocs pour Manchester City qui se déplace à Manchester United avant de recevoir Tottenham, Arsenal sera de son côté opposé à Tottenham plus tôt dans la journée, on aura également un joli duel entre Brighton et Liverpool dans la lutte pour l’Europe ! </p><p>Comme toujours n’hésitez pas à rejoindre notre Discord si vous voulez échanger sur la FPL et sur la Premier League de manière générale : </p><p><a href="https://discord.gg/EhBHPukm"><u>Rejoindre le Discord FPL</u></a> </p><h2>Les matchs de la journée</h2><p><strong>Aston Villa 2-1 Leeds</strong></p><p><strong>Manchester United 1-1 Manchester City</strong></p><p><strong>Brighton 2-1 Liverpool</strong></p><p><strong>Everton 1-1 Southampton</strong></p><p><strong>Nottingham Forest 1-1 Leicester</strong></p><p><strong>Wolves 1-1 West Ham</strong></p><p><strong>Brentford 3-1 Bournemouth</strong></p><p><strong>Chelsea 2-1 Crystal Palace</strong></p><p><strong>Newcastle 2-1 Fulham</strong></p><p><strong>Spurs 2-2 Arsenal</strong></p><p><strong>Crystal Palace 1-3 Manchester United</strong></p><p><strong>Manchester City 2-2 Spurs</strong></p><h2>Player Picks</h2><p>Pour cette journée, on a quatre équipes qui doublent<strong> </strong>dont trois intéressantes : <strong>Manchester City, Tottenham et Manchester United</strong>. Intégrer des joueurs de ces formations semble bien entendu intéressant mais il ne faut pas non plus négliger les joueurs d’autres équipes qui ont un bon calendrier lors des prochaines journées : <strong>Newcastle</strong>, <strong>Brentford</strong> voire <strong>Arsenal</strong>. Comme d’habitude, nos picks sont divisés en différentes catégories pour mieux vous repérer ! </p><p><strong>Hors catégorie </strong></p><p><strong>Haaland (Man City, £12.2M, 85.0% TSB) :</strong> Les gameweeks passent mais les choses ne changent pas pour Haaland, muet contre Chelsea en GW19, il avait tout de même marqué en GW18 et en est désormais à 21 buts en 18 matchs de championnat. Mis au repos en FA cup et en Carabao Cup, il sera frais et bénéficie d’une double gameweek, face à des adversaires compliqués certes mais il a déjà démontré qu’il peut marquer contre n’importe qui et il avait inscrit un triplé lors du match aller contre Manchester United. Lui donner le capitanat est obligatoire cette semaine et la question d’utiliser notre triple capitaine est sur la table également. </p><p><strong>Incontournables</strong><strong> </strong></p><p><strong>Kane (Spurs, £11.6M, 31.6% TSB) : </strong>Buteur à 3 reprises lors du Boxing Day, Kane est l’homme sur des Spurs et aime généralement bien les grosses affiches pour briller, ça tombe bien il en aura deux lors de cette GW20 face aux deux meilleures équipes de Premier League pour le moment cette saison. A l’aller, il avait marqué contre Arsenal et l’an dernier les Spurs s’étaient imposés à l’Etihad, je suis certain qu’il sera de nouveau décisif et il me semble vraiment très intéressant à intégrer dans nos lignes d’attaque aux côtés d’Haaland. </p><p><strong>Trippier (Newcastle, £6.0M, 67.5% TSB) :</strong> Un véritable habitué de cette catégorie et il y a de quoi, Trippier est tout simplement le meilleur défenseur du jeu cette saison et enchaine les clean sheets, les bonus et les assists, bénéficiant d’un calendrier abordable jusque GW23 incluse, il devrait encore nous rapporter pas mal de points dans les semaines à venir. </p><p><strong>Almiron (Newcastle, £5.9M, 42.2% TSB) : </strong>Le coéquipier de Trippier n’est pas en reste non plus dernièrement, il n’a pas marqué lors des deux derniers matchs mais restait avant sur 8 buts en 9 matchs. C’est le meilleur milieu de terrain du jeu cette année et face à des adversaires à sa portée lors des prochaines gameweeks il devrait de nouveau se montrer décisif offensivement.</p><p><strong>Rashford (Manchester United, £7.0M, 40.4% TSB) : </strong>L’homme fort des Reds Devils lors du Boxing Day avec 3 buts en 3 matchs mais également 1 assist, il a également marqué en FA cup et en Carabao cup et semble tout simplement inarrêtable dernièrement. Bénéficiant d’une double gameweek et historiquement plutôt en réussite contre Manchester City, il devrait réaliser un joli score et semble incontournable d’autant plus qu’il est détenu par de plus en plus de joueurs FPL au fil des journées. </p><p><strong>Martinelli/Saka (Arsenal, £6.8M et £8.1M, 48.0% TSB et 20.9% TSB) :</strong> Difficile de les séparer car ils se sont tout les deux montrés performants lors du Boxing Day (2 buts et 1 assist pour Martinelli/2 buts pour Saka), le calendrier des gunners va se compliquer mais je les vois capable d’être décisifs tout de même. Martinelli est plus facile à intégrer dans une équipe car moins cher tandis que Saka permet d’avoir un petit différentiel car il est détenu par moins de joueurs FPL, avoir les deux dans sa formation est également une bonne option, à vous de faire votre choix ! </p><p><strong>Bon tuyaux </strong></p><p><strong>Pope (Newcastle, £5.4M, 22.3% TSB) :</strong> Comme dit plus haut, les magpies ont un calendrier vraiment abordable lors des prochaines journées, Pope enchaine les clean sheets et semble donc être le choix le plus logique au poste de gardien. </p><p><strong>Shaw (Manchester United, £5.1M, 15.2% TSB) : </strong>Surtout utilisé sur le jeu pendant le Boxing Day car Dalot était blessé, il a réalisé de très jolis scores et semble aujourd’hui plus intéressant à tenter qu’un Dalot de retour de blessure. Capable d’avoir des bonus ou bien de marquer comme en GW19, il aura deux matchs pour marquer des points lors de cette GW20 et permettre de faire une petite différence au classement. </p><p><strong>De Bruyne (Manchester City, £12.5M, 37.4% TSB) :</strong> Depuis son retour de la Coupe du monde il est clairement moins en vue, fantomatique même par moments, néanmoins il est un joueur de grand rendez-vous et il aura deux matchs lors de cette gameweek pour montrer qu’il est bien l’homme avec Haaland qui peut porter City vers le titre en fin de saison. Il est cependant difficile à caler dans une équipe au vu de son prix élevé et ne correspond donc pas forcément à tout les joueurs FPL.</p><p><strong>Joao Cancelo (Manchester City, £7.2M, 45.7% TSB) :</strong> Lui aussi est descendu d’une catégorie dans la hiérarchie cette saison, la faute au coaching très douteux de Pep ces dernières semaines qui lui a régulièrement préféré le jeune Lewis avant de l’aligner contre Chelsea à un poste d’ailier droit pour finalement le faire sortir à la mi-temps… Néanmoins, avec deux matchs aussi importants, on peut logiquement penser que Cancelo sera de nouveau titularisé et pourrait retrouver sa forme de l’an dernier et du début de saison avec des retours offensifs. </p><p><strong>Pépites </strong></p><p><strong>Mahrez (Manchester City, £7.5M, 2.8% TSB) : </strong>C’est le joueur offensif le plus en forme de l’équipe dernièrement avec Haaland (1 but et 2 assists lors des 3 derniers matchs), à un prix assez abordable et très peu détenu par les joueurs FPL, il pourrait être un superbe différentiel s’il a la confiance de Pep lors de cette double gameweek. </p><p><strong>Martial (Manchester United, £6.6M, 4.9% TSB) : </strong>Lui aussi pourrait être un joli différentiel pour cette GW20, avec l’arrivée très prochaine de Weghorst, il voudra prouver qu’il mérite sa place de titulaire dans cette équipe de Ten Hag et quoi de mieux que de marquer dans le derby de Manchester ? </p><p><strong>Watkins (Aston Villa, £7.1M, 2.9% TSB) : </strong>Un dernier joueur qui me plait bien, relancé sous Emery avec 1 but et 1 assist sur les 3 derniers matchs, il joue contre Leeds qui encaisse beaucoup de buts ce vendredi, je le vois bien se montrer décisif et il pourrait permettre de booster vos classements de manière significative. Plus globalement, le calendrier d’Aston Villa est très abordable jusque GW22 comprise ce qui le rend encore plus attractif. </p><h2>Les Experts FPL</h2><p><strong>Arthur :</strong> Double vainqueur de la ligue Fantasy Coach lors des 2 dernières saisons en battant à chaque fois le record de point.</p><p><strong>Rwano :</strong> Vainqueur de la Cup fantasy-coach.fr et troisième de la ligue la saison dernière. Comme Arthur, il participe régulièrement aux discussions sur le Discord FPL. </p><p><strong>Arthur </strong></p><p><strong>Capitaine, Haaland (Man City, £12.2M, 85.0% TSB) : </strong>Haaland est en double gameweek. Pas besoin d’en dire plus. Capitaine… Triple Capitaine ?</p><p><strong>Pépite, Martial (Manchester United, £6.6M, 4.9% TSB) : </strong>United à aussi une double gameweek. Réception de City et déplacement à Palace. L’attaquant Français à de la concurrence qui arrive avec Weghorst. Il doit impressionné et confirmer qu’il est l’option numéro 1. Quoi de mieux pour la FPL que ces 2 matchs ? </p><p><strong>Rwano </strong></p><p><strong>Capitaine, Haaland (Manchester City, £12.2M, 85 % TSB)</strong> <strong>:</strong> A mon sens, la seule vraie interrogation pour ce vingtième brassard n’est pas de savoir à qui l’attribuer puisqu’une nouvelle fois le Cyborg, qui double ses matchs avec un derby mancunien et un duel en live avec le Spur Harry Kane pour désigner le meilleur avant-centre actuel du championnat, s’imposera à la grande majorité des fantaisistes. Le principal questionnement porte plutôt sur l’activation ou pas du « triple captain » à cette occasion ? Bien que ce soient Manchester United et Tottenham en face, cette option pourtant contre-intuitive pourrait s’avérer payante car les défenses des Red Devils et des Spurs ne sont pas forcément plus compliquées à désosser que celles d’Arsenal et d’Aston-Villa au menu de la GW 23 qui verra à nouveau City doubler. Surtout qu’avec Haaland, chaque game week est aux franges du quasi-irrationnel lorsque l’on facture pour son année de bizutage de Premier League 21 buts en 16 matchs. Pas une mince affaire que cette décision à prendre, assurément un des tournants de la saison FPL. Reste à savoir dans quel camp des managers vous vous positionnerez : lucky or unlucky ?</p><p><strong>Pépite, Riyad Mahrez (Manchester City, £7.5M, 2,8 % TSB) : </strong>On profite à plein de cette double semaine de jeu en regardant toujours du côté de City (et avec en perspective une double portion en GW23) avec le toujours soyeux Mahrez. Entre sa forme étincelante sur les dernières parties disputées avec City ( depuis la reprise, il a participé à 5 matchs pour 4 buts et une passe) et, coïncidence, sa mise au repos dans le cadre de la Pep roulette lors de l’élimination de son club mercredi soir face à Southampton en Carabao Cup, l’ex-quimpérois devrait avoir du temps jeu et donc l’opportunité d’y exprimer son talent. Pour ne rien gâter, il tire certains CPA et est beaucoup moins cher que De Bruyne et Foden. Bref, ce serait à coup sûr un superbe pick garanti si son entraîneur sur ces deux rencontres rapprochées ne s’appelait pas Guardiola.</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

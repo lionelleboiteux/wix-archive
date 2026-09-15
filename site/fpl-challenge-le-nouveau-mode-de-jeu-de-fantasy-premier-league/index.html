@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>FPL Challenge, le nouveau mode de jeu de Fantasy Premier League</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="La Fantasy Premeier League (FPL) a lancé le Lundi 25 Mars un nouveau mode de jeu: le Fantasy Challenge. Nous vous expliquons les..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="FPL Challenge, le nouveau mode de jeu de Fantasy Premier League"><figure class="hero"><img src="/media/deb9b2_c14729db10c6448998cf99f30ad4b14b_mv2.jpg" alt=""/><div class="scrim"></div><h1>FPL Challenge, le nouveau mode de jeu de Fantasy Premier League</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 28 mars 2024</p><div class="body"><img src="/media/deb9b2_c14729db10c6448998cf99f30ad4b14b_mv2.jpg" alt=""/><p>La Fantasy Premeier League (FPL) a lancé le Lundi 25 Mars un nouveau mode de jeu: le Fantasy Challenge. Nous vous expliquons les particularités de ce nouveau mode et nous vous invitons à rejoindre notre ligue <a href="http://Fantasy-Coach.fr"><u>Fantasy-Coach.fr</u></a><u> </u>(code: <strong>bc5agz</strong>).</p><h2>FPL Challenge, kezako?</h2><p>La Fantasy Premier League est un marathon qui dure 38 journées et qui demande beaucoup d'implication (recherche d'informations sur les effectifs, analyse de données sur les équipes et les joueurs, construction d'une stratégie pour maximiser l'utilisation des chips). Pour les néophytes ou les personnes qui veulent juste s'amuser avec le foot fantasy, c'est peut être un peu rébarbatif.</p><p>La Premier League a donc décidé d'ajouter un 3e mode de jeu après le mode classique et le mode &quot;Draft&quot; (qui se rapproche de la version Fantasy NFL). C'est le FPL Challenge. </p><p>Au lieu d'avoir un vaiqueur à la fin de la saison, dans le mode Challenge, il y aura un vaiqueur lors de chaque journée. Au niveau modial vous pourrez gagnez des goodies Premier League. Au niveau Fantasy Coach, vous aurez droit à une mise en avant sur nos différentes plateformes. </p><h2>Les règles du FPL Challenge</h2><h3>La base</h3><p>La règle de base du mode classique de la FPL est repris dans le Challenge. Petit rappel pour les nouveaux: pour constituer son effectif il faut sélectionner 15 joueurs avec un budget de 100M. Les 15 joueurs doivent obligatoirement être 2 gardiens, 5 défenseurs, 5 milieux et 3 attaquants. </p><p>Les prix des joueurs sont les même que ceux du mode classique. Le mode Challenge subira les variations de prix du mode classique.</p><p>Le 11 de départ peut être chosi selon n'importe quel système tactique mais il doit y avoir au moins 1 gardien, 3 défenseurs et 1 attaquant. Le système tactique peut être choisi sur l'onglet &quot;Manage Team&quot;.</p><img src="/media/deb9b2_80b02ea3a54d4693942962b214c82277_mv2.jpg" alt=""/><p>A chaque journée, vous devez chosir un capitaine qui verra ses points doublés et un vice-capitaine qui verra ses points doublés si votre capitaine joue 0min lors de la GW.</p><p>Les points attribués aux joueurs suivent la même grille que celle du mode classique.</p><img src="/media/deb9b2_dc1fdc144b61486990eac95b8de4cffd_mv2.png" alt=""/><h3>Les particularités</h3><h3>Les challenges</h3><p>La grande nouveauté du mode Challenge c'est qu'à chaque tour de jeu (qui correspond en gros à une journée de championnat), il y aura un challenge à relever. </p><p>On connaît déjà ceux des 3 prochaines journées.</p><ul><li><p>En GW30 il faudra constituer son effectif sans limite de budget. Vous pourrez donc prendre les joueurs les plus cher du jeu sans craindre de dépassement.</p></li><li><p>En GW31 les points de attaquants seront doublés.</p></li><li><p>En GW32 les joueurs de Liverpool et de Manchester United verront leurs points doublés.</p></li></ul><p>Vous trouverez le challenge de la gameweek sur l'onglet &quot;Manage Team&quot;, sur le compte X de la @OfficialFPL (<a href="https://twitter.com/OfficialFPL"><u>https://twitter.com/OfficialFPL</u></a><u>)</u>  et bien sûr sur le compte X de @FantasyCoach_FR (<a href="https://twitter.com/FantasyCoach_FR"><u>https://twitter.com/FantasyCoach_FR</u></a>).</p><img src="/media/deb9b2_4efb13a7942d4b858f5f288b16aea51a_mv2.jpg" alt=""/><h3>La sélection des joueurs</h3><p>Chaque journée vous devez sélectionnez un nouveau 15 qui vous permettra de relever le challenge proposé.</p><p>Lorsque vous sélectionnez votre équipe vous pouvez choisir jusqu'à 5 joueurs de la même équipe. Par exemple en GW32, vous pourriez avoir 5 joueurs de Liverpool et 5 joueurs de Man U dans votre 15. Ces 10 joueurs, si vous les sélectionnez dans le XI titulaire auront leurs points doublés lors de cette journée et uniquement lors de cette journée.</p><p>Vous pouvez apporter des changement à votre 15 et à votre XI titulaire jusqu'au début du match des joueurs concernés et au plus tard à la final deadline qui interviendra quand il ne restera plus que minimum 3 équipes à jouer (soit Dimanche 31 Mars, 15h CET pour la GW30).</p><p>Quand l'équipe d'un joueur de votre effectif ou celle d'un joueur que vous convoitez aura commencé son match, vous ne pourrez plus les toucher, ils seront bloqués.</p><p>Si vous ne comptez pas apporter de modification à votre équipe ou à votre effectif pendant la gameweek, les règles de remplacement automatique sont les mêmes que pour le mode classique. </p><p>Si votre gardien titulaire joue 0min il sera automatiquement remplacé par le gardien que vous avez mis sur le banc.</p><p>Si un de vos joueur de champs joue 0min il sera remplacé par le premier joueur de champs qui est sur votre banc à condition que les règles de composition de votre XI soit respectées. Par exemple: si vous jouez dans un système à 3 défenseurs, si l'un de vos défenseurs titulaires ne joue pas une seule minute lors de la journée il est obligatoirement remplacé par un défenseur qui se trouve sur votre banc, même si ce dernier est en 2e position.</p><h2>Rejoindre la ligue Fantasy Coach</h2><h3>Si vous avez déjà un compte FPL </h3><p>Il faut tout simplement cliqué sur &quot;Fantasy Challenge&quot; dans l'onglet &quot;Fantasy&quot; du site <a href="https://fantasy.premierleague.com/"><u>https://fantasy.premierleague.com/</u></a>.</p><p>Chosissez le nom de votre équipe, slectionnez votre 15, cliquez sur l'onglet Leagues (1) puis cliquez sur &quot;Join League&quot; (2).</p><img src="/media/deb9b2_d047d89ab88248cc9e339288288e2758_mv2.jpg" alt=""/><p>Entrez le code <strong>bc5agz</strong> (3) et cliquez sur le bouton &quot;Join League&quot; (4). Bienvenue dans la ligur Fantasy Coach!!</p><img src="/media/deb9b2_4671447105a7411b8f352214c7a87498_mv2.jpg" alt=""/><h3>Si vous n'avez pas de compte FPL</h3><p>Allez sur le site du jeu <a href="http://fplchallenge.premierleague.com"><u>fplchallenge.premierleague.com</u></a>. Cliquez sur &quot;Register to play&quot;.</p><img src="/media/deb9b2_6db5b83a831d49eb9016eddda153180a_mv2.jpg" alt=""/><p>Créez votre compte. Une fois que celui-ci est créé, reprenez toutes les étapes décrites dans la procédure des jouers qui ont déjà un compte. Et n'oubliez pas de rentrez le code <strong>bc5agz</strong> pour rejoindre la ligue Fantasy Coach.</p><p>Bonne chance à tous et surtout amusez vous grâce à ce nouveau mode de jeu proposé par la Fantasy Premeier League. Si vous avez des questions, n'hésitez pas à nous MP sur X</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

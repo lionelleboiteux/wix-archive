@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J7</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Cette semaine en Premier League, le choc des titans sera Chelsea contre Liverpool. Liverpool a eu une semaine noire, mais Chelsea n'a pas fait beaucoup mieux. On note aussi Arsenal qui reçoit West Ham. Après avoir joué contre Man U, Brentford se retrouve contre Manchester City. Pour moi, le score sera inversé ce coup-ci, on verra ça dans les prono. Il y a aussi le clash des équipes qui s'habillent en blanc entre Leeds et Tottenham. À mon avis, ça va être un match nul dans tous les sens..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J7"><figure class="hero"><img src="/media/449182_3ae2d55e4e85444289e450dac3b5760d_mv2.avif.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J7</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 2 octobre 2025</p><div class="body"><p>Cette semaine en Premier League, le choc des titans sera Chelsea contre Liverpool. Liverpool a eu une semaine noire, mais Chelsea n'a pas fait beaucoup mieux. On note aussi Arsenal qui reçoit West Ham. Les champions des coups de pied arrêtés contre la plus mauvaise défense sur coups de pied arrêtés, on espère qu'il y aura plein de buts pour les Gunners. Après avoir joué contre Man U, Brentford se retrouve contre Manchester City. Pour moi, le score sera inversé ce coup-ci, on verra ça dans les pronostics. Il y a aussi le clash des équipes qui s'habillent en blanc entre Leeds et Tottenham. À mon avis, ça va être un match nul dans tous les sens. Voyons voir un peu ce que cette semaine de Premier League nous réserve…</p><h2>Le tour d'horizon</h2><h3>Liverpool</h3><p>Liverpool montre ses limites malgré un départ canon : défaite contre Crystal Palace en championnat (2-1) exposant leur vulnérabilité sur contre-attaque, puis une autre contre Galatasaray (1-0) en Ligue des champions, aggravée par des blessures majeures. L’équipe peine à réagir face à l’adversité, ce qui soulève doutes et difficultés tactiques – il n’y aura pas de champion intouchable cette saison.</p><h3>Arsenal</h3><p>Arsenal affiche une force mentale nouvelle. Les Gunners ont arraché la victoire en Premier League et se sont affirmés sur la scène européenne avec une victoire en Ligue des champions contre Olympiacos. L’équipe profite d’un pressing efficace, du retour en grâce de ses cadres, et d’une gestion physique rassurante malgré la blessure (mineure) de Gabriel Magalhães.</p><h3>Manchester City</h3><p>City n’a pas trouvé la clé pour battre Newcastle (1-1) et a également concédé le nul en Ligue des champions contre Monaco. L’équipe de Guardiola domine dans le jeu mais manque de réalisme devant, alors que Doku s’impose comme élément offensif de plus en plus central. Défensivement, City a révélé certaines failles récurrentes dont ont profité leurs adversaires.</p><h3>Manchester United</h3><p>United s’est effondré 3-1 à Brentford dans un match où leur défense fut systématiquement prise à défaut par des transitions rapides sur les ailes. Tactiquement, c’est une véritable crise de confiance : l’organisation d’Amorim est stérile, l’attaque inefficace, et Bryan Mbeumo (ex-Brentford) insuffisamment décisif depuis son arrivée. L’absence de liant et de collectif est criante.</p><h3>Chelsea</h3><p>Chelsea a vécu une semaine en montagnes russes : l’équipe a été surclassée par Brighton en Premier League (4-2), encaissant un nouveau carton rouge et révélant de profonds problèmes disciplinaires. En Ligue des champions, malgré une victoire importante contre Benfica (1-0), Chelsea a à nouveau fini à dix après l’expulsion de João Pedro. Maresca doit trouver rapidement l’équilibre entre discipline et agressivité.</p><h3>Bournemouth</h3><p>Bournemouth a signé deux nuls consécutifs : 0-0 contre Newcastle et 1-1 chez Leeds. Le bloc défensif reste solide, mais l’équipe doit retrouver du tranchant offensif si elle veut conserver sa place dans le wagon de tête. Les Cherries ont l’occasion de reprendre leur marche en avant en ouvrant la Gameweek 7 ce week-end.</p><h3>Tottenham</h3><p>Les Spurs ont aussi enregistré deux scores nuls cette semaine : d’abord à domicile en Premier League contre la lanterne rouge Wolves (1-1), sauvés dans les arrêts de jeu par un but de João Palhinha. En Ligue des champions, Tottenham a également été tenu en échec (1-1) face à FK Bodo/Glimt. Ce double résultat illustre une série sans victoire et souligne une incapacité à marquer la différence dans les moments clés, que ce soit en championnat ou sur la scène européenne</p><h2>Mes Pronos pour la J7 de Premier League:</h2><p>Bournemouth 2 - 1 Fulham</p><p>Leeds United 1 - 1 Tottenham</p><p>Arsenal 2 - 0 West Ham</p><p>Man United 1 - 1 Sunderland</p><p>Chelsea 1 - 2 Liverpool</p><p>Aston Villa 2 - 1 Burnley</p><p>Everton 2 - 2 Crystal Palace</p><p>Newcastle 2 - 0 Nottingham</p><p>Wolverhampton 1 - 1 Brighton Hove</p><p>Brentford 1 - 3 Man City</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p>Cette semaine, la Team Le Raccoon a droit à deux transferts gratuits et pour moi, il est temps de sortir Salah et Ngumoha pour faire rentrer Semenyo et Doku.</p><h3>Les Indispensables</h3><p><strong>Gabriel Magalhaes</strong> (6.2M) Défenseur solide d’Arsenal, bon calendrier défensif, menace sur coups de pied arrêtés et fiable en clean sheets.</p><p><strong>Erling Haaland</strong> (14.4M) Meilleur buteur actuel avec Manchester City, formé et avec des matchs favorables, incontournable pour les buts et passes décisives.</p><p><strong>Ismaila Sarr</strong> (6.4M) Milieu offensif de Crystal Palace, en bonne forme, avec un calendrier abordable et un très bon potentiel de buts et passes.</p><p><strong>João Pedro</strong> (7.8M) Attaquant performant de Chelsea, avec des occasions offensives nombreuses et un bon calendrier devant lui (surtout après Liverpool).</p><p>	•	</p><p><strong>Martin Ødegaard</strong> (7.3M) Milieu offensif et créateur d’Arsenal, en forme avec des passages réguliers à la finition et des passes clés.</p><h3>Les bons tuyaux</h3><p><strong>Antoine Semenyo</strong> (7.8M) Attaquant de Bournemouth, en excellente forme avec plusieurs buts récents, calendrier favorable.</p><p><strong>Chris Wood</strong> (7.6M) Attaquant de Nottingham Forest, performant avec des adversaires abordables sur les prochains matchs.</p><p><strong>Yankuba Minteh</strong> (5.9M) Milieu de Brighton, à la progression constante et impliqué offensivement, bon calendrier.</p><p><strong>Kaoru Mitoma</strong> (6.4M) Milieu offensif de Brighton, créatif et régulier dans les occasions, avec fixtures accessibles.</p><h3>Les pépites</h3><p><strong>Joachim Andersen</strong> (4.9M) Défenseur clé avec des clean sheets envisageables pour Crystal Palace.</p><p><strong>Matty Cash</strong> (4.6M) Latéral d’Aston Villa, budget-friendly avec un rôle offensif régulier et matches favorables.</p><p><strong>Granit Xhaka</strong> (5.0M) Ex-Milieu d’Arsenal avec budget raisonnable et rôle clé dans le système défensif et offensif de Sunderland.</p><p><strong>Pascal Struijk</strong> (5.1M) Défenseur de Leeds, joué régulièrement avec un calendrier modéré et potentiel de clean sheets.</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

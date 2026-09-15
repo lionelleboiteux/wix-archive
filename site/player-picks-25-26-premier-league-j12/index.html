@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J12</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="C'est la semaine qu'on coche tous sur le calendrier dès sa sortie. Non, pas le Black Friday, mais le North London Derby. Arsenal reçoit ses voisins bruyants à l'Emirates, et vu la dynamique des deux équipes, ça sent la correctionnelle pour les Spurs (je dis ça en toute objectivité, bien sûr)."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J12"><figure class="hero"><img src="/media/449182_2b664261315344e6afdf1470dc78acaa_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J12</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 20 novembre 2025</p><div class="body"><p>C'est la semaine qu'on coche tous sur le calendrier dès sa sortie. Non, pas le Black Friday, mais le North London Derby. Arsenal reçoit ses voisins bruyants à l'Emirates, et vu la dynamique des deux équipes, ça sent la correctionnelle pour les Spurs (je dis ça en toute objectivité, bien sûr).</p><p>Mais la J12 ne se résume pas qu'à voir Saka humilier la défense de Tottenham. City a un déplacement périlleux mais prometteur à Newcastle, Liverpool a une occasion en or de soigner sa différence de buts face à Forest, et les promus continuent d'offrir des options low-cost incroyables pour nos équipes Fantasy. Préparez vos transferts, c'est l'heure de faire des choix forts.</p><h2>Le tour d'horizon</h2><p><strong>Arsenal</strong></p><p>Le moment de vérité. Les Gunners reçoivent Tottenham dans une ambiance qui s'annonce électrique. Forts de leur solidité défensive (le meilleur taux de clean sheets d'Europe), les hommes d'Arteta partent grands favoris. Saka adore ces matchs et la défense, même sans Gabriel, devrait museler une attaque des Spurs toujours aussi brouillonne. Un 2-0 propre et net est à prévoir. North London is Red, comme d'habitude.</p><p><strong>Manchester City</strong></p><p>Déplacement compliqué à St James' Park, mais City semble avoir retrouvé son rythme de croisière. Newcastle encaisse beaucoup cette saison, et face à l'armada de Guardiola, ça risque de craquer. On s'attend à des buts, beaucoup de buts, et donc des points pour Haaland et Foden.</p><p><strong>Liverpool</strong></p><p>Après quelques turbulences, Liverpool reçoit Nottingham Forest à Anfield. C'est le genre de match &quot;pain béni&quot; pour les managers Fantasy. Forest voyage mal, et Salah aura à cœur de briller devant le Kop. Clean sheet et avalanche d'occasions en vue.</p><p><strong>Manchester United</strong></p><p>Les Red Devils reçoivent Everton. L'effet Amorim continue de porter ses fruits, notamment grâce à l'apport offensif de Mbeumo et Bruno. Everton reste Everton : capable de résister 60 minutes avant de s'effondrer. United devrait s'imposer logiquement.</p><p><strong>Chelsea &amp; Sunderland</strong></p><p>Chelsea se déplace chez le promu Burnley, tandis que Sunderland (l'autre promu qui cartonne) va à Fulham. Deux matchs à l'extérieur où les visiteurs sont favoris pour des clean sheets. La défense de Chelsea et celle de Sunderland sont des viviers à points pour cette journée.</p><h2>Mes Pronos pour la J12 de Premier League:</h2><p>Burnley 0 - 2 Chelsea</p><p>Bournemouth 2 - 0 West Ham</p><p>Brighton Hove 2 - 1 Brentford</p><p>Fulham 0 - 2 Sunderland</p><p>Liverpool 2 - 0 Nottingham</p><p>Wolverhampton 0 - 2 Crystal Palace</p><p>Newcastle 1 - 3 Man City</p><p>Leeds United 0 - 2 Aston Villa</p><p>Arsenal 2 - 0 Tottenham</p><p>Man United 2 - 1 Everton</p><p>Envoyez nous vos pronos via le jeu des pronos</p><h2>Le Player Picks</h2><h3>Les Indispensables</h3><p><strong>Erling Haaland </strong>(£14.9M) : Même à l'extérieur contre Newcastle, on annonce 3 buts pour City. Vous imaginez vraiment City en mettre trois sans que le Cyborg ne soit impliqué ? Impossible. Gardez-le, toujours.</p><p><strong>Bukayo Saka</strong> (£10.2M) : Le roi du Derby. Il ne déçoit jamais dans les gros matchs. Face à la défense haute et souvent naïve des Spurs, Saka va avoir des boulevards. Un but et une passe décisive, c'est le minimum syndical attendu ce week-end.</p><p><strong>Mohamed Salah</strong> (£12.8M) : À domicile contre Nottingham Forest avec une prévision de victoire 2-0 ? C'est le capitaine évident si vous voulez jouer la sécurité. Il est sur les penaltys, il est de retour en forme, et Forest va souffrir.</p><p><strong>Virgil van Dijk</strong> (£5.9m) : Défenseur premium avec grosse menace sur coups de pieds arrêtés, Liverpool a une série de matches favorables avec hautes chances de clean sheet.​</p><p><strong>Bryan Mbeumo</strong> (£7.0m) : Milieu très en forme, crée des occasions et marque régulièrement. Fixtures de Brentford solides (Leeds, Burnley, Everton) avant qu’il parte à la CAN.</p><h3>Les bons tuyaux</h3><p><strong>Danny Welbeck</strong> (£6.5m) : Attaquant de Brighton ; bonne dynamique, fixtures remarquables : BRE (H), NFO (A), AVL (H), WHU (H). Bon rapport qualité-prix.​</p><p><strong>Bruno Fernandes</strong> (£8.9m) : Leader technique de Man United, fixtures favorables (Wolves, West Ham, Everton), joueur régulier sur penalty et coups francs.​</p><p><strong>Jurrien Timber </strong>(£6.2m) : Défenseur d’Arsenal, très fiable, bon potentiel offensif, fixtures accessibles avec des clean sheets probables.​</p><p><strong>Senesi</strong> (£5.0m) : Défenseur de Bournemouth, calendrier défensif idéal (West Ham, Everton, Burnley), bonne valeur DEFCON et stats défensives.​</p><p><strong>Doku</strong> (£6.4m) : Ailier de Man City, explosif et impliqué dans l’attaque, bonne série de matches abordables avec stats sous-jacentes solides.</p><p><strong>Igor Thiago</strong> (£6.3m) : Attaquant de Brentford, il a probablement bien pris le pli de la Premier League et reste à un prix défiant toute concurrence avec ses 8 buts au compteur... Meilleure valeur Prix/buts que Haaland.</p><h3>Les pépites</h3><p><strong>Nordi Mukiele</strong> (£4.2M) : Je le répète chaque semaine, mais c'est le cadeau de la saison. Titulaire chez Sunderland (4ème du championnat !), il joue Fulham à l'extérieur. Avec un prono de 0-2, c'est 6 points minimum pour un prix dérisoire.</p><p><strong>Morgan Rogers</strong> (£5.2M) : Aston Villa va à Leeds avec une victoire 2-0 en vue. Rogers s'installe dans le XI et offre une voie d'accès pas chère à l'attaque de Villa. Idéal pour compléter votre milieu.</p><p><strong>Robin Roefs</strong> (£4.8M) : Le gardien de Sunderland. Si vous avez besoin de libérer du budget au poste de gardien, foncez. Sunderland est solide et Fulham a du mal à concrétiser ses occasions.</p><p><strong>Minteh</strong> (£6.0m) : Milieu Brighton, prix attractif, dynamique, titulaire, fixtures offensives alléchantes.​</p><p><strong>Richards</strong> (£4.5m) : Défenseur de Crystal Palace, enchaîne les points bonus et les clean sheets, fixtures défensives favorables (Wolves, Burnley, Fulham, Leeds)</p><p>Il ne me reste plus qu'à vous souhaiter une bonne semaine... et surtout un excellent Derby (pour le bon côté de North London) ! </p><p>🦝</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

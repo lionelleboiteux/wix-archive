@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Fantasy Coach FPL Survivor GW25</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="(You can find the english version in the 2nd half of the article.) La J25 de Premier League était très attendue puisque c'était la..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Fantasy Coach FPL Survivor GW25"><figure class="hero"><img src="/media/deb9b2_a24d29261c6b4fc6b6c15ccd672cb6a0_mv2.png" alt=""/><div class="scrim"></div><h1>Fantasy Coach FPL Survivor GW25</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 22 février 2024</p><div class="body"><img src="/media/deb9b2_a24d29261c6b4fc6b6c15ccd672cb6a0_mv2.png" alt=""/><p>(<em>You can find the english version in the 2nd half of the article</em>.)</p><p>La J25 de Premier League était très attendue puisque c'était la première journée double avec un gros intérêt. City et Liverpool étant 2 des 4 clubs avec 2 matchs dans cette GW. Les blessures et méformes de nombreuses stars de la FPL ont rendu les choses compliquées. Ça n’a pas empêché nos managers de poster de jolis scores. </p><p>Côté Fantasy Coach's FPL Survivor, il fallait faire un score minimum de 59pts. C’est le score minimum le plus important depuis le début de la saison. 11 managers n’ont pas réalisé ce score et s'arrêtent là dans cette compétition. Il reste donc 159 managers qui verront la GW26.</p><p>La GW25 était la dernière avec un minimum de 10 managers éliminés au minimum. De la GW26 à la GW30 il y aura au minimum 12 managers éliminés à chaque journée.</p><p>La GW26 est une journée tronquée (Blank Game Week) à cause de la finale de la League Cup entre Liverpool et Chelsea. Il n’y aura donc que 8 matchs comptant pour cette gameweek. En plus des 2 finalistes, Tottenham et Luton ne figureront pas pendant cette gameweek. La deadline de la GW26 est à 14h30 CET (1.30pm GMT) ce Samedi 24 Février 2024.</p><p>Le détail des résultats est à retrouver via ce lien</p><p><a href="https://docs.google.com/spreadsheets/d/1xRjq4pKdqb0nzb-_P12nv64nROxYY7xcyBN8fCLcALc/edit?usp=drivesdk"><u>https://docs.google.com/spreadsheets/d/1xRjq4pKdqb0nzb-_P12nv64nROxYY7xcyBN8fCLcALc/edit?usp=drivesdk</u></a></p><p>GW25 was highly expected as it was the 1t double gameweek of real interest. Manchester City and Liverpool were 2 of the double-billed protagonists. Injuries and less than overwhelming performances from popular assets made of this DGW an uneasy moment. It fortunately didn't prevent some of the managers of our league to post healthy scores.</p><p>In the Fantasy Coach's FPL Survivor competition managers had to reach the safety score of 59pts to survive this DGW. It's the highest safety score required since the beginning of the season. 11 managers didn't reach this mark and exit the competition. 159 managers are left before the start of GW26.</p><p>GW25 was the last one with 10 managers minimum eliminated. From GW26 to GW30, there will minimum 12 managers exiting the Survivor each gameweek.</p><p>GW26 is a blank gameweek due to the final of the Carabao Cup final between Liverpool and Chelsea. There will be only 8 matches counting for this FPL gameweek. In addition to the 2 finalists, Tottenham and Luton will also blank.</p><p>The deadline for GW26 is Saturday 24th February at 14h30 CET (<u>1.</u><a href="http://1.am">30pm</a> G</p><p>The results can be seen in the link above.</p><p>Scores minimum par journée / Safety scores per Game Week</p><p><u>GW1:</u> 49pts</p><p><u>GW2:</u> 24pts</p><p><u>GW3:</u> 28pts</p><p><u>GW4:</u> 53pts</p><p><u>GW5:</u> 27pts</p><p><u>GW6:</u> 48pts</p><p><u>GW7:</u> 29pts</p><p><u>GW8:</u> 28pts</p><p><u>GW9:</u> 51pts</p><p><u>GW10:</u> 47pts</p><p><u>GW11:</u> 16pts</p><p><u>GW12:</u> 44pts</p><p><u>GW13:</u> 32pts</p><p><u>GW14:</u> 41pts</p><p><u>GW15:</u> 24pts</p><p><u>GW16:</u> 23pts</p><p><u>GW17:</u> 32pts</p><p><u>GW18:</u> 25pts</p><p><u>GW19:</u> 26pts</p><p><u>GW20:</u> 48pts</p><p><u>GW21:</u> 32pts </p><p><u>GW22:</u> 34pts</p><p><u>GW23:</u> 47pts</p><p><u>GW24:</u> 43pts</p><p><u>GW25:</u> 59pts </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

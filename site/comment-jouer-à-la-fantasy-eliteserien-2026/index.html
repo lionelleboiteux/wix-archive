@@ -1,0 +1,97 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Comment jouer à la Fantasy Eliteserien 2026 ?</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Eliteserien Fantasy, comment jouer ?
+Les règles expliquées en français.
+Comment jouer à la Fantasy Eliteserien.
+Les règles expliquées. Effectif, transferts, scoring, chips n'auront plus de secrets pour vous."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Comment jouer à la Fantasy Eliteserien 2026 ?"><figure class="hero"><img src="/media/3448f3_1a1dfe58fdbf4bc7be31d3d388bacf17_mv2.jpg" alt=""/><div class="scrim"></div><h1>Comment jouer à la Fantasy Eliteserien 2026 ?</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 14 mars 2026</p><div class="body"><img src="/media/3448f3_1a1dfe58fdbf4bc7be31d3d388bacf17_mv2.jpg" alt=""/><p><strong>Comment jouer à la Fantasy Eliteserien 2026 ?</strong></p><p>La création gratuite d’un compte TV 2 est nécessaire pour accéder au jeu et s’inscrire. Il n’y a qu’à se laisser guider en arrivant ici : <a href="https://en.fantasy.eliteserien.no/"><u>https://en.fantasy.eliteserien.no/</u></a></p><p>Une interface en anglais est disponible (cliquer sur le drapeau de l’Union jack). Sinon, il vous reste le norvégien.</p><h2>Les grandes lignes du jeu</h2><p>Les règles sont disponibles sur le site sous l’onglet « help »</p><p><a href="https://en.fantasy.eliteserien.no/help/rules"><u>https://en.fantasy.eliteserien.no/help/rules</u></a></p><h2>Effectif</h2><p>Un budget initial de 100 millions.</p><p>Un effectif de 15 joueurs, avec maximum trois joueurs du même club.</p><p>Un onze de départ comprenant au moins trois défenseurs et un attaquant.</p><h2>Transferts</h2><p>Un transfert gratuit par journée.</p><p>Cumul possible des transferts gratuits, jusqu'à cinq maximum.</p><p>Chaque transfert supplémentaire coûte quatre points.</p><p>Les prix varient en fonction de l’offre et la demande, avec des variations entre prix d’achat et prix actuel. Le prix affiché sur votre page de transferts correspond au prix de vente du joueur. Ne pas oublier qu’une commission de 50 % (arrondie au dixième supérieur) est prélevée sur tout bénéfice réalisé sur la vente.</p><p>Pause d’été entre le round 11 (29/05) et le round 12 (05/07) : chaque manager recevra au maximum cinq transferts gratuits supplémentaires, sans pouvoir excéder la règle des 5 transferts gratuits maximum.</p><p>Toute modification de votre équipe (onze de départ, composition du banc, changement de capitaine et transferts) doit être effectuée avant la date limite de la journée pour être prise en compte pour les matchs à venir.</p><p>En général, la date limite pour les compositions d'équipe (et donc la fin des transferts) est fixée à cinq minutes avant le coup d'envoi du premier match de la journée.</p><p>Enfin, par défaut, votre onze de départ est aligné à chaque journée, il n’y a pas besoin de validation spécifique.</p><h2>Wilcards</h2><p>Une wildcard vous permet d'effectuer un nombre illimité de transferts au cours d'une journée dans la limite de votre budget du moment.</p><p>Vous disposez de deux wildcards sur la saison.</p><p>L’usage de vos wildcards est encadré :</p><ul><li><p>la première à utiliser entre les journées 2 et 15</p></li><li><p>la seconde à utiliser entre les journées 16 et 30.</p></li></ul><p>Lorsque vous jouez vos wildcards, vous conservez les transferts gratuits que vous possédiez avant de jouer la wildcard.</p><img src="/media/3448f3_bdd314d92765464dab818a4b7432c729_mv2.jpg" alt=""/><h2>Points</h2><p>Vos joueurs titulaires marquent des points à chaque journée selon la nomenclature ci-dessous.</p><img src="/media/3448f3_cc3aae6868a04cfb9a244f66f2b18220_mv2.jpg" alt=""/><p>Un bonus est attribué à chaque match par le commentateur du match de TV 2 (chaîne de TV norvégienne).</p><p>A noter que contrairement à FPL, il n’y a pas de Defensive contribution (DefCon).</p><p>Les points du capitaine sont doublés à chaque journée, avec désignation d’un vice-capitaine au cas où le capitaine est absent.</p><p>Si un titulaire de votre onze est absent, remplacement (s) automatique(s) en fonction de l’ordre sur le banc et de la structure de votre onze.</p><h2>Chips, la grande différence avec FPL</h2><p>Les chips sont au nombre de quatre et sont à usage unique.</p><p>On ne peut jouer qu’un seul chip à la fois par journée.</p><p>On ne peut pas jouer un chip en même temps qu’une wildcard.</p><p><strong><em>Rich Uncle </em></strong></p><p>Un nombre illimité de transferts gratuits avec un budget illimité pour une seule journée. Puis, retour à votre effectif initial et vous conservez les transferts gratuits que vous possédiez avant de jouer ce chip.</p><p><strong><em>Attack! Attack!</em></strong></p><p>Tous les attaquants doublent leurs points. Pas de capitaine cette journée là.</p><p><strong><em>Two Captains</em></strong></p><p>Le capitaine et le vice-capitaine doublent leurs points.</p><p><strong><em>Park the Bus</em></strong></p><p>Tous les défenseurs doublent leurs points. Pas de capitaine cette journée là.</p><p>Voilà, il ne vous reste plus qu'à rejoindre notre Ligue Fantasy vous attend ici :</p><p><a href="https://en.fantasy.eliteserien.no/leagues/auto-join/9oi91w"><u>https://en.fantasy.eliteserien.no/leagues/auto-join/9oi91w</u></a></p><p>son code <strong>9oi91w</strong></p><img src="/media/3448f3_7e548e79a6de4760a2c2e62535e197bc_mv2.jpg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

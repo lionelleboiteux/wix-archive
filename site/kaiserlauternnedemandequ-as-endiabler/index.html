@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Kaiserlautern ne demande qu'à s'endiabler</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Kaiserslautern
+2.Bundesliga"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Kaiserlautern ne demande qu'à s'endiabler"><figure class="hero"><img src="/media/3448f3_081b6a7e84f2484982a29d1f16fcbab6_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Kaiserlautern ne demande qu'à s'endiabler</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 2 août 2024</p><div class="body"><img src="/media/3448f3_897e52ec05d34dd793acaab0b964811c_mv2.jpeg" alt=""/><h2>1. FC Kaiserslautern</h2><p>Après un maintien arraché in extremis du haut d’une treizième place qui raconte mal le stress d’une saison compliquée, Kaiserlautern ambitionne de vivre un exercice beaucoup moins agité.</p><p>En effet, si les Lauterers avaient pourtant très bien redressé une saison mal engagée en enchaînant une série remarquable de 7 matchs consécutifs sans défaite (5v, 2n), ils ont sombré dans les grandes largeurs au cours d’un automne cataclysmique (1n, 7d) avec une série de 6 défaites consécutives. Paniquée, la direction du club a actionné la carte mercato pour corriger le tir et a multiplié les changements d’entraîneur puisque pas moins de quatre entraîneurs se sont succéder pour enrayer tant bien que mal cette spirale négative infernale (Schuster démis, Martin intérimaire, Grammozis remplaçant viré puis Funkel). Jusqu’au bout le championnat restera compliqué, avec un sauvetage opéré sous la houlette d’un <strong>Friedhelm Funkel</strong> venu jouer les pompiers de service et reparti après une finale dignement perdue face au rouleau compresseur venu de Leverkusen. Ce très bon parcours en Pokal, seule éclaircie dans cette grisaille, venant suggérer qu’il y avait certainement mieux à faire avec davantage de stabilité.</p><p>Pour essayer de retrouver une certaine forme de quiétude sportive, les dirigeants ont fait le choix de nommer <strong>Markus Anfang</strong> comme entraîneur. Son épisode du faux vaccin pendant la pandémie (Werder Brême) et son éviction de Cologne alors en tête de 2.Buli viennent troubler l’image d’un technicien plutôt clivant qui demande à ses équipes de pratiquer un jeu offensif et agressif, parfois avec réussite (Holstein Kiel) et souvent sans.</p><img src="/media/3448f3_2f3a61ff965d43a083c3445067744067_mv2.jpeg" alt=""/><p>Le mercato a été marqué par les départs notables de <strong>Julian Niehues</strong> (fin de contrat) et  <strong>Tymo Puchacz</strong> (prêté) alors que les arrivées ont été réalisées essentiellement à base de transferts onéreux et ont ciblé des joueurs plutôt expérimentés : <strong>Jannis Heuer</strong> pour renforcer la défense centrale, <strong>Jan Gyamerah</strong> pour le côté droit, <strong>Erik Wekesser</strong> et <strong>Florian Kleinhansl</strong> pour couvrir le poste de latéral gauche, option d’achat levée pour le milieu tchèque <strong>Filip Kaloc</strong> qui a stabilisé l’entre-jeu sur la deuxième partie de saison, ou encore les pioches venues de l’échelon inférieur comme le défensif <strong>Luca Sirch </strong>et le buteur <strong>Jannik Mause</strong> qui a marqué 18 buts en 3.Liga avec Ingolstadt et qui aura pour mission de limiter la <strong>Ache</strong> dépendance (16 buts en 26 matchs pour l’avant-centre prénommé Ragnar). Notre chouchou <strong>Boris Tomiak</strong> (excellent défenseur central, polyvalent et fiable) est toujours là jusqu’au jour où des recruteurs avisés auront la bonne idée de lui donner sa chance au-dessus.</p><p>Le décès accidentel de <strong>Peter Miethe</strong> (responsable des équipements et membre de l’encadrement, au club depuis 20 ans et très apprécié) lors d’une chute de vélo occasionnée pendant le stage d’entraînement qui se déroulait au Tyrol va peser lourd en terme de cohésion et de détermination d’un groupe qui a achevé sa préparation sur six victoires en autant de matchs.</p><p>Dans un environnement qui n’est pas des plus simples à appréhender, Anfang va devoir convaincre les bouillants supporters qui ne demandent qu’à mettre le feu aux 49.500 places du Fritz Walter Stadion. S’il y parvient, les Diables Rouges pourraient alors sortir de leur boîte et venir musarder dans la première moitié de tableau.</p><p><strong><em>Pronostic 9</em></strong></p><img src="/media/3448f3_081b6a7e84f2484982a29d1f16fcbab6_mv2.jpeg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

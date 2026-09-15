@@ -1,0 +1,99 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Mercato été 2022</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Dernière MAJ : Vendredi 02/09/2022 00h00 Vous trouverez dans cet article le tableau, club par club, reprenant tous les transferts..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Mercato été 2022"><figure class="hero"><img src="/media/449182_aa254c4c27194dbcb31d42db5927d9b8_mv2.png" alt=""/><div class="scrim"></div><h1>Mercato été 2022</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 30 août 2022</p><div class="body"><p><strong>Dernière MAJ : Vendredi 02/09/2022 00h00</strong> </p><p>Vous trouverez dans cet article le tableau, club par club, reprenant tous les transferts <strong>OFFICIELS </strong>des clubs de Ligue1 du mercato de l'été 2022.  </p><img src="/media/449182_aa254c4c27194dbcb31d42db5927d9b8_mv2.png" alt="Angers"/><img src="/media/449182_807c20a06b24434ba39a86bbf4105d68_mv2.png" alt="Ajaccio"/><img src="/media/449182_fb265bc730df4e39b3c395a018031f71_mv2.png" alt="Auxerre"/><img src="/media/449182_205af53c7bca481499dc56703f25ef85_mv2.png" alt="Brest"/><img src="/media/449182_8306855ab0ae45278945ba149d27bbff_mv2.png" alt="Clermont Foot"/><img src="/media/449182_bb31500fc9734ceeb53df6aeda63ac84_mv2.png" alt="Lille"/><img src="/media/449182_0e50910811b4417289bf3900df23566c_mv2.png" alt="Lorient"/><img src="/media/449182_53ba50429cb44f5690a273ea8e6d8448_mv2.png" alt="Lyon"/><img src="/media/449182_c6f767d0bbbb4ea68f0bf770a4f76031_mv2.png" alt="Marseille"/><img src="/media/449182_82858e817092403c832f9f53d183a08a_mv2.png" alt="Monaco"/><img src="/media/449182_c0331bbd6579426b82c86ed97f7c42ac_mv2.png" alt="Montpellier"/><img src="/media/449182_9bac993311f2415a927a57e1bbf1773a_mv2.png" alt="Nantes"/><img src="/media/449182_aa55a521249240cfbba76903ae2be43c_mv2.png" alt="Nice"/><img src="/media/449182_a59bd3e758fb439784a26d0cdb70c101_mv2.png" alt="Paris"/><img src="/media/449182_fe30a9c487434f44aac21141dad9e930_mv2.png" alt="Reims"/><img src="/media/449182_9d850317b33642d6a0505d20f8dffbd5_mv2.png" alt="Rennes"/><img src="/media/449182_6c34df1644e146fc88ce8fbeeaa22dcb_mv2.png" alt="Strasbourg"/><img src="/media/449182_e06866b0da1f469b8327923cb78ec26c_mv2.png" alt="Toulouse"/><img src="/media/449182_b518bb4592d24b34bdc4dcdb3a81e3f2_mv2.png" alt="Troyes"/><p>Tableau de suivi des mises à jour</p><p>N’hésitez pas à nous suivre nous sur Twitter <a href="https://twitter.com/FantasyCoach_FR">@FantasyCoach_FR </a>et <a href="https://twitter.com/MPGLaurent">@MPGLaurent</a> et sur Facebook : <a href="https://www.facebook.com/Fantasy-Coach-824491257591639/">Fantasy Coach</a> </p><p>Pour jouer au <a href="https://www.winamax.fr/landing/landing_leads.php?ldg=jde&amp;banid=37173">Jeu de l’Entraîneur Winamax</a>, à <a href="https://data.mpg.football/">MonPetitGazon </a>ou à <a href="https://sorare.com/">Sorare</a> </p><p>Voici la légende de la colonne &quot;type&quot; qui précise le type de transfert :
+td : transfert définitif
+tl : transfert libre
+rp : retour de prêt
+p : prêt
+fc : fin de contrat   </p><h2>AC Ajaccio/ Coach : Pantaloni ARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEMATTOIRCholetrpKALULULorienttlNJIKECholetrpKRASSOSt-EtiennerpELISORVillefrancherpN'JIKEFC ArgesfcOBISSACharleroirp ELISORRFC SeraingfcMANGANIAngerstl COURTETGuingamp HAMOUMASt-Etiennetl OBISSAVillefrancePSPADANUDAFC Aarau  ARCONTEBresttdALPHONSEMaccabi Haïfatl   VIDALMontpelliertd   MAYEMBOLe Havretd   TOUZGHARTroyestd   KONELyonp     </h2><h2>SCO Angers/ Coach : Baticle ARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEFOFANALe HavretdTHOMASCaenfc ABDELLILe HavretdTRAOREMetzfc DIONYBelgraderpMANGANIAjacciofcALIOUIKortrijkrp PETKOVIC fcBERNARDONISt-Etiennerp BAHOKENKasimpasa SKfcTHIOUBSt-Etiennerp PEREIRA LAGEBrestfc BOBICHONNancyrp ALI-CHOReal Sociedadtd EL MELALIPaurp MEDDAHSochauxtdBLAZICFerencvarosfc MANCEAUGuingampfcSALAMADunkerquetlMANDREASM CaentlHUNOUMinnesotap MEDDAHSochaux SABANOVICSarajevotl CABOTLenstlENEME-ELLABrightontl NINGAFamagoustetl SIMABrightonpFULGINIMayencetdCHETTIEsperance TunistdEBOSSEUdinesetdHOUNTONDJIClermonttd FATARCholetpCAMARAParis FCtd BOMARodezfcAMADOU/tl   VALERYSouthampton      </h2><h2>AJ Auxerre / Coach : FurlanARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEM'CHANGAMAGuingamptlJI fcBOTOPaurpTROUILLETNicerpRUIZ-ATILBarcelonetdPONTIBourg-en-BressefcBAINBresttlARCUSVitesse Arnhemfc PEREIRALenstdAKPAOrléansp COSTILBordeauxtlMOHAMEDSM Caenfc JEANVIERBrentfordtl LLORISLe Havrefc DA COSTANottingham F.tdBEN FREDJLe Puy FootpRAVELOSONLA Galaxytd   MENSAHBordeauxtd   NIANGBordeauxtl   </h2><h2>Stade Brestois 29 / Coach : Der ZakarianARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEPHILIPPOTEAUXDijonrpSATRIANOInterrpPEREIRA LAGEAngersfcPIERRE-GABRIELMainz 05rpFADIGAHeracles Almelo AGOUMEInterrpBELAÏLI tlCIBOISRodeztlDEMBELECeltic GlasgowtlBAINAJ AuxerrefcLEES-MELOUNorwichtdLASNEParis FCfcDARIWACtd FAUSSURIERSochauxfcBLAZQUEZCordobapLARSONNEURValenciennespSLIMANISport. Lisbonnetl M'BOCKCaenpM. CAMARASt Etiennep PHILIPPOTEAUX/fc ARCONTEAjaccio SAÏDNîmestd</h2><h2>Clermont Foot / Coach : GastienARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEBOYERBastiarpDA CUNHANicerpTEIXEIRALustenaurpHAMELLorientrpNETO BORGESGenktl ALBERT/fc DIAWLausanne-SporttdPHOJO/fc ZEFFANE tlZEDADKALillefcMASSOLINMoulinstlN'SIMBABordeaux?fcCISSELens ABDUL SAMEDLenstdGONALONS GrenadefcCISSOKOHQRMtd ANDRICDynamo ZagrebtdTEIXEIRAAustri Lustenaufc WIETESKALegia VarsovietdDESMASLe HavretdBELABirminghamtlBAYOLilletd CAUFRIEZSpartak MoscoutdBUSQUETSAroucatd   HOUNTONDJIAngerstd   CHADERLucernetd   JABYMoulins Yzeurep   BELLACHEAustria Lustenaup   BILLONGClujtl   DIABYLustenaup   BERTHOMIERValenciennestl  </h2><h2>RC Lens / Coach : HaiseARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEOUDJANIStade BriochinrpCAHUZACRetraiteFINFORTESOostenderpKALIMUENDOParis SGrpDUCROCQBastiarpCISSEClermont BOLIVicenzarp JEANInter MiamitdVARANERodezrp VARANE fcBOURALe HavrerpCAMARA fcBUKSAMLStd DUCROCQSC BastiapPOREBAZaglebie LubintlDOUCOURECrystal PalacetdSAMBANottingham Ftd PEREIRAAuxerretdBALDEPSGtd BANZABragatdCABOTAngerstl CLAUSSMarseilletdABDUL SAMEDClermonttd ROBAILAtromitostlOPENDAFC Brugestd BERGBodo Glimttd ONANABordeauxtdGANAGONantestdCLAUDE-MAURICENicep WOOHRennestd   M. CAMARABastia </h2><h2>Lille OSC / Coach : FonsecaARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPECHEVALIERValenciennesrpYLMAZFortuna SittardfcYAZICICSKA MoscourpXEKA fcZEDADKAClermonttlGRBICAt. MadridrpALEXSANDROGD ChavestdPIED fcMARTINRennestl KARNESIS fcCABELLAMontpelliertlBEN ARFA/fcBAYOClermonttdBOTMANNewcastletdBURLETSchalketlCELIKAS RomatdDIAKITEToulousetdNLANDU fcISMAILYShaktartlINNONCENTIValenciennesfcVIRGINIUSSochauxtdAGOUZOULSochauxfcOUNASNaples BRADARICSalernitanatdANDRE GOMESEverton DABILAParis FCtd   RENATO SANCHESParis SGtd   ONANAEvertontd   CAPITAEstrala Amadora </h2><h2>FC Lorient / Coach : Le BrisARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEBOZOKKasimparpHERGAULT/fcHAMELClermontrpMENDESUD AlmeriafcGRBICVitesserpMOUAZANNancyfcMOUYOKOLOBourg-en-BresserpLABONNENîmestdPONCEAUNîmesrpHAMELParis FCtdKALULUAjacciofcCALLENSAnnecyp YONGWANiorttdMOREL fc MVOGORB LeipzigpLEMOINE fcTALBIRubin KazantdJENTZCeltic GlasgowpMATSIMAMonacopRENAUDCholetp NAGUERAParis SGpSOUMANOAS Eupenp   DREYERSt-Etiennefc   MONCONDUITSt-Etiennetd   PETROTSt-Etiennetd   NARDIGentp   PAGISNîmesp    LAURIENTESassuolotd   BOZOKTrabzonsporttd  </h2><h2>Olympique Lyonnais / Coach : BoszARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEDA SILVAVillefrancherpEMERSONChelsearpOZKACARLeuvenrpNDOMBELETottenhamrpSOUMAREAnnecyrpKEITACourtraipLACAZETTEArsenalfcNDIAYESC BastiapRIOUCaentdDUBOISGalatasaraytdLEPENANTCaentdPINTORSt-Etiennetd TOLISSOBayern MunichtlSOUMAREBourg PeronnaspTETEShakhatar Donetskp OZKACARFC ValencepLAAZIRI tl PAQUETAWest HamtdKONETroyesrp KADEWEREMajorquepTAGLIAFICOAjaxtd KONEAjacciop  </h2><h2>Olympique de Marseille / Coach : TudorARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEGIGOTRussiefcKAMARAAston VillafcLOPEZAS RomatdPERRINStrasbourgtdGUENDOUZIArsenaltdSALIBAArsenalrpUNDERAS RomatdHARITSchalke 04rpRADONJICBenficarp MANDANDARennestlAMAVINicerp RADONJICTorinopSTROOTMANCagliarirp PHLIPONEAUAnnecyfcTOURELe Havretd LUIS HENRIQUEBotafogopMBEMBAPortotl LUAN PERESFenerbachetdSUAREZGrenadetdALVARO Al NassrfcCLAUSSLenstd TARGHALLINEAlanyasporpNYAKOSSIServette Genèvetd LIROLAElchepBLANCOCelta VigoP DE LA FUENTEOlympiakospNUNO TAVARESArsenalp STROOTMANGenoapVERETOUTAS RomatdMILIKJuventuspSANCHEZInter Milantl TONGYAOdensetdKABOREMan Cityp AMAVIGetafepBAILLYMan Unitedp CALETA-CARSouthamptontdHARITSchalke 04p     </h2><h2>Monaco /  Coach : ClémentARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEGEUBBELSNantesrpFABREGASCômefcPELLEGRITorinorpAHOLOUStrasbourgtdBARRECALeccerp SIDIBE fcMINAMINOLiverpooltd TCHOUAMENIReal MadridtdEMBOLOBor. MönchengladbachtdMANNONE fc DIDILLONCercle BrugespPAVLOVICSalzbourgtd SARRChelseapPELLEGRITorinotd M. CAMARARB SalzbourgtdLECOMTEEsp. Barcelonep   MAJECKICercle Brugesp   PELEFamalicaop   MATSIMALorientp   BARRECA/fc   DIOPNicetd   MUSABAMetzp   MARCELINBruggep</h2><h2>Montpellier / Coach : Dall'OglioARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPESAINTE-LUCENîmestdRISTICBenficafcNORDINSt-EtiennetlOYONGO fcSUAREZUruguayrpJUNIOR SAMBIASalernitanafcMAOUASSABrugesrpTHULERFlamengofcKHAZRISt-EtiennetlGIOACCHINISM CaenfcSACKOVitoria SCpMOLLETSchalke 04tdJULLIENCeltic GlasgowtdBAKAYOKONiorttdKAMARAStrasbourgtdVIDALAjacciotd   CABELLALillefc   BARESFC Thounep   GUERMOUCHEChateaurouxp  </h2><h2>FC Nantes / Coach : KombouareARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEBAMBAAmiensrpKOLO MUANIBundesligafcNDILUQuevillyrpCYPRIENParmerpSISSOKOWatford BUKARILa GantoiserpGUESSANDNicepGEUBBELSMonacorpMOHAMEDGalatasaraypPEREIRA DE SASochauxfcGANAGONantestdAUGUSTINFC Bâletl   LIMBOMBEAlmere Citytl   SYLLASeraingtd   COULIBALYBelgradefc  </h2><h2>OGC Nice / Coach : FavreARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPETROUILLETAuxerrerpKLUIVERTRomarpNDOYEBâlerpAMAVIMarseillerpDA CUNHAClermontrpBENITEZPSVfcSOTONABrentfordrp SACKO fcBULKAPSGtd N'GUESSANNîmesp ILIERapid BucaresttdGUESSANDNantespVITIEmpolitd SMITHQuevillypBEKA BEKALokomotiv Moscoutd SOTONAKilmarnokpRAMSEYJuventustl DANILOBotafogotdSCHMEICHELLeicestertd DANILIUCSalernitanatdPEPEArsenalp STENGSAntwerppDIOPMonacotd DOLBERGSévillepLABORDERennestd CLAUDE-MAURICELenspSORENSENBrentford  GOUIRIRennestd  </h2><h2>Paris Saint Germain / Coach : Galtier ?ARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPENUNO MENDESSportingtdDI MARIAJuventus TurinfcRICOMallorcarpBULKANicetdRAFINHAReal SociedadrpBALDELenstdSARABIASportingrpSIMONSPSVfcKALIMUENDOLensrpDAGBAStrasbourgpPEMBELEBordeauxrpWIJNALDUMAS RomapAREOLAWest HamrpT. BALDETroyestdVITINHAFC PortotdKALIMUENDORennestdEKITIKEReimspKHERERWest HamtdMUKIELERB LeipzigtdBITUMAZALAAS EupentdRENATO SANCHESLilletdEBIMBEFrancfortpRUIZNaplestdHERRERAAth. Bilbaop   NAGERALorientp   FRANCHIBurnleytd   MICHUTSunderlandp   PAREDESJuventusp   INNOCENTEupentd   DIALLORB Leipzigp   KURZAWAFulhamp   GUEYEEvertontd   DRAXLERBenficap  </h2><h2>Reims / Coach : GarciaARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEGRAVILLONIntertdKONANAl-Nassr FCfcSIERHUISAlmelorpBUSIParmerpAGBADOUAS Euspentd SISSOKORFC SeraingfcMARESICLaskrpM. DOUMBIASochauxfcPENTZAustria ViennetlCERVANTESLe ManspITOGenktdMARESICIstra 1961pBALOGUNArsenalpEKITIKEParis SGpGUITANEMaritimorpRAJKOVICMajorquetdHOLMRosenborgpHORNBYOostendep   M. CASSAMANicosietd   KUTESAServette Genèvetl   KOFFIPaços de Ferreirap   FAESLeicestertd   KEBBALParis FC    DONISNicosie    TOUREAlmeriatd  </h2><h2>Rennes / Coach : GenesioARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEABLINELe HavrerpMARTINLoscfcGUCLUEmmenrpBONETRed StarfcSILIKIMiddlesbroughrpGELINAmiens SCfcGBOHOVitesserpAGUERDWest HamtdMANDANDAMarseilletlKADILEFC de FamalicaopTHEATEBolognetdDIOUFBâlepRODONTottenhampLEA SILIKIEstorilfcKALIMUENDOParistdTELBayern MunichtdGOUIRIRennestdGBOHOCercle BrugestdWOOHLenstdGUIRASSYStuttgartp   LABORDENicetd  </h2><h2>Strasbourg / Coach : StéphanARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEMOTHIBATroyesrpCACIMainz 05tdKAMARACharleroirpGUILBERTAston VillarpPIERREAnnecyrp BELLAAROUCHStade BriochinpPERRINMarseilletd CHAHIRIParis FCpAHOLOUMonacotdELIMBIUS OrléanspCHAHIRICaenrp WARISFamagustafcDELAINEMetztl  BASTIANAnnecypSENAYASochauxrp SIBYMalmö DAGBAPSGp SENAYARodezpPIERRE-GABRIELMayencep SAHIAnnecyp   KAMARAMontpelliertd  </h2><h2>Toulouse / Coach : MontanierARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPESIDIBEQuevillyrpBANGREQRMpABOUKHALAlkmaartdSANNALavalpHAUGOslotdDIAKITELilletdDALLINGARotterdamtdKASONGOSuisse ZANDENIF ElfsborgtdSKYTTAStavangerpTSINGARASPAOK NGOUMOUBor. Mönchen.td BRIMANCEVICMalmö RAPNOUILBotev Vratsa   </h2><h2>Troyes / Coach : IrlèsARRIVEEDEPARTJOUEURVENANT DETYPEJOUEURVERSTYPEGIRAUDONLeganésrpKABOREMan CityrpLUMEKAVilafranquenserpMOTHIBAStrasbourgrpPOROZOBoavista PortotdUGBOGenkrpBRUUSBrondbytdABDALLAH fcUGBOGenktdCHAMBOSTSt-EtiennetlT. BALDEParis SGtdGIRAUDONSt-EtiennefcRONY LOPESFC SevillepRENOTFC VersaillesfcYADEMetzpMETINHOLommel UnitedpFATAHAIK BIANCONENottinghamtdMORENOMan. CitypKONELyonrpPALAVERSAMan. CitypKUKHAREVYCHLeuvenpLISSouthampton SAVINHOPSV EindhovenpAGOUMEInterpEL HAJJAMLe Havrefc   SUKrupture contratfc   CHADLILommelp   TOUZGHARAjacciofc   DOMINGUES/fc</h2><p>Ma </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

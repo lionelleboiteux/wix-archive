@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Greuther Fürth, la carte jeune</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Greuther Fürth
+2.Bundesliga"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Greuther Fürth, la carte jeune"><figure class="hero"><img src="/media/3448f3_d96e06e4bf284c07903b3e44694f7e66_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Greuther Fürth, la carte jeune</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 4 août 2024</p><div class="body"><img src="/media/3448f3_cb2ab3dbd1f54a0a81906a06f99aadef_mv2.jpeg" alt=""/><h2>SpVgg Greuther Fürth</h2><p>En faisant le pari de la jeunesse, Greuther Fürth a proposé la saison dernière un projet de club ambitieux et intéressant. Et qui aurait pu payer si certains concurrents directs n’avaient pas été si solides et si réguliers sur la durée. Devant jusqu’à Noël, l’équipe s’est écroulée sur la seconde partie de championnat : la huitième place obtenue est en tout cas venue valider la pertinence de la démarche entreprise.</p><p>Malheureusement, certains de ces jeunes joueurs cadres et non des moindres n’étaient qu’en prêt et sont rentrés dans leurs clubs parents cet été : l’attaquant <strong>Armindo Sieb</strong> (option de rachat actionnée par le Bayern Munich avant un nouveau prêt à Mayence), le gardien<strong> Jonas Urbig</strong> (Cologne), le milieu <strong>Robert Wagne</strong>r (Fribourg puis nouveau prêt à Sankt Pauli), <strong>Tim Lemperle</strong> (Cologne) ont performé tout au long de la saison. Une impossibilité contractuelle à s’inscrire dans la durée qui marque une des limites du modèle retenu.</p><img src="/media/3448f3_5deefdd361924cc9821ace19b2104d19_mv2.jpeg" alt=""/><p>Convaincus par les résultats obtenus et voulant poursuivre dans la voie qui consiste à miser sur de jeunes potentiels peu connus, les dirigeants se sont lancés lors de ce mercato estival avec l’idée de remplacer les jeunes talents par des recrues ayant le même profil. Et vu le succès de la cohorte passée, la tâche s’annonce ardue.</p><p>On devrait avoir ainsi l’occasion de découvrir de nouveaux visages : l’attaquant <strong>Noel Futkeu</strong> (21 ans) déniché dans l’équipe réserve de l’Eintracht Francfort, le milieu de terrain droit revanchard <strong>Roberto Massimo</strong> (23 ans) arrivé libre en provenance de Stuttgart où il s’est quelque peu perdu, le gardien <strong>Nahuel Noll</strong> (21 ans) pioché dans les équipes réserves du TSG Hoffenheim ou encore l’attaquant <strong>Marlon Mustapha</strong> (23 ans) prêté par Côme et aperçu la saison dernière du côté de Düsseldorf, déjà en prêt. Alors que les défenseurs <strong>Reno Münz</strong> (18 ans) des U18 de Leverkusen et <strong>Matti Wagner</strong> (19) de la réserve de Cologne complètent ces nouveaux paris pris sur le futur. Six arrivées que des U23…</p><img src="/media/3448f3_d96e06e4bf284c07903b3e44694f7e66_mv2.jpeg" alt=""/><p>Le reste de l’effectif étant resté stable et ayant bien travaillé sous la coupe d’un entraîneur et d’un staff dont les travaux méritent d’être attentivement suivis, l’équipe au trèfle s’annonce encore comme une des attractions de ce championnat. Surtout que Fürth peut compter ses jeunes mais aussi sur des leaders dans chacune de ses lignes : le défenseur central polonais <strong>Damian Michalski</strong> (22 ans et en devenir), le milieu américain <strong>Julian Green</strong> (29 ans et très fiable) et l’attaquant suédois <strong>Branimir Hrgota</strong> (31 ans) qui reste le meilleur joueur du club. Il va sans dire qu’une absence longue durée notamment de Hrgota et/ou Green fragiliserait l’équilibre de tout ce jeune édifice. Une des fragilités résidant dans le peu de profondeur de son milieu de terrain et particulièrement chez les éléments à vocation offensive. Une vraie faiblesse pour jouer le très haut de tableau et un vrai danger en cas de pépins. A voir si le mercato du mois d’août répare cette absence.</p><p>De la capacité à <strong>Alexander Zorniger</strong> à poursuivre le développement de ces espoirs dans un cadre collectif partagé et performant dépendra la bonne tenue de Greuther Fürth lors de cette nouvelle saison. Le projet du club restant assurément un des plus excitants de la division. Probablement trop tendre pour se mêler sérieusement à la montée et trop court sur certains postes, on imagine bien l’équipe continuer à progresser dans le jeu déployé et dans sa course au classement. Des coups d’éclats ne seraient pas non plus pour nous surprendre. Et le calendrier favorable du début de saison pourrait aider à se mettre sur les bons rails.</p><p><strong><em>Pronostic 8</em></strong></p><img src="/media/3448f3_8f9b2ca419444298bfab2d132f17fb45_mv2.jpeg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

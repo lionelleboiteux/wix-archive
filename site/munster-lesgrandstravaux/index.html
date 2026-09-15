@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Münster, les grands travaux</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Münster
+2.Bundesliga"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Münster, les grands travaux"><figure class="hero"><img src="/media/3448f3_58a696e9a518410e9066239246a8859a_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Münster, les grands travaux</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 2 août 2024</p><div class="body"><img src="/media/3448f3_04c2bfd95b214d2187b5305fa2a175bc_mv2.jpeg" alt=""/><h2>SC Preußen Münster</h2><p>Club historique, Münster retrouve la Bundesliga 2 pour la première fois depuis 33 ans après avoir enchaîné deux montées successives : d’abord en remportant la Regionalliga West avec 13 points d'avance en 2022/23 et en terminant second de la 3.Liga la saison dernière.</p><p>Une folle trajectoire où la meilleure attaque (68 buts marqués) s’est offert une remontée peu probable après la trêve hivernale notamment grâce à une belle série de 12 matchs sans défaite dont 7 victoires consécutives. Le promu a toutefois failli échouer dans la ligne droite la faute à des déraillements dans les matchs contre les concurrents directs. La montée arrivant au bout de la dernière journée.</p><p>Rançon du succès, et forme de reconnaissance du travail accompli, son directeur des sports <strong>Peter Niemeyer</strong> est parti en tant que nouveau directeur sportif du Werder Brême. C’est donc la promotion interne qui a fonctionné avec l’intronisation de <strong>Ole Kittner</strong> qui était jusqu'à présent directeur général du marketing, de la stratégie et de la communication. Or, un sacré baptême du feu l’attend car à la tête du budget le plus petit de la ligue, il doit s’atteler à la rénovation du Preußenstadion, stade délabré de 1926, en le mettant aux normes de la division (extension de la capacité d'accueil à 15 000 spectateurs, technologie sur la ligne de but, modernisation des projecteurs et de la zone médiatique…) tout en travaillant à la construction d’un nouveau stade dont la livraison est prévue à l’été 2027, avec 19.400 places couvertes, sur le même site de la Hammer Strasse. Rien que ça.</p><img src="/media/3448f3_8146df1afadb4f38a62ebf3e35e825fd_mv2.jpeg" alt=""/><p>Heureusement que côté effectif, il n’y a pas de départ majeur, si ce n’est celui de l’arrière gauche <strong>Benjamin Böckle</strong> (Rapid Vienne) compensé par la double arrivée de <strong>Mikkel Kirkeskov</strong> (32 ans, Kiel) et <strong>Luca Boley</strong> (21 ans, Mannheim), aux profils différents et donc complémentaires. Un secteur défensif qui pourra aussi compter sur le défenseur central <strong>Torge Paetow</strong>, ex taulier de Verl., alors que <strong>Sebastian Mrowca</strong> s'est déchiré le tendon d'Achille et sera absent plusieurs mois. Le défenseur central <strong>Niko Koulis</strong> nous avait beaucoup plus la saison dernière, il pourrait être une des satisfactions de l’exercice à venir.</p><img src="/media/3448f3_58a696e9a518410e9066239246a8859a_mv2.jpeg" alt=""/><p>Dans un mercato à 12 transferts, majoritairement à titre gratuit et faisant la part belle à l’expérience, la recrue phare est le milieu défensif hollandais <strong>Jorrit Hendrix</strong>, de retour d’Australie (Western Sydney) et qui est passé entre autres par le PSV Eindhoven et le Spartak Moscou, avec une vraie expérience en Ligue des Champions et Europa League. Il devrait apporter de la stabilité à un groupe qui sera mené par le défenseur central <strong>Simon Scherder</strong> et par <strong>Marc Lorenz</strong>,<strong> </strong>capitaine et milieu gauche de 35 ans. Les autres arrivées renforcent principalement le secteur offensif avec trois joueurs expérimentés en 2.Bundesliga et capables de couvrir tous les postes de la ligne d’attaque (<strong>Etienne Amenyido</strong>, <strong>Joshua Mees</strong>, <strong>Charalambos Makridis</strong>).</p><p>Mais surtout, Münster a réussi à conserver sa prolifique doublette d’attaquants constituée de <strong>Malik Batmaz</strong> et <strong>Joel Grodowski</strong> (17 buts 3 passes, chacun) et qui a martyrisé les défenses de 3.Liga. Les automatismes développés pendant un an devraient aider le promu à exister et lui offrirent des certitudes offensives.</p><img src="/media/3448f3_20e89f4f27504662a1abeeea6adb6a4b_mv2.jpeg" alt=""/><p>Difficile de jauger par rapport à la préparation qui n’a proposé qu’un seul adversaire de standing (Mayence défaite 3-1), le déplacement à Greuther Fürth en ouverture de bal permettra de s’étalonner.</p><p>A la barre de cette équipe que nombre de suiveurs voient descendre, on retrouve le coach <strong>Sascha Hildmann</strong> qui connaît bien son groupe pour l’avoir façonné et emmené dans cette folle ascension. Il devra se montrer inspiré pour obtenir un maintien qui est le seul objectif du club. La robustesse défensive sera le secteur clef pour y parvenir et la marche pourrait être un peu trop haute pour cette arrière-garde. Des trois promus, il est celui qui a la majorité des faveurs pour éviter une éventuelle relégation. Alors pourquoi pas un sauvetage après un barrage épique avec le but de la délivrance inscrit après une longue touche ? Et méfiez-vous c’est presqu’une spécialité maison. Vous aurez été prévenus !</p><p><strong><em>Pronostic 16</em></strong></p><img src="/media/3448f3_85bf94a15a5a49e1a773c55c764e3c7c_mv2.jpeg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

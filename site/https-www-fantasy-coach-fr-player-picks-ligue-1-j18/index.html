@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J18</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="« Je suis là pour que tout le monde prenne du plaisir. » D Digard (janvier 2023) Sénilité au sommet de la fédé, valse des coachs français..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J18"><figure class="hero"><img src="/media/a73c0f_0e7a942a5e6542d6afbab5d67e2dce78_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Ligue 1, J18</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 10 janvier 2023</p><div class="body"><p> « Je suis là pour que tout le monde prenne du plaisir. » D Digard (janvier 2023)</p><p><em>Sénilité au sommet de la fédé, valse des coachs français et le PSG chicoté :Player Picks de la saison LCDE, épisode 18</em></p><h2>Les matchs de la journée</h2><h3>Clermont – Rennes</h3><p><em>C’est quand même pas dommage de prêter Abline à l’AJA le jour même où tu perds, pour le reste de la saison, ta pépite (extra)terrienne. Pour autant, le Stade Rennais tient le rythme de la locomotive de tête malgré la chute contre Reims. De son côté, le club auvergnat s’est brillamment relancé chez son voisin lyonnais au Groupama Stadium après 3 mois de disette mais je ne lui donne pas beaucoup de garanties pour la 2nde partie de saison, à commencer par cette réception</em></p><p><strong><em><span style="color:#1e73be">Score 0-1</span></em></strong></p><h3>Brest – Lille</h3><p><em>Dans ce pays qui aime fait revenir des pré-retraités sur les bancs de ligue 1, le stade Brestois a en sus réalisé l’exploit de recruter un nouvel entraîneur dont le rejet est unanime pour tous les parties prenantes au projet pirates. A l’inverse, en confrontant directement ses  supporters, et à la faveur de la bonne série des Dogues, Fonseca a réussi à retourner un public lillois exigeant et boudeur, et pose, plus que jamais, le LOSC en candidat européen convaincu pour l’an prochain</em></p><p><strong><em><span style="color:#1e73be">Score 1-2</span></em></strong></p><h3>Nantes – Lyon</h3><p><em>Maintenant qu’on commence à comprendre qu’il va falloir un peu de temps à un club en crise depuis 2 ans et à son coach qui n’a pas entraîné une équipe de foot depuis 6, on va être moins impatient sur un renouveau lyonnais et pas surpris que cette saison c’est Nantes, et pas Lyon, qui jouera le mois prochain la Juventus de Turin. Pour autant européen et invaincu en 3 parties, Nantes n’est ni un adversaire généreux (cf recette de coupe) ni un adversaire coriace à l’extérieur.</em></p><p><strong><em><span style="color:#1e73be">Score 1-1</span></em></strong></p><h3>AC Ajaccio – Reims</h3><p><em>Les choses vont tellement mal en Corse que Pantaloni en est à se congratuler quand ses joueurs n’en prennent que 2 en déplacement. Pas dit qu’avec cette mentalité, l’ACA échappe au couperet final, néanmoins à cette heure les Ajacciens occupent le dernier ticket L1. Cela me fumerait tout de même que la capitale mondiale du champagne, qui n’a pas concédé de défaite depuis 9 journées, revienne bredouille (ou plutôt brocouille comme on dit dans le Bouchonnois)</em></p><p><strong><em><span style="color:#1e73be">Score 0-3</span></em></strong></p><h3>Auxerre – Toulouse</h3><p><em>On enchaîne avec la rencontre qu’on aurait appréciée y a 10 ans (imaginez un peu Moreira vs Cissé) entre un club qui recrute que des 2nds couteaux et un autre capable d’en prendre 6 et de faire quand même guichets fermés le match suivant un 1er janvier. Après Ajaccio, le Tef poursuit donc sa tournée des équipes toutes pétées de ligue 1 uber eats avec Auxerre, puis Brest, Strasbourg et Troyes. Ce sera l’occaz de voir ce que vaut réellement Toulouse face à des concurrents directs</em></p><p><strong><em><span style="color:#1e73be">Score 1-1</span></em></strong></p><h3>Paris SG – Angers</h3><p><em>C’est quand même pas dommage, quand on est lanterne rouge, que les 2 mecs un peu capables de jouer au foot se cassent et que les buteurs angevins marquent autant dans leurs cages que dans celles adverses ! Quelconque sans Ney et Messi, il faudra pour le PSG composer cette fois sans Ney (on  ragote pas sur l’indispo du n°10 parisien mais ça ne saurait tarder) et Mbap contre un SCO qualifié en CDF mais qui fait plus parler en dehors (perquisition) que sur le terrain</em></p><p><strong><em><span style="color:#1e73be">Score 2-0</span></em></strong></p><h3>Strasbourg – Lens</h3><p><em>En tapant, avec brio, l’invincible leader parisien, le RC Lens, qui avance au rythme d’un futur champion de France, a non seulement relancé le championnat – en revenant à 4 unités du PSG – mais fermé définitivement les dernières bouches récalcitrantes à sa candidature au podium en mai 2023. Du coup le déplacement à la Meinau, où un autre Racing, sans coach, n’a pas gagné de l’année et alignera une défense toujours appauvrie, ne devrait être qu’une simple formalité</em></p><p><strong><em><span style="color:#1e73be">Score 1-3</span></em></strong></p><h3>Troyes – Marseille</h3><p><em>Quand on y songe, c’est drôle que Longoria recrute Malinovski pour palier à la blessure d’Harit cet hiver sachant qu’il avait recruté Harit pour palier à l’échec de Malinovski cet été. Bref l’OM est sur les temps de passage du Marseille de Bielsa. Pour les plus optimistes, c’est la preuve que le trio de tête excelle en 2022-23. Pour les pessimistes, c’est un témoignage de la déliquescence de la 1ère division française. Quoi qu’il en soit Marseille est largement favorite de ce kaborético</em></p><p><strong><em><span style="color:#1e73be">Score 0-1</span></em></strong></p><h3>Lorient – Monaco</h3><p><em>Quand t’es de Lorient, tu sais que tu galères à conserver à chaque mercato tes pépites en attaque, et même quand elle casse pas 3 pattes à un Rennais comme Wissa. Je pense aux Darcheville, Gameiro et Moukandjo. Alors en 2023, où le FCL ferraille avec les grosses cylindrées de France et de Navarre, il faudra un miracle pour conserver Ouattara et Moffi. Dans une saison déjà historique au nombre de coachs virés, si j’étais Clement, je commencerais quand même à claquer du fessier</em></p><p><strong><em><span style="color:#1e73be">Score 3-0</span></em></strong></p><h3>Nice – Montpellier</h3><p><em>Même si on s’est fait mettre en 2/3 coups de culs hier à Pau, je pleure plus pour les 4 points d’avance sur la relégation que l’élimination en coupe par une L2. Je me disque ça pourrait être pire et je pourrais être supporter de Nice ! C’est bien d’avoir soulagé ce pauvre Favre, totalement déconfis après la défaite du Puy, de ce lourd fardeau d’entraîner des vieux noms ronflants incapables d’accorder le peu qui leur reste de talent. Entre 2 malades, mon chauvinisme me pousse vers le MHSC</em></p><p><strong><em><span style="color:#1e73be">Score 1-2</span></em></strong></p><p><em>On perd pas les bonnes habitudes et on attend comme chaque semaine </em><a href="http://www.fantasy-coach.fr/pronostics-ligue-1/"><em>vos petits pronos.</em></a></p><h2>Players Picks</h2><h3>Les bons tuyaux:</h3><p><strong><em><span style="color:#1e73be">J Onana</span></em></strong><em> (9,2) titu du fait de la suspension de Samed</em></p><p><em>Passionné de F1, ancien basketteur et potentielle recrue du Bayern à 16 berges, il occupe, avec un certain talent, les cages champenoises à 22 ans : </em><strong><em><span style="color:#1e73be">Y Diouf</span></em></strong><em> (9)</em></p><h3>Les pépites:</h3><p><em>Un Ricard pour </em><strong><em><span style="color:#1e73be">Bayo </span></em></strong><em>(10,8) hiya hiya yo</em></p><p><em>L’attaquant lillois en pleine renaissance est lesupersub du 18e volet du Player Picks LCDE</em></p><p><em>Ladila-ladila-ladilafé !</em></p><p><em>Lady la fée, </em><strong><em><span style="color:#1e73be">le fée</span></em></strong><em> (14,8) se bat</em></p><h3>Les incontournables:</h3><p><em>Le prénom d’une chanteuse irlandaise dépressive, la gueule d’un Turc et un nom bosniaque : </em><strong><em><span style="color:#1e73be">Kolasinac </span></em></strong><em>(14,9) pour le but de la victoire et le clean-sheet dans l’Aube</em></p><p><em>La pépite belge de Lens (ou l’inverse) </em><strong><em><span style="color:#1e73be">L Openda</span></em></strong><em> (15,6) est la tête d’affiche duPlayer Picks LCDE n°18</em></p><p>t34</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J17</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="C'est la période de Noël et en Premier League il n'y a pas de trêve des confiseurs. C'est d'ailleurs la période qui fait le plus mal, au..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J17"><figure class="hero"><img src="/media/449182_622a8e08c2074f619f77632324728147_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J17</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 19 décembre 2024</p><div class="body"><p>C'est la période de Noël et en Premier League il n'y a pas de trêve des confiseurs. C'est d'ailleurs la période qui fait le plus mal, au classement, aux joueurs et aux fantaisistes. Il faut bien tenir le rythme. </p><p>La seule chose dont on est sûr pour le moment, c'est qu'il va y avoir beaucoup de rotations dans les effectifs et donc des résultats moins prévisibles qu'à la normale. Donc chacun pour soi et le Player Picks pour tous. Je la fais un peu brève cette semaine mais l'essentiel y est.</p><h2>Mes Pronos pour la J17 de Premier League:</h2><p>Aston Villa 2 - 1 Man City</p><p>West Ham 1 - 1 Brighton</p><p>Ipswich Town 1 - 1 Newcastle</p><p>Brentford 2 - 1 Nottm Forest</p><p>Crystal Palace 1 - 2 Arsenal</p><p>Everton 1 - 2 Chelsea</p><p>Man United 2 - 0 Bournemouth</p><p>Fulham 2 - 0 Southampton</p><p>Leicester City 1 - 1 Wolves</p><p>Tottenham 0 - 3 Liverpool</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p>Un format un peu différent cette semaine:</p><h3>À Vendre </h3><p><strong>Rashford</strong> et <strong>Garnacho</strong> : il semble qu'il y ait de l'incompréhension entre eux et Amorim et qu'ils soient bien disposés à partir. Donc je ne les vois pas jouer (beaucoup) pour ManU. </p><p><strong>Haaland</strong>, si vous l'avez encore, il semble que lui aussi se soit pris la tête avec le manager et soit ouvert à partir. Ça arrangerait bien les affaires et les comptes de Pep qui doit refaire son équipe après une douzaine de matches catastrophiques. </p><p><strong>Mudryk</strong>, l'Ukrainien a sorti un test positif à un produit interdit, on ne devrait pas le voir pendant un bout de temps.</p><h3>À Acheter </h3><p>Du <strong>Chelsea</strong>. Les Blues sont en grande forme et ont une série de matches plutôt abordables pour les seconds de la Premier League. Chelsea a aussi le plus grand nombre de joueurs de la Premier League et peuvent se permettre d'avoir deux équipe une. Une équipe pour la semaine et une  pour le Weekend. <strong>Nkunku</strong> (£5.8M) est un joueur de l'équipe de la semaine qui n'a pas beaucoup joué en Premier League mais qui devrait avoir plein d'opportunités de faire des points dans les 3 semaines à venir. <strong>Sancho</strong> (£6.2M), <strong>João Félix</strong> (£6M) devraient aussi avoir du temps de jeu. </p><p><strong>Jackson</strong> (£8.2M) est le seul attaquant semi-fiable à disposition et devrait jouer tous les matches ou presque.</p><p>Vu que Rashford est out, on peut prendre <strong>Hojlund</strong> (£6.9M) qui serait l'attaquant principal avant que le mercato ne commence, surtout avec 3 matches à la portée des Red Devils. </p><p><strong>Nwaneri</strong> (£4.5M) : C'est la période idéale pour Arteta et les fantaisistes de faire confiance au jeune produit du centre de formation des Gunners. Une autre option serait Sterling (£6.7M) mais il coûte plus cher et, selon moi, est bien loin derrière le jeune prodige...</p><p><strong>Dúbravka</strong> (£4.2M) : Avec Pope blessé au genou, il devrait prendre la place entre les poteaux. Un gardien avec une belle expérience de la Premier League dans une équipe qui marche plutôt bien et à ce prix-là, c'est une pépite.</p><p><strong>Gakpo</strong> (£7.1M) pour donner un coup de main à l'Egyptian King.</p><h3>À garder</h3><p>Bien entendu les irremplaçables <strong>Salah</strong>, <strong>Palmer</strong>, <strong>Saka</strong> et j'y ajouterais <strong>Isak</strong>. </p><p>Sur ce, je vous laisse entre les mains de Robin pour les fêtes, que je vous souhaite joyeuses et on se retrouve en 2025.</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,100 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Ligue 1 - Suspensions et Blessures J4</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Dernière MAJ : Dimanche 28/08/2022 13h00 Les principaux absent-s confirmés :  Alhadhur, Baretto, N'Diaye, Touzghar, Bentaleb, Sabanovic,..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Ligue 1 - Suspensions et Blessures J4"><figure class="hero"><img src="/media/449182_c5822757a22a42a88c89edd3ec97702e_mv2.png" alt=""/><div class="scrim"></div><h1>Ligue 1 - Suspensions et Blessures J4</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 26 août 2022</p><div class="body"><p><strong>Dernière MAJ : Dimanche 28/08/2022 13h00</strong> </p><p><strong>Les principaux absent-s confirmés : </strong>
+<strong>Alhadhur, Baretto, N'Diaye, Touzghar, Bentaleb, Sabanovic, Jakolis, Mensah, Da Costa, Niang, Jeanvier, Charbonnier, Del Castillo, Philippoteaux, Saïd, Fadiga, Mounie, Hérelle, Zeffane, Rashani, Buksa, Bayo, Weah, Cabella, Lihadji, I. Silva, Matsima, Monconduit, Boisgard, Lopes, Boateng, Diomande, Aouar, Paqueta, Kadewere, Gigot, Amavi, Gerson, Vanderson, Boadu, Diop, Geubbels, Fayad, Savanier, Mavididi, Delaye, P. Mendes, Sakho, Sissoko, Traore, Todibo, Lemina, Dolberg, Schneiderlin, Boudaoui, Daniliuc, Da Cunha, Vitinha, Kurzawa, Herrera, Draxler, Rafinha, Icardi, Gueye, Foket, Matusiwa, Kebbal, Berisha, Salin, Ugochukwu, Omari, Mandanda, Majer, Kalimuendo, Gomis, Guirassi, Fila, Nyamsi, Sissoko, Kandil, Dagba, Perrin, Sylla, Ngoumou, Bruus, N'Jo</strong>  </p><p><strong>Longue absence :</strong>
+<strong>Eneme-Ella</strong>, <strong>Pellenard, Farinez, Sierhuis, Healey, Conte</strong> </p><p><strong>Les dernières décisions de la commission de discipline de la LFP en cliquant sur le lien</strong> :
+<a href="https://www.lfp.fr/Articles/Discipline/2022/08/17/commission-de-discipline-les-decisions-du-17-aout-2022">17 août 2022</a>
+<a href="https://www.lfp.fr/Articles/Discipline/2022/08/24/commission-de-discipline-les-decisions-du-24-aout-2022">24 août 2022</a>  </p><p>Nous avons rajouté une colonne afin de vous indiquer quel club a été mis à jour. &quot;Mer 22h30&quot; signifie que la dernière mise à jour date de Mercredi à 22h30, &quot;Jeu 17h00&quot; = Jeudi à 17h00 et &quot;Ven 14h00&quot; = Vendredi à 14h00. Le but est que vous sachiez quel club a été modifié lors des mises à jour.
+Code couleur :
+Noir : 1ère MàJ / Rouge : 2nde MàJ / Bleu : 3ème MàJ / Violet : 4ème MàJ / Jaune : 5ème MàJ </p><p>Bienvenue sur notre page suspensions et blessures Ligue 1. Cette page sera constamment ré-actualisée avec des informations provenant de sources sûres et vérifiées. </p><img src="/media/449182_c5822757a22a42a88c89edd3ec97702e_mv2.png" alt="Ajaccio"/><img src="/media/449182_3613f17e39274061aea63f323f3dfe62_mv2.png" alt="Angers"/><img src="/media/449182_a41c6a0e27f64be3a1da46781de8ad3c_mv2.png" alt="Auxerre"/><img src="/media/449182_14b32b6b26d545ae82e0e9b9742fbc2a_mv2.png" alt="Brest"/><img src="/media/449182_41472521c027407cbe7e1472157e415d_mv2.png" alt="Clermont Foot"/><img src="/media/449182_0f408aa86b144280b4ecaed51d573f06_mv2.png" alt="Lille"/><img src="/media/449182_23a4e5781e204de0b655251b94154e0f_mv2.png" alt="Lorient"/><img src="/media/449182_a465892480df473bb878bd874144bb4d_mv2.png" alt="Lyon"/><img src="/media/449182_02e0472491ea4642bca816b57927218e_mv2.png" alt="Marseille"/><img src="/media/449182_dc1df41dfd4149418b564eb05dd5aef1_mv2.png" alt="Monaco"/><img src="/media/449182_6699b659edd14f75a73fd32740ff0c28_mv2.png" alt="Montpellier"/><img src="/media/449182_b57aada1f4cd49b9b86dcae8ac23c810_mv2.png" alt="Nantes"/><img src="/media/449182_56c31c7050c942bbbab001cd0015f034_mv2.png" alt="Nice"/><img src="/media/449182_3ba9e8be9b074eb289d4f5c56c961ea5_mv2.png" alt="Paris"/><img src="/media/449182_33b68d6380464d72b4886f42b40dbaab_mv2.png" alt="Reims"/><img src="/media/449182_1170c404f10f4475a8f728d89cfae000_mv2.png" alt="Rennes"/><img src="/media/449182_5f5ffea1eb244c86a9f97fed27ea5088_mv2.png" alt="Strasbourg"/><img src="/media/449182_455f10266d364df8a9ba036970a18deb_mv2.png" alt="Toulouse"/><img src="/media/449182_0b4434ed08474cd1a011a25f5383dd67_mv2.png" alt="Troyes"/><p>Tableau de suivi des mises à jour</p><p>Vous trouverez <a href="https://www.fantasy-coach.fr/category/fantasy-ligue1/suspensions-et-blessures-l1/">ici</a> l’ensemble des articles suspensions et blessures pour cette nouvelle saison de Ligue 1. </p><p>N’hésitez pas à nous suivre nous sur Twitter <a href="https://twitter.com/FantasyCoach_FR">@FantasyCoach_FR </a>et <a href="https://twitter.com/MPGLaurent">@MPGLaurent</a> et sur Facebook : <a href="https://www.facebook.com/Fantasy-Coach-824491257591639/">Fantasy Coach</a> </p><p>Pour jouer au <a href="https://www.winamax.fr/landing/landing_leads.php?ldg=jde&amp;banid=37173">Jeu de l’Entraîneur Winamax</a> ou à <a href="https://data.mpg.football/">MonPetitGazon </a> </p><p>Code couleur de la page: </p><p><strong>Rouge : Suspendu</strong> </p><p><strong>Orange : Forfait confirmé</strong> </p><p><strong>Jaune : Incertain</strong> </p><p><strong>Bleu : transfert définitif</strong> </p><p><strong>Vert : Disponible pour le groupe</strong>  </p><h2>Calendrier J4 Ajaccio-LilleAuxerre-StrasbourgLens-RennesNantes-ToulouseLorient-ClermontNice-MarseilleBrest-MontpellierTroyes-AngersReims-LyonParis-Monaco  </h2><h2>Ajaccio (reçoit Lille)  JoueurProblèmePosteRetourAlhadhurHors groupe J3DJ?N'DiayeHors groupe J3AJ?BarettoHors groupe J3MJ?TouzgharTransfert récentAJ5MarchettiTalon d'AchilleMJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/ACAjaccio/status/1562883885142523904 </p><h2>SCO Angers (va à Troyes)  JoueurProblèmePosteRetourBentalebSuspenduMJ5SabanovicSuspenduDJ6Eneme-EllaMénisque - opérationAJ?JakolisChoix du coach en J4AJ?SimaDans le groupeAJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/AngersSCO/status/1563579629063274497?s=20&amp;t=L0ViO1RZLfMQKFvkQW59nQ </p><h2>Auxerre (reçoit Strasbourg) JoueurProblèmePosteRetourDa CostaSuspenduAJ5NiangSuspenduAJ6MensahSuspenduDJ5PellenardLigaments croisésD2023JeanvierMolletDJ9?CharbonnierFissure au tibiaAJ9?BainDisponible mais hors groupe J3DJ?HeinDisponibleMJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/AJA/status/1563205924118212608?s=20&amp;t=G-P2Ersk8GdBP0eK2mU_tw </p><h2>Stade Brestois 29 (reçoit Montpellier) JoueurProblèmePosteRetourPhilippoteauxAvec la réserveMJ?SaïdAvec la réserveAJ?Del CastilloCuisseAJ6?FadigaChevilleDJ5?MounieTalon - a repris l'entrainementAJ5?HerellePiedDJ5?SlimaniDisponibleAJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/SB29/status/1563556956245315585?s=20&amp;t=L0ViO1RZLfMQKFvkQW59nQ </p><h2>Clermont Foot (va à Lorient)  JoueurProblèmePosteRetourZeffaneIschiosDJ9CisséAvec la réserveDJ?RashaniRepriseMJ5?SeiduPiedDJ4?DossouGenou et ChevilleMJ4?Neto BorgesGenouDJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/ClermontFoot/status/1563489850795249665?s=20&amp;t=L0ViO1RZLfMQKFvkQW59nQ </p><h2>RC Lens (reçoit Rennes)  JoueurProblèmePosteRetourFarinezGenouGFin 2022BuksaChevilleAJ5? </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/RCLens/status/1563209723020988424 </p><h2>Lille OSC (va à Ajaccio) JoueurProblèmePosteRetourBayoSanctionAJ5WeahPiedAJ5?CabellaIschiosMJ5?LihadjiHors groupe J3AJ? </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/LePetitLillois/status/1562865423153999874?s=20&amp;t=7ayb42IILaWdhLv5wvz0sQ </p><h2>FC Lorient (reçoit Clermont) JoueurProblèmePosteRetourI. SilvaForfaitDJ5?MatismaRepriseMJ5?MonconduitEcartéMJ?BoisgardCuisseMJ5? </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/FCLorient/status/1563565772382736385?s=20&amp;t=L0ViO1RZLfMQKFvkQW59nQ </p><h2>Olympique Lyonnais (va à Reims) JoueurProblèmePosteRetourLopesSuspenduMJ6BoatengForfaitDJ?DiomandeForfaitDJ?PaquetaTransfert en cours?MJ?AouarChevilleMJ?KadewereHors groupeAJ?DembeleDisponibleAJ4? </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/OL/status/1563579596389367808?s=20&amp;t=L0ViO1RZLfMQKFvkQW59nQ </p><h2>Olympique de Marseille (va à Nice) JoueurProblèmePosteRetourMilikTransféréAJuventusGigotSuspenduDJ5AmaviIndésirableDJ?DiengPas dans le groupe J3AJ?GersonForfaitMJ5?BaillyTransfert récentDJ4? </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/OM_Officiel/status/1563813646542802945?s=20&amp;t=zmY60uUSL__5GH55KebayQ  </p><h2>AS Monaco (va à Paris) JoueurProblèmePosteRetourVandersonSuspenduDJ5BoaduPiedAJ?GeubbelsHors groupe J3AJ?DiopTransfert en cours?MJ? </h2><h3>Le Groupe 4 </h3><p>https://twitter.com/AS_Monaco/status/1563579596578201600?s=20&amp;t=L0ViO1RZLfMQKFvkQW59nQ </p><h2>Montpellier H.S.C. (va à Brest)   JoueurProblèmePosteRetourFayadSuspenduMJ6SavanierSuspenduMJ7MavididiCuisseAJ5?DelayePubisAJ5?Pedro MendesAlerte musculaireDJ?SakhoForfait J4DJ5?JullienDisponibleDJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/MontpellierHSC/status/1563549396947456000?s=20&amp;t=cJrIgbtSS6_xQLIZkiKfow </p><h2>FC Nantes (reçoit Toulouse) JoueurProblèmePosteRetourSissokoLésions aux ischiosMJ6?TraoreEn repriseDJ?BlasDans le groupeMJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/FCNantes/status/1563587149630320640?s=20&amp;t=wzhx_69eoTszixEeEQQCPg </p><h2>OGC Nice (reçoit Marseille) JoueurProblèmePosteRetourTodiboSuspenduDJ5LeminaSuspenduMJ7DolbergEpauleAJ?BoudaouiDosMJ4?SchneiderlinIndésirable ?MJ?DaniliucTransfert en coursDJ?Da CunhaTransfert ?MJ?ThuramDans le groupeMJ4AtalDans le groupeDJ4PepeDans le groupeAJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/ogcnice/status/1563509038855245825?s=20&amp;t=FKM3zta8cRv-Gyvd_Vh2mA </p><h2>Paris SG (reçoit Monaco) JoueurProblèmePosteRetourVitinhaSuspenduMJ5KurzawaIndésirableDJ?DraxlerIndésirableMJ?RafinhaIndésirableMJ?IcardiIndésirableAJ?GueyeIndésirableMJ?ParedesDisponible mais transfert en coursMJ4?NavasDisponibleGJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/PSG_inside/status/1563494513146212352?s=20&amp;t=L0ViO1RZLfMQKFvkQW59nQ </p><h2>Stade de Reims (reçoit Lyon) JoueurProblèmePosteRetourSierhuisForfaitA2023?FoketForfaitDJ4?GuitaneForfaitAJ?MatusiwaForfaitMJ?KebbalEcartéMJ?BerishaEcartéMJ?FaesDisponibleDJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/reimsvdt/status/1563592176793419777?s=20&amp;t=wzhx_69eoTszixEeEQQCPg </p><h2>Stade Rennais FC (va à Lens) JoueurProblèmePosteRetourUgochukwuSuspenduMJ5SalinSuspenduGJ5OmariPubalgieDJ8?MajerFracture du nezMJ5?KalimuendoCuisse - très incertainAJ5?GomisEcarté ?GJ5?GuirassyTransfert mais a reprisAJ5?MandandaDans le groupe mais annoncé sur le bancGJ4MelingDisponibleDJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/staderennais/status/1563449776271933440?s=20&amp;t=L0ViO1RZLfMQKFvkQW59nQ </p><h2>RC Strasbourg (va à Auxerre)  JoueurProblèmePosteRetourFilaPubalgieDJ15?NyamsiHancheDJ9?SissokoEpauleMJ6?KandilQuadricepsMJ5?DagbaDispo pour J5DJ5PerrinIschiosDJ6? </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/RCSA/status/1563213936551350272?s=20&amp;t=G-P2Ersk8GdBP0eK2mU_tw </p><h2>Toulouse (va à Nantes) JoueurProblèmePosteRetourSkyttaTransféréMNorvègeHealeyLig. croisésA2023SyllaAdducteurs - forfait à 90%DJ?NgoumouEn repriseAJ5?ChaibiA repris l'entrainementMJ4DeslerTalon d'Achille - normalement okDJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/MPGLaurent/status/1563575358733307904?s=20&amp;t=FKM3zta8cRv-Gyvd_Vh2mA </p><h2>Troyes (reçoit Angers)  JoueurProblèmePosteRetourConteForfaitD2023?BruusGenouDJ6?N'JoForfaitDJ?Rony LopesDisponibleAJ4 </h2><h3>Le Groupe J4 </h3><p>https://twitter.com/estac_officiel/status/1563572096902385666?s=20&amp;t=L0ViO1RZLfMQKFvkQW59nQ </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, GW16</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Notre analyse des matchs de la GW16 de Premier League et nos conseils pour briller sur la Fantasy Premier League (FPL)"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, GW16"><figure class="hero"><img src="/media/251b8f_80405cb43cc24e47b8c648ad01516bee_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, GW16</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 8 décembre 2023</p><div class="body"><p>Pas le temps de niaiser en Premier League avec une nouvelle gameweek qui s’ouvrira ce samedi après-midi ! Ce qu’on peut dire rapidement de la GW15 qui s’est déroulée cette semaine c’est qu’on va avoir une belle lutte pour le top 4 et pour le titre. Arsenal et Liverpool ont clairement un coup à jouer pour titiller un Man City qui connait un coup de moins bien. Aston Villa pourrait de son côté être la très belle surprise de cette saison, fort de son incroyable forme à Villa Park. On note aussi la victoire de Man United dans le duel des titans malades face à Chelsea et la nouvelle défaite en déplacement de Newcastle sur la pelouse d’Everton. Les Spurs se sont eux aussi inclinés contre West Ham. Pour cette gameweek 16, le choc opposera Aston Villa à Arsenal. Les Gunners vont avoir un véritable test face à l’une des meilleures équipes d’Europe à domicile cette saison, une victoire affirmerait leurs ambitions de titre cette année. On aura aussi une belle affiche entre Tottenham et Newcastle pour ne pas se faire décrocher dans la course au top 4. Pour le reste, tous les autres favoris devront tenir leurs rangs face à des adversaires à leur portée. On est parti !!! </p><p>Vous pouvez nous suivre sur <strong>Twitter</strong> pour avoir des informations en complément : </p><p><a href="https://twitter.com/FantasyCoach_FR?t=YVlIrI0NgQGxXgqQJaKpXA&amp;s=33"><u>Nous suivre sur Twitter</u></a> </p><p>Notre <strong>Discord</strong> est toujours disponible si vous voulez parler FPL et Premier League : </p><p><a href="https://discord.gg/yvdQ8Bpk"><u>Rejoindre le Discord FPL</u></a> </p><h2>Les matchs de la journée</h2><p><strong>Crystal Palace 0-2 Liverpool</strong></p><p><strong>Brighton 3-1 Burnley</strong></p><p><strong>Man United 2-1 Bournemouth</strong></p><p><strong>Sheffield 1-1 Brentford</strong></p><p><strong>Wolves 2-0 Nottingham</strong></p><p><strong>Aston Villa 2-1 Arsenal</strong></p><p><strong>Everton 1-1 Chelsea</strong></p><p><strong>Fulham 1-1 West Ham</strong></p><p><strong>Luton 0-3 Man City</strong></p><p><strong>Spurs 1-1 Newcastle</strong></p><h2>Player Picks</h2><p>L’enchainement des matchs entraine pas mal de blessures dernièrement et nous pousse à sans cesse devoir recomposer notre formation en réalisant de nombreux transferts. Cette semaine, la blessure majeure concerne Mbeumo, tandis que Son est incertain. C’est pour cela qu’il y a pas mal d’options de remplacements au milieu de terrain au sein de ce Player Picks.</p><p>Pour ce qui est des équipes à privilégier, les choses n’ont pas changé par rapport à ce qui a été dit dans notre précédent Player Picks. <strong>Liverpool, Arsenal , les Wolves, Newcastle, West Ham, Man City et Chelsea </strong>sont les meilleures équipes sur la durée. Attention dans les semaines à venir à bien préparer également votre équipe à la Coupe d’Afrique des Nations et à la Coupe d’Asie qui commenceront le 13 janvier prochain et qui toucheront les GW21 et GW22 principalement. Je vous rappelle aussi que Brentford et Man City n’auront pas de matchs en GW18, mais une probable double gameweek en GW20. Sur ce, bonne lecture ! </p><h2>Hors catégorie</h2><p><strong>Haaland (Man City, £14.0M, 84.3 % TSB) :</strong> Le Cyborg a été réduit au silence tout comme ses coéquipiers sur la pelouse de Villa Park ce mercredi. Nul doute qu’il voudra se reprendre sur la pelouse de Luton pour mettre fin à la mauvaise passe des Sky Blues qui n’ont plus gagné depuis la GW11. Je le vois inscrire à minima son 15 ème but de la saison et il pourrait faire un véritable carnage si City retrouve sa forme offensive. Le choix de capitanat évident de cette gameweek. </p><h2>Incontournables</h2><p><strong>Saka (Arsenal, £8.9M, 58.1% TSB) : </strong>Même si les Gunners ont un déplacement difficile, impossible de ne pas posséder l’ailier anglais dans son équipe à l’heure actuelle. Il a encore délivré une assist sur la pelouse de Luton cette semaine, portant son total statistique à 5 buts et 8 assists en 14 matchs cette saison. Il tire les penaltys et il ne lui suffira pas de grand-chose pour marquer des points une nouvelle fois à Villa Park. </p><p><strong>Trippier (Newcastle, £7.0M, 50.6% TSB) : </strong>C’est un peu le même principe pour Trippier. Il a un match difficile face aux Spurs, surtout quand on sait que les Magpies ne sont pas performants cette saison à l’extérieur. Mais il est capable de délivrer une assist à n’importe quel moment et bénéficie ensuite d’un très bon calendrier jusqu’à la GW19 comprise. Impossible de l’enlever donc à ce moment de la saison. </p><p><strong>Salah (Liverpool, £13.1M, 50.0% TSB) : </strong>Le pharaon ne bouge pas non plus de catégorie, malgré son dernier match face à Sheffield où il n’a pas été décisif. Auteur de 10 buts et 6 assists en 15 matchs, il est le seul à pouvoir rivaliser avec Haaland et c’est encore une bonne option de capitanat pour se différencier sur cette gameweek. Il rend en effet visite à des Eagles en panne de résultats dernièrement. </p><p><strong>Watkins (Aston Villa, £8.4M, 37.9% TSB) : </strong>Lui aussi muet en GW15, Watkins ne bouge pas non plus des incontournables. Il est le buteur d’une équipe intraitable à domicile et même face à Arsenal je ne serais pas surpris qu’il réalise un gros score. Pour rappel, il compte pas moins de 8 buts et de 9 assists en 15 matchs. </p><h2>Bons tuyaux</h2><p><strong>Alvarez (Man City, £7.0M, 28.9% TSB) : </strong>Absent du dernier Player Picks, Alvarez fait son retour pour ce déplacement à Luton. Il n’est pas en grande forme en ce moment, car il n’a plus marqué depuis la GW9. Mais ce match est l’occasion idéale pour lui de se relancer avant d’aborder un calendrier globalement plus abordable dans les semaines à venir. </p><p><strong>Mitoma (Brighton, £6.5M, 23.0% TSB) : </strong>Blessé puis mis au repos, Mitoma a retrouvé un statut de titulaire cette semaine et a délivré une assist face à Brentford. Moins cité que d’autres milieux en ce moment, il reste très intéressant avec ses 3 buts et ses 5 assists en 11 matchs, surtout à l’heure de recevoir Burnley. </p><p><strong>Gordon (Newcastle, £6.1M, 21.1% TSB) : </strong>Un homme en forme ensuite avec l’ailier anglais des Magpies. Muet contre Everton, il reste tout de même sur 4 buts et 1 assist lors de ses 7 derniers matchs. Comme dit plus haut, Newcastle aborde une phase abordable de son calendrier et il pourrait même rapporter des points dès ce week-end face aux Spurs, à intégrer, probablement à la place de Mbeumo. </p><p><strong>Bowen (West Ham, £7.6M, 18.8% TSB) : </strong>Un nouveau milieu avec le buteur des Hammers, revenu de blessure. Il est plus cher, mais marque très souvent (9 buts) en plus d’avoir accès aux penaltys. West Ham est irrégulier cette saison, mais lui non, ça se regarde.</p><p><strong>Palmer (Chelsea, £5.4M, 16.1% TSB) : </strong>Buteur sur la pelouse d’Old Trafford, Palmer est lui aussi une bonne option pour remplacer Mbeumo. Il est l’homme à tout faire des Blues dernièrement et va affronter Everton, Sheffield, les Wolves et Crystal Palace. Il aura de quoi se régaler donc et risque de rapporter gros lors des semaines à venir. </p><p><strong>Tsimikas/Alexander-Arnold (Liverpool, £4.7M, £8.0M et 15.4% TSB et 12.1% TSB) : </strong>Je replace le duo défensif des Reds pour cette GW16. Tsimikas a été mis au repos cette semaine, mais il va bien retrouver une place de titulaire ce samedi et à ce prix en sachant qu’il délivre souvent des assists, c’est une opportunité en or ! Alexander-Arnold serait lui incontournable s’il n’était pas aussi cher, lui qui a encore délivré une assist face à Sheffield. Le problème c’est qu’il est très difficile à caser, hormis si vous enlevez Trippier de votre équipe, ce qui ne semble pas être une bonne option vu le calendrier des Magpies. </p><p><strong>Pedro Porro (Spurs, £5.3M, 13.7% TSB) : </strong>Etant donné que les choix en défense sont limités pour cette gameweek, je vous propose l’espagnol. Même si ses chances de réaliser un clean sheet ne sont pas hyper élevés, il pourrait rapporter des points car il se projette beaucoup et a encore délivré une assist ce jeudi. On le jouera donc pour son apport offensif. </p><p><strong>Bruno Fernandes (Man United, £8.3M, 13.5% TSB) : </strong>Moins en vue cette saison que d’autres milieux, le portugais fait son retour dans ce Player Picks au moment de recevoir Bournemouth. Avec la possible blessure de Son, il me semble être une bonne option de remplacement et a toujours un impact offensif sur les prestations des Reds Devils. Il a en plus l’avantage de tirer les penaltys et je le vois être décisif au moins une fois ce samedi. </p><p><strong>Hee-Chan (Wolves, £5.7M, 10.0% TSB) : </strong>On poursuit avec le sud-coréen que j’aime beaucoup cette saison et qui compte déjà 8 buts au sein d’une équipe qui figure pourtant au sein de la seconde partie de tableau. Il est en pleine bourre et ce n’est pas la venue d’un Nottingham qui vient d’en prendre 5 à Fulham qui devrait l’inquiéter. Hwang va marquer selon moi et il a les penaltys pour cela également, à tenter ! </p><p><strong>Sanchez (Chelsea, £4.6M, 7.2% TSB) : </strong>Je termine cette seconde catégorie avec le gardien des Blues. C’est un bon investissement à long terme avec un calendrier plus facile qui devrait lui permettre de réaliser des clean sheets. Il ne coute pas trop cher et peut remplacer Turner et/ou Areola, peu rémunérateurs depuis de nombreuses équipes et présents chez beaucoup de managers FPL. </p><h2>Pépites </h2><p><strong>Jackson (Chelsea, £6.9M, 6.3% TSB) : </strong>On débute ces pépites avec le buteur des Blues, qui tout comme Palmer et Sanchez va bénéficier d’un bon calendrier. Il s’est mis en route dernièrement avec 4 buts et 1 assist en 5 matchs, malgré encore de nombreux ratés devant le but. C’est le moment pour lui de prouver qu’il est le titulaire en pointe de cette formation et ce même si Nkunku venait à revenir. </p><p><strong>Colwill (Chelsea, £4.5M, 5.2% TSB) : </strong>Le défenseur des Blues ne coute pas trop cher et devrait normalement débuter la majorité des prochaines rencontres. Tout comme Sanchez, il devrait obtenir des clean sheets et faire ses points. </p><p><strong>Cunha (Wolves, £5.6M, 3.7% TSB) : </strong>Déjà cité lundi, Cunha a délivré une assist contre Burnley et c’est à nouveau un bon différentiel si vous cherchez un buteur pas trop cher. Il compte 2 buts et 2 assists lors de ses 4 derniers matchs. </p><p><strong>Kudus (West Ham, £6.6M, 3.5% TSB) : </strong>Le ghanéen enchaine lui aussi en ce moment avec 2 buts et 3 assists lors de ses 5 derniers matchs. Il a gagné sa place de titulaire et c’est un bon complément à Bowen si vous croyez aux Hammers. Si vous n’avez pas le budget pour ce dernier, il peut même être une alternative. </p><p><strong>Shaw (Man United, £5.2M, 3.4% TSB) : </strong>Je termine avec Shaw, de retour de blessure. L’an dernier il était vraiment à son avantage sur le jeu avec des clean sheets, des assists et des bonus. S’il venait à retrouver ce niveau, il deviendrait à coup sûr l’une des meilleures options au sein d’un secteur peu rémunérateur cette saison. </p><p><strong>Les conseils d'Arthur</strong> </p><p><strong>Not Haaland Captain, Salah (Liverpool, £13.1M, 50.0% TSB) : </strong>Match décevant de l’égyptien, 66 min, pas grand-chose à se mettre sous la dent. 0,44 d’xG dans une victoire 2-0. Heureusement, il a l’opportunité de se rattraper sur la pelouse de Palace et en dehors de Haaland, il n’y a pas d’autre option cette GW.</p><p><strong>Pépite, Cunha (Wolves, £5.6M, 3.7% TSB) : </strong>L’attaquant des Wolves est sur une série de 4 matchs sans blank, 2 buts et 2 passes, la réception d’un Nottingham Forest à la defense poreuse, une défaite 5-0 contre Fulham le dernier match et 4 défaite consécutives avec 12 buts encaissés. À Cunha de continuer cette belle série.</p><p>Bonne GW16 et à la semaine prochaine pour la suite !!! </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

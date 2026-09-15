@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Bilan d'une Saison Buli 4/5 - En chiffres</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Une saison de Bundesliga en chiffres"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Bilan d'une Saison Buli 4/5 - En chiffres"><figure class="hero"><img src="/media/3448f3_b15d81d81b2a455ab452745d57b74cc5_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Bilan d'une Saison Buli 4/5 - En chiffres</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 4 août 2023</p><div class="body"><p><strong><u>Une saison en Bundesliga 2022-2023 en chiffres</u></strong></p><p><strong>0</strong></p><p>Nombre de point séparant le Champion de son Dauphin. Une saison serrée, on vous dit !</p><p><strong>1</strong></p><p>Comme la première fois de son histoire où le FC Union s’est assis dans le fauteuil de leader de la Bundesliga. Et il y a pris goût au gré des sept journées passées sur le trône. Moment.</p><p><strong>5</strong></p><p>Bülter (Schalke-11 buts) et Silva (RB Leipzig-4 buts) ont touché chacun les montants à 5 reprises. Caramba, encore raté !</p><img src="/media/3448f3_b15d81d81b2a455ab452745d57b74cc5_mv2.jpeg" alt=""/><p><strong>6</strong></p><p>Nombre de joueurs ayant disputés en intégralité les 34 rencontres du championnat de Bundesliga soit 3060 minutes, décompte qui ne tient pas compte des arrêts de jeu.  </p><p>On y trouve cinq gardiens Baumann (Hoffenheim), Casteels (Wolfsbourg), Flekken (Fribourg), Riemann (Bochum) et Schwäbe (Cologne) et surtout, performance aussi rare que remarquable, un joueur de champ : l’excellent défenseur central Ginter (Fribourg). Stakhanovistes du ballon rond.</p><p><strong>6</strong></p><p>Le Bayern a marqué 6 buts et plus au cours de cinq matchs cette saison : Francfort-Bayern 1-6, Bochum-Bayern 0-7, Bayern-Mayence 6-2, Bayern-Werder 6-1, Bayern-Schalke 6-0. Boucher sans pitié.</p><p><strong>7</strong></p><p>C’est la septième fois de l’Histoire de la Bundesliga que le titre est attribué à la différence de buts, une première depuis 23 ans. Certains buts valent plus chers que d’autres.</p><p><strong>11</strong></p><p>Le FC Bayern porte mieux que jamais son surnom de Rekordmeister en remportant son onzième titre consécutif de champion de Bundesliga. Série en cours.</p><p><strong>12</strong></p><p>Guerreiro (Dortmund) est le meilleur passeur de la saison avec 12 offrandes, devant Kolo Muani (11) et Musiala (10). A bien intégré la science de la galette durant son passage au FC Lorient (d’ailleurs les puristes bretons parlent de crêpe et non pas de galette – spéciale dédicace à ma bien-aimée qui aime aussi le ballon rond).</p><p><strong>12</strong></p><p>Koné (Mönchengladbach) et Gouweleeuw (Augsbourg) ont été sanctionnés de 12 cartons. Membres du gang des vilains garçons.</p><p><strong>13</strong></p><p>Nombre de clean sheets réalisé par Flekken dans les cages de Fribourg. L’année prochaine, il jouera en Angleterre sous les couleurs de Brentford, future pépite sur Fantasy Premier League.</p><p><strong>14</strong></p><p>Nombre de joueurs ayant disputé les 34 rencontres du championnat de Bundesliga. Aux six stakhanovistes ayant joué toutes les minutes, on y ajoute Anton (Stuttgart), Ducksch (Werder), Frimpong (Leverkusen), Hofmann (Bochum), Jung (Werder), Becker (Union), Gnabry (Bayern) et Lee (Mayence) qui tous les huit ont connu les joies du remplacement. Fiabilité.</p><p><strong>15</strong></p><p>Le nombre de matchs s’étant soldés par un score vierge (le fameux 0-0), soit 4,9 % des 306 matchs que compte une saison de Bundesliga. Parmi les équipes concernées, on retrouve Cologne 5 fois et Schalke 5 fois. Et quand ces deux-là se rencontrent ? Cologne-Schalke (3-1) et Schalke-Cologne (0-0).</p><p><strong>16</strong></p><p>Comme le nombre de buts inscrits cette saison par Füllkrug (Werder Brême) et Nkunku (RB Leipzig), qui finissent co-meilleur buteur du championnat. Petite cuvée.</p><img src="/media/3448f3_d9781444a12d472fa9305d0b1526bb0a_mv2.jpeg" alt=""/><p><strong>19</strong></p><p>Le 27 août 2022, à l’Allianz Arena de Munich, le gardien Suisse Sommer a réalisé 19 arrêts. Le précédent record était de 14 arrêts. Il faut préciser que le Bayern a frappé 35 fois au but sur cette rencontre, record de la saison. Résultat ? Match nul 1-1 et un transfert au mercato hivernal lorsque les Bavarois ont cherché un remplaçant à Neuer blessé. Coffre-fort suisse.</p><p><strong>26</strong></p><p>Avec 15 buts et 11 passes, Kolo Muani (Francfort) fait une arrivée tonitruante en Bundesliga. Mon Most Valuable Player de la saison.</p><p><strong>32</strong></p><p>Le Bayern a remporté son trente deuxième titre de l’ère Bundesliga, auquel on peut ajouter un titre glané avant soit trente trois titres de Champions d’Allemagne dans l’armoire à trophées bavaroise. Rekordmeister.</p><p><strong>34</strong></p><p>Petersen (Fribourg) est le remplaçant le plus efficace de toute l’histoire de la Bundesliga avec 34 buts inscrits en sorti de banc. Le dernier marqué le 19 mai dernier pour le dernier match à domicile de sa carrière : il loge la gonfle au fond des filets 5 minutes après son entrée en jeu alors que le score était de 0-0. Victoire 2-0 devant son public et retraite sportive bien méritée pour le buteur de 34 ans. Super-sub.</p><p><strong>35</strong></p><p>Berisha (Augsbourg) a inscrit le but le plus rapide de la saison après 35 secondes de jeu lors de la défaite à domicile face à Francfort (1-2). Précocité pas récompensée.</p><img src="/media/3448f3_3d8ebe18ff304fe88dc04782b86d0852_mv2.jpeg" alt=""/><p><strong>36,65</strong></p><p>En kilomètre/heure, la vitesse à laquelle a été flashé le joueur le plus rapide de la saison et nouveau recordman depuis que la Bundesliga collecte les données : et le vainqueur est speedy Adeyemi (Borussia Dortmund) juste devant Becker (36,57 km/h, Union) et Davies (36,53 km/h, Bayern). Pressé.</p><p><strong>38</strong></p><p>Le FC Bayern et le FC Union Berlin sont les meilleures défenses avec 38 buts encaissés soit 1,12 buts encaissés par match. Barbelés.</p><p><strong>42</strong></p><p>La journée aura été la plus prolifique avec 42 buts inscrits en 9 rencontres soit 4,66 buts par match. Journée portes ouvertes.</p><p><strong>43</strong></p><p>Les expulsions sont en augmentation avec 43 cartons rouges contre 24 la saison dernière. Jeu dur.</p><p><strong>46</strong></p><p>La victoire 5-2 de Dortmund sur Mönchengladbach a été un match à 46 frappes : 13 cadrées et 20 à côté pour les Marsupiaux et 8 cadrées et 5 à côté pour les Poulains. Feu d’artifice entre Borussens.</p><p><strong>54</strong></p><p>Avec une différence de plus 54 buts, le Bayern a coiffé au poteau le Borussia Dortmund (et sa différence de plus 39 buts) et s’est adjugé une nouvelle fois le Meisterschale. Vraie différence.</p><p><strong>60</strong></p><p>La Bundesliga version 2023-2024 fêtera la soixantième édition du genre. Bel âge et bon anniversaire. Là non plus, l’heure de la retraite n’a pas sonné.</p><p><strong>63</strong></p><p>Höfler (Fribourg) a été sanctionné 63 fois pour ses fautes. Pour 10 cartons. Artiste-boucher contrarié.</p><p><strong>71</strong></p><p>Nombre de points remportés permettant au Bayern de remporter cette saison un nouveau titre de Champion d’Allemagne, soit le plus petit nombre de points pour un vainqueur depuis la saison 2009-2010. Petit champion.</p><p><strong>72</strong></p><p>Bochum est la plus mauvaise défense avec 72 buts encaissés soit une moyenne de 2,12 buts par match. Voir le chiffre 454.</p><p><strong>92</strong></p><p>Le Bayern Munich est la meilleure attaque avec 92 buts inscrits soit une moyenne de 2,7 buts par match. Dont 57 buts marqués lors de la première partie de saison, nouveau record historique de la Buli. Alors si Harry Kane pose ses valises en Bavière…</p><p><strong>109</strong></p><p>Nombre de pénaltys accordés cette saison. Exercice de style.</p><p><strong>134</strong></p><p>Les arrêts réalisés par le dernier rempart de la plus mauvaise défense Riemann (Bochum). Suivent Flekken (134 arrêts, Fribourg) et Pavlenka (112 arrêts, Werder). Défilé de la grande parade.</p><p><strong>151</strong></p><p>Nombre de buts venus du banc, nouveau record de Bundesliga. Logique avec la possibilité de procéder à 5 remplacements. Reyna (Dortmund) et Stindl (Mönchengladbach) étant les remplaçants les plus efficaces, chacun avec 5 buts en sortie de banc. Un match se gagne aussi avec un bon coaching.</p><img src="/media/3448f3_6639575629fa4854ab82752808cd2774_mv2.jpeg" alt=""/><p><strong>218</strong></p><p>Sur les 306 matchs que comptait cette saison de Bundesliga, 218 matchs se sont joués à guichet fermé avec un taux de remplissage moyen de 94,13%. Pays de football.</p><p><strong>261</strong></p><p>Le nombre de joueurs à avoir inscrit au moins un but cette saison. Sport collectif.</p><p><strong>269</strong></p><p>Autant de duels aériens remportés par Hofmann (Bochum), devant Behrens (Union, 183 duels aériens) et Kempf (Hertha, 172 duels aériens). Fortes têtes.</p><p><strong>393,38</strong></p><p>En kilomètres, la distance parcourue par Skhiri (Cologne) en 32 matchs et 2856 minutes soit une moyenne de 12,4 km ramenés sur 90 minutes. Dit autrement, 393,38 kilomètres, c’est l’équivalent de plus de 9 marathons courus ! Effort.</p><p><strong>428</strong></p><p>Le 11 février dernier, lors de la réception de Bochum à l’Allianz Arena dans le cadre de la vingtième journée, Thomas Müller est devenu le joueur de champ le plus capé de l’histoire du Bayern Munich avec 428 apparitions. Au détriment d’un autre Müller, Gerd (427 matchs). Thomas ouvrira le score d’une victoire 3-0. Légende.</p><p><strong>454</strong></p><p>Équipe la plus sanctionnée, Bochum s’est vue reprocher 454 fautes. Voir le chiffre 72.</p><p><strong>473</strong></p><p>Soit les duels remportés par le néo-retraité Hector (Cologne), devant les 463 duels gagnés par Bellingham (Dortmund) et Hofmann (Bochum). Hommage musclé à l’excellent film les Duellistes de Ridley Scott (1977). Contact.</p><p><strong>971</strong></p><p>Comme le nombre total de buts inscrits sur les 306 matchs que comptait cette saison de Bundesliga soit une moyenne de 3,17 buts par match. Nouveau record avec les 568 buts inscrits à domicile. Coman like it #gwada</p><p><strong>3.722 </strong></p><p>C’est le parcage moyen d’un club de Bundesliga c’est à dire le nombre de supporters visiteurs en déplacement pour suivre le match de leur équipe favorite qui joue à l’extérieur. On retiendra que le parcage moyen le plus fréquenté est celui de Schalke (7.182 fans) et le moins fréquenté étant celui d’Hoffenheim (897 fans). Le déplacement le plus massif revenant aux supporters du Werder Brême venus à 25.000 fans le 22 avril dernier voir leurs protégés s’imposer à Berlin face au Hertha (2-4), avec un hat-trick de Ducksch. Soutiens.</p><p><strong>13.163.796</strong></p><p>Nombre de personnes ayant assisté à un match au stade cette saison en Buli. Soit environ 43.019 personnes par match. Le record date de la saison 2011-2012 avec 13,8 millions de spectateurs. Spectacle.</p><img src="/media/3448f3_69d416599bf64cbb8b5903d89e49a1f7_mv2.jpeg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

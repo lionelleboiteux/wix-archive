@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Résultats des ligues Fantasy Coach sur FPL. GW 2.</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="(English version follows).  La 2e journée de Premier League aura vu la plus part des joeurs importants marquer beaucoup de points. Cole..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Résultats des ligues Fantasy Coach sur FPL. GW 2."><figure class="hero"><img src="/media/deb9b2_39e90af7fc5e46dcae6fd585628bfb5d_mv2.jpg" alt=""/><div class="scrim"></div><h1>Résultats des ligues Fantasy Coach sur FPL. GW 2.</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 26 août 2024</p><div class="body"><p>(English version follows). </p><p>La 2e journée de Premier League aura vu la plus part des joeurs importants marquer beaucoup de points. Cole Palmer et Erling Haaland ont fait le show avec 17pts chacun. Son avec 16pts n’est pas loin derrière, Salah avec 10pts a fait le taf. Saka dans le match le plus difficile a réussi à marqué 6pts. </p><p>On fait le point sur nos compétitions FPL. </p><ul><li><h2>La Ligue Classique (code: gpojm8): </h2></li></ul><p>Si la semaine dernière les managers qui avaient Salah dans leur équipe étaient les gagnants, en GW2 ce sont les propriétaires de Haaland qui sortent vainqueurs. Ceux qui l’ont mis capitaine ont bien progressé dans le classement. Les courageux qui ont eu le cran d’utiliser leur bonus Triple Captain (TC) sur le norvègien ont pris le leadership dans le classement de la ligue. </p><p>Les premières chips utilisées ont permis de creuser des écarts. Le top 10 se tient maintenant en 25pts. </p><img src="/media/deb9b2_0457c6705b5a4beb96dc841e22c59f18_mv2.jpg" alt=""/><p><strong>Massimo</strong> <strong>Mourinho</strong> qui devient le nouveau leader grâce à son TC sur Haaland. <strong>Feyi</strong> <strong>Ajiginni</strong> redescend à la 5e place et il a déjà joué sa Wildcard (WC). </p><p>La journée a été plus compliquée pour <strong>Arthur</strong> le champion en titre. Sans Haaland, il perd 220 places et se retrouve 226e. Malgré cette apparente dégringolade, il limite quand même la casse et se maintien dans le top 250, à seulement 56pts de la tête. </p><p><strong>Julien</strong> <strong>Cazenave</strong>, le vainqueur de la Cup 2024, est 171e et perd 18 places. </p><p><strong>Sean</strong> <strong>Gardener</strong>, le vainqueur de la Winter Cup 2023, est 267e et perd 88 places. </p><p>Enfin <strong>Michael</strong> <strong>Akins</strong>, le vainqueur du Survivor 2024, est 113e et gagne 40 places. </p><ul><li><h2>Fantasy Coach’s FPL Survivor (code: gpojm8) </h2></li></ul><p>Pour cette 2e journée du Survivor, le score minimum à atteindre était de 41pts. A nouveau, 8 managers ont été éliminés. </p><p>Grâce à l’inscription de nouveaux managers qui avaient dépassé les 36pts minimum de la GW1, il reste 509 managers en course. Ils passent à l’étape 3. </p><p><strong>Michael</strong> <strong>Akins</strong> le champion 2024 passe haut la main en GW3. Son score de 82pts est bien au delà du minimum requis. </p><p>Le Meilleur score de la journée a été réalisé par <strong>Dean</strong> <strong>Marjanovic</strong> avec 116pts. </p><p>Le manager avec le pire classement généralqui reste en course dans le Survivor est <strong>Michael</strong> <strong>Ogunyemi</strong>. Il est 523e de la ligue Classique. </p><p>La moyenne de point de la ligue pour la GW2 est de 73.8pts. </p><p>Le tableau des résultats est à retrouver via ce <a href="https://docs.google.com/spreadsheets/d/1_Dk_RGKeSgA4EpAkqU6Vkl_zVHlbQDcpJdMgSGuOP8Q/edit?usp=drivesdk"><u>lien</u></a>. </p><p><u>Les</u> <u>scores</u> <u>de</u> <u>qualification</u> <u>minimum</u>: </p><p><em>GW</em> <em>1</em>: 36pts </p><p><em>GW</em> <em>2</em>: 41pts </p><ul><li><h2>Ligue H2H </h2></li></ul><img src="/media/deb9b2_307051b77d73478e9a87f8d48f008541_mv2.jpg" alt=""/><p>Pas de match nul en GW2 dans la ligue H2H. <strong>Joe</strong> <strong>Julis</strong> grâce à une 2e Victoire d’affilée et un score général de 184pts, prend la tête. </p><p><strong>Tom</strong> <strong>Nettleton</strong> le premier leader chute de peu dans son 2e match et tombe à la 23e place. </p><p>En plus de prendre la tête, <strong>Joe</strong> <strong>Julis</strong> remporte le match avec la plus grosse différence de points (45). </p><ul><li><h2>Ligue FPL Challenge (code 5n6fr5) </h2></li></ul><img src="/media/deb9b2_36595aecc7df47648f177a7bb0c28b49_mv2.jpg" alt=""/><p>Le challenge de la GW2 était “All out attack”. Il y a 2 managers ex-aequo avec 79pts qui gagnent ce challenge. Ce sont <strong>Farid</strong> <strong>Alsagoff</strong> et <strong>Jesukorede</strong> <strong>Adelowokan</strong>. </p><img src="/media/deb9b2_56cf09723d1f4acb903185663e7b6cfc_mv2.jpg" alt=""/><p>Jesukore Adelowokan prend largement la tête de l’évènement 5-a-side ainsi que de la saison. Son avance est déjà de 14 points. </p><p>Le challenge de la 3e journée est relativement compliqué. Il est nommé “<strong>Promoted</strong> <strong>Punt</strong>”. Il vous faudra selectionner 5 joueurs provenant exclusivement des équipes promues en PL cette saison: Ipswich, Leicester et Southampton. Le budget alloué est de 24M. Pas de bonus particuliers pour les buts ou passes décisives. </p><p>Bonne semaine. Profitez des matchs européen. N’oubliez pas non plus que la League Cup commence cette semaine pour les clubs non européens de Premier League. </p><p>Mardi 27 Août 2024: </p><ul><li><p>Brighton v. Crawley Town (L1) </p></li><li><p>Everton v. Doncaster Rovers (L2) </p></li><li><p>Leicester v. Tranmere Rovers (L2) </p></li><li><p>Birmingham City (L1) v. Fulham </p></li><li><p>Crystal Palace v. Norwich (CH) </p></li></ul><p>Mercredi 28 Août 2024: </p><ul><li><p>Wolverhampton v. Burnley (CH) </p></li><li><p>AFC Wimbledon (L2) v. Ipswich Town </p></li><li><p>Cardiff (CH) v. Southampton </p></li><li><p>Colchester United (L2) v. Brentford </p></li><li><p>West Ham v. Bournemouth </p></li><li><p>Nottingham Forest v. Newcastle </p></li></ul><p> The 2nd matchweek of the Premier League saw most of the important players score lots of points. Cole Palmer and Erling Haaland put on a show with 17pts each. Son with 16pts is not far behind, Salah with 10pts did the job. Saka, in the most difficult match, managed to score 6pts. </p><p>We update you on the FPL competitions from <a href="http://fantasy-coach.fr"><u>fantasy-coach.fr</u></a>.  </p><ul><li><h2>Classic League (code: gpojm8):  </h2></li></ul><p>If last gameweek managers with Salah in their team were the winners. In GW2 it was Haaland's owners who emerged victorious. Those who made him captain have progressed well in the rankings. The brave ones who had the guts to use their Triple Captain (TC) chip on the Norwegian took the lead of the league rankings. </p><p>The first chips used by managers helped to widen the gaps. The top 10 is now within 25pts.  </p><img src="/media/deb9b2_5b4dfdfba098484bbaf82960f60c3322_mv2.jpg" alt=""/><p><strong>Massimo</strong> <strong>Mourinho</strong> becomes the new leader thanks to his TC on Haaland. </p><p><strong>Feyi</strong> <strong>Ajiginni</strong> drops down to 5th place. He used his Wildcard (WC). I hope for him it is not used too early. </p><p>The gameweeks was more complicated for <strong>Arthur</strong>, the reigning champion. Without Haaland, he loses 220 places and finds himself 226th. Despite this apparent decline, he still limits the damages by remaining in the top 250, 56pts from the lead.  </p><p><strong>Julien</strong> <strong>Cazenave</strong>, the winner of the 2024 Cup, is 171st and drops 18 places.  </p><p><strong>Sean</strong> <strong>Gardener</strong>, the winner of the 2023 Winter Cup, is 267th and drops 88 places.  </p><p>Finally <strong>Michael</strong> <strong>Akins</strong>, the winner of the 2024 Survivor, is 113th and gains 40 places.  </p><ul><li><h2>Fantsy Coach’s FPL Survivor (code: gpojm8)  </h2></li></ul><p>For this 2nd gameweek of Survivor, the safety score was 41pts. As planned, 8 managers were eliminated. </p><p>A few new managers who scored more than GW1 safety score (36pts) joined the league so we are 509 left in the race. Next stop is GW3.  </p><p><strong>Michael</strong> <strong>Akins</strong>, the 2024 champion, reaches GW3 with very little troubles. His healthy 82pts are well above safety. </p><p> The best score of GW2 was achieved by <strong>Dean</strong> <strong>Marjanovic</strong> with 116pts.  </p><p>The manager with the worst overall ranking who remains in the Survivor is <strong>Michael</strong> <strong>Ogunyemi</strong>. He is 523rd in the Classic league.  </p><p>The league scoring average for GW2 is 73.8pts. </p><p>The results for GW2 of the Fantasy Coach's FPL Survivor  are through this <a href="https://docs.google.com/spreadsheets/d/1_Dk_RGKeSgA4EpAkqU6Vkl_zVHlbQDcpJdMgSGuOP8Q/edit?usp=drivesdk"><u>link</u></a>.</p><p><u>Survivor</u> <u>safety</u> <u>scores</u>: </p><p><em>GW</em> <em>1</em>: 36pts</p><p><em>GW</em> <em>2</em>: 41pts </p><h2>H2H League  </h2><img src="/media/deb9b2_9d83c7ccacdc49948e9d4d24802e3860_mv2.jpg" alt=""/><p>No draw in GW2. <strong>Joe</strong> <strong>Julis</strong> thanks to a 2nd win in a row plus an overall score of 184pts takes the lead.  </p><p><strong>Tom</strong> <strong>Nettleton</strong> the first leader narrowly lost his 2nd match and drops to 23rd place.  </p><p>In addition to his top spot, <strong>Joe</strong> <strong>Julis</strong> won the match with the biggest point difference (45).  </p><ul><li><h2>FPL Challenge League (code 5n6fr5)  </h2></li></ul><img src="/media/deb9b2_9caecbd76de44244b64e1c055394c8dc_mv2.jpg" alt=""/><p>GW2 challenge was “All out attack”. 2 managers are tied on 79pts and win this challenge. They are <strong>Farid</strong> <strong>Alsagoff</strong> and <strong>Jesukorede</strong> <strong>Adelowokan</strong>.</p><img src="/media/deb9b2_c728823dea12481a86653fac8adec920_mv2.jpg" alt=""/><p><strong>Jesukore Adelowokan</strong> largely takes the lead in the 5-a-side event as well as in the season standings. His lead is already of 14 points.  </p><p>The challenge of the GW3 is relatively complicated. It is named “<strong>Promoted</strong> <strong>Punt</strong>”. You need to select 5 players exclusively from the promoted teams: Ipswich, Leicester and Southampton. The allocated budget is 24M. There are no special bonuses for goals or assists.  </p><p>Have a good week. Enjoy the European matches. </p><p>Remember that the League Cup starts this week for the non-European Premier League clubs.  </p><p>Tuesday August 27, 2024:  </p><ul><li><p>Brighton v. Crawley Town (L1)  </p></li><li><p>Everton v. Doncaster Rovers (L2)  </p></li><li><p>Leicester v. Tranmere Rovers (L2)  </p></li><li><p>Birmingham City (L1) v. Fulham  </p></li><li><p>Crystal Palace v. Norwich (CH)  </p></li></ul><p>Wednesday August 28, 2024:  </p><ul><li><p>Wolverhampton v. Burnley (CH)  </p></li><li><p>AFC Wimbledon (L2) v. Ipswich Town  </p></li><li><p>Cardiff (CH) c. Southampton  </p></li><li><p>Colchester United (L2) v. Brentford  </p></li><li><p>West Ham v. Bournemouth  </p></li><li><p>Nottingham Forest v. Newcastle </p></li></ul></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

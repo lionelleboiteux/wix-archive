@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J15</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Player Picks, Premier League, J15"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J15"><figure class="hero"><img src="/media/449182_641854c9fb684b159c0584abbbe320a9_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J15</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 6 décembre 2024</p><div class="body"><p>On lève la main ceux qui ont zappé la J14 de Premier League ! Pas de problèmes, Fantasy Coach est là pour vous aider. L'avantage si vous avez zappé la J14 c'est que vous avez 2 FT dispo pour la J15, donc on y va avec le Player Picks 15ème du nom…</p><p>Si vous avez raté la j14, un petit résumé vite fait. Liverpool a laissé échapper deux des points d'avance que les Reds avaient sur le reste de la Premier League contre un Newcastle déterminé. Chelsea a profité de l'occasion en mettant une valise à Southampton et passe second au classement. Amorim a appris ce qu'il arrive quand on offre 13 corners à Arsenal (même sans Gabriel). City a finalement gagné un match et KdB a fait un bon match, ou est-ce le contraire ? Everton a défoncé Wolves et Villa a détruit Brentford.</p><p>Beaucoup de derbys cette semaine en Premier League et il faut faire un peu attention car c'est souvent là où on a des résultats imprévisibles. Le Derby de Liverpool tombe le même jour que le célèbre <a href="https://www.btrliverpool.com/santa-dash-event"><u>Santa Dash</u></a> où des milliers de gens déguisés en père Noël (Santa) courent à travers la ville. Les Fans d'Everton refusant de s'habiller de rouge, sont donc habillés en Blue-Santa… une variante qui n'existe apparemment qu'à Liverpool. De retour au foot, Everton a gagné 4-0 en J14 alors que les Reds perdaient 2 points. Malgré ça, il semble impossible que les fans d'Everton, habillés en Blue-Santa ou non, voient leur équipe gagner ce derby. </p><p>Fulham - Arsenal, j'espère bien que les visiteurs repartiront avec tous les points. Là aussi il y a un petit risque que les anciens Gunners Leno, Iwobi, Reiss Nelson et Smith-Rowe veuillent montrer à leur ancien employeur ce qu'ils ont perdu. Sans compter Sessegnon l'ancien Spurs mais lui ne semble pas être dans le 11 bien souvent. </p><p>Spurs - Chelsea sera sur le papier le Derby le plus tendu de la journée. Spurs a l'avantage de jouer à la maison, mais Chelsea compte plus de victoires à l'extérieur qu'à Stamford Bridge cette saison.</p><h2>Mes Pronos pour la J15 de Premier League:</h2><p>Everton 0 - 2 Liverpool</p><p>Brentford 2 - 0 Newcastle</p><p>Aston Villa 2 - 0 Southampton</p><p>Crystal Palace 0 - 2 Man City</p><p>Man United 2 - 1 Nottm Forest</p><p>Fulham 0 - 3 Arsenal</p><p>Leicester City 2 - 1 Brighton</p><p>Ipswich Town 1 - 0 Bournemouth</p><p>Tottenham 1 - 2 Chelsea</p><p>West Ham 1 - 2 Wolves</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p>On commence à comprendre comment Amorim joue, et c'est plutôt offensif. Dans ce registre, <strong>Rashford</strong> (£7M), <strong>B.Fernandes</strong> (8.5M), <strong>Amad</strong> (£5M) et <strong>Zirkzee</strong> (£6.6M) semblent les meilleurs Picks. </p><p>Chez les Foxes on trouve des pépites. RvN vient juste de prendre les rênes et comme je le disais dans mon <a href="https://www.fantasy-coach.fr/post/player-picks-24-25-premier-league-j14"><u>Player Picks de la J14</u></a>, je ne m'attendais pas à grand-chose, mais il est parti du bon pied avec une belle victoire et une équipe qui attaque bien. En trois jours il a sorti les Foxes de la zone rouge. On notera les bonnes performances de l'increvable <strong>Vardy</strong> (£5.5M) et de <strong>El Khannouss</strong> (£4.8M)</p><p><strong>Iwobi</strong> (£5.6M), j'en parlais plus haut fait la meilleure saison de sa carrière. C'est un pick assez risqué vu qu'après Arsenal il va jouer Liverpool et Chelsea en 3 journées. </p><p><strong>Enzo Fernandez</strong> (£4.9M) une très bonne alternative à Palmer et à moitié prix.</p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J15</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="« Ne pas concrétiser reste notre seul problème. » P Fonseca (novembre 2022) De l’utilité de conclure, du jeu lensois sans fioriture et..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J15"><h1 class="title-only">Player Picks, Ligue 1, J15</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 10 novembre 2022</p><div class="body"><p>« Ne pas concrétiser reste notre seul problème. » P Fonseca (novembre 2022)</p><p>De l’utilité de conclure, du jeu lensois sans fioriture et dans 3 jours la coupure: Player Picks de la saison LCDE, épisode 15</p><h2>Les matchs de la journée</h2><h3>Lyon – Nice</h3><p>Résurrection danoise, rachat des Reds, 8e de Ligue Europa et 6 matchs sans défaite : pour sûr c’est encore l’été indien sur la Côte d’Azur. Comme quoi un Boudaoui et un Atal sur 2 jambes ça rend la vie plus légère ! Pour combien de temps je l’ignore et il ne serait pas étonnant de voir Favre débarqué cet hiver. Ces dernières années, l’OL était à chier mais – histoire de faire vibrer et maronner ses supporters – se transcender sur 2/3 matchs de prestige. Cette année est synonyme de rdv manqués</p><p>Score 1-1</p><h3>Lens – Clermont</h3><p>Vous le savez comme moi le foot est un sport de superstitieux et il n’est jamais bon de parler d’Europe trop tôt dans l’exercice – comme le font, et on l’entend, Fofana et Haise – sachant qu’elle a échappé de peu par 2 fois aux Sang et Or. Mais faudrait vraiment que cette année soit historique – genre une coupe du monde en hiver et une guerre en Europe – pour que le Racing Club de Lens loupe le podium en mai prochain. Attention toutefois à Clermont, intraitable à l’extérieur depuis quasi 3 mois</p><p>Score 2-1</p><h3>Rennes – Toulouse</h3><p>Émoussé actuellement, mais toujours invaincu depuis l’été et encore en lisse pour la rentrée européenne – où il retrouvera et Martin Terrier (on l’espère) et une vieille connaissance ukrainienne qui avait brisé ses rêves européens il y a peu –, le Stade rennais n’en reste pas moins attractif puisqu’il pourrait envoyer au Mondial des tricards comme Gomis, Sulemena et Doku. Avant cela il recevra une formation toulousaine en panne offensivement et bousculée dernièrement par les grosses écuries</p><p>Score 2-0</p><h3>Paris SG – Auxerre</h3><p>Ça aurait pu être anecdotique si on avait chopé Porto, Tottenham même Chelsea. Mais cette ville est à part et les boules sont noires à chaque tirage (de LDC petits coquins.) J’attends pas grande chose d’un match à 13h dimanche de veille de trêve mais ça me surprendrait que l’invincibilité parisienne tombe face à une faible AJA Le vrai sujet c’est dans quel schéma et avec quels joueurs – pour ne pas hypothéquer les chances au Mondial d’une sélection ou une autre – le PSG se présentera au Parc</p><p>Score 3-1</p><h3>Lille – Angers</h3><p>On enchaîne par une confrontation des extrêmes entre l’équipe la plus joueuse, mais la moins vernie de France et de Navarre – 3 poteaux contre Rennes –, et la cuillère en bois du championnat dont le coach doit trembler du fessier en prévision d’une trêve hivernale qui pourrait le voir mis dehors non pas par les forces de l’ordre (trêve hivernale on vous a dit) mais par un président, qui ne dégage jamais en principe un entraîneur en cours d’année, contraint à maintenir son club dans l’élite.</p><p>Score 4-0</p><h3>Montpellier – Reims</h3><p>Je pensais pas me réjouir d’un nul ramené à Clermont mais miraculés (1 but sur peno donné par l’arbitre et 2 loupés de l’autre côté), il est temps que se termine – ou presque – cette annus horribilis (ou cul pourri comme disent les Nîmois) pour les Pailladins. Depuis que Still a pris les commandes du Stade de Reims, c’est 5 sorties sans perdre et 1 tout petit but concédé. Pour autant il a encore moins de chances de rester sur le banc que son homologue de dimanche. Va comprendre</p><p>Score 1-2</p><h3>Brest – Troyes</h3><p>Autant je peux comprendre que l’on dégage un coach après une mauvaise série (6 matchs sans victoire), autant le faire la semaine avant une coupure de quasi 2 mois c’est un non-sens total. Comme aligner un gardien français avec une défense exclusivement anglophone tu me diras. Bref je mettrais pas le Stade brestois, plus mauvaise équipe de ligue 1 uber eats à la maison, favori de cette opposition, qui se fera entre deux clubs actuellement sans entraîneur, à Le Blé pour autant</p><p>Score 2-3</p><h3>Nantes – AC Ajaccio</h3><p>Quand je pense que l’ACA a marqué en 15 minutes deux fois plus de pions que sur l’ensemble des rencontres disputées à François Coty cette saison, j’aime à croire qu’il existe encore des miracles de Noël et parfois même en plein mois de novembre. En revanche, en février ce sera passé donc je sais pas si Kombouaré est plus quart d’heure américain qu’ajaccien mais une chose est sûre il a intérêt à bien réviser ses bases de tarentelles en vue de ce duo sensuelle avec la Vieille Dame</p><p>Score 1-1</p><h3>Strasbourg – Lorient</h3><p>Alors que les Racing men se sont fait pourrir comme jamais par maître Keller en raison de leurs piteuses prestations récentes – 0 victoire à la Meinau, 2,3 buts encaissés par match et, pire, dépassés au classement par Ajaccio –, les Lorientais eux, se sont éjectés, à la faveur d’une 4e sortie infructueuse comptablement, eux-mêmes du wagon de tête avec une passe dé de Talbi pour Rony Lopes, un CSC de Laporte à Troyes, un autre CSC de Talbi à Nice et une interception de Ney sur Mvogo. </p><p>Score 0-3</p><h3>Monaco – Marseille</h3><p>Et on boucle (sauf pour les chauves et dégarnis bien entendu), de nouveau, la journée par une belle affiche de prétendants au podium final en 2023. Maintenant que les Olympiens se sont offert le luxe de dormir les mardi et mercredi soir, ils vont nous refaire le coup de terminer dauphin pour pas jouer l’Europe la saison suivante. Aussi, avant ce court déplacement phocéen sur le Rocher, OM et ASM sont à égalité parfaite avec la 3e place rennaise à 1 point en ligne de mire. Enjeu</p><p>Score 0-0</p><p>On perd pas les bonnes habitudes et on attend comme chaque semaine <a href="http://www.fantasy-coach.fr/pronostics-ligue-1/">vos petits pronos.</a></p><h2>Players Picks</h2><h3>Les bons tuyaux:</h3><p>Lorient → Monaco → Sunderland → Arsenal. Encore un dont la carrière aurait été incroyable si elle avait été faite à l’envers : le portier <strong>V Mannonne</strong> (7,2)</p><p>Ailier, Camerounais mais, à l’inverse de Karl-Toko Ekambi, pas placardisé : la pépite lilloise<strong> C Baleba</strong> (3) est le supersub du 15e volet du Player Picks LCDE</p><h3>Les pépites:</h3><p>Sal<strong>abgadou </strong>(5,7), la menchikabou, la Bibidi Bobidi Bou,</p><p>Mélangez tout ça et vous aurez quoi ? Bibidi Bobidi Bou !</p><p>Avec 9 buts en 14 journées, il (r)égale Moukandjo, autre serial buteur africain passé par le FC Lorient : <strong>Terem Moffi</strong> (14,9)</p><h3>Les incontournables:</h3><p>L’éternel Il Femonemo <strong>Mandanda</strong> (15,6), doublure de H Lloris chez les Bleus</p><p>Qu’il me revienne démotivé mais qu’il me revienne apte en décembre svp : le meilleur joueur de France et de Navarre, <strong>Neymar Jr</strong> (21,7) est la tête d’affiche du Player Picks LCDE n°15</p><p><em>t34</em></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

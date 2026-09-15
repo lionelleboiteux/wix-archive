@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J16</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Player Picks, Premier League, J16"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J16"><figure class="hero"><img src="/media/449182_98c2abe465d8459faba34db1b8eed9ed_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J16</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 12 décembre 2024</p><div class="body"><p>On commence ce Player Picks de Premier League par une petite pensée pour Michail Antonio, l'attaquant de West Ham qui a été retrouvé au volant de sa Ferrari FF après un accident où il se serait pris un arbre de plein fouet. Vu l'état de la bagnole, il s'en sort apparemment bien avec 'seulement' une fracture de la jambe. </p><p>La J15 de Premier League n'a pas eu droit au Merseyside Derby entre Everton et Liverpool (le Santa Dash a eu lieu lui !) Ce qui aura offert à Mo Salah et ses coéquipiers un peu de répit. On suppose que le repos inespéré aura aussi fait les affaires d'Everton qui voyage ce week-end à l'Emirates pour faire face à des Gunners qui ont non seulement joué en J15 mais aussi en LdC mercredi, mais c'était un match facile (coucou Robin👋😁). </p><p>Chelsea est la seule équipe du groupe de tête à avoir profité de l'absence de jeu de Liverpool en allant gagner un match à haut tempo contre les Spurs. Les Blues passent deuxième à quatre points de Liverpool et deux devant Arsenal, 4 devant City. Les hommes de Maresaca ont aussi l'avantage d'être si nombreux que l'équipe B peut être envoyée se geler les miches au Kazakhstan pour jouer la Conférence League tandis que l'équipe première peut se concentrer sur la Premier League. </p><p>Cette J16 a tout de même un Choc des Titans à savoir le Manchester Derby. Cette semaine, on ne prévoit pas de tempête, donc on suppose que ce match aura lieu. Quand je dis pas de tempête, je parle de météo parce que, quel que soit le résultat, je pense qu'une tempête médiatique est inévitable. Depuis l'arrivée d'Amorim en J12, les deux clubs ont accumulé le même nombre de points, à savoir 4 (1G - 1N - 2D). D'un côté comme de l'autre, il y a plus de questions que de réponses. Pep et Ruben doivent passer plus de temps à préparer les transferts de janvier que les matches. Dans mes pronostics, je donne l'avantage aux Citadins mais c'est surtout parce qu'ils jouent à la maison et qu'ils ont un jour de plus de repos après leurs matchs européens. </p><h2>Mes Pronos pour la J15 de Premier League:</h2><p><span style="color:#000000">Arsenal 3 - 0 Everton</span></p><p><span style="color:#000000">Wolves 2 - 0 Ipswich Town</span></p><p><span style="color:#000000">Newcastle 3 - 1 Leicester City</span></p><p><span style="color:#000000">Liverpool 3 - 0 Fulham</span></p><p><span style="color:#000000">Nottm Forest 2 - 1 Aston Villa</span></p><p><span style="color:#000000">Brighton 2 - 1 Crystal Palace</span></p><p><span style="color:#000000">Man City 2 - 1 Man United</span></p><p><span style="color:#000000">Southampton 1 - 2 Tottenham</span></p><p><span style="color:#000000">Chelsea 2 - 0 Brentford</span></p><p><span style="color:#000000">Bournemouth 1 - 0 West Ham</span></p><p><span style="color:#000000">Le nouveau Chip</span></p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le nouveau Chip</h2><p><span style="color:#000000">Depuis le début de la saison on avait ce 'Mistery Chip ' et maintenant on sait ce que c'est. Ils appellent ça '</span><strong><span style="color:#000000">Assistant Manager Chip</span></strong><span style="color:#000000">', je vous explique:</span></p><p><span style="color:#000000">Il sera dispo à partir de la J24 (25 Jan).</span></p><p><span style="color:#000000">Quand vous l'activer vous aurez un nouveau membre temporaire à votre équipe. Ce membre sera un manager de Premier League. Il vous faudra choisir et </span><strong><span style="color:#000000">ACHETER</span></strong><span style="color:#000000"> ce manager en utilisant votre budget. </span></p><p><span style="color:#000000">Attention le manager comptera dans la limite des 3 personnes par équipe mais pas comme un Free Transfer lorsque vous jouez votre Chip pour la première fois. Par contre si vous voulez changer l'Assistant ça va compter comme un transfert de joueur et vous coûtera soit un FT soit un -4 </span></p><p><span style="color:#000000">Une fois le Chip activé, votre Assistant sera dans votre équipe pour 3 journées consécutives, ce qui fait au moins 3 matches, plus si vous le choisissez lors d'une Double Week.</span></p><h3>Le système de point pour votre Assistant:</h3><ul><li><p><span style="color:#000000">Match gagné 6pts</span></p></li><li><p><span style="color:#000000">Match nul 3pts</span></p></li><li><p><span style="color:#000000">Match perdu 0pts</span></p></li><li><p><span style="color:#000000">+1pt par but marqué(s)</span></p></li><li><p><span style="color:#000000">+2 pts pour un CS (Clean Sheet)</span></p></li><li><p><span style="color:#000000">Table Bonus (Match nul) 5pts Si votre assistant fait un nul contre une équipe qui était au moins 5 place devant au classement avant le début de la journée</span></p></li><li><p><span style="color:#000000">Table Bonus (Gagné) 10pts Si votre assistant bat une équipe qui était au moins 5 place devant au classement avant le début de la journée</span></p></li></ul><p><span style="color:#000000">C'est digéré ou je vous donne un exemple? </span></p><p><span style="color:#000000">Ok, un exemple: Le classement va probablement bouger d'ici là, mais pour l'instant il me semble que d'acheter Amorim pour les trois dernières journées du championnat pourrait être une bonne option. </span></p><p><span style="color:#000000">Man U est 13eme au classement  et joue contre West Ham, Chelsea et Villa. Les deux derniers sont plus de 5 places devant United et offrent la possibilité à Amorim de gagner des 'Table Bonus'. Si on considère des score comme:</span></p><p><span style="color:#000000">ManU 2 - 0 west Ham (6pts pour le match gagné + 2 pts pour les buts + 2 pts pour la CS = 10 pts)</span></p><p><span style="color:#000000">Chelsea 1 - 1 Man U (3 pts pour le nul + 1 pt pour le but + 5pts de TB Table Bonus = 9pts)</span></p><p><span style="color:#000000">ManU 2 - 1 Villa (6 pts pour la gagne + 2 pts pour les buts + 10 pts de TB = 18pts)</span></p><p><span style="color:#000000">* ces calculs sont les miens d'après ce que j'ai compris des règles… </span></p><p><span style="color:#000000">Il va falloir faire des calculs savants surtout si vous comptez changer d'Assistant pour utiliser l'assistant au meilleur escient … on y reviendra d'ici là. Si vous avez des questions, mettez-les dans les commentaires et on tâchera d'y répondre.</span></p><h2>Le Player Picks</h2><h3>Les Pépites</h3><p><span style="color:#000000">Vardy (£5.6M) Je l'ai déjà mis dans le PP de la J15 et je continue à penser que sous RvN le vieux briscard va faire une belle saison.</span></p><p><span style="color:#000000">Enzo (£5M) La super pepite de Chelsea. Comme Palmer il n'est pas dans la liste des joueurs Européen des Blues et donc il a le temps de se reposer pendant la semaine</span></p><p><span style="color:#000000">Schade (£5.1M) Il a explosé en J13 avec 3 buts et 1 assiste contre Leicester et depuis il a mis une autre assiste et un autre but. Il joue contre Chelsea cette semaine et leur défense est suffisamment poreuse pour donner une chance à schade</span></p><p><span style="color:#000000">Amad (£5.1M) Lui aussi était déjà là la semaine dernière, mais j'ai de bonnes raisons. Le mino est en jambes et est la force créatrice de ManU. Cette semaine contre un City de trentenaires fatigués par un voyage à Turin il aura tout le champs pour courir derrière cette défense et mettre </span></p><h3>Les Valeures sûres</h3><p><span style="color:#000000">Salah (£13.3M) Le King indiscutable cette saison. Il aurait même ouvert les négociations avec Liverpool pour son prolongement. </span></p><p><span style="color:#000000">Palmer (£11.1M) Enfin, en J15 le capitanat de Palmer a payé ses fruits. J'espère bien qu'il sera aussi bon contre un autre club londonien… Brentford</span></p><p><span style="color:#000000">Saka (£10.5M) Avec ses potes Odegaard et Timber ils terrorisent les arrières gauches. Si on y ajoute les corners et potentiellement les pénos il y a du potentiel. A la maison contre Everton ça devrait le faire.</span></p><p><span style="color:#000000">Isak (£8.6M) 6 buts et 3 assistes en 11 matchs plein, c'est pas mal comme stats. C'est peut etre pour ca que tous les grands clubs le reniflent avant la saison du mercato…</span></p><h3>Les Bons Tuyaux </h3><p><span style="color:#000000">L'Egyptian King ne laisse pas beaucoup de miettes aux autres joueurs de Liverpool, mais il y en a quelques-uns qui méritent d'être dans vos Teams…</span></p><p><span style="color:#000000">Kelleher (£4.6M) loin d'être le plus cher, il est le plus efficace du jeu</span></p><p><span style="color:#000000">Mac Allister (£6.2M) - Virgil (£6.4M). Cette doublette, je l'ai deja mise dans le Player Picks, mais je suis sûr qu'ils essayent de reproduire les corners d'Arsenal et un jour ça va payer</span></p><h3>La tactique du Raccoon</h3><p><span style="color:#000000">Je suis à la 337 240 eme place avec 1 FT et £1.9M à la banque mes option sont</span></p><p><span style="color:#000000">Odegaard -&gt; B.Fernandez + un potentiel Cunhia -&gt; Jackson pour (-4). Je ne suis pas convaincu de miser sur un club de Manchester une semaine de Derby.</span></p><p><span style="color:#000000">Odegaard -&gt; Enzo + un potentiel Wan-Bissaka -&gt; Virgil (-4) + un potentiel Ait-Nouri -&gt; Saliba (-8) Tous ces changements vaudraient le coup sur le papier mais je ne pense pas que ça vaille un -8. Bien entendu je peux aussi faire tout ça en 3 étapes. </span></p><p><span style="color:#000000">Le plus simple c'est encore Amad -&gt; Enzo j'aime bien les deux joueurs mais Enzo a plus de monde autour de lui pour lui permettre de faire des points. A prix égal je pense que Enzo est un bien meilleur Pick…</span></p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

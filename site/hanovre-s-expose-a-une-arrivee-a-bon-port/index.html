@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Hanovre s'expose à une arrivée à bon port</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Hanovre
+2.Bundesliga"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Hanovre s'expose à une arrivée à bon port"><figure class="hero"><img src="/media/3448f3_a7fb79a916eb49e8aea471cb3a5b143c_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Hanovre s'expose à une arrivée à bon port</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 11 août 2024</p><div class="body"><img src="/media/3448f3_d6184a35ea594a20b07a0d11917a58bd_mv2.jpeg" alt=""/><h2>Hannover 96</h2><p>Équipe solide, Hanovre est longtemps resté au contact des meilleurs la saison dernière avant de lâcher prise dans le sprint final et de finir à la sixième place, à 11 points du podium. La faute à une irrégularité chronique et plus particulièrement aux deux trous d’air rédhibitoires pour qui veut jouer la montée : le premier à partir de la mi novembre (3n, 2d) et le second en mars-avril (1v, 6n, 1d).</p><p>Cet été, plusieurs départs sont à relever : le décevant milieu offensif <strong>Louis Schaub</strong> rentré au pays (Rapid Vienne), <strong>Cedric Techert</strong> parti vivre son rêve américain via la colonie allemande de Saint-Louis, <strong>Sebastian Ernst</strong> parti chercher du temps de jeu à Regensbourg, l’espoir <strong>Yannik Lührs</strong> chassé par le BVB et surtout la promesse défensive <strong>Bright Arrey-Mbi</strong> transféré à Braga contre 6,2 M€. Une manne financière qui a permis aux Roten de faire un mercato estival vraiment très consistant : <strong>Jannick Rochel</strong> milieu offensif dont on ne pense ici que du bien depuis son passage à Ulm en Regionalliga Südwest et <strong>Josh Knight</strong> défenseur central anglais qui a tout d’une bonne pioche sur les premières sorties amicales arrivent ainsi que les deux prêts que sont l’attaquant<strong> Jessic Ngankam</strong> à la relance après deux expériences ratées depuis son départ du Hertha Berlin (Francfort, Mayence, 0 but) et le talentueux milieu <strong>Hyun-ju Lee</strong> qui après un premier tour de chauffe en prêt à Wehen doit pouvoir augmenter sa contribution (4 buts).</p><p>Sans compter que l’équipe de Basse-Saxe conserve un effectif constitué de joueurs cadres dans toutes les lignes : le très expérimenté <strong>Ron-Robert Zieler</strong> dans les bois, le taulier <strong>Marcel Halstenberg</strong> défenseur central de choc qui a dominé son sujet pour son retour à la maison (5 buts, 5 passes), son compère axial <strong>Phil Neumann</strong> (2 buts 2 passes) dragué par les sirènes anglaises (au moins celles de Birmingham City), le milieu défensif <strong>Fabian Kunze</strong>, le milieu central <strong>Enzo Leopold</strong> (vraiment excellent au-delà de ses 3 buts, 4 passes) ainsi que les attaquants <strong>Andreas Voglsammer</strong> (8 buts, 2 passes) et <strong>Havard Kallevik Nielsen</strong> (7 buts, 3 passes).</p><p>Cerise sur le gâteau, Hanovre compte dans ses rangs un des joueurs qui va défrayer la chronique dans les années à venir : le buteur <strong>Nicolo Tresoldi</strong>, 20 ans le 20 août prochain (7 buts, 1 passe). Cette saison devrait être celle de son envol et il devrait prendre le leadership offensif d’une attaque où les forces sont jusqu’à présent bien réparties. Et comme les bons buteurs sont rares, il pourrait bien être le facteur X des H96. Moins tape à l’œil, le milieu offensif <strong>Lars Gindorf</strong> (22 ans) pourrait aussi être une bonne surprise, notamment s’il joue en meneur derrière l’attaquant.</p><img src="/media/3448f3_b27105c298b14353b9e47b1cd82022d1_mv2.jpeg" alt=""/><p>Sur le côté gauche de la défense à trois, Arrey-Mbi n’a pas encore été remplacé. <strong>Brooklyn Ezh</strong> et <strong>Eric Uhlmann</strong> n’offrant pas forcément toutes les garanties (je les vois plus aujourd’hui comme des doublures), une recrue pourrait bien venir compléter le groupe même si <strong>Jannik Dehm</strong> peut parfaitement faire l’affaire.</p><p>Finalement, la seule inquiétude identifiée lors de cette intersaison est venue de l’extra-sportif avec le jugement rendu par la Cour fédérale de justice de Karlsruhe qui acte définitivement le fait que <strong>Martin Kind</strong> n'est plus directeur général du Hanovre 96. Toujours dans le circuit via le conseil de surveillance d’une structure concourant à la gouvernance et à la gestion du club, la personnalité clivante de Kind, toujours vent debout contre le 50+1, reste aussi un frein réel à la popularité d’un club qui a vu deux de ses voisins du nord de l’Allemagne prendre l’ascenseur.</p><p>De quoi, donner des idées ambitieuses à un club qui ne cache pas ses envies d’accession. Si l’entraîneur <strong>Stefan Leitl </strong>dispose des arguments pour que le H96 augmente son niveau d’exigence en terme de qualité de jeu produit, accrocher le podium demandera aussi d’autres ingrédients. Si le groupe paraît tailler pour s’inviter à la lutte finale, il pourrait encore manquer d’épaisseur et de talent pour forcer la décision dans les confrontations directes, celles qui font mal à la concurrence.</p><p><strong><em>Pronostic 5</em></strong></p><img src="/media/3448f3_a7fb79a916eb49e8aea471cb3a5b143c_mv2.jpeg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J33</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Player Picks, Ligue 1, J33"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J33"><figure class="hero"><img src="/media/a73c0f_943a7d2be77b479e8b0e1b661b4c2c2b_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Ligue 1, J33</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 8 mai 2026</p><div class="body"><p> « <em>Si j’aligne mes meilleurs joueurs, on bat Toulouse. Mais le service médical nous a dit de ne pas le faire. </em>» O’Neil (mai 2026)</p><p>De médical, de grammatical mais pas d’anticlérical : Player Picks de la saison LCDE, épisode 33</p><h2>Les matchs de la journée</h2><h3>Lens – Nantes</h3><p>Et on démarre en fanfare à 20:45 (heure de Rennes) cette J33 par la rencontre entre une équipe qui, comme dans une soirée gang-bang, regarde autant ce qu’il se passe devant que derrière au classement et l’équipe qui a pris 25% de ses points de sa saison en championnat contre l’Olympique de Marseille. Si le Racing Club de Lens veut croire encore à ses rêves de titre, il ne faudra pas sombrer en 10 minutes, à l’instar de l’équipe marseillaise sus nommée, contre le FC Nantes et espérer, dans le même temps, un faux-pas du PSG à Brest. Pour ce faire, il faudra poursuivre la belle série à Bollaert-Delelis malgré l’absence notable de 5 tauliers de Pierre Sage</p><p><strong><span style="color:#084ebd">Score 2-1</span></strong></p><h3>Paris SG – Brest</h3><p>On passe ensuite directement au dimanche soir 21h – autant vous dire qu’on va bien se toucher la n*uille samedi les amis – pour un 1er multiplex où l’on aura doit, entre autres, à une petite douceur bien sucrée (tu l’as ?) sans doute synonyme de titre national, avant le sacre européen, pour le PSG. En effet, même si Luis Enrique venait à aligner à nouveau ce week-end l’équipe bis – ce qui est relativement probable au regard de l’enchainement des 4 matchs en 10j –, les Ti Zefs sont déjà mentalement en Thaïlande au grand désarroi d’Eric Roy. Aussi, je vais pas vous parler plus longtemps de technico-tactique : les Parisiens vont destroncher les Brestois et puis voilà</p><p><strong><span style="color:#084ebd">Score 2-0</span></strong></p><h3>Toulouse – Lyon</h3><p>Venons-en ensuite à l’opposition entre deux des plus belles cellules de recrutement de France et de Navarre. Ça me tabasse mais force est de constater que l’Olympique lyonnais, rétrogradé l’été dernier en ligue 2 (pour rappel), va retrouver la ligue des champions 6 ans plus tard en faisant notamment de Niakhaté l’un des meilleurs centraux du championnat. En ce sens, il faut l’emporter au Tolosa Stadium, peut-être sous les yeux de Will Still pressenti pour succéder à Carlos Martinez Novell, dans une rencontre qui sera sans doute moins intense et b*ndante que celle de dimanche dernier au Groupama Stadium. Mais que voulez-vous, je peux pas être partout</p><p><strong><span style="color:#084ebd">Score 1-3</span></strong></p><p><strong>Monaco – Lille</strong></p><p>Poursuivons par le seul choc de dimanche malgré les enjeux qui se dessinent de part et d’autre de l’hexagone à 2 journées du terme. Si l’ASM veut jouer l’épreuve reine de coupe d’Europe, il faudra montrer autre chose que face à la redoutable équipe de Metz et taper (on va pas se parler chinois) contre toutes augures un nouveau gros client à domicile. Ces Dogues toujours en mal criant d’efficacité – 14 corners, 53 ballons touchés dans la surface du HAC, 22 tirs, 2 montants et 1 petit but – n’en demeurent pas moins invaincus depuis 12 journées de ligue 1 Mc Donalds. C’est clairement le match où jamais pour les Asémites sur le Rocher</p><p><strong><span style="color:#084ebd">Score 0-1</span></strong></p><h3>Rennes – Paris FC</h3><p>On enchaîne – et c’est tant pis pour Kool Shen – par un duel de capitales des plus attrayants sur le papelard dans la mesure où il verra s’opposer 2 attaques en folie. Si les Rennais semblent uniquement focalisés sur l’idée d’enfoncer leur ancien coach au Vélodrome lors de la dernière journée, sans Samba l’ex de la maison, il faudra néanmoins accueillir au préalable le PFC en vue de s’assurer d’un strapontin européen. Ce qui est loin de constituer une mince affaire car les Franciliens sont de sacrés clients, seulement chicotés par Lille depuis bientôt 2 mois. Et c’est pas pour me déplaire</p><p><strong><span style="color:#084ebd">Score 2-2</span></strong></p><h3>Le Havre – Marseille</h3><p>Passons maintenant à une rencontre placée sous le signe du commerce maritime entre deux des plus gros ports de France et 2 des formations avec la dynamique la plus claquée au sol actuellement. La reine des matchs nuls accueille en effet la reine des mélodrames, défaite par 4 fois sur les 6 dernières journées. Mention spéciale pour les Phocéens d’un Habib Beye qui avait pour objectif la coupe de France et le podium de ligue 1 McDonalds mais qui préfèreront toujours une belle mise au vert à la Commanderie à un podium qu’ils n’ont plus que 2.8% de chances d’accrocher d’ici 2 journées. Sans trop de conséquence toutefois puisque l’UEFA menace l’OM d’exclusion</p><p><strong><span style="color:#084ebd">Score 1-1</span></strong></p><h3>Angers – Strasbourg</h3><p>On bouge ensuite du côté de l’Athènes de l’Ouest – comme quoi il y a des surnoms qui claquent et des réalités qui déchantent – pour assister au genre de rencontres typiques où l’on se dit que si la L1 marque plus de buts en moyenne que la PL, la Liga et la Serie A (true story), c’est pas grâce à des Angers – Strasbourg. Le SCO n’a théoriquement besoin que d’un point pour se maintenir et le Racing est tout à fait partant pour lui accorder à l’aune de ses 4 défaites lors de ses 6 derniers matchs. Un bon gros nul des familles pour le jubilé de deux de mes anciens tauliers MPG, j’ai nommé messiseurs Capelle et Bamba, en perspective les petits lapins. Aussi vrai que j’aime pas le boulghour</p><p><strong><span style="color:#084ebd">Score 0-0</span></strong></p><h3>Metz – Lorient</h3><p>Dans le même temps, on aura aussi droit à une rencontre éclatée au sol dimanche soir. Les Orange, qui pourraient également accueillir (et en même temps ça fait sens d’un point de vue colorie) Will Still sur leur banc cet été, auront connu un retour en ligue des talents plein de paradoxe puisqu’ils auront réussi à attraper toutes les équipes de la 1ere partie de tableau mais également à se faire sur les mollets contre Brest, Angers, Auxerre ou le PFC. Comme le Football Club Metz, officiellement relégué (tu parles d’un scoop), fait partie de cette dernière catégorie, autant vous épargner mes salades grecques et vous le donner Emile : victoire aussi classe qu’inutile des Messins</p><p><strong><span style="color:#084ebd">Score 2-1</span></strong></p><h3>Auxerre – Nice</h3><p>Et on « boucle » cette journée par une finale pour les barrages entre 2 beautés du championnat : la belle des champs et Nissa la Bella! Des Bourguignons, qui viennent quoisiment de condamner les Canaris au purgatoire, ont une incroyable occaz, à la maison, de voler le dernier ticket du maintien direct (pour la 3e année consécutive) au nez et à la barbe de leurs invités niçois qui devraient selon toute vraisemblance garer le double bus dans l’Yonne – et en même temps (poke patron) que peuvent-ils faire d’autres avec cet effectif ?! –  devant Diouf pour ramener un nul <span style="color:#0d2123">de l’Yonne </span>comme face au Havre, Lille, Lens ou encore Marseille. Du tout cuit je te dis</p><p><strong> </strong><strong><span style="color:#084ebd">Score 1-1</span></strong></p><h2>Players Picks</h2><p><strong>Nos compositions probables des 18 équipes de Ligue 1 sont disponibles comme chaque semaine : </strong></p><p><a href="https://www.fantasy-coach.fr/compos-probables"><strong><u>Nos compositions probables</u></strong></a></p><p><strong>La liste des absents et des suspendus est également à jour :</strong></p><p><a href="https://www.fantasy-coach.fr/indisponibles-dnp"><strong><u>Les absents et les suspendus</u></strong></a></p><p><strong>Enfin, n’hésitez pas à nous suivre sur X pour avoir les dernières informations concernant les absents et les suspendus : </strong></p><p><a href="https://x.com/FantasyCoach_FR"><strong><u>Nous suivre sur X</u></strong></a></p><h3>Les incontournables</h3><ul><li><h3>Lyon</h3></li></ul><p>=&gt; Tauliers : Tolisso (16.5), Moreira (14.9)</p><p>=&gt; Gars sûrs : Greif (15.1), Abner (15.6)</p><p>=&gt; Supersubs : Fofana (11)</p><p>=&gt; Pépite : Merah (11.5)</p><ul><li><h3>Paris SG :</h3></li></ul><p>=&gt; Tauliers : Beraldo (14.6), Lee (14.9)</p><p>=&gt; Gars sûrs : Barcola (14.1)</p><p>=&gt; Supersubs : Doué (16)</p><p>=&gt; Pépites: Dro (9.3), Mbaye (9.5)</p><h3>Les jouables</h3><ul><li><h3>Lens :</h3></li></ul><p>=&gt; Tauliers : Udol (14.6), Risser (12.2)</p><p>=&gt; Gars sûrs : Edouard (14.1)</p><p>=&gt; Supersub : Bermont, Said (13.5)</p><p>=&gt; Pépites: Bulatovic (9.5), Haidara (9.9)</p><ul><li><h3>Lille :</h3></li></ul><p>=&gt; Tauliers : Fernandez Pardo (13.9), Haraldsson (14)</p><p>=&gt; Gars sûrs : Mandi (13.8), Ozer (14.9)</p><p>=&gt; Supersub : Mbappe (7.6), Perrin (11.7)</p><h3>Les paris </h3><ul><li><h3>  Auxerre</h3></li></ul><p>=&gt; Taulier : Danois (11.1), Sinayoko (11.8)</p><p>=&gt; Gars sûr : Diomandé (12)</p><p>=&gt; Supersubs : Casimir (8)</p><p>=&gt; Pépite : De Percin (3), Mara (10.4)</p><p>Bonne composition d’équipe à tous et à la semaine prochaine pour la J34 !!! </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,96 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Pick, J10 de Premier League.</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="On se remet de ce dernier week-end festif pour les managers FPL et on enchaîne ave le Player Pick, J10 de Premier League. Haaland a rendu..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Pick, J10 de Premier League."><h1 class="title-only">Player Pick, J10 de Premier League.</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 6 octobre 2022</p><div class="body"><p>On se remet de ce dernier week-end festif pour les managers FPL et on enchaîne ave le Player Pick, J10 de Premier League. Haaland a rendu le capitanat inutile donc il va falloir bien choisir les 10 autres joueurs. </p><p>La J10 voit l'un des clashs de titans le plus intéressant de la saison, entre un Arsenal en pleine confiance et un Liverpool fragile défensivement. Les Gunners pourraient prendre la place des Reds comme principaux rivaux de Manchester City. Petit rappel concernat ces 2 équipes, Arsenal et Manchester City n'auront pas de match en J12. Pensez à gérer la future absence des joueurs de ces clubs. </p><p>Ailleur, nous attendons avec impatience de voir si le De Zerbi ball va mettre autant en difficulté Tottenham que Liverpool. On attend aussi de voir la réaction de Manchester United après l'humiliation du week-end dernier. Un déplacement à Liverpool, même du coté bleu de la ville n'est pas une sinécure.  </p><p>Le Discord (<a href="https://discord.com/channels/737355915686182943/737442472837513287">https://discord.com/channels/737355915686182943/737442472837513287)</a> de fantasy-coach.fr est toujours là pour nous montrer vos équipes, chatter et charrier gentillement les autres lors des jours de match. </p><h2>Les matchs de la journée  </h2><h3>Bournemouth - Leicester: 1-3 </h3><h3>Chelsea - Wolverhampton: 1-0 </h3><h3>Manchester City - Southampton: 4-0  </h3><h3>Newcastle - Brentford: 3-2 </h3><h3>Brighton - Tottenham: 2-2 </h3><h3>Crystal Palace - Leeds: 2-1 </h3><h3>West Ham - Fulham: 3-1 </h3><h3>Arsenal - Liverpool: 3-3 </h3><h3>Everton - Manchester United: 1-2 </h3><h3>Nottingham Forest - Aston Villa: 0-1 </h3><h2>Player Picks </h2><p>On va régler une question tout de suite: si vous n'avez pas <strong>Haaland (£12.2M)</strong>, il n'y a pas grand chose qu'on puisse faire pour vous à ce stade de la saison. Jusqu'à la Coupe du Monde (J16) il doit être votre perma-captain même en J12 (suffit de choisir un bon vice-capitaine). Il aura des matchs où il ne sera pas le meilleur marqueur mais c'est très (trop) risqué de parier contre lui. C'est triste car il supprime un des élément différenciant du jeu. Face à un Hasenhütl qui pourrait disputer son dernier match sur le banc de Southampton, le Cyborg peut faire un carnage.  </p><h3>Les incontournables : </h3><p><strong>Jesus (£8M) / Martinelli (£6.6M).</strong> Les Gunners jouent Liverpool, une de leurs bêtes noires, en J10 et ils n'ont pas de matchs en J12. Mais impossible de les ignorer tellement ils sont en pleine confiance. Jesus réalise son plein potentiel maintenant qu'il a la confiance de son entraîneur. Martinelli continue à impressioner. C'est le joueur qui a pris le plus de valeur dans le jeu derrière Haaland. Au delà de cet élément annecdotique, Martinelli tire énormément au but (autant que Salah) avec un précision supérieur à 40% sur les 5 derniers matchs. Il sous performe un peu avec un xGI Delta de -0.29 pour 2 expected Goal Involvement (implication sur but attendu). Avec le volume de tir qu'il propose, il reste donc un bon choix. </p><p><strong>Zaha (£7.3M)</strong>. L'ivoirien n'est pas vraiment un incontournable évident. Palace a enfin terminé son début de saison dantesque (Arsenal, Liverpool, Manchester City et Chelsea affrontés lors de leurs sept matchs disputés jusque là). Les Eagles s'attaquent à un calendrier beaucoup plus abordable. Zaha, qui tire les pénalties, devient donc un pick très intéressant. Sans faire de bruit, il marque 1 match sur 2. </p><p><strong>Kane (£11.4M).</strong> Loin de Haaland qui enfile les hat-trick comme des perles, le capitaine des 3 Lions a fait chou blanc une seul journée, la J1. C'est d'ailleur les 2e meilleur marqueur du jeu mais quand on a un phénomène qui casse tout sur son passage, difficile de remarquer les petits copains qui suivent...de loin. Si votre structure d'équipe le permet, avoir une ligne d'attaque Haaland-Kane peut vous porter très loin.   </p><h3>Les bons tuyaux : </h3><p><strong>Foden (£8.1M)</strong>. Petit à petit le jeune anglais se présente comme le 3e larron d'une attaque magique à City. Lui aussi auteur d'un triplé face à MU, sa position à droite de l'attaque des Sky Blues lui convient mieux que le côté gauche où il doit composer avec Cancelo. Sur ce côté droit il peut rentrer plus dans le centre du jeu et donc se retrouver plus souvent dans la zone de vérité.Pour son prix il peut permettre de se passer de De Bruyne et d'utiliser l'argent (4.3M!!) ailleur. </p><p><strong>Maddison (£8.1M)</strong>. Bloqué par les blessures lors des saisons COVID, son retour aux affaires en 2e parti de saison dernière est tonitruant. Dans une équipe des Foxes très en difficulté, il surnage avec ses 5 buts et 2 passes dé (soit 50% des buts de son équipe). Le calendrier de Leicester devient plus digeste et Madders doit convaincre Southgate de l'emmener au Qatar. Comme je le dit souvent, si Leicester marque, il y a une chance sur 2 que Maddison soit impliqué. </p><p><strong>Trossard (£6.7M).</strong> Le belge vient de marquer 4 buts en 2 matchs dont 3 contre Liverpool. De Zerbi considéré plus offensif que Potter peut instaurer un système qui permettra à Trossard de continuer sur sa lancée. Encore en dessous de 10% de TSB il est assez différentiel pour vous faire progresser dans les classements. </p><h3>Les pépites </h3><p><strong>Coady (£4.9M, 4.7% TSB).</strong> Lage regrettera peut être d'avoir envoyé l'international Anglais en prêt. En tout cas dans les recrues Toffees de ces dernières années, Coady est probablement l'une des meilleurs. Il stabilise la défense et apporte sa menace sur les corners. Un consultant de la BBC le considère même comme le meilleur défenseur du royaume. </p><p><strong>Aubameyang (£9M, 1.7% TSB).</strong> De retour à Londres, le gabonnais reprend petit à petit ses marqes. Buteur  lors de ses 2 derniers matchs, il redonne une solution à l'attaque des Blues.Son prix le rend compliqué à inclure dans les équipes FPL, surtout avec Mitrovic, Toney et Isak qui peuvent faire jeu égal avec l'ancien Gunner. Si vous avez 9M qui traînent quelques part, tentez le pari. </p><p><strong>Martial (£6.9M, 1% TSB).</strong> Un peu comme Wilson (qui vous sera proposé plus bas), le français est (trop) régulièrement sujet à des blessures. Par contre quand il joue il est  décisif. 1 passe dé en 45min contre Liverpool et 2 buts en 31min contre City. Ce sont les seules 76min qu'il a joué en championnat. Comparativement Haaland est un minable avec ses 14 buts et 3 passes dé en 661min.   </p><p><strong>Barnes (£6.9M, 1.4% TSB).</strong> Il fait pâle figure par rapport à Maddison, mais dans un calendrier plus simple, l'anglais peut être un très bon complément à son compatriote. S'il vous manque 1M pour posséder Maddison, parier sur Barnes peut vous couvrir. C'est plus riqué. </p><p><strong>Willock (£4.9M, 0.6% TSB).</strong> A ce prix et à ce taux de possession c'est un très bon pari. Il a ouvert son compteur d'implication sur les buts lors du dernier match. On espère tous pouvoir compter sur lui pour retrouver son niveau des 6 premiers mois de 2021. S'il y arrivait, il offrirait un pick efficace en dessous de 5M. A surveiller.  </p><p>La question du capitanat ne se posant plus pour cette saison, nos experts doivent se creuser la tête pour trouver la pépite de chaque journée. Cette semaine ils sont particulièrement de très bon conseil je trouve. </p><p>Pour rappelle les experts sont: </p><p>Arthur: double vainqueur de la ligue Fantasy Coach lors des 2 dernières saison en battant à chaque fois le record de point. </p><p>Rwano: vainqueur de la Cup fantasy-coach.fr et troisième de la ligue la saison dernière. Comme Arthur il participe régulièrement aux discussions sur le Discord FPL. </p><h3>Arthur </h3><p><strong>Capitaine: Haaland (83% TSB) :</strong>Bon après le matchs contre Manchester United (3 buts, 2 passe). Plus besoin de le présenter. Comme chaque GW il est le capitaine automatique. (vs Southampton). </p><p><strong>Pépite: Wilson (1.3% TSB) :</strong>De retour de blessure la semaine dernière Wilson avec 1 but en 60min, et une belle victoire 4-1 contre Fulham. Cette GW il affronte Brentford a domicile. Il est projeté à 41% de marquer un but (2e meilleur attaquant de la GW derrière Haaland à 73%). </p><h3>Rwano </h3><p><strong>Capitaine: Haaland (83% TSB) :</strong>Invaincu en Premier League, le cyborg tue cette rubrique car ne pas le mettre capitaine, c’est se tirer une balle dans le pied. Ainsi, dans le derby mancunien, il facturé 3 buts et 2 passes décisives soit 23 points. Pour le reposer, Guardiola l’a sorti à la mi-temps du match de Ligue des Champions de ce mercredi alors qu’il avait déjà inscrit 2 buts. Les Saints de Southampton, qui se déplacent à l’Etihad Stadium, restent eux sur 3 défaites consécutives contre des adversaires squattant la seconde partie de tableau. Nouvelle boucherie en vue. </p><p><strong>Pépite: Bowen (4.2% TSB) :</strong>Auteur d’une grosse saison l’année dernière avec 12 buts et 10 passes, Jarrod Bowen est devenu international anglais et aspire légitimement à jouer la prochaine Coupe du Monde. Problème, son début de saison est poussif à l’image d’un West Ham décevant : pour le moment, il a des stats faméliques en Premier League avec un seul but inscrit (lors de la dernière journée) et zéro passe. Autant dire que s’il veut aller au Qatar, il va falloir se bouger. Et vite. Lors de la réception d’une équipe de Fulham plutôt inconstante, il va pouvoir confirmer les progrès entrevus lors de ses derniers matchs et démontrer dans ce derby londonien qu’il est en train de retrouver son meilleur niveau. </p><p>Bonne chance à tous. </p><p>Pour rejoindre notre 'private league', utilisez le code:
+<strong>Classique : f6xuri</strong>
+ </p><p>Le meilleur moyen de rester au top c’est probablement de nous suivre sur <a href="https://www.facebook.com/Fantasy-Coach-824491257591639/">Facebook,</a> <a href="https://twitter.com/FantasyCoach_FR">Twitter</a> et <a href="https://discord.com/invite/MmcHMmD">Discord</a></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

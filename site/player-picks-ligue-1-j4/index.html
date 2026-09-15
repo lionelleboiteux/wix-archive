@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J4</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="« On va passer. » L. Favre (août 2022) Retour du fair-play financier, de la ligue des bouchers et des 90 min max par fessée: Player Picks..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J4"><h1 class="title-only">Player Picks, Ligue 1, J4</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 25 août 2022</p><div class="body"><p>« On va passer. » L. Favre (août 2022)</p><p>Retour du fair-play financier, de la ligue des bouchers et des 90 min max par fessée: Player Picks de la saison LCDE, épisode 4</p><h2>Les matchs de la journée</h2><h3>AC Ajaccio – Lille</h3><p>Ça faisait tellement longtemps que j’avais pas assisté à un boulard le dimanche soir que j’en suis sorti revigoré pour toute la semaine ! Toujours privés de Bayo et Cabella, il faudra pourtant se remettre très vite de la déconvenue, et du record de vitesse du 1er but encaissé en 1ère div, pour des Dogues qui se déplacent à l’extrémité sud de la France sur Lille de beauté où l’ACA continue sa tournée des candidats européens en se défendant avec ses propres armes mais des résultats forcément limités</p><p>Score 1-1</p><h3>Auxerre – Strasbourg</h3><p>On aura rarement – peut-être même jamais – vu dans l’histoire de notre championnat, 2 nouveaux attaquants se faire sortir dès leur 1er match sous leurs nouvelles couleurs. Fort heureusement (je pleure du sang en l’écrivant), cela n’aura pas empêché Auxerre de renouer avec un succès dans l’élite pour la 1ere fois depuis 10 piges. Mais avec Charbonnier incertain, Furlan va pouvoir s’arracher les derniers cheveux qui lui restent sur le caillou pour composer sa ligne offensive. Le Racing doit gagner</p><p>Score 0-1</p><h3>Lens – Rennes</h3><p>Sinon à Rennes, on a réussi l’exploit de prendre un rouge (Salin) et un jaune (Genesio) alors qu’on était même pas sur le terrain. C’est dire si ce début d’exercice est particulier pour les Bretons à l’inverse de Lensois invaincus depuis 11 sorties. Maintenant que le Stade rennais a prouvé qu’il était capable de tenir un score et garder Terrier, il est l’heure de montrer s’il est en mesure de rivaliser avec, les Sang-et-Or ne peuvent plus se cacher cette année, un concurrent direct à l’Europe.</p><p>Score 2-2</p><h3>Nantes – Toulouse</h3><p>Faut croire que les clubs occitans s’étaient passés le mot et avaient décidé de se chi*r dessus en J3 puisque le voisin toulousain a donné 3 coups pieds arrêtés, dont 2 payants, à son adversaire lorientais qui n’en demandait sans doute pas tant. Néanmoins toujours invaincu, le promu se rend à la Beaujoire où les Canaris, malheureux à Marseille samedi soir (tout comme moi au Barberousse), peuvent remercier l’ami Pallois qui en 3 matchs contre l’OM a offert un rouge, un péno et un CSC. Généreux</p><p>Score 0-2</p><h3>Nice – Marseille</h3><p>On enchaîne avec un derby du Sud muy caliente pour ce dernier week-end d’été qui j’espère suscitera plus d’engouement que la réception – pourtant capitale et pour Inéos et, pardon de m’en soucier quand même, notre indice UEFA – du Maccabi Tel-Aviv. Sale semaine pour les Aiglons, dont le mercato est toujours si peu lisible et cohérent, sèchement battus à chaque fois sur un score minimaliste. La venue du voisin marseillais – allégé des gourmands Strootman et Milik – s’annonce périlleuse</p><p>Score 0-1</p><h3>Lorient – Clermont</h3><p>Après seulement 2 matchs, ça reste toujours assez difficile de se rendre compte de la réelle qualité du groupe lorientais. D’autant plus que l’équipe morbihannaise a changé d’entraîneur dans l’inter-saison mais je vais rester cohérent et miser contre Clermont qui vient malgré tout d’enregistrer 2 succès consécutifs grâce à un recrutement – Cham, Gonalons, Andric – réussi car réalisé en début de mercato (je pensais que c’était connu comme combine mais j’ai jugé bon de le rappeler ici)</p><p>Score 2-1</p><h3>Brest – Montpellier</h3><p>C’est donc à Brest, son ancienne équipe, entraînée aujourd’hui par l’ancien coach de son actuel équipe, et à la suite d’un recrutement d’un défenseur… auxerrois – qui n’a pas touché un ballon depuis 2 piges tant qu’à faire – contre lesquels il a concédé un énième revers à la maison, que va se jouer le destin de Dall’Oglio. Ça en serait presque romantique si le MHSC n’avait pas perdu 15 fois en 2022 – record européen – après sabordage (avant-goût de ce déplacement breton) contre l’AJA</p><p>Score 3-1</p><h3>Troyes – Angers</h3><p>Bon vous ne savez que trop bien ce que je pense de ces rencontres de bas de tableau du dimanche aprem mais là quand elles voient s’affronter 2 formations que je pressens descendre en L2 au mois de mai c’est dire si je déborde d’inspi. Ça me fera plaisir de revoir mon ancienne pépite mpg R Lopes sous les couleurs troyennes mais comme l’ESTAC a pris 3 buts à Montpell, 3 contre Toulouse puis 4 à Lyon, si le SCO pouvait en mettre ne serait-ce que 2 je m’estimerais déjà assez bien payé</p><p>Score 1-2</p><h3>Reims – Lyon</h3><p>Il reste une semaine de mercato, le mec veut se barrer, t'as déjà son remplaçant dans tes rangs, tu réalises un bon début de saison (point de vue comptable) et tu rechignes parce que les mecs alignent 50 à la place de 60 millions pour le fantôme de Paqueta. Y a des choses qui m’échappent. Comme le jeu lyonnais. Également non défaits depuis la reprise, les Gones qui n’ont toujours pas dégraissé leur effectif pléthorique non européen se déplacent en Champagne sur les terres du prodige Balogun</p><p>Score 3-3</p><h3>Paris SG – Monaco</h3><p>Moi qui pensais qu’il n’y avait rien de pire que de retrouver son ex quelques mois après la douloureuse séparation heureuse au bras d’un tout nouvel hidalgo. J’ai assisté au 7-1 du PSG de Galtier et revu en conséquence mon jugement. Après 17 buts marqués (je compte pas le trophée des champions), ce PSG peut réellement finir invincible et je vois très mal cette indigente ASM, qui s’est liquéfiée contre le Racing Club de Lens, endiguer la série. Mais j’ai dit pareil avant le réveil monégasque il y a 6 mois</p><p>Score 4-0</p><p>On perd pas les bonnes habitudes et on attend comme chaque semaine <a href="http://www.fantasy-coach.fr/pronostics-ligue-1/">vos petits pronos.</a></p><h2>Players Picks</h2><h3>Les bons tuyaux:</h3><p>Pas Pierre, ni Aldo mais bien Gédéon. Un sacré <strong>cas lulu</strong> (6,1)</p><p>Vu la prestation catastrophique de Gudmundsson, et l’absence de Cabella, petite pièce sur la titu de <strong>Virginius</strong> (4,8) côté LOSC</p><h2>Les pépites:</h2><p>Toujours partant, jamais vendu :<strong> Duje Caleta-Car</strong> (10,8)</p><p>Ça fait mal de parier contre son club mais <strong>Slimani</strong> (10), supersub du 4e volet du Player Picks LCDE</p><h3>Les incontournables:</h3><p>Si la défense alsacienne reste un peu imperméable, c’est bien grâce à l’eau de <strong>Sels</strong> (12,9)</p><p>Qui d’autre que lui pour punir son club formateur et remerciait Paris des 35 millions versés lors de sa prolongation ? Sa majesté <strong>Mbappé</strong> (20,6) est la tête de gondole du Player Picks LCDE n°4</p><p><em>t34</em></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J24</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Le nouveau Chip est disponible pour les fantaisistes. Est-ce que la semaine où Liverpool joue 2 fois est le bon moment pour se lancer ?"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J24"><figure class="hero"><img src="/media/449182_65752ea225f04a669b03539230bd4f72_mv2.avif.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J24</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 30 janvier 2025</p><div class="body"><p><span style="color:#000000">La J24 de Premier League est arrivée et ça se bouscule au portillon. Les phases qualificatives de la LdC sont enfin finies, le nouveau chip du jeu FPL est disponible et le Mercato est sur le point de se conclure, voyons un peu où on en est…</span></p><p><span style="color:#000000">Primo, les phases qualificatives Européennes sont enfin finies et l'on sait à présent qu'en LdC Liverpool, Arsenal et Aston Villa sont en 8eme, City à du se battre pour atteindre les barrages in-extremis, mais ils seront probablement dans la course jusque loin dans la compétition maintenant. En Europa Spurs et Man United ont aussi assuré le passage aux phases à élimination directe.</span></p><p><span style="color:#000000">Le nouveau Chip est maintenant disponible pour les fantaisistes. Est-ce que la semaine où Liverpool joue 2 fois est le bon moment pour se lancer ? Est-ce qu'on attend que City prenne sa déduction de 40pts pour miser sur leur remontada ? Un Chapitre entier plus bas pour tout couvrir.</span></p><h2>Le tour d'horizon</h2><p><span style="color:#000000">En parlant de City, il semble que Pep ait encore réussi son coup. Marmoush est entré directement dans le 11 contre Chelsea et semble avoir changé la donne pour les Citizens. Avec un style plus direct et une bonne entente entre Marmoush et Haaland, les Skyblues ont perforé la défense des Blues, pris leur 4ème place au classement (pour l'instant) et redeviennent candidats pour le titre. Le plus gros problème en ce qui concerne un potentiel 5ème titre de rang pour les citadins est la sanction attendue pour leurs 115 violations du fair play financier. On parle potentiellement de 40 points de déduction et donc de se retrouver ENCORE plus bas que les Spurs…. </span></p><p><span style="color:#000000">Bournemouth est bien embêté. Son style de jeu inspiré de la horde sauvage où tout le monde se jette à l'attaque les a portés jusqu'à une place européenne, mais leur stade est à peine aux normes de la Premier League… Une chose à la fois, on se concentre cette semaine sur la visite du leader du classement et l'équipe qui a gagné la phase qualificative de la LdC, rien que ça, Liverpool.</span></p><p><span style="color:#000000">Liverpool justement a laissé partir son invincibilité en LdC contre le PSV en jouant leur équipe de minimes pour être bien frais pour cette double journée. En effet, après des Cherries en plein essor, viendra le derby contre un Everton de nouveau sous les ordres de Moyes. </span></p><p><span style="color:#000000">Arsenal n'aura pas réussi à signer un attaquant avant la visite d'un City qui revient à son niveau. Une petite offre coquine juste avant le dernier match de LdC pour Watkins a énervé les dirigeants d'Aston Villa et Emery ne fera rien pour faciliter la vie du club qui l'a licencié. Ceci étant dit, Watkins est un Fan d'Arsenal et voudra rejoindre son club de cœur. Ça sent le bras de fer pendant le weekend… En plus du match contre City je veux dire !</span></p><p><span style="color:#000000">Man United et les Spurs ont gagné leurs matchs d'Europa League, ce n'est pas forcément une référence mais leurs managers respectifs vont espérer que ce soit le début d'une convalescence pour ces clubs qui sont pour l'instant bien en deçà des espérances de leurs fans et de leurs dirigeants. Les deux clubs ont dû recourir à leurs petits jeunes pour s'imposer, je me demande si ces mêmes jeunes ne vont pas être appelés sur les terrains de Premier League bientôt. </span></p><h2>Mes Pronos pour la J24 de Premier League:</h2><p><span style="color:#000000">Nottm Forest 2 - 1 Brighton</span></p><p><span style="color:#000000">Newcastle 2 - 1 Fulham</span></p><p><span style="color:#000000">Everton 2 - 1 Leicester City</span></p><p><span style="color:#000000">Ipswich Town 1 - 0 Southampton</span></p><p><span style="color:#000000">Bournemouth 1 - 2 Liverpool</span></p><p><span style="color:#000000">Wolves 1 - 1 Aston Villa</span></p><p><span style="color:#000000">Man United 1 - 0 Crystal Palace</span></p><p><span style="color:#000000">Brentford 2 - 0 Tottenham</span></p><p><span style="color:#000000">Arsenal 2 - 1 Man City</span></p><p><span style="color:#000000">Chelsea 2 - 1 West Ham</span></p><p><span style="color:#000000">Everton 1 - 2 Liverpool</span></p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le nouveau chip</h2><p><span style="color:#000000">La grosse nouveauté cette saison c'est le nouveau chip, l'Assistant Manager. J'en ai déjà parlé lorsqu'il a été lancé, et voici le récapitulatif de tout ce qu'il faut savoir et des stratégies d'utilisation.</span></p><h3>Les bases</h3><p><span style="color:#000000">L'Assistant Manager est un nouveau chip disponible à partir de la J24 qui dure 3 semaines consécutives. Il permet de sélectionner un manager d'équipe qui rapporte des points selon les performances de son équipe : </span></p><p><span style="color:#000000">6 points pour une victoire, </span></p><p><span style="color:#000000">3 pour un match nul, </span></p><p><span style="color:#000000">1 point par but marqué et </span></p><p><span style="color:#000000">2 points pour les clean sheets. </span></p><p><span style="color:#000000">Un bonus de 10 points est accordé si l'équipe bat une équipe classée 5 places ou plus au-dessus d'elle. </span></p><p><span style="color:#000000">Les managers coûtent entre £0.5M et £1.5M et comptent dans la limite de 3 joueurs maximum par équipe. On peut transférer le manager pendant la période active mais cela coûte un transfert gratuit. Le chip ne peut pas être utilisé en même temps que d'autres chips (Triple Captain, Bench Boost, etc.). Les meilleures périodes pour l'utiliser sont pendant les doubles journées (DGW) comme la J24, 33 ou 36, car cela permet de maximiser les points sur 4 matchs au lieu de 3. Une stratégie équilibrée consiste à viser un mix entre matchs faciles et opportunités de bonus liés au classement.</span></p><h3>Stratégies</h3><p><span style="color:#000000">Je le disais plus haut, les trois fenêtres optimales d'utilisation sont les J24-26, J31-33 ou J36-38, car elles incluent potentiellement des doubles journées (DGW). Il faut éviter les J29 et 34 qui seront des &quot;blank gameweeks&quot; où certaines équipes ne joueront pas. </span></p><p><span style="color:#000000">La stratégie la plus sûre consiste à choisir une équipe forte avec des matchs faciles qui devraient assurer des victoires confortables, visant environ 32 points sur la période. </span></p><p><span style="color:#000000">Une approche plus risquée mais potentiellement plus rentable est de cibler des équipes qui affrontent des adversaires classés 5 places au-dessus, pour profiter du bonus de 10 points, avec un potentiel de 48 points mais une plus grande variance. </span></p><p><span style="color:#000000">Une stratégie équilibrée serait d'utiliser un transfert pendant la période de 3 semaines pour alterner entre ces deux approches. La fin de saison (J36-38) peut être particulièrement intéressante car certaines équipes luttent pour leur survie contre d'autres qui n'ont plus rien à jouer, créant des opportunités de bonus. Il est aussi crucial de coordonner l'utilisation de ce chip avec les autres (Wildcard, Free Hit, Bench Boost) car ils ne peuvent pas être utilisés simultanément, d'où l'importance d'une planification détaillée sur les dernières semaines de la saison.</span></p><p><span style="color:#000000">Pour la J24-26, deux options principales se démarquent :</span></p><p><span style="color:#000000">1. Stratégie Moyes/Iraola :</span></p><p><span style="color:#000000">- J24 : Moyes (0.5M£) avec Everton qui joue Leicester (domicile) et Liverpool (domicile)</span></p><p><span style="color:#000000">- Puis transfert vers Iraola (1.1M£) de Bournemouth pour J25-26 avec Southampton (extérieur) et Wolves (domicile)</span></p><p><span style="color:#000000">Cette stratégie combine la double journée d'Everton et la possibilité de bonus contre Liverpool avec une série de matchs favorables pour Bournemouth.</span></p><p><span style="color:#000000">2. Stratégie pour plus tard (J31-33) :</span></p><p><span style="color:#000000">- Unai Emery (0.8M£) avec Aston Villa qui a une belle série : </span></p><p><span style="color:#000000">  J31 : Nottingham Forest</span></p><p><span style="color:#000000">  J32 : Southampton </span></p><p><span style="color:#000000">  J33 : Newcastle + potentielle double journée</span></p><p><span style="color:#000000">3. Stratégie fin de saison (J35-37) :</span></p><p><span style="color:#000000">- Guardiola (1.5M£) avec Manchester City :</span></p><p><span style="color:#000000">  J35 : Wolves (domicile)</span></p><p><span style="color:#000000">  J36 : Southampton + potentielle double journée</span></p><p><span style="color:#000000">  J37 : Bournemouth (domicile)</span></p><p><span style="color:#000000">Le choix dépend beaucoup du timing des autres chips (notamment Free Hit pour J29/34) et de l'évolution du classement qui influence les bonus possibles. Il est aussi important de garder suffisamment de budget pour pouvoir faire ces transferts de managers pendant la période active du chip.</span></p><h2>Le Player Picks</h2><h3>Man City est de retour…</h3><p><span style="color:#000000">J'en parlais plus haut, mais l'arrivée de </span><strong><span style="color:#000000">Marmoush</span></strong><span style="color:#000000"> (£7M) semble avoir revitalisé Man City et plus particulièrement </span><strong><span style="color:#000000">Haaland</span></strong><span style="color:#000000"> (£14.7M) et </span><strong><span style="color:#000000">Foden</span></strong><span style="color:#000000"> (£9.3M) qui ont mis la misère à Chelsea en J23. Ça fait drôle de remettre le Cyborg et Foden dans le Player Picks… Attention, ce coup-ci ils tombent sur une des, sinon la meilleure défense de Premier League tout de même, suivie des visites de Newcastle et Liverpool. </span></p><h3>Liverpool est incontournable</h3><p><strong><span style="color:#000000">Salah</span></strong><span style="color:#000000"> (£13.7M) est le capitaine qui coule de source et le choix entre un triple capitaine ou l'assistant manager sera le premier dilemme pour les fantaisistes. </span><strong><span style="color:#000000">Gakpo</span></strong><span style="color:#000000"> (£7.6M) et </span><strong><span style="color:#000000">Luis Diaz</span></strong><span style="color:#000000"> (£7.5M) vont probablement ne jouer que des morceaux de matchs, mais ce sera probablement suffisant pour être rentable. </span><strong><span style="color:#000000">Virgil</span></strong><span style="color:#000000"> (£6.4M) ou </span><strong><span style="color:#000000">Konaté</span></strong><span style="color:#000000"> (£5.2M) pourraient faire de gros scores en cas de double CS.</span></p><h3>Everton à considérer</h3><p><span style="color:#000000">Le côté bleu de Liverpool aussi a deux matches à jouer et le retour de Moyes a tonifié l'effectif. Deux victoires serait en demander un peu trop, mais un nul dans le derby et une victoire contre des Foxes qui sont à leurs basques est possible. </span><strong><span style="color:#000000">Pickford</span></strong><span style="color:#000000"> (£5.1M) est probablement le meilleur pick du lot, un </span><strong><span style="color:#000000">Tarkowski</span></strong><span style="color:#000000"> (£4.8M) pourrait mettre un but sur un malentendu et sur corner et peut-être un </span><strong><span style="color:#000000">Ndiaye</span></strong><span style="color:#000000"> (£5.5M) mais là faut être très joueur.</span></p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

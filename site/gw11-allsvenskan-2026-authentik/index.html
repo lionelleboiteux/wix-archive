@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>gw11 Allsvenskan 2026 - Authentik</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Tout savoir sur la journée 11 du championnat Allsvenskan 2026 et conseils pour la fantasy"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="gw11 Allsvenskan 2026 - Authentik"><figure class="hero"><img src="/media/3448f3_ff8da431ad65445d8f9637cc1cc21af1_mv2.jpg" alt=""/><div class="scrim"></div><h1>gw11 Allsvenskan 2026 - Authentik</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 3 juillet 2026</p><div class="body"><p>La Coupe du Monde n’a pas encore désigné son vainqueur que le vrai football, celui sans pause hydratation, sans coupure pub, sans technologie excessive, financièrement accessible aux supporters et qui offre une compétition où tous les participants sont sur la ligne de départ à égalité de chance (au moins de façade...), reprend ses droits avec la reprise de l'<strong>Allsvenskan</strong> en ce premier week-end du mois de juillet 2026.</p><p>Ce vendredi à 19h heures, en ouverture de cette onzième journée, c’est une belle affiche qui est proposée : la réception par l'IK Sirius, actuel leader surprise, de Mjällby AIF, le champion en titre et actuellement sixième à treize points.</p><img src="/media/3448f3_ff8da431ad65445d8f9637cc1cc21af1_mv2.jpg" alt=""/><p><strong>Notre Ligue Fantasy vous attend ici :</strong></p><p><a href="https://en.fantasy.allsvenskan.se/leagues/auto-join/0xamio"><u>https://en.fantasy.allsvenskan.se/leagues/auto-join/0xamio</u></a></p><p>Et comme les Suédois sont au top rayon contenu, voici <strong>nos meilleures adresses</strong> pour suivre le <a href="https://x.com/hashtag/allsvenskanfantansy?src=hashtag_click"><u>#allsvenskanfantansy</u></a> . C'est une liste non exhaustive que vous pouvez aussi enrichir en nous communiquant vos bons plans :</p><p><a href="https://fantasytruppen.se/"><u>FantasyTruppen</u></a></p><p>la boîte à outil indispensable, en vo (on s’en sort très bien avec la traduction automatique) mais tellement bien</p><p><a href="https://www.442fantasy.se/"><u>https://www.442fantasy.se/</u></a></p><p>la meilleure crémerie du Royaume de Suède, là aussi en vo et avec le même traducteur</p><p><a href="https://x.com/Nordisk_Suede"><u>https://x.com/Nordisk_Suede</u></a></p><p>les copains francophones qui éditent tous les ans le guide de la saison qui va bien et que vous trouverez ici <a href="https://nordiskfootball.fr/allsvenskan-2026-le-guide-de-la-saison/"><u>https://nordiskfootball.fr/allsvenskan-2026-le-guide-de-la-saison/</u></a></p><p>bref, l’autre adresse indispensable pour un suivi dans la langue de Molière</p><p><a href="https://x.com/eytexi"><u>https://x.com/eytexi</u></a></p><p>la référence scandinave sur les réseaux (fil majoritairement en anglais ou en vo)</p><p><strong>Côté fantasy pour ce round 11 (validation avant le 03/07, 18h55)</strong>, on déconseille vivement de procéder dès maintenant à une profonde refonte de votre effectif en jouant par exemple une wildcard (la première doit être utilisée entre les journées 2-15 et la seconde entre les journées 16-30). et ce, pour plusieurs raisons : déjà parce que les prochaines compositions d’équipes vont profondément bouger à l'ouverture du mercato suédois le 7 juillet prochain, qui validera les différentes mutations déjà dans les tuyaux. Et donc parce que certains joueurs seront préservés pour ne pas risquer la blessure et compromettre un transfert déjà conclu sous conditions suspensives. Et enfin, parce que rien ne garantit que les internationaux du championnat qui participaient à la Coupe du Monde soient alignés dès ce premier week-end de reprise.</p><p><strong>Côté stratégie</strong>, on peut privilégier dès maintenant des actifs provenant des équipes suivantes car le calendrier des prochaines journées pourrait être favorable :</p><p><strong>Malmö FF </strong>: après une année 2026 compliquée (sixième place) et une profonde restructuration (entraîneur et joueurs) l’hiver dernier, le MFF continue de dégringoler et déçoit encore sur cette première partie de saison (neuvième avec cinq défaites). Malgré les nombreuses inconnues suite au limogeage de son entraîneur Miguel Ángel Ramírez et à son récent remplacement par Gaute Helstrup, ancien adjoint à Bodø/Glimt, on regarde avec envie ce qui s’y passe en raison d’un calendrier favorable à venir de <em>SEPT matchs</em>. Ce qui, en somme, a tout d’une risquette de première catégorie mesurée. Parmi les options immédiates, on peut envisager l’attaquant <strong>Erik Botheim</strong> même si l’arrivée de Diego García (26 ans) en provenance de Leganés devrait rapidement entamer son temps de jeu, les milieux <strong>Sead Haksabanovic</strong> (un des seuls à évoluer à son niveau sur ces premiers mois compliqués) et <strong>Adrian Skogmar</strong> (une des rares bonnes surprises et en plus à un coût modique, 4,9) ou le gardien <strong>Robin Olsen</strong> (bon rempart quand il a joué).</p><p><strong>GAIS </strong>: un surprenant cinquième qui évolue dans un 433 bien balancé et dont la dynamique doit être considérée de près si on n’oublie pas que ses deux meilleurs joueurs sont blessés (<strong>Gustav Lundgren</strong> et <strong>Kevin Holmén</strong>) et les départs de Ibrahim Diabaté et Amin Boudri. Comme une demi-confirmation que ce club travaille toujours aussi bien même après avoir déjà décroché la saison dernière une troisième place et les qualifications de la Ligue Conférence à disputer cet été. Des noms pour composer votre effectif ? On apprécie particulièrement les défenseurs <strong>Anes Cardaklija</strong>, <strong>August Wängberg</strong>, le milieu <strong>William Milovanovic</strong> et l’attaquant <strong>Samuel Salter</strong>, même si ces deux derniers seront suspendus ce week-end.</p><p><strong>Västerås SK</strong> : un promu qui pour le moment tire son épingle du jeu avec une honnête onzième place (3v, 3n, 4d) et dont l’effectif permet de dégotter quelques trouvailles parfaites pour composer un banc à moindre coût et susceptible de produire à l’occasion quelques points dont les défenseurs <strong>Herman Magnusson</strong>, <strong>Marcus Baggesen</strong>, une belle promesse, et l’attaquant <strong>Mikkel Ladefoged</strong> qui compte parmi les meilleurs buteurs (7 buts).</p><p><strong>Après cette journée de reprise</strong>, on pourra ensuite cibler prioritairement les deux équipes suivantes afin de structurer notre prochaine wildcard qu'il faudra joueer avant la journée 15 :</p><p><strong>Hammarby</strong> : favori numéro un de l’Allsvenskan en début de saison, le club de Stockholm a limogé son entraîneur Kalle Karlsson, remplacé depuis quelques jours par Henrik Rydström, malgré un bilan sportif plus qu’acceptable avec une finale de la Coupe de Suède et une quatrième place du championnat à 11 points à d’un leader qui compte toutefois un match en moins. Parmi la volée de critiques entendues, on retient des contre-performances notables et symboliques (un derby perdu contre l’AIK et la défaite concédée contre Halmstad), un style de jeu décevant par rapport au potentiel des joueurs à disposition, un management déconcertant notamment au niveau des compositions d’équipe, un coaching trop déroutant, la baisse d'intensité à l'entraînement, le manque de progression des jeunes et la mauvaise dynamique des trois défaites consécutives juste avant la pause. Sans oublier la difficulté de gérer l’héritage d’un Kim Hellberg, parti en novembre 2025 manager à Middlesbrough. Simple panique, coup de pression ou fausse route sportive, les dirigeants ont en tout cas fait sauter le fusible.</p><p>Au rayon pick, si le milieu <strong>Nahir Besara</strong> reste un quasi incontournable de la fantasy, son prix (13,7) permet d’apprécier les performances de son coéquipier <strong>Victor Lind</strong> (10,1) avec un autre regard. Pour s’éviter les surprises, on peut piocher dans une défense marquée du sceau de la stabilité  : le gardien <strong>Warner Hahn</strong>, bien qu’un peu cher à notre goût, le latéral droit <strong>Hampus Skoglund</strong> ou les centraux <strong>Victor Eriksson</strong> et <strong>Frederik Winther</strong> (ce dernier étant moins cher et moins possédé).Alors que le milieu défensif <strong>Markus Karlsson</strong> est un taulier qui ne devrait pas rester longtemps en Suède tellement il est profilé pour évoluer dans de plus grosses cylindrées.</p><p><strong>Djurgården IF </strong>: huitième à 15 points du leader et avec un match en moins, le DIF n’a pas produit le début de saison escompté pour un club vu en demi-finale de la Ligue Conference 2024-2025. Capable de proposer une certaine qualité de jeu sans parvenir pour autant à obtenir des résultats réguliers, le club de Stockholm dont le modèle économique repose principalement sur le trading de joueurs voudra tabler sur une grosse deuxième partie de saison pour retrouver l’Europe. Mention spéciale au milieu de terrain offensif <strong>Bo Hegland</strong> (2 buts, 7 passes), ce Norvégien de 22 ans est peut-être le meilleur joueur du championnat de ces derniers mois. Alors que son coéquipier <strong>Matias Siltanen</strong> est un milieu finlandais que l’on pense promis à un bel avenir.</p><p>Enfin, vous trouverez dans notre nouvelle rubrique <a href="https://www.fantasy-coach.fr/allsvenskan"><u>https://www.fantasy-coach.fr/allsvenskan</u></a> des articles sur le championnat, ses équipes et ses joueurs.</p><p>A bientôt.</p><p>Rwano Breizh</p><p><a href="mailto:rwanobreizh@yahoo.com"><u>rwanobreizh@yahoo.com</u></a></p><p><a href="https://x.com/RwanoBreizh"><u>https://x.com/RwanoBreizh</u></a></p><p><a href="https://bsky.app/profile/rwanobreizh.bsky.social"><u>https://bsky.app/profile/rwanobreizh.bsky.social</u></a></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

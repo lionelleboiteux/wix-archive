@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J30</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Le coup d'envoi de cette journée 30 de Premier League un mardi soir, n'est pas une blague bien que ça tombe le premier avril..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J30"><figure class="hero"><img src="/media/449182_86f0470a54ab4826a45152681e0f8615_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J30</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 31 mars 2025</p><div class="body"><p><span style="color:#000000">Le coup d'envoi de cette journée 30 de Premier League un mardi soir, n'est pas une blague bien que ça tombe le premier avril. D'ailleurs je préviens d'entrée, il n'y a pas de blague dans cet article. On m'a déjà demandé si c'était une blague, non… on aime bien rigoler, mais là, le Fantasy foot est une chose sérieuse… Avoir des deadline qui ne sont jamais à une date précise ça fatigue et je vous préviens direct, ça va aussi vouloir dire que le prochain va être un peu compressé.</span></p><h2>On se méfie🚨🚨</h2><p><span style="color:#000000">La J32 sera double pour Palace et Newcastle, la J34 sera blank pour Arsenal, Brentford, Palace, Forest, Villa et City à cause des demi-finales de la FA Cup. Les matches n'ont pas encore été reprogrammés à l'heure où je publie, mais il n'est pas impossible qu'ils le soient au moment où vous lisez.</span></p><h2>Le tour d'horizon</h2><p><span style="color:#000000">On suppose que c'était Slot le plus heureux de voir arriver cette trêve et il a dû espérer que ses troupes se rechargent et se ressourcent durant leurs voyages dans leurs équipes nationales respectives. Avant la trêve, Les Reds se sont fait sortir de la Cup, de la LdC et de la Coupe de la Ligue coups sur coups sur coup. Heureusement qu'ils ont un écart suffisamment conséquent, même si mathématiquement ils ne sont pas encore champions, pour être sereins en Premier League. On va tester ça direct avec un derby contre un Everton bouillant depuis le retour de Moyes aux manettes.</span></p><p><span style="color:#000000">Arsenal a été plutôt busy pendant cette trêve, ayant signé un nouveau directeur sportif pour remplacer Edu et, côté gazon, avoir remis Saka à l'entraînement. On suppose qu'il va avoir droit à quelques minutes de jeu cette semaine (J30 et 31) avant le quart de finale contre le Real. En attendant un petit Derby contre son équipe de recyclage d'anciens joueurs pour voir si le petit chouchou de l'Emirates retrouve ses automatismes.</span></p><p><span style="color:#000000">City attend toujours de savoir le sort qui leur sera réservé pour leurs 115 infractions à la FFP. Il ne reste que neuf matchs aux hommes de Pep pour assurer une potentielle qualification en LdC la saison prochaine. Les saisons précédentes les Skyblues étaient sur le point de gagner la Premier League à ce point du calendrier, pas en train de tenter d'accrocher une qualification en LdC.</span></p><p><span style="color:#000000">Newcastle a fêté leur premier Titre en 70 ans en battant Liverpool en finale (d'où l'extra match contre Palace en J32). On sait que la fête a été proportionnelle à l'attente de ce trophée, donc je pense que Brentford, qui est très fort en déplacement cette saison, pourrait bien profiter de la gueule de bois des Magpies. Dans mes pronos j'ai mis la victoire des hôtes, mais c'était avant de voir les images de la fête. Advienne que pourra…</span></p><h2>Mes Pronos pour la J30 de Premier League:</h2><p><span style="color:#000000">Wolves 1 - 1 West Ham </span></p><p><span style="color:#000000">Arsenal 2 - 0 Fulham </span></p><p><span style="color:#000000">Nottm Forest 2 - 1 Man United </span></p><p><span style="color:#000000">Southampton 0 - 1 Crystal Palace </span></p><p><span style="color:#000000">Bournemouth 3 - 0 Ipswich Town </span></p><p><span style="color:#000000">Brighton 2 - 0 Aston Villa </span></p><p><span style="color:#000000">Newcastle 2 - 0 Brentford </span></p><p><span style="color:#000000">Man City 2 - 0 Leicester City </span></p><p><span style="color:#000000">Liverpool 2 - 0 Everton </span></p><p><span style="color:#000000">Chelsea 2 - 0 Tottenham</span></p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p><span style="color:#000000">Même dans une période aussi difficile à prédire que celle-ci pour les Citadins, un match contre des Foxes qui sont complètement à la rue devrait être une formalité. J'ai mis que 2-0 dans mon prono, mais je ne serais pas surpris s'ils en mettent 5, 6 ou même 10. On sait qu'ils ont la qualité de joueurs pour ça. </span><strong><span style="color:#000000">Haaland</span></strong><span style="color:#000000"> (£14.8M) qui a eu autant de match avec que sans buts pour l'instant cette saison pourrait bien nous en mettre 3. Le mettre en capitaine ne serait pas une mauvaise idée</span><span style="color:#000000"> (Haaland est outpour plusieures semaines)</span><span style="color:#000000">.  </span><strong><span style="color:#000000">Marmouch</span></strong><span style="color:#000000"> (£7.3) est à moitié prix du Cyborg, et pourrait bien profiter que son camarade ne soit pas dispo pour en planter 1 ou 2.</span></p><p><span style="color:#000000">Les Cherries ont souffert en Février et Mars, mais là, avec l'arrivée d'Avril, c'est la saison des Cherry blossoms </span>🌸🌸<span style="color:#000000">(le premier Player Picks botanique…. ) et recevoir Ipswich c'est quand même un joli présage. </span><strong><span style="color:#000000">Kluivert</span></strong><span style="color:#000000"> (£6.3M), </span><strong><span style="color:#000000">Semenyo</span></strong><span style="color:#000000"> (£5.7M) et </span><strong><span style="color:#000000">Kerkez</span></strong><span style="color:#000000"> (£5.2M) sont toujours les meilleurs Picks.</span></p><p><span style="color:#000000">Finalement Palace, l'équipe la plus en forme de la Premier League se déplace à Southampton, l'équipe statistiquement la plus nulle de l'histoire de la Premier League. Après 29 journées ils en sont encore à un nombre de points au compteur à un seul chiffre !! Donc on peut charger sur les attaquants, surtout que Palace aura 2 matches en J32. </span><strong><span style="color:#000000">Sarr</span></strong><span style="color:#000000"> (£5.6M), </span><strong><span style="color:#000000">Eze</span></strong><span style="color:#000000"> (£6.7M) et </span><strong><span style="color:#000000">Mateta</span></strong><span style="color:#000000"> (£7.5M)</span></p><h2>Assistant Manager </h2><p><span style="color:#000000">Si vous voulez jouer ce Chip cette semaine, il va peut-être valoir songer à </span><strong><span style="color:#000000">Oliver Glasner</span></strong><span style="color:#000000"> à Palace ou </span><strong><span style="color:#000000">Eddie Howe</span></strong><span style="color:#000000"> à Newcastle qui ont tous les deux un J32 double pour la simple et bonne raison qu'ils jouent l'un contre l'autre. On l'a vu plus haut, je ne suis pas sûr que Newcastle soit en état de gagner en J30, quoique… mais les trois autres matches sont plus à la portée des Magpies. Pour ceux qui aiment les gros paris il y a </span><strong><span style="color:#000000">Moyes</span></strong><span style="color:#000000"> qui voit ses hommes jouer Liverpool en J30 (on en a déjà parlé) mais aussi Arsenal en J31 et Bournemouth en J32. Ça pourrait faire jusqu'à 3 Bonus Table pour l'Écossais. S'il gagne contre Liverpool et Arsenal, Bournemouth ne devrait plus être à 5 places devant en J32 mais pour l'instant ça le fait.</span></p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,186 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Statistiques sur la saison de Ligue1 2021-2022</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Cet article &quot;bilan&quot; a pour but de vous présenter un ensemble de données statistiques liées aux absences des joueurs lors de la saison..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Statistiques sur la saison de Ligue1 2021-2022"><h1 class="title-only">Statistiques sur la saison de Ligue1 2021-2022</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 1 juin 2022</p><div class="body"><p>Cet article &quot;bilan&quot; a pour but de vous présenter un ensemble de données statistiques liées aux absences des joueurs lors de la saison 2021-22 de Ligue1. L'objectif est de fournir des données brutes mais aussi de vous fournir une analyse d'abord global puis enfin club par club.</p><p>Les données sont celles qui ont été récoltées par moi-même à travers les différents sites comme <a href="https://www.sofascore.com/fr/">sofascore</a>, <a href="https://www.flashscore.fr/">flashscore</a> et le site de la <a href="https://www.ligue1.fr/">Ligue1</a> et intégrées dans un tableur Excel. Je tiens à remercier chaleureusement Kévin de <a href="https://www.mpgstats.fr/">MPGStats</a> pour son aide précieuse et le temps incroyable qu'il a su accordé à un béotien comme moi.</p><p>Les données que j'ai pris en compte so</p><p>En image, voici l'exemple de la J38 de Marseille avec 1 joueur suspendu, 1 écarté, 4 blessés, 3 lignes en bleu (les joueurs transférés au cours de la saison), 1 joueur qui était en sursis et 2 joueurs qui ont reçu 1 carton jaune.</p><p><strong>Ceci travail a été fait pour les 20 clubs sur les 38 journées</strong>. Cela me permet de pouvoir vous rendre les données qui vont suivre avec une analyse sur :
+- Le nombre de cartons cumulés J+R par équipe ;
+- Le nombre de cartons rouges et de journées de suspension par club ;
+- Les minutes entre 2 cartons ;
+- Le nombre de joueur, par club, ayant joué au moins 1 minute dans l'ensemble de la saison ;
+- Le nombre de joueurs utilisés, en moyenne par match et donc le nombre de remplacements effectués ;
+- Le nombre de joueurs forfaits, en moyenne, par club et par journée ;
+- Le nombre de forfaits liés à des blessures SANS PRENDRE EN COMPTE LES CAS COVID.</p><p>Pour finir cette introduction, une précision importante : suite aux incidents lors de Nice vs Marseille puis Lyon vs Marseille, les 2 matchs concernés ont été rejoués. Le OLOM ayant été arrêté après seulement 4mn de jeu, je ne les ai pas intégré dans mon tableau de statistiques. <strong>En revanche, les 75mn du &quot;premier&quot; OGCNOM avec les cartons et les minutes jouées, ont été prises en compte</strong>. C'est la raison pour laquelle si 18 clubs ont joué autour de 37 620 minutes (38 journées x 90mn x 11 joueurs), Marseille et Nice sont autour des 37 700mn.</p><h2>Les stats globales </h2><h3>Les Cartons :</h3><p>Il s’agit ici du nombre de cartons Rouge + Jaunes reçu par chaque club tout au long de la saison. Et les clubs les plus sanctionnés sont donc le LOSC (98 J et 5 R) et le FC Metz (94 J et 9 R) avec 103 cartons reçus. Bordeaux avec 99 (94J et 5R) complète le podium.</p><p><em>Pour les plus attentifs d'entre vous, vous constaterez une différence entre mes données et celles de la Ligue1. La raison est simple : là où la ligue compte 1 carton jaune et 1 rouge pour un joueur qui reçoit 2 cartons jaunes dans le match et est exclu, j'ai pour ma part estimé que je devais lui comptabiliser 2 cartons jaunes et 1 rouge. A titre d'exemple, là où la ligue compte 4 cartons jaunes pour Ali-Cho de Angers, moi je lui en compte 6 (il a été expulsé 2 fois suite à 2 cartons jaunes).</em></p><p>Ils sont donc largement au-dessus de la moyenne puisque qu’avec 1 604 cartons distribués par nos arbitres cette saison, celle-ci est de 80. La répartition est de 103 cartons Rouges (contre 102 la saison précédente) et de 1 502 cartons jaunes (contre 1 452 la saison précédente).</p><p>Le nombre de cartons global permet de donner une petite statistique supplémentaire, celle des « minutes entre 2 cartons ». Quand Rennes a reçu un carton toutes les 59 minutes de jeu, Lille en a reçu un toutes les 33 minutes…</p><p>Enfin en termes de répartition des cartons, voici les chiffres par poste. Que ce soit pour les jaunes, les rouges et les journées de suspension, on constate une grande homogénéité. Juste petite différence, si les gardiens ne sont concernés que pas 2,9% des cartons jaunes, ce chiffre monte à 6,9% pour les rouges.</p><h3>Temps de jeu :</h3><p>En termes de temps jeu, 5 joueurs peuvent se vanter d’avoir participé à 100% des minutes jouées par leur club. On retrouve logiquement 4 gardiens : Bizot de Brest, Nubel de Monaco, Lafont de Nantes et Rajkovic de Reims. Mais on peut féliciter José Fonte du Losc qui, à l’âge de 38 ans, est le seul joueur de champ à avoir effectué l’intégralité des 38 matchs de la saison.</p><p>Bravo également à 2 autres gardiens qui n’auront au final manqué que 1 match dans la saison : Sels et Benitez.</p><p>Enfin on retrouve 9 joueurs, 6 défenseurs et 3 milieux de terrain, qui auront joué 90% ou plus de minutes : Gradit (90%) et Clauss (90%) de Lens, Mendes (94%) de Lorient, Saliba (94%) et Guendouzi (92%) de Marseille, Girotto (92%) de Nantes, Todibo (91%) de Nice, Bourigeaud (94%) de Rennes et enfin Camara (90%) de Saint-Etienne.</p><p>Concernant le nombre de joueurs utilisés lors de cette saison par chaque club, deux groupes se distinguent assez nettement. Un groupe de 8 clubs (Brest, Lille, Marseille, Monaco, Montpellier, Nantes, Nice et Strasbourg) <strong>qui s’est reposé sur un effectif de 25 à 27 joueurs</strong>. Brest avec ses « seulement » <strong>25 joueurs</strong> utilisés est le club qui aura eu un groupe le plus restreint.</p><p>En face, un groupe de 6 clubs (Bordeaux, Metz, Paris, Reims, Saint-Etienne et Troyes) aura lui utilisé plus de 35 joueurs sur l’ensemble de la saison. La palme revient <strong>aux Girondins et aux Stéphanois qui, avec 39 joueurs ayant porté au moins 1mn </strong>le maillot au scapulaire ou le maillot vert, ont donc utilisé 14 joueurs de plus que Brest…</p><h3>Les remplacements :</h3><p>Avec la nouvelle règle des 5 changements par match, j’ai trouvé intéressant de vous proposer ce graphique qui montre combien de joueurs, en moyenne sur l’ensemble de la saison, participe à chaque match de leur club.</p><p>Cela montre que Saint-Etienne est le club qui fait le plus de changement juste devant Bordeaux. A l’inverse, Bosz, le coach de Lyon, est celui qui en fait le moins avec en moyenne 3,6 changements, devant Pochettino et ses 3,7 changements par match.</p><h3>Les indisponibilités :</h3><p>Je vais commencer par le graphique le plus parlant, celui du<strong> nombre moyen de joueurs forfaits par club</strong>. Et 4 très mauvais élèves se détachent clairement. <strong>Reims, Bordeaux, Paris et surtout Troyes</strong>, ont clairement vécu une saison très problématique en termes de gestion des blessures. D’ailleurs Reims a même décidé, en cours de saison, de virer le responsable de la performance… Il faut dire qu’avec près de 6 joueurs pros forfaits en moyenne par journée, une remise en cause semble nécessaire pour ses 4 clubs.</p><p>A l’inverse, 3 clubs ont performé puisque <strong>Lille, Lens et surtout Marseille</strong>, ont eu en moyenne un peu plus de 2 joueurs forfaits par journée. Et si ces données ne se basent que sur les 38 matchs de Ligue1, il est intéressant de noter que si <strong>Lens a joué 41 match</strong>s cette saison, le <strong>LOSC en a joué 49 et surtout Marseille en a effectué 57 !</strong></p><p><strong>Il me semble donc important d’insister sur la performance du staff de Sampaoli, que ce soit dans sa gestion des joueurs mais aussi dans la préparation physique exemplaire. Sans cela, avec un effectif quand même assez court (27 joueurs utilisés en championnat pour rappel), Marseille n’aurait pas pu finir second et demi-finale de C4.</strong></p><p>Passons maintenant au recensement des blessures. J’ai ici comptabilisé, club par club, <strong>le nombre de forfaits HORS COVID</strong>. 1 blessure, qu’elle dure 1 journée ou 20, ne compte que pour 1. Et comme vous pouvez le voir sur le graphique, le PSG explose tous les records. Avec 74 blessures différentes, le club devance très largement les 49 blessures de Troyes et les 45 de Reims.</p><p>Chez les bons élèves, on retrouve un trio composé de <strong>Angers qui ne comptabilise que 21 blessures cette saison, juste devant les 22 de Montpellier et Strasbourg</strong>. Et encore, le MHSC a été très très longtemps en tête de ce classement mais les blessures de Wahi, Savanier, Mavididi, Cabella et Omlin lors des 4 dernières journées ont légèrement terni un bilan quand même très positif.</p><h2>Les stats par club</h2><p>Vous trouverez pour chaque club 2 graphiques et 1 tableau :</p><ol><li><p>Le nombre de minutes jouées par chaque joueur(ayant au moins joué 1mn) ainsi que le % de présence sur la saison par rapport au 3 420 minutes max possible (3 495 pour Marseille et Nice) ;</p></li><li><p>Le nombre de carton Jaune, Rouge et de journées de suspension par joueur</p></li><li><p>Un tableau récapitulatif du nombre d’apparition sur les 38 matchs de la saison, du nombre de blessures (hors Covid) et du nombre de journées d’absence (toutes raisons confondues).</p></li></ol><p>Enfin vous trouverez également à chaque fois :
+Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe
+TOP J = joueur (s) ayant reçus le + de cartons jaunes
+TOP R = joueur (s) ayant reçus le + de cartons rouges
+TOP S = joueur (s) ayant cumulé le + de journées de suspension
+TOP BL = joueur (s) ayant subis le + de blessures</p><h3>Cliquez sur le tableau pour qu'il s'ouvre en grand et ainsi le rendre lisible</h3><h3>Angers</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>39</strong>
+TOP J = Doumbia et Thomas / 10
+TOP R = Ali-Cho / 2
+TOP S = Doumbia / 5
+TOP BL = Ebosse, Ali-Cho, Pereira Lage et Thioub / 2</p><p><strong>30</strong> joueurs utilisés cette saison mais quand même 8 joueurs qui ont participé à 30 matchs ou +. <strong>Traoré</strong> aura joué dans <strong>37</strong> matchs. Dans les joueurs &quot;actifs&quot;, on note que <strong>Cabot</strong> aura manqué <strong>13</strong> matchs. Enfin concernant les cartons, les milieux d'Angers auront été plus sanctionnés que la défense. Mais c'est l'inverse en termes de suspension.</p><h3>Bordeaux</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>40</strong>
+TOP J = Fransergio / 8
+TOP R = 5 joueurs à 1
+TOP S = Ignatenko, Kwateng et Gregersen / 2
+TOP BL = Gregersen, Koscielny, Elis et Traore / 3</p><p><strong>39</strong> joueurs utilisés, le record à égalité avec Saint-Etienne. Du coup seulement <strong>4 joueurs dépassent les 30</strong> matchs joués cette saison. Bordeaux a notamment fait partie de la longue liste des clubs de Ligue1 à avoir un souci niveau gardien. RAS niveau blessure et absence. Par contre beaucoup de cartons (99 en tout) dont 45 pour le milieu contre 35 pour la défense, pour 15 journées de suspension cumulée à ces 2 postes.</p><h3>Brest</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe =<strong>41</strong>
+TOP J = Chardonnet, Hérelle, Pierre-Gabriel et Agoume / 6
+TOP R = Del Castillo et Chardonnet / 1
+TOP S = Chardonnet / 3
+TOP BL =Le Douaron et Saïd / 3</p><p>Seulement <strong>25</strong> joueurs utilisés cette saison par Der Zakarian. Logique donc d'avoir 10 joueurs qui cumulent plus de 30 participations, <strong>dont Bizot 38</strong>. Lasne et Hérelle auront été les grands absents de cette saison à cause de leurs longues blessures. Et si le club en cumule 33 au total, 2 attaquants (Le Douaron et Saïd) en cumulent 3 chacun. Concernant les cartons, les défenseurs brestois en cumulent plus que les bretons.</p><h3>Clermont</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>40</strong>
+TOP J = Abdul Samed / 11
+TOP R = Seidu, Abdul Samed et Gastien / 2
+TOP S = Gastien / 5
+TOP BL = Khaoui / 4</p><p><strong>28</strong> joueurs utilisés par Gastien dont 7 joueurs qui cumulent plus de 30 matchs. Niveau absence, c'est assez homogène. En revanche, <strong>Khaoui cumule 4 blessures différentes</strong> dans la saison. Dans la répartition des cartons, belle égalité sur les cartons jaunes entre milieu et défense (29 chacun), mais le milieu est largement devant pour les suspensions (9 contre 5). Le milieu est notamment &quot;plombé&quot; par <strong>Abdul Samed qui, avec ses 11 cartons jaunes</strong>, est dans le top 3 des joueurs les plus &quot;cartonnés&quot; du championnat.</p><h3>Lens</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>41</strong>
+TOP J = Medina / 11
+TOP R = Danso / 2
+TOP S = Medina et Doucoure / 4
+TOP BL = Kakuta / 5</p><p><strong>28</strong> joueurs utilisés également par Haise avec 10 joueurs à 30 matchs de championnat ou plus. Et cela sans compter le gardien car Leca et Farinez ont tourné, surtout sur la fin de saison. Saïd cumule <strong>13</strong> journées d'absence pour 3 blessures. <strong>Kakuta lui aura subit 5 forfaits pour différentes raisons</strong> (mais des courtes car seulement 7 journées d'absence cumulées). Bravo à <strong>Medina</strong> qui entre dans le top 3 des cartons jaunes avec ses <strong>11</strong> cartons reçus en 31 matchs. A Lens, c'est d'ailleurs la défense qui est la plus sanctionnée par rapport au milieu. A noter que l'attaque est une des plus sanctionnées du championnat.</p><h3>Lille</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>49</strong>
+TOP J = Andre / 13
+TOP R = 5 joueurs à 1
+TOP S = Tiago Djalo et André / 4
+TOP BL = Renato Sanches / 4</p><p><strong>26</strong> joueurs utilisés par Gourvennec dont 8 à 30 matchs ou plus. <strong>Jose Fonte est d'ailleurs le seul joueur de champs, cette saison, à avoir participé à tous les matchs.</strong> Autre record mais moins glorieux, Andre est l'un des joueurs ayant reçu le plus de cartons jaunes avec <strong>13</strong> en 33 matchs. Jardim, Botman et Renato Sanches auront été les 3 joueurs les plus absents, ce dernier cumulant même <strong>4</strong> blessures cette saison. En termes de répartition des cartons, le milieu lillois aura été plus sanctionné que la défense.</p><h3>Lorient</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>39</strong>
+TOP J = Abergel / 9
+TOP R = Hergault / 2
+TOP S = Hergault  / 3
+TOP BL = Diarra / 6</p><p><strong>29</strong> joueurs utilisés par Pelissier avec <strong>8</strong> joueurs à plus de 30 participations. Morel et Diarra auront été les 2 grands absents de cette saison. <strong>Diarra détient même le record,</strong> tout clubs confondus, <strong>du nombre de blessures différentes avec 6! </strong>Le milieu lorientais aura été plus sanctionné que la défense (35 vs 28).</p><h3>Lyon</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>49</strong>
+TOP J = Boateng et Dembele / 6
+TOP R = 6 joueurs à 1
+TOP S = Da Silva / 4
+TOP BL = Denayer et Dubois / 4</p><p><strong>31 </strong>joueurs utilisés par Bosz cette saison et <strong>7</strong> joueurs à 30 matchs ou plus. 3 joueurs dépassent la barre des <strong>20 matchs ratés</strong> : <strong>Denayer, Diomande et Reine-Adélaïde</strong>, en sachant que Cherki avec 15 serait leader dans beaucoup d'autres clubs. La défense aura été plus sanctionné que les autres postes.</p><h3>Marseille</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>57</strong>
+TOP J = Luan Peres et Gueye / 7
+TOP R = 3 joueurs à 1
+TOP S = Balerdi et Gonzales / 3
+TOP BL = Payet / 5</p><p><strong>27</strong> joueurs utilisés par Sampaoli avec <strong>9 joueurs</strong> à plus de <strong>30</strong> matchs mais aussi <strong>7</strong> joueurs à plus de <strong>20</strong> matchs. <strong>Milik et De La Fuente</strong> ont été les joueurs les plus absents avec <strong>13</strong> et <strong>14</strong> journées ratées. Cependant, c'est <strong>Payet</strong> qui cumule le plus de blessures avec <strong>5 forfaits</strong> (juste derrière les 6 de Diarra de Lorient). Côté cartons jaunes, le milieu aura été plus sanctionné que la défense.</p><h3>Metz</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>39</strong>
+TOP J = Bronn  / 10
+TOP R = Jemerson / 2
+TOP S = Pajot / 6
+TOP BL = 4 joueurs à 3</p><p><strong>35</strong> joueurs utilisés par Antonetti cette saison mais seulement <strong>4 joueurs à 30 matchs ou plus</strong>. Sans parler de <strong>Udol</strong> qui aura subi sa <strong>4ème rupture</strong> des ligaments croisés de sa carrière, <strong>Centonze, Maïga et N'Doram</strong> auront été les plus absents à Metz. Coté cartons, Jemerson finit sur le podium avec ses 2 cartons rouges. Metz est le club avec Lille ayant reçu été le plus sanctionné, et notamment ses milieux.</p><h3>Monaco</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>55</strong>
+TOP J = Tchouaméni / 11
+TOP R = 4 joueurs à 1
+TOP S = Tchouaméni / 3
+TOP BL = Golovin / 5</p><p><strong>27</strong> joueurs utilisés par Kovac ou Clément dont <strong>10</strong> qui cumulent 30 matchs ou plus. Diatta et Fabregas sont logiquement les joueurs qui ont été les plus absents. Mais c'est <strong>Golovin qui avec 5 forfaits différents</strong> est le &quot;leader&quot; en termes de blessure. Côté cartons, la défense monégasque aura été plus sanctionné que le reste des postes. Mais notons que <strong>Tchouaméni</strong> fini, avec ses <strong>11</strong> cartons jaunes, sur le podium des joueurs en ayant le plus reçu.</p><h3>Montpellier</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>41</strong>
+TOP J = Ferri / 13
+TOP R = Savanier / 2
+TOP S = Ristic / 5
+TOP BL = Sakho / 4</p><p><strong>26</strong> joueurs utilisés par Dall'Oglio dont <strong>9</strong> qui ont joué 30 matchs ou plus. Si on met Pedro Mendes de côté, <strong>Estève et Oyongo</strong> auront été les 2 joueurs les plus absents à Montpellier. Mais c'est <strong>Sakho</strong> qui avec <strong>4</strong> blessures différentes, aura été le plus &quot;fragiles&quot;. Côté carton, &quot;joli&quot; doublé de <strong>Ferri</strong> qui avec ses <strong>13</strong> jaunes finit - avec André du Losc - en tête des joueurs les plus sanctionnés et Savanier avec ses 2 rouges finit lui sur le podium des cartons rouges. Et donc pas étonnant de voir que le milieu de terrain du #MHSC finit largement devant les autres postes en termes de sanctions.</p><h3>Nantes</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>44</strong>
+TOP J = Blas / 9
+TOP R = 4 joueurs à 1
+TOP S = Fabio et Sylla / 3
+TOP BL = 4 joueurs à 3</p><p><strong>26</strong> joueurs utilisés par Kombouare cette saison dont 8 joueurs à <strong>30</strong> matchs ou plus. <strong>Troare et Pereira De Sa</strong> sont les 2 joueurs qui ont été les plus absents. En termes de blessures,<strong> 4 joueurs finissent avec 3</strong> forfaits différents. A Nantes, c'est la défense qui aura été le plus sanctionné, loin devant le milieu de terrain.</p><h3>Nice</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>44</strong>
+TOP J = Lemina / 8
+TOP R = Dante / 3
+TOP S = Dante / 4
+TOP BL = Atal / 4</p><p><strong>27</strong> joueurs utilisés par Galtier cette saison dont 10 qui ont participé à 30 matchs ou plus. <strong>Claude-Maurice et Atal</strong> sont les <strong>2</strong> niçois les plus absents. Et sans surprise, à Nice, <strong>Atal</strong> est LE joueur qui a subit le plus de blessures différentes avec <strong>4 forfaits</strong>. Côté carton, commençons par <strong>LE joueur de Ligue1 ayant reçu le plus de carton rouge : Dante</strong>. En termes de répartition, c'est assez homogène.</p><h3>Paris</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>50</strong>
+TOP J = Verratti / 12
+TOP R = 4 joueurs à 1
+TOP S = Verratti / 4
+TOP BL = Kurzawa et Verratti / 6</p><p>Pocchettino aura utilisé <strong>36</strong> joueurs cette saison mais seulement <strong>5 joueurs</strong> dépassent les 30 matchs. Côté blessures, le club du PSG a tout explosé! <strong>74 blessures différentes en une saison</strong>, c'est juste incroyable comme chiffre. <strong>4 joueurs en cumulent 22</strong> (soit plus que tout le club d'Angers) dont les<strong> 6 de Verratti et Kurzawa</strong>. On retrouve <strong>Verratti</strong> dans un second classement puisqu'avec <strong>12 cartons jaunes reçus</strong>, il finit à la seconde place de ce classement, derrière Ferri et André. Niveau répartition, les milieux ont été logiquement plus sanctionnés que la défense. Mais en revanche, <strong>les 21 cartons de l'attaque sont encore un record</strong> cette saison<strong>.</strong></p><h3>Reims</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>41</strong>
+TOP J = Gravillon / 9
+TOP R = Gravillon / 2
+TOP S = Abdelhamid et Ekitike / 4
+TOP BL = Moussa Doumbia / 5 (y compris les blessures diplomatiques)</p><p><strong>35</strong> joueurs utilisés par Oscar Garcia mais seulement <strong>5</strong> avec 30 matchs ou plus. Beaucoup de longues blessures avec <strong>5 joueurs avec plus de 13 journées d'absence</strong>. <strong>Moussa Doumbia en cumule 5</strong> à lui seul (mais on sait que pour ce joueur, certaines ont peut-être été diplomatiques...). Gravillon finit sur le podium des cartons rouges avec ses 2 sanctions. Enfin niveau répartition, c'est assez homogène entre le milieu et la défense.</p><h3>Rennes</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>50</strong>
+TOP J = Martin / 8
+TOP R = Aguerd et Bade / 1
+TOP S = Aguerd et Martin / 2
+TOP BL = Doku / 4</p><p><strong>28</strong> joueurs utilisés par Génésio avec <strong>10</strong> joueurs qui finissent la saison avec 30 matchs ou plus. Côté blessure, <strong>4 joueurs et surtout Doku</strong>, dépassent les <strong>10</strong> journées d'absence. <strong>Doku</strong> est d'ailleurs celui qui, avec <strong>4 forfaits différents</strong>, en cumulent le plus. Côté carton, <strong>Rennes est le club le plus fair-play</strong> cette saison. </p><h3>Saint-Etienne</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>41</strong>
+TOP J = Mangala / 9
+TOP R = 5 joueurs à 1
+TOP S = 5 joueurs à 2
+TOP BL = Moueffek / 5</p><p><strong>39</strong> joueurs utilisés par Puel puis Dupraz, soit le record avec Bordeaux. Et quand même <strong>9</strong> joueurs avec 30 matchs ou plus. Beaucoup de joueurs dépassent les <strong>10</strong> journées d'absence et <strong>Moueffek</strong> est le joueur ayant subi le plus de blessures, <strong>5</strong>. Enfin pour la répartition, le milieu a été le plus sanctionné.</p><h3>Strasbourg</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>40</strong>
+TOP J = Djiku / 10
+TOP R = 3 joueurs à 1
+TOP S = Djiku / 3
+TOP BL = Aholou / 4</p><p><strong>27</strong> joueurs utilisés cette saison par Stéphan et <strong>14 joueurs (un record)</strong> avec 30 participations ou plus. Côté blessure, <strong>2 joueurs ont été absents 18 journées</strong> mais c'est <strong>Aholou</strong> qui cumule le plus de blessures différentes, <strong>6</strong>. Côté cartons, pas grand chose à dire avec une répartition assez homogène dans la répartition.</p><h3>Troyes</h3><p>Le nombre total de matchs joués Championnat + Coupe de France  + Coupe d’Europe = <strong>39</strong>
+TOP J = Biancone / 10
+TOP R = Kabore / 2
+TOP S = Biancone / 3
+TOP BL = Rami / 5</p><p><strong>35</strong> joueurs utilisés par Battles puis Irlès dont <strong>8</strong> avec plus de 30 participations. 6 joueurs qui comptent plus de 13 journées d'absence, auquel on peut rajouter les 5 blessures de Rami, joueur le plus touché cette saison à l'Estac. En termes de cartons, la défense, et notamment Biancone, aura été la plus sanctionnée. </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

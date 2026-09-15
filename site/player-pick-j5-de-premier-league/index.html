@@ -1,0 +1,96 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Pick, J5 de Premier League.</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Une journée folle vient de se terminer et on enchaîne avec le nouveau Player Pick, J5 de Premier League. Les équipes non Européennes..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Pick, J5 de Premier League."><h1 class="title-only">Player Pick, J5 de Premier League.</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 30 août 2022</p><div class="body"><p>Une journée folle vient de se terminer et on enchaîne avec le nouveau Player Pick, J5 de Premier League. Les équipes non Européennes (sauf West Ham) ont déjà commencé le calendrier fou d'un match tous les 3 jours. Avec cette J5 ce sont les clubs Européens qui vont lancer ce grand marathon qui va nous emmener jusqu'à la Coupe du Monde. </p><p>Pep a déjà prévenu que la Pep Roulette sera au taquet lors de 3 prochains mois. Les autres clubs ne seront pas en reste. </p><p>Les débuts de saison regorgent de résultats surprises mais là on rentre dans la routine et les équipes se stabilisent. Certaines sont en crise (Aston Villa, Leicester), d'autres sont déjà à fond (Manchester City, Arsenal, Brighton) et d'autres ont remis l'église au milieu du village (Liverpool, Manchester United).  </p><p>Rendez-vous mardi sur notre Discord (<a href="https://discord.com/channels/737355915686182943/737442472837513287">https://discord.com/channels/737355915686182943/737442472837513287)</a> pour commenter les évènements qui se dérouleront lors de cette J5. </p><h2>Les matchs de la journée  </h2><h3>Crystal Place - Brentford: 3-1 </h3><h3>Fulham - Brighton: 1-1 </h3><h3>Southampton - Chelsea: 1-2 </h3><h3>Leeds - Everton: 3-1 </h3><h3>Arsenal - Aston Villa: 4-0 </h3><h3>Bournemouth - Wolverhampton: 1-2 </h3><h3>Manchester City - Nottingham Forest: 4-0 </h3><h3>West Ham - Tottenham: 0-3 </h3><h3>Liverpool - Newcastle: 3-2 </h3><h3>Leicester - Manchester United: 0-2 </h3><h2>Player Picks </h2><p>Firmino, Haaland et Kane ont été les héros de la J4 mais avec un calendrier qui s'emballe, combien vont jouer la majorité des minutes à disposition? C'est compliqué à estimer, même Kane qui joue les 90min des 38 matchs n'est pas à l'abri de faire un petit séjour sur le banc. Conte pourrait utiliser Richarlison pour soulager son buteur vedette. Choisir les picks de cette J5 va être un exercice intéressant et j'espère échapper à la loterie de la rotation des effectifs. </p><h3>Les incontournables : </h3><p><strong>Alexander-Arnold (£7.5M)</strong>. Le jeune Liverpuldien n'a pas beaucoup de concurrence sur son poste de latéral droit (surtout que Milner doit déjà dépanner au milieu). Comme tous ses coéquipiers, il a eu un début de saison compliqué au niveau défensif. Son but magistral a sans doute lancé sa saison et il semblerait que le vrai TAA soit de retour. La clean sheet contre Newcastle est loin d'être assurée, mais on attend surtout de lui ses points offensifs. </p><p><strong>Jesus (£8.2M).</strong> Dans une équipe des Gunners qui carbure, l'ancien de City brille. Après le match compliqué contre Fulham, la venue de Villa devrait permettre au brésilein et ses coéquipiers d'enchaîner un 5e succès. Et là il nous doit un gros score. </p><p><strong>De Bruyne (£12.2M)</strong>. Avec 89min disputées en J4, KdB pourrait être menacé par la Pep Roulette. Mais le Belge est tellement intégral au jeu des Citizens qu'il va être l'un des Sky Blues qui jouera le plus. Vu la forme de City en ce moment, la créativité de De Bruyne et la propension des Reds de Nottingham à laisser beaucoup de chances à leurs adversaires, le vice capitaine des Citizens devrait être dans les points en J5. </p><p><strong>Kane (£11.4M).</strong> Kane ne marque jamais au mois d'Août. Cette légende urbaine peut être mise au placard. Les 4 buts en 4 matchs montrent que Super Harry marque quelque soit le moment. En plus West Ham est une de ses victimes préférées. COYS.   </p><h3>Les bons tuyaux : </h3><p><strong>Odegaard (£6.5M)</strong> Probablement parti trop tôt au Real Madrid, le jeune Norvégien a mis du temps à exploser. Sous les ordres d'Arteta, il prouve enfin que les Merengue ne s'étaient pas trompés sur son potentiel. Un peu à l'image de Gündogan à City, il fait de plus en plus d'incursions dans la surface et le résultat est là, 3 buts en 2 matchs. </p><p><strong>Rodrigo (£6.4M)</strong>. Muet face à la défense de fer de Brighton, l'espagnol va retrouvé son jardin , Elland Road et une défense relativement généreuse. Ne vous laissez pas influencer par un petit raté plutôt prévisible. Le calendrier de Peacocks est abordable jusqu'à la J10 ce qui laisse plein de temps pour profiter des points de Rodrigo. </p><p><strong>Sanchez (£4.6M).</strong> 3 clean sheets lors des 3 derniers matchs, un calendrier favorable jusqu'à la trêve internationale, le gardien des Seagulls est à la limite de l'incontournable. Il ne manquerait plus qu'il arrête les pénalties. </p><p><strong>Saint-Maximin (£6.5M). </strong>L'ancien Niçois marche sur l'eau. Après avoir ridiculisé Walker en J3, il a permis aux Magpies de gratter un point à Wolverhampton. Il leur permet donc de rester l'une des équipes invaincues en 4 matchs. Le problème de Saint-Max c'est sa régularité, mais vu ce qu'il fait en ce moment ce serait bête de passer à côté....hein Didier. </p><h3>Les pépites </h3><p><strong>Gündogan (£7.6M, 5.1% TSB).</strong> Il n'a joué qu'une petite demie heure ce week-end. Je le vois donc être titulaire contre Nottingham Forest. Lors de ce court moment sur la pelouse, il a été le joueur le plus avancé de City. Il aura des chances et donc il devrait être dans les points FPL. </p><p><strong>Eze (£5.5M, 1.9% TSB).</strong> Je remets le jeune anglais dans mon PP car j'aime beaucoup ce qu'il fait. Après 1 point de bonus en J3, il fait une passe dé en J4. Donc en J5...il va marquer. </p><p><strong>Fernandes (£9.8M, 2.1% TSB).</strong> Son prix fait qu'il est très compliqué d'inclure le portugais dans son effectif FPL. Mais il redevient petit à petit le joueur central de MU comme lors de la saison 2020-2021 où il avait fini meilleur marqueur du jeu. Si vous jouez votre Wild Card, c'est casse gueule mais le pari vaut le coup d'être tenté. </p><p><strong>Alvarez (£6.2M, 1.3% TSB).</strong> Haaland est incontournable en attaque à City, mais sa fragilité va pousser Pep à le faire tourner, surtout maintenant que les match vont s'enchaîner. Alvarez va donc sûrement jouer beaucoup plus de minutes. Dans une équipe qui crée des chances comme des petits pains, je vois bien le jeune argentin faire de jolis scores. </p><p>Malgré le court turn around entre la J4 et la J5, les experts ont quand même envoyé leur conseils. Spoiler alert: sans se consulter ils ont mis exactement les même noms pour leurs conseils de capitaine et leurs conseils de pépite.  </p><p>Pour rappelle les experts sont: </p><p>Arthur: double vainqueur de la ligue Fantasy Coach lors des 2 dernières saison en battant à chaque fois le record de point. </p><p>Rwano: vainqueur de la Cup fantasy-coach.fr et troisième de la ligue la saison dernière. Comme Arthur il participe régulièrement aux discussions sur le Discord FPL. </p><h3>Arthur </h3><p><strong>Capitaine: Haaland (68% TSB) : </strong>Le titan viens d’inscrire son premier triplé en Angleterre le Samedi dernier. Il affronte Nottingham Forrest qui a encaissé, cette saison, 7,82xGA (Expected goals Against). Le problème étant que c’est un match en semaine, Il peut commencer sur le banc. Je penses personnellement qu’il va jouer et être reposé contre Aston Villa lors de la prochaine GW. 50/50. </p><p><strong>Pépite: Harrison (4.2% TSB) : </strong>L’ailier créateur de Leeds reçoit Everton (7,79xGA). Leeds depuis le début de la saison est impressionnant offensivement et malgré la contre performance contre la grosse défense de Brighton, Leeds va remettre la marche en avant contre Everton et quoi de mieux sous l’impulsion d’Harrisson (1 but et 3 passes décisives). </p><h3>Rwano </h3><p><strong>Capitaine: Haaland (68% TSB) : </strong>Déjà 6 buts en 4 matchs pour un Cyborg qui n’a donc besoin d’aucun temps d’adaptation aux exigences de la Premier League. La venue d’un promu à l’Etihad Stadium lui donnera une nouvelle occasion de faire trembler les filets. </p><p><strong>Pépite: Harrison (4.2% TSB) : </strong>Cinquième au classement général, Leeds réussit un bon début de saison en étant intraitable à domicile quelque soit le pédigré du visiteur (Wolves, Chelsea). Pour cette journée, c’est un Everton bien patraque qui se déplace à Elland Road : on retrouvera certainement Jack Harrison dans les bons coups offensifs de son équipe. Jusqu’ici, il a facturé 3 passes dé et un but. </p><p>Bonne chance à tous. </p><p>Pour rejoindre notre 'private league', utilisez le code:
+<strong>Classique : f6xuri</strong>
+ </p><p>Le meilleur moyen de rester au top c’est probablement de nous suivre sur <a href="https://www.facebook.com/Fantasy-Coach-824491257591639/">Facebook,</a> <a href="https://twitter.com/FantasyCoach_FR">Twitter</a> et <a href="https://discord.com/invite/MmcHMmD">Discord</a></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

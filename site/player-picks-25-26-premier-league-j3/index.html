@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J3</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Après deux journées de Premier League, seules trois équipes ont engrangé 6 points. Arsenal, Spurs et Liverpool occupent donc le podium dans cet ordre par la différence de buts. Les Spurs, qui ont mis une grosse claque aux Citadins à l’Etihad en J2, pourraient bien se retrouver seuls en tête après la J3 vu que les deux autres s’affrontent dans le deuxième Choc des Titans pour les Gunners, qui ont un début de saison torride au niveau du calendrier..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J3"><figure class="hero"><img src="/media/449182_38fc679b652140e39b6149c9fc41dc78_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J3</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 29 août 2025</p><div class="body"><p>Après deux journées de Premier League, seules trois équipes ont engrangé 6 points. Arsenal, Spurs et Liverpool occupent donc le podium dans cet ordre par la différence de buts. Les Spurs, qui ont mis une grosse claque aux Citadins à l’Etihad en J2, pourraient bien se retrouver seuls en tête après la J3 vu que les deux autres s’affrontent dans le deuxième Choc des Titans pour les Gunners, qui ont un début de saison torride au niveau du calendrier.</p><h2>Le tour d'horizon</h2><p>Manchester City a frappé fort dès la première journée avec une victoire 4-0 à Wolverhampton grâce à un doublé d’Erling Haaland et une prestation aboutie de ses recrues. Mais les Citizens ont connu un coup d’arrêt à domicile lors de la deuxième journée, battus 0-2 par Tottenham au terme d’un match où l’attaque s’est retrouvée impuissante malgré la domination.</p><p>Rien ne va chez leurs voisins d'United, une élimination choc en Carabao Cup par Grimsby (D4). Les Mancuniens perdent aux tirs au but après un match totalement fou (12-11), un résultat qui restera dans les annales des Mariners. En Premier League, un penalty manqué de Bruno Fernandes leur avait déjà fait perdre deux points. MU accuse l’arbitre d’avoir gêné la course d’élan de Fernandes lors du nul à Fulham...</p><p>Chelsea continue son mercato et est sur le point d'obtenir la signature du jeune argentin Alejandro Garnacho de Manchester United, gros coup si ça se confirme avant la deadline. Dans l'autre sens,  Nicolas Jackson serait sur le départ, direction le Bayern</p><p>Ngumoha, 16 ans, sauve Liverpool à Newcastle (3-2) Le jeune Anglais marque en fin de match pour offrir la victoire aux Reds face à Newcastle, un nouvel exploit pour la pépite du centre de formation. Les Reds accélèrent tout de même sur Isak, les dirigeants tentent encore de convaincre Newcastle de lâcher Alexander Isak avant la fin du mercato, mais le club refuse toujours une offre supérieure à 135 M€.</p><h2>Mes Pronos pour la J3 de Premier League:</h2><p>Chelsea 3 - 1 Fulham</p><p>Sunderland 1 - 2 Brentford</p><p>Man United 2 - 0 Burnley</p><p>Tottenham 1 - 0 Bournemouth</p><p>Wolverhampton 0 - 2 Everton</p><p>Leeds United 1 - 1 Newcastle</p><p>Brighton Hove 1 - 0 Man City</p><p>Nottingham 2 - 0 West Ham</p><p>Liverpool 1 - 1 Arsenal</p><p>Aston Villa 2 - 0 Crystal Palace</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p>Les Indispensables</p><p><strong>Mohamed Salah</strong> (£14.5m) Toujours le pilier de Liverpool en attaque, régulier et ultra-implication dans les buts, titulaire à chaque match.</p><p><strong>Erling Haaland</strong> (£14.0m) Serial buteur, point de fixation de l’attaque de Manchester City, il délivre des points presque à chaque journée et sa disponibilité est confirmée.</p><p><strong>Bruno Fernandes</strong> (£9.0m) Milieu et capitaine de Manchester United, il joue 90 minutes quasi-systématiquement, tireur de pénaltys (il nous doit des buts).</p><p><strong>Ollie Watkins</strong> (£9.0m) Pointe d’Aston Villa, disponible, performant et buteur régulier, très actif dans l’animation offensive de son équipe.</p><h3>Les bons tuyaux</h3><p><strong>Viktor Gyökeres</strong> (£7.5m) Avant-centre titulaire d’Arsenal, bonne forme, joue toutes les minutes et enchaîne des adversaires accessibles malgré la rotation dans les ailes d’Arsenal.</p><p><strong>Dominic Solanke</strong> (£7.5m) Focal point de Tottenham, calendrier offensif sur les prochains matchs, assume les penaltys en l’absence de concurrence sérieuse.</p><p><strong>Chris Wood</strong> (£7.5m) Attaquant de Forest, toujours disponible, nombreux buts la saison passée, série favorable à venir dont des matches contre West Ham, Burnley et Sunderland.</p><p><strong>Iliman Ndiaye </strong>(£6.5m) Milieu d’Everton, très en vue en ce début de saison, prend les coups de pied arrêtés et un enchaînement de matches abordables pour les Toffees.</p><p><strong>Moussa Diaby</strong> (£7.0m) Rapide ailier d’Aston Villa, disponible, profite d’un calendrier ouvert pour s’illustrer aux points et aux passes décisives.</p><p><strong>Joao Pedro</strong> (£7.5m) Il a été décisif en marquant et délivrant des passes lors des deux premières journées. Titulaire indiscutable, il bénéficie d’un calendrier favorable dans les prochaines rencontres.</p><p><strong>Hugo Ekitike</strong> (£8.5m) Arrivé à Liverpool, il a marqué dès ses débuts et montre un fort potentiel offensif. Il s’impose rapidement comme une option offensive majeure malgré la forte concurrence.</p><h3>Les pépites</h3><p><strong>Tijjani Reijnders</strong> (£5.5m) Milieu relayeur qui participe au jeu offensif, coûte peu cher et joue régulièrement dans les matchs faciles pour City.</p><p><strong>Kiernan Dewsbury-Hall</strong> (£5.0m) Titulaires dans l’axe, bon tireur de coups de pied arrêtés, excellent rapport minutes/prix et belles perspectives face à des concurrents directs.</p><p><strong>Rodrigo Muniz</strong> (£5.5m) Attaquant principal des Cottagers avec beaucoup de temps de jeu et un calendrier démarrant de façon abordable.</p><p><strong>Anton Stach</strong> (£5.0m) Milieu créatif abordable, titulaire, apporte des points bon marché en surface et face à des équipes abordables à court terme.</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

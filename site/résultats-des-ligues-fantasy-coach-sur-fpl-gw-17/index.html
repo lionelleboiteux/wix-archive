@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Résultats des ligues Fantasy Coach sur FPL. GW 17.</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Joyeux Noël à tous. Bon Boxing Day demain. Pas de version anglaise pour ce point rapide sur nos ligues et compétitions FPL. N’oubliez pas..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Résultats des ligues Fantasy Coach sur FPL. GW 17."><figure class="hero"><img src="/media/deb9b2_7d3282b01a154c7d8a36149a9f0205dd_mv2.png" alt=""/><div class="scrim"></div><h1>Résultats des ligues Fantasy Coach sur FPL. GW 17.</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 25 décembre 2024</p><div class="body"><p>Joyeux Noël à tous. Bon Boxing Day demain. Pas de version anglaise pour ce point rapide sur nos ligues et compétitions FPL.</p><p>N’oubliez pas la deadline du Boxing Day ce jeudi 26 Décembre à 12h00 CET (11h00 BST)</p><h2>La Ligue Classique (code: gpojm8): </h2><img src="/media/deb9b2_dd62d13bdbc74ac48c58b6c4f40efd07_mv2.jpg" alt=""/><p>Cette fois ci <strong>Julien Cazenave </strong>renforce son emprise sur la ligue classique  Fantasy Coach. Avec 26pts d'avance sur son dauphin <strong>Axel Dancette </strong>il se permet d’être en tête pour Noël et probablement aussi jusqu'à fin 2024. La 3e place est occupée par un nouveau venu dans ligue: <strong>Lacoste 🐊.</strong></p><p>Julien s'échappe et aide à faire monter l’écart de point dans le top 10. Ce dernier se tient maintenant en 51pts ce qui commence à être important.</p><p><strong>Arthur Simmonet</strong>, champion 2021,2022 et 2023, se stabilise proche de la 400e place. Il gagne 3 place et fini la GW17 en 378e place.</p><p><strong>Sean Gardener</strong>, le vainqueur de la Winter Cup 2023, grâce à un score de 85pts remonte de 46 et remonte à la 423e place. </p><p><strong>Michael Akins</strong>, le vainqueur du Survivor 2024, perd 8 places. Il redescend à la 59e place. </p><h2>Fantasy Coach’s FPL Survivor (code: gpojm8) </h2><p>Le score minimum à réaliser en GW17 était de 38pts avec un score total sur la saison de 948pts. 14 managers prennent la porte du Survivor. Les 344 survivants batailleront pendant le Boxing Day.</p><p><strong>Michael Akins</strong>, le champion 2024, passe ce tour de jeu tranquillou avec un score de 78pts. </p><p>Le meilleur score de la GW17 est réalisé par <strong>Señor Corleone </strong>et par <strong>Alban Sinaj</strong> qui postent un score de 107pts. </p><p>Le manager avec le pire classement général encore en course dans le Survivor est toujours et encore <strong>Michael Ogunyemi</strong>. Malgré 7 places perdues qui le font tomber à la 534e place, Michael continue la compétition.</p><p>La moyenne de point de la ligue pour la GW17 est de 67.4pts. </p><p>Le tableau des éliminés résultats est le suivant:</p><img src="/media/deb9b2_3f65f7a11e09422085cec25184855ce0_mv2.jpg" alt=""/><p><u>Les scores de qualification minimum:</u> </p><p><em>GW</em> <em>1</em>: 36pts </p><p><em>GW</em> <em>2</em>: 41pts </p><p><em>GW 3</em>: 38pts (159pts OP)</p><p><em>GW 4</em>: 24pts</p><p><em>GW</em> <em>5</em>: 38pts (275pts OP) </p><p><em>GW</em> <em>6</em>: 26pts </p><p><em>GW 7</em>: 25pts (428pts OP)</p><p><em>GW8</em>: 17pts (480pts OP)</p><p><em>GW9</em>: 39pts (471pts OP)</p><p><em>GW10</em>: 22pts (527pts OP)</p><p><em>GW 11</em> : 28pts (581pts OP) </p><p><em>GW 12</em>: 28pts (658pts OP) </p><p><em>GW 13</em>: 40pts (754pts OP) </p><p><em>GW 14</em>: 34pts (789pts OP) </p><p><em>GW 15</em>: 30pts (840pts OP) </p><p><em>GW 16</em>: 29pts (887pts OP) </p><p><em>GW 17:</em> 38pts (948pts OP)</p><h2>Fantasy Coach's Winter Cup (code: gpojm8)</h2><img src="/media/deb9b2_dba971c16c8b42fa9bc16701166f0204_mv2.jpg" alt=""/><p>La grande finale de la Fantasy Coach’s Winter Cup se disputera entre <strong>Asare</strong> <strong>Daniel</strong> qui a largement dominé <strong>Abdoul Kabore</strong>; et <strong>Paul MacAffrey </strong>qui s'est débarrassé de <strong>Pierre Monin </strong>avec un peu plus de difficulté<strong>.</strong></p><p>La finale se disputera en GW 19. Le tableau des résultats des demies finales et l’affiche de la finale peut être consultée via ce <a href="https://docs.google.com/spreadsheets/d/1CzV7xaGkVGGWyLKa-il9VDG8mcGFS08vtKhXNwUmY3g/edit?usp=drivesdk"><u>lien</u></a>.</p><h2>Ligue H2H </h2><img src="/media/deb9b2_9065d860eba94345be459db887f68369_mv2.jpg" alt=""/><p><strong>Faloye Oluwaseyi </strong>est le premier à flancher dans le mano à mano au sommet de notre ligue H2H qui l’oppose à <strong>Dmitry Gor </strong>et <strong>Tom Nettleton</strong>. Dmitry réalise le plus gros écarts lors d’un des matchs de cette gameweek (54pts). Il prend donc seul la tête de la ligue. <strong>Nicolas Pluchon</strong>, lui,<strong> </strong>revient à hauteur du podium. </p><h2>Ligue FPL Challenge (code 5n6fr5) </h2><p>La GW17 à vue le début de l’évènement &quot;Festive Fixtures&quot; dont le premier challenge était nommé &quot;Home for the Holidays&quot;. Il fallait sélectionner 9 joueurs avec un budget illimité. Ceux dont l’équipe jouait à domicile voyaient leurs points doublés.</p><p><strong>Ifeanyi Ezeokoli </strong>remporte ce challenge et prend donc en même temps la tête de l’évènement. Il est accompagné sur le podium par <strong>Adeel Shafiq </strong>et <strong>Farid Alsagoff</strong>.<strong> </strong></p><img src="/media/deb9b2_8c08fd6f2a4848108a4de5b6aaf663e5_mv2.jpg" alt=""/><p><strong>Sebastian Przybylowski </strong>reste leader de la ligue FPL Challenge de Fantasy Coach. Il est accompagné sur le podium par <strong>Michael de Salazar</strong> et <strong>Aled Wilcox</strong>.<strong> Jesukorede Adelowokan </strong>progresse légèrement en remontant de 2 places au 33e rang. Personnellement je rentre dans le top 20 de la ligue en prenant la 19e place. <strong>Zakaria El Manyani </strong>le vainqueur du dernier événement, &quot;Goal Diggers&quot;, est au 9e rang à 94pts de Sebastian.</p><img src="/media/deb9b2_310c39407ad5478b849e4a0d01900980_mv2.jpg" alt=""/><p>Le challenge de la GW18 qui se déroule pendant le Boxing Day se nommera &quot;Out of the Box&quot;. Il faudra séléctionner 9 joueurs à nouveau avec un budget illimité. Les buts marqués par un tir réalisé en dehors de la surface verront leurs points doublés.</p><p>Bonne chance à tous pour la GW18. N’oubliez pas que vos équipes doivent prêtes pour l’heure du déjeuner de ce Jeudi. </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

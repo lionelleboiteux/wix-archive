@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Round 15 – Allsvenskan 2026</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Tout savoir sur la journée 15 du championnat Allsvenskan 2026 et conseils pour la fantasy"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Round 15 – Allsvenskan 2026"><figure class="hero"><img src="/media/3448f3_d947e4f8597b4b139c64b3c2ac65305f_mv2.jpg" alt=""/><div class="scrim"></div><h1>Round 15 – Allsvenskan 2026</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 28 juillet 2026</p><div class="body"><h2>Tops</h2><p>Vainqueur de l'IFK Göteborg (4-1), <strong>Sirius </strong>continue d’imposer à ses poursuivants un train d'enfer. Et comme le dauphin Hammarby est à 11 points alors qu'il reste 16 matchs à disputer, l'IKS a définitivement les cartes en main pour gagner son premier titre de champion de Suède.</p><p>Belle opération pour <strong>Djurgården</strong> qui s'impose à Degerfors (0-1) et en profite pour monter sur la troisième marche. Comme un acte de candidature au podium pour une équipe qui compte encore deux matchs de retard.</p><p>Focus sur son opération maintien, le promu <strong>Västerås</strong> continue de grapiller les points qu'il faut (ici une victoire sur Örgryte un concurrent direct, 2-0) et pointe aujourd'hui à la cinquième place. Une belle surprise.</p><p>Victoire importante (2-1) du promu <strong>Kalmar</strong> sur Mjällby, champion sortant, dans la lutte pour le maintien. Avec une nouvelle performance de choix de <strong>Charles Sagoe Jr (Kalmar)</strong> : avec 2 buts et 8 passes, l'ailier gauche prêté par Arsenal attire définitivement l'attention. Et d'ici la fin du mercato estival, les prochaines semaines risquent d'être un peu longues du côté du KFF...</p><img src="/media/3448f3_d947e4f8597b4b139c64b3c2ac65305f_mv2.jpg" alt=""/><p>De nouveau buteurs, <strong>Robbie Ure (Sirius)</strong> et <strong>Hegland (Djurgården) </strong>sont en très grande forme. En plein mercato, ça pourrait donner de bonnes idées à certains clubs.</p><h2>Flops</h2><p>Piégé à Brommapojkarna (1-1) avec une équipe mixte, <strong>Hammarby</strong> cède du terrain au leader Sirius. Avec maintenant 11 points de retard, le dauphin ne peut plus que constater les dégâts.</p><p>D'ailleurs, les autres Européens ont aussi perdu des plumes dans la bagarre du championnat : défaite de <strong>Mjällby</strong> à Kalmar (2-1), petite fessée pour l'<strong>IFK Göteborg</strong> chez le leader (4-1) et match nul de <strong>GAIS</strong> surpris à domicile par Halmstad la lanterne rouge (1-1). Tout sauf une coïncidence.</p><p>Dans le dur cette saison avec une treizième place (3v , 4n, 7d) et seulement trois points d'avance sur la zone rouge, l'<strong>IFK Göteborg</strong> a limogé Stefan Billborn. En Suède comme ailleurs, l'entraîneur reste le fusible idoine. Le calendrier à venir, plus clément, devrait aider Joachim Björklund à assurer la succession.</p><p>Défait à domicile ce wek-end par Elfsborg (1-2), après le match nul concédé auparavant à Kalmar (2-2), <strong>Malmö</strong>  n'y arrive pas. Et ça ressemble de plus en plus à une nouvelle saison décevante pour cette institution du championnat.</p><h2>FANTASY</h2><p>Quatre équipes blank sur ce round 15 : Elfsborg, GAIS, Hammarby et Mjällby.</p><p>Dernière journée pour jouer la wildcard de la phase aller (rounds 2-15). Ce qui est notre cas.</p><p><strong><u>Équipes à cibler ou pas</u></strong></p><p><strong>Sirius</strong> à l'extérieur chez Halmstad la lanterne rouge et <strong>Djurgården</strong> à domicle face à <strong>Västerås </strong>ont cette semaine encore nos préférences.</p><p>Sinon, <strong>AIK </strong>à domicile est plus que tentant (vs Örgryte), <strong>Häcken</strong> toujours à domicle bénéficie d'un à priori favorable (vs Kalmar) alors que la grosse cote est à chercher du côté de l'<strong>IFK Göteborg</strong> qui, sous les ordres de son nouvel entraîneur, recevra Degerfors.</p><p><strong><u>MA BUS TEAM sur wildcard</u></strong></p><p>Je n'ai plus rien en banque : -0,1.</p><p><strong>OR : 3 792</strong></p><p>942 points</p><p>Vu notre classement général du moment (et c'est ce qui arrive quand on est pas pleinement concentré sur le jeu dès les premières journées, on court après le train), on a l'envie de tenter des coups sur cette wildcard pour enclencher un début de remontada.</p><img src="/media/3448f3_462d45ac0c3b4bad89fb3c5b60136d2e_mv2.jpg" alt=""/><p>Tout d'abord, on sort <strong>Besara (Hammarby, 13,5) </strong>pour retrouver de la flexibilité financière et pour anticiper un possible temps de jeu en baisse (il a 35 ans et la récente arrivée de Boudri qui évoluait au Los Angeles Galaxy et qui présente le même profil de milieu offensif – meneur de jeu devrait rogner ses minutes). Une risquette car Besara pèse tout de même sur ce début d'exercice 5 buts et 5 passes.</p><p>On conserve notre trio de <strong>Sirius</strong> comme armature <strong>(Castegren, Bkerkebo, Ure)</strong>. Et nos actifs de <strong>Djurgården</strong> comme actif premium <strong>(Hegland, Tenho)</strong> alors que ceux de <strong>Häcken</strong> sont davantage vus comme nos variables qualitatives d'ajustements, <strong>Hilvenius</strong> et <strong>Doumbia</strong> étant de parfaits role players pour notre équilibre d'équipe (titulaires d'une bonne équipe, réguliers et pas chers, bref le combo magique, sachant que Doumbia est un top player en devenir).</p><p>Et, parce que la risquette est nécessaire pour aller éventuellement chercher mieux, on mise sur un sursaut de l'<strong>IFK Göteborg</strong> qui a en plus un calendrier favorable sur cette deuxième partie de saison : en défense, <strong>Yeboah (5,4)</strong> nous tente bien mais nous sommes un peu juste financièrement pour le faire et il est suivi par plusieurs clubs avides de défenseurs centraux jeunes avec un certain potentiel de développement donc on se rabat sur <strong>Erlingmark (5,3)</strong> qui a l'avantage d'être latéral.</p><p>Au rayon milieu offensif, pour le moment, notre cœur balance. Facturant 6 buts et 1 passe, <strong>Heintz (IFK, 9,9)</strong> et son pied gauche seraient un pari fort pour la suite de notre saison fantasy. Même s'il est moins bien depuis deux matchs, <strong>Lindberg (Häcken, 8,3)</strong> reste une option séduisante tant ce milieu est capable de merveilles quand il est en chaleur (3 buts, 4 passes). Alors que <strong>Madjed (Hammarby, 8,9)</strong>, 5 buts, représente la voie de la sagesse de celui qui évolue dans un gros club et comme on l'imagine peser de plus en plus sur le jeu offensif du HIF, le rentrer maintenant aurait du sens.</p><p><strong><span style="color:#FF0909">MISE A JOUR, le 31/07</span></strong></p><p><em><span style="color:#FF0909">Heintz et Lindberg sont suspendus (accumulation de carton jaune) donc comme on veut du IFK en ligne offensive, on rentre Clemmensen en attaque et Hove (AIK, 7) au milieu.</span></em></p><p>En attaque, le troisième strapontin devrait aller à un joueur frisson. Actuellement, deux profils sont en balance : le prometteur <strong>Fillling (AIK, 6,2)</strong> dont la candidature a pris de l'épaisseur depuis la sortie sur blessure de son coéquipier <strong>Ayari (AIK, 5,4)</strong>, un milieu qui devait intégrer notre squad avant que son mollet n'en décide autrement. Et <strong>Clemmensen (IFK, 6,2)</strong> dont la présence peut-être subordonnée aux sorts réservés à ses coéquipiers Yeboah et Heintz, l'idée étant aussi de ne pas se surcharger en actif d'une équipe qui malgré tout navigue aujourd'hui à la treizième place.</p><p>De plus et à condition que l'inflation ne nous joue pas de mauvais tour, on planifie davantage nos transferts avec une activité plus soutenue qu'à l'accoutumée : par exemple, Botheim jouera les rounds 15 et 16 avant de céder sa place à <strong>Abraham (Hamamrby, 10,2)</strong> au round 17.</p><p>Reste la défense, trois piliers (Castegren, Tenho et Hilvenius) qui couvrent les grosses cylindrées du championnat à l'exception notable de Hammarby. Si <strong>Winther (Hammarby, 6,5)</strong> et <strong>Skoglund (Hammarby, 6,6)</strong> sont malheureusement trop chers pour notre bourse alors qu'ils sont des choix évidents, la solution envisagée pour avoir quand même du HIF en défense est donc de rentrer son gardien <strong>Hahn (Hammarby, 6,1)</strong> qui devrait lui rester à l'écart des questions de rotation qui ne manqueront pas de toucher l'effectif.</p><p>En définitive, il nous manque actuellement 0,1 (et oui, c'est rageant) pour réussir notre mercato idéal. Avec un peu de chance, les ventes massives des joueurs de Hammarby occasionneront une baisse de 0,1 qui déclenchera un achat opportuniste à contre-courant.</p><p>Sinon, des arbitrages autour de Lindberg au milieu (il est le moins cher) et du défenseur de l'IFk Göteborg (Yeboah ou Erlingmark) devraient nous permettre de bâtir une équipe que l'on espère compétitive.</p><img src="/media/3448f3_da599b8d66064965a58e812a2a9c68f7_mv2.jpg" alt=""/><p>Bel été et à bientôt.</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

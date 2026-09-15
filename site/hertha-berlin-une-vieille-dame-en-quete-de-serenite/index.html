@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Hertha Berlin, une Vieille Dame en quête de sérénité</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Hertha Berlin
+2.Bundesliga"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Hertha Berlin, une Vieille Dame en quête de sérénité"><figure class="hero"><img src="/media/3448f3_9ac0671cd0a44c66afa7e8b1aeee958f_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Hertha Berlin, une Vieille Dame en quête de sérénité</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 11 août 2024</p><div class="body"><img src="/media/3448f3_9ac0671cd0a44c66afa7e8b1aeee958f_mv2.jpeg" alt=""/><h2>Hertha BSC</h2><p>Atterrissage un peu compliqué pour le Hertha Berlin qui a mis du temps à intégrer que son statut de club tout juste relégué ne lui garantirait pas pour autant un avantage sur des concurrents parfois au passé au moins aussi ronflant que le sien et parfois sur des adversaires tout simplement meilleurs : neuvième à 15 points du podium, une attaque prolifique (la deuxième du championnat) et une défense à la rue (59 buts encaissés), il n’en fallait pas plus pour que le HBSC ne s’offre à la fin de cette saison décevante un de ces petits coups de chauds dont il a le secret.</p><p>Un bilan pas au goût des dirigeants qui décidaient de changer l’entraîneur pour la prochaine saison. Une décision qui fuitait dans la presse avant même la fin du championnat. Sauf que <strong>Pal Dardai</strong> toujours sous contrat jusqu’en 2025 et très populaire au club (15 ans comme joueur, 5 ans comme entraîneur sur 3 mandats, 3 fils en équipe première, autant dire une institution) menaçait ces même dirigeants (<strong>Thomas E. Herrich</strong> directeur général, <strong>Benjamin Weber</strong> directeur sportif et <strong>Andreas &quot;Zecke&quot; Neuendorf</strong>, directeur de l'académie et des joueurs licenciés) de se présenter à la présidence du club et de les mettre à la porte une fois élu.</p><p>Et comme , ça ne suffisait pas. L’agitation en coulisses grimpait en température. Déjà marqué par le décès brutal cet hiver de son atypique président de 43 ans <strong>Kay Bernstein</strong>, ex kapo du groupe ultra Harlekins Berlin '98, le club toujours endetté voit son propriétaire actuel, le groupe 777 Partners (qui a aussi des parts dans plusieurs autres clubs comme le Genoa, Vasco da Gama, Standard de Liège et le Red Star), être en grande difficulté avec pas moins de seize plaintes pour fraudes et dettes impayés. Probablement insolvables, les Américains d’un 777 à la dérive pourraient chercher à vendre. Les Berlinois déjà sous surveillance pour le renouvellement de leur licence n’avaient pas besoin de cela.</p><p>Autant dire que les prochaines élections pour la présidence (novembre 2024) devraient valoir le déplacement.</p><p>C’est dans ce contexte toujours aussi électrique que <strong>Cristian Fiél </strong>est arrivé sur le banc en provenance de Nuremberg avec l’idée est de proposer un football plus offensif, plus ambitieux, une philosophie de jeu claire (433, possession, bloc haut, contre-pressing) et faisant la part belle au développement des jeunes joueurs.</p><img src="/media/3448f3_1edcc15288184ad6ba898e84ca4cac47_mv2.jpeg" alt=""/><p>C’est donc avec cette nouvelle feuille de route que des choix ont été faits : il a fallu cet été ajuster un effectif mal taillé pour jouer les premiers rôles dans une division exigeante. Un mercato intéressant où le milieu de terrain, clairement pas au niveau la saison dernière, a été bien renforcé notamment avec des profils permettant de fermer l’axe du terrain (<strong>Diego Demme</strong>) ou de le réguler <strong>Michael Cuisance</strong> et <strong>Kevin Sessa</strong>). Si certaines individualités présentent des garanties pour performer à ce niveau (<strong>Haris Tabakovic</strong>, <strong>Fabian Reese</strong>, <strong>Demme</strong>), plusieurs jeunes joueurs sont appelés à jouer un rôle de premier plan : <strong>Tjark Ernst</strong> excellent gardien de 21 ans, <strong>Marlon Dardai</strong>, défenseur central de 22 ans <strong>Pascal Klemans</strong> milieu défensif de 19 ans ou le très offensif <strong>Ibrahim Maza</strong> de 19 ans.</p><p>La préparation encourageante a été ternie par les blessures de Reese (cheville, au moins 8 semaines) et Sessa (genou, opération, date de retour inconnue, plusieurs mois). Des absences qui seront autant d’opportunités pour développer d’autres forces collectives.</p><p>Alors que la Vieille Dame vient de fêter ses 132 ans, retrouver l’élite figure certainement dans un coin de toutes les têtes berlinoises surtout que c’est un groupe beaucoup mieux structuré et mieux préparé aux durs combats de la 2.Buli qui se présente sur la ligne de départ. Officiellement, la montée n’est pas une exigence. Mais si le mercato n’ampute pas davantage l’effectif de quelques uns de ses plus beaux atouts (Tabakovic, Reese, Ernst) et si Fiél arrive à faire émerger une vraie véritable force collective alors le Hertha Berlin pourrait bien dépasser le simple profil d’outsider.</p><p><strong><em>Pronostic 4</em></strong></p><img src="/media/3448f3_4f4e54f000184871a07bb73399626045_mv2.jpeg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

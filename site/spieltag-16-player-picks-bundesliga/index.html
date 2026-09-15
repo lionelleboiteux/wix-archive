@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Spieltag 16 Player-Picks Bundesliga</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Buli Circus 16 : pour la dernière de l'année 2023, au programme : un derby, des fêtes des voisins et sûrement des cadeaux de saison."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Spieltag 16 Player-Picks Bundesliga"><figure class="hero"><img src="/media/3448f3_502fe10d94c949448453069ad735b69d_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Spieltag 16 Player-Picks Bundesliga</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 19 décembre 2023</p><div class="body"><h2>Buli Circus Episode 16 – Cadeau.</h2><p>On rejoue deux jours après le dernier match de la quinzième journée. Cette seizième journée de Bundesliga est la <strong>dernière de l’année 2023</strong>. Après, ce sera la trêve hivernale avec une <strong>reprise du championnat fixée au 12 janvier 2024</strong>.</p><p>Cette semaine, version expresse du Buli Circus et à l’arrache. Et encore <strong>toutes mes excuses</strong> pour avoir dû déclarer inopportunément forfait pour le spieltag 15.</p><p><strong>Devant</strong>, Leverkusen reste leader avec quatre points d’avance et est donc sûr de le rester jusqu’à l’année prochaine. Sur les autres marches du podium, on retrouve à la seconde place un Bayern qui devrait agiter son chéquier pendant le mercato hivernal et sur la troisième marche le RB Leipzig, peut-être irrégulier mais toujours dans la course.</p><p><strong>Pour l’Europe</strong>, les prétendants sont connus et identifiés.</p><p>Descendue du podium, la surprise Stuttgart reste l’équipe la plus à même de s’inviter parmi les trois premiers.</p><p>Le Dortmund de Terzic, toujours aussi inclassable entre pauvreté du jeu et froide capacité à prendre des points, aspire forcément à jouer plus haut mais pour y arriver, il va falloir changer quelque chose.</p><p>Fribourg qui a enfin trouvé une meilleure carburation et qui revient bien au classement.</p><p>Le surprenant TSG Hoffenheim, qui revit cette année après un dernier exercice bien difficile.</p><p>L’Eintracht Francfort, qui lance son nouveau cycle avec Töppmoller, et qui est toujours en travaux.</p><p><strong>Derrière</strong>, la foire d’empoigne devrait durer jusqu’au 18 mai 2024. Même si avec Union Berlin, Cologne, Mayence et Darmstadt, on tient de solides candidats à la relégation avec deux descentes automatiques et un barragiste.</p><p>En <strong>2.Bundesliga</strong>, nouveau leader. Kiel (35 points) passe en tête à la faveur d’une nouvelle victoire probante face à Hanovre, Sankt Pauli (33 points) et Hambourg SV (31 points) complètent le podium.</p><p>Le programme de la <strong>seizième étape du Buli Circus</strong> nous offre un derby (Leverkusen-Bochum) et des fêtes des voisins (Hoffenheim-Darmstadt, Stuttgart-Augsbourg voir Dortmund-Mayence) et un Kovacico qui sent le sapin. On espère un festival de buts et d’émotions pour finir en beauté cette année 2023.</p><p>Bonnes fêtes et à l’année prochaine !</p><p>Notre incomparable concours de pronostic est toujours fidèle au poste et vous attend ici :</p><p><a href="https://www.fantasy-coach.fr/pronos-bundesliga">https://www.fantasy-coach.fr/pronos-bundesliga</a></p><p>Retrouver le Buli Circus sur notre site: <a href="https://www.fantasy-coach.fr/bundesliga">https://www.fantasy-coach.fr/bundesliga</a></p><p>et sur les réseaux sociaux : <a href="https://twitter.com/RwanoBreizh">https://twitter.com/RwanoBreizh</a></p><h2>SV Werder Bremen (14) - RB Leipzig (3)</h2><p>A domicile, le Werder a parfois des sortes de fulgurances capables de renverser des équipes aussi irrégulières que peut l’être cette cuvée de RB Leipzig lorsqu’elle est servie loin de ses bases. Après une dernière réussie à la Red Bull Arena (victoire 3-1 face Hoffenheim, avec un but en sortie de banc et une joie qui vaut bien une dernière fête en tête d’affiche du Buli Circus), Forsberg pour son ultime match de Bundesliga avant de migrer à New-York toujours chez Red Bull.</p><p>Pronostic 1-2</p><img src="/media/3448f3_502fe10d94c949448453069ad735b69d_mv2.jpeg" alt=""/><h2>Borussia Dortmund (5) - 1. FSV Mainz 05 (17)</h2><p>Se remettre la tête à l’endroit avant la trêve hivernale est pour le BVB une nécessité. A cinq points de la dernière place qualificative pour le Ligue des Champions après avoir été accroché à Augsbourg (1-1), Terzic n’a plus le choix. Très décevant pour le moment avec un classement toujours en délicatesse, Mayence se contenterait bien du point du match nul pour attaquer 2024 sur de meilleures bases que sa dernière défaite à domicile face au promu Heidenheim (0-1).</p><p>Pronostic 2-0</p><h2>TSG Hoffenheim (7) - SV Darmstadt 98 (18)</h2><p>Pour clôturer une bonne première partie de saison et rêver à une place européenne, le TSG ne visera rien d’autre que les trois points face à la lanterne rouge Darmstadt, un promu volontaire et limité depuis la perte sur blessure de Mehlem, son maître à jouer. Alors feu d’artifice pour cette fête des voisins ?</p><p>Pronostic 3-1</p><h2>1. FC Union Berlin (15) - 1. FC Köln (16)</h2><p>Match palpitant pour qui s’intéresse à la course au maintien avec cette opposition entre mal classés ayant le même nombre de points. Les Berlinois pensaient avoir repris du poil de la bête depuis que Bjelica est aux manettes, la claque reçue à Bochum (3-0) a résonné fort dans les têtes. Alors que Cologne, sous la coupe d’un Baumgart plus pragmatique, n’arrive toujours pas à naviguer dans des eaux plus tranquilles. Celui qui gagne passera de meilleures fêtes de fin d’année. Running match entre deux équipes branchées course à pied, même si elles ont cette année le souffle court</p><p>Pronostic 2-1</p><h2>Bayer 04 Leverkusen (1)- VfL Bochum 1848 (13)</h2><p>Derby de la Ruhr pour un leader dont le style de jeu a constitué un magnifique étendard pour la Bundesliga, ce championnat à nul autre pareil. Avec ce court déplacement, Bochum n’a certainement rien prévu à son tableau d’avancement : c’est donc du bonus pour des Unabsteigbaren que personne n’attend sur ce match et qui sont déjà dans leur temps de passage.</p><p>Pronostic 4-1</p><h2>Eintracht Frankfurt (8) - Borussia Mönchengladbach (11)</h2><p>Après la fessée distribuée au Bayern il y a une semaine (5-1), Francfort a pris sa leçon à Leverkusen (3-0). Pas facile d’enchaîner les deux premiers de Buli. Gladbach est un autre club en reconstruction. Match équilibré du milieu de tableau.</p><p>Pronostic 2-2</p><h2>VfL Wolfsburg (9) - FC Bayern München (12)</h2><p>Des Loups pas convaincants reçoivent un ogre bavarois branché sur courant alternatif. Le dernier déplacement du Bayern s’étant conclu par une rouste mémorable du côté de Francfort, peu probable que le FCB prenne ce match à la légère surtout après sa victoire obtenue face à Stuttgart (3-0). Retrouvailles en vue compliquées pour Kovac avec une de ses ex, attention une déculottée pourrait sonner le glas de son histoire dans la ville de l’automobile même avec la victoire arrachée à Darmstadt (0-1) .</p><p>Pronostic 0-3</p><h2>VfB Stuttgart (4) - FC Augsburg (10)</h2><p>Match de sudistes entre représentants du Bade-Württemberg et de Bavière. Ce sera aussi la rencontre entre Hoeneß et Thorup, deux managers qui ont indéniablement boosté leur équipe. Avec un jeu résolument offensif et technique, Stuttgart continue d’emballer son monde malgré la défaite enregistrée à Munich (3-0). Alors que Augsbourg a trouvé un équilibre qui lui permet de naviguer cette année plus sereinement, à l’image du point pris à domicile face à Dortmund (1-1). Une pièce sur un match enlevé et quelques buts.</p><p>Pronostic 3-1</p><h2>1. FC Heidenheim 1846 (12) - Sport-Club Freiburg (6)</h2><p>Deux équipes dont la constance n’a pas caractérisé cette première partie de saison mais qui sont en forme pour cette fin de première partie de saison. Comme lors de sa victoire ramenée de Mayence (0-1), le promu a montré des qualités qui devraient lui permettre de se maintenir, à la condition expresse que le mercato ne le dépouille de ses meilleurs joueurs. Mal embarqué, le club de la Forêt Noire a redressé la barre avec une série en cours de trois victoires consécutives. Curiosité que la rencontre entre ces deux personnages que sont les entraîneurs Schmidt et Streich.</p><p>Pronostic 1-1</p><h2>16 PLAYER-PICKS BUNDESLIGA</h2><p>Dernière tournée de l’année et comme la prochaine trêve nous offrira une nouvelle fenêtre de transferts illimités pour revoir nos effectifs, on se lâche.</p><p>Avec une stratégie simple et claire : « All-in Leverkusen contre Bochum » comme dirait l’ami Marco Chupas de la Team Fantasy Coach, qui vous propose avec le smile du contenu de qualité ici sur la Ligue 1, MPG, Sorare, la Premier League et bien entendu la Buli : <a href="https://www.fantasy-coach.fr/"><u>https://www.fantasy-coach.fr/</u></a></p><p>Attention toutefois à ne pas prendre Palacios qui sera suspendu, remplacé au sein du Werkself par Andrich.</p><h2>L’équipe du week-end dernier (spieltag 15)</h2><img src="/media/3448f3_31ad1bff678f4997912efb7472333340_mv2.webp" alt=""/><h2>Bus Team (maj le 19/12/2023, 05h00)</h2><p>3-4-3</p><p>En banque 1,4</p><p>Points 2283</p><p>Classement général 468</p><p>Formation susceptible de modifications</p><p>Blaswich, (Nicolas)</p><p><strong>GRIMALDO</strong>, Frimpong, Raum, (Kossonou, Makengo)</p><p><strong>WIRTZ</strong>, Brandt, Simons, Hofmann, (Bynoe-Guittens)</p><p><strong>BONIFACE</strong>, Kane, Füllkrug</p><p>IN</p><p>Makengo, Kossonou, Hofmann, Bynoe-Guittens</p><p>OUT</p><p>Schlotterbeck, Traoré, Stöger, Beste</p><h2>Gardiens</h2><p><u>Forcément</u></p><p>Baumann (9,7 Hoffenheim) boss des cages en fantasy</p><p>Hradecky (11,8 Leverkusen) rempart de la meilleure défense</p><p><u>Bon plan</u></p><p>Rönnow (7,8 Union Berlin) revival</p><p>Blaswich (5,2 Leipzig) pour finir l’année en beauté</p><p>Neuer (11,4 Bayern) grands segments</p><p>Kobel (11,8 Dortmund) meilleur gardien du championnat</p><p><u>Pour le budget</u></p><p>Nicolas (1,5 Mönchengladbach) le top du rapport qualité-prix</p><p><u>Risquette</u></p><p>Atubolu (7 Fribourg) en progrès</p><p>Trapp (9,6 Francfort), en promo</p><p>Batz (1 Mayence) danger</p><p>Zetterer (1,1 Werder) du boulot</p><h2>Défenseurs</h2><p><u>Forcément</u></p><p>Grimaldo (14 Leverkusen) tic-tac</p><p>Frimpong (17,9 Leverkusen) tac-tic</p><p><u>Bon plan</u></p><p>Davies (16,4 Bayern) irrégulier</p><p>Raum (12,9 Leipzig) plutôt</p><p>Henrichs (13 Leipzig) valeur sûre</p><p>Kim (13 Bayern) pour se différencier</p><p>Kossonou (7,7 Leverkusen) Tah (8,5 Leverkusen) Tapsoba (7,6 Leverkusen) défense de fer. Et si une seule place disponible pour un membre de ce trio ? Alors Odilon Kossonou pour la forme du moment.</p><p><u>Pour le budget</u></p><p>Maloney (3,3 Heidenheim) titulaire à bas coût</p><p>Makengo (2,5 Fribourg) découverte frenchy</p><p><u>Risquette</u></p><p>Weiser (10,8 Werder) pied droit fulgurant</p><p>Bensebaini (13,5 Dortmund) pourrait être un vrai différenciant fantasy</p><h2>Milieux</h2><p><u>Forcément</u></p><p>Wirtz (17,7 Leverkusen) maestro</p><p>Brandt (17,8 Dortmund) souvent bien quand même</p><p><u>Bon plan</u></p><p>Simons (17 Leipzig) yeap</p><p>Bynoe-Guitens (7,8 Dortmund) pari</p><p>Musiala (16,1 Bayern) de retour</p><p>Führich (11,4 Stuttgart) revanchard</p><p>Hofmann (16,2 Leverkusen) en promo</p><p><u>Pour le budget</u></p><p>Röhl (3,1 Fribourg) pépite</p><p>Rietz (3 Mönchengladbach) découverte</p><p>Pavlovic (1,3 Bayern) pour boucler un budget, pas sûr d’entrer</p><p><u>Risquette</u></p><p>Prömel (8 Hoffenheim) en promo</p><p>Beste (9,2 Heidenheim) dans un match de CPA</p><p>Grifo (16,9 Fribourg) dans un match de CPA</p><p>Baumgartner (14,8 Leipzig) Forsberg lui laisse sa place</p><p>Millot (9,3 Stuttgart) sur le côté, pas son meilleur poste</p><h2>Attaquants</h2><p><u>Forcément</u></p><p>Kane (19,1 Bayern) GOAT</p><p>Boniface (16,3 Leverkusen) must have</p><p><u>Bon plan</u></p><p>Guirassy (14,7 Stuttgart) dernier shot avant la CAN</p><p>Sané (18,5 Bayern) meilleur allemand ud début de championnat</p><p>Openda (17 Leipzig) a surpris son monde jusqu’à présent</p><p>Kramaric (13,9 Hoffenheim) expert but</p><p>Füllkrug (15,8 Dortmund) représentant de l’école allemande des buteurs</p><p><u>Pour le budget</u></p><p>Undav (10,3 Stuttgart) parti pour un retour fantasy</p><p>Dinkçi (5 Heidenheim) moins bien qu’au début de saison</p><p><u>Risquette</u></p><p>Ducksch (12,3 Werder) en piste pour l’Euro, humor de clubber</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

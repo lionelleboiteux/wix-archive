@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J4</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Le Player Picks revient après la trêve internationale de septembre qui s'est achevée avec son lot habituel de préoccupations pour les managers FPL, notamment avec les blessures confirmées d'Ismaila Sarr et les incertitudes autour de Cole Palmer, Bukayo Saka et Matheus Cunha. Au cœur de cette journée se dresse le choc des Titans : Manchester City reçoit Manchester United à l'Etihad. Serez vous de ceux qui osent naviguer sans leurs chips ou, à l'inverse, de ceux tentés par un Free Hit audacieux?"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J4"><figure class="hero"><img src="/media/449182_6c3f431c0eae49adb52b2fae889aeef6_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J4</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 11 septembre 2025</p><div class="body"><p>Le Player Picks revient après la trêve internationale de septembre qui s'est achevée avec son lot habituel de préoccupations pour les managers FPL, notamment avec les blessures confirmées d'Ismaila Sarr et les incertitudes autour de Cole Palmer, Bukayo Saka et Matheus Cunha. Au cœur de cette journée se dresse le choc des Titans : Manchester City reçoit Manchester United à l'Etihad. Serez vous de ceux qui osent naviguer sans leurs chips ou, à l'inverse, de ceux tentés par un Free Hit audacieux?</p><h2>Le tour d'horizon</h2><p>Liverpool a signé Alexander Isak pour £125M, transfert record, et vise une 4ème victoire consécutive, Isak pourrait débuter face à Burnley. Salah n’a pas encore retrouvé son niveau habituel, mais l’équipe reste leader invaincu .</p><p>Eberechi Eze est prêt à débuter pour les Gunners contre Nottingham Forest où sont arrivés Zinchenko en prêt d'Arsenal (donc ineligible cette semaine)et Ange Postecoglou (ex-Spurs) </p><p>Chelsea fait partie des outsiders pour le titre, mais João Pedro, recrue phare, enchaîne les buts et pourrait les porter loin cette saison. Ceci dit, les Blues ont été accusé de 74 entorses aux règles des agents par la FA, soulevant des questions sur sa gestion des transferts. </p><p>En parlant d'entorses aux regles, Manchester City traverse une période délicate après deux défaites et l’arrivée in extremis de Gianluigi Donnarumma au poste de gardien. Le club prépare deux grands rendez-vous, le derby face à United puis un choc contre Arsenal .</p><p>Manchester United a recruté Senne Lammens au poste de gardien et a arraché une victoire sur le fil à Burnley; des changements majeurs en cours. Des matches contre City et Chelsea pourraient déjà mettre la pression sur Amorim</p><p>Tottenham amorce une nouvelle ère suite au départ surprise de Daniel Levy après 25 ans, et l'arrivée de Randal Kolo Muani (prêt PSG). </p><h2>Mes Pronos pour la J4 de Premier League:</h2><p>Arsenal 3 - 0 Nottingham</p><p>Bournemouth 0 - 2 Brighton Hove</p><p>Crystal Palace 2 - 0 Sunderland</p><p>Everton 2 - 0 Aston Villa</p><p>Fulham 1 - 1 Leeds United</p><p>Newcastle 2 - 1 Wolverhampton</p><p>West Ham 0 - 2 Tottenham</p><p>Brentford 0 - 2 Chelsea</p><p>Burnley 0 - 2 Liverpool</p><p>Man City 1 - 1 Man United</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><h3>Le point sur la stratégie des Chips</h3><p>La saison 2025/26 de Fantasy Premier League révolutionne la stratégie des chips en doublant leur nombre et en imposant une contrainte temporelle cruciale : le premier de chaque chip doit être utilisée avant la J19, sinon il est perdu. </p><p>Cette nouvelle règle transforme complètement l'approche stratégique traditionnelle qui consistait à attendre les Blank ou Double Gameweeks en fin de saison. Pour le Free Hit, on peut désormais être judicieux de l'utiliser dès la  J4 pour naviguer les fixtures difficiles de joueurs clés comme Bruno Fernandes face à Manchester City ou les joueurs de Nottingham Forest contre Arsenal. </p><p>L'idée est de ne plus garder ces chips au chaud mais de les utiliser proactivement dés que votre équipe rencontre des obstacles spécifiques, que ce soit des blessures , des confrontations directes entre Titans, ou des opportunités comme cette journée où Arsenal, Liverpool et Newcastle  affrontent des adversaires plus faibles. </p><p>Pour le Triple Captain, il faut identifier les journées où votre capitaine sera à un avantage certain, ce qui est complexe en l'absence probable de doubles journées. La clé est d'adopter une mentalité plus flexible et opportuniste plutôt que d'attendre le moment &quot;parfait&quot; qui pourrait ne jamais arriver dans la première moitié de saison.</p><h3>Les Indispensables</h3><p><strong>Mohamed Salah</strong> (£14.5m) Salah affronte Burnley et reste l’option premium la plus fiable du jeu grâce à ses minutes assurées et sa constance sur les points, malgré un début de saison plus calme.</p><p><strong>Erling Haaland</strong> (£14.1m) Top buteur et boss du xG (3.86 en trois matchs), Haaland joue tous les matchs et peut marquer même contre des gros adversaires, ce qui en fait une nécessité .</p><p><strong>Jean-Philippe Mateta</strong> (£7.5m) Penalty-taker de Crystal Palace, Mateta bénéficie d’une série très favorable et d’un volume de tirs élevé, parfait pour GW4 contre Sunderland.</p><p><strong>Virgil van Dijk</strong> (£6.0m) Solide en défense et gros danger lors des corners, Van Dijk joue à Burnley qui vient d’encaisser sur phase arrêtée, grande chance de clean sheet et bonus.</p><p><strong>Jack Grealish</strong> (£6.7m) Milieu d’Everton très en forme, Grealish a déjà délivré 4 passes décisives en 2 matchs et serait face à la défense faible d’Aston Villa.</p><h3>Les bons tuyaux</h3><p><strong>Antoine Semenyo</strong> (£7.4m) L’attaquant de Bournemouth est leader aux tirs dans la surface et aux grosses occasions, et reçoit Brighton en GW4.</p><p><strong>Cody Gakpo</strong> (£7.7m) Titulaires pressentis à Liverpool avec calendrier alléchant (Burnley, Everton), Gakpo profite de l’arrivée tardive d’Isak pour jouer plus.</p><p><strong>Joao Pedro</strong> (£7.7m) Avant-centre de Chelsea, Pedro figure parmi les meilleurs tireurs et affronte Brentford (très faible xG concédé).</p><p><strong>Gabriel Magalhaes</strong> (£6.1m) Défenseur d’Arsenal avec fort potentiel de clean sheet à domicile contre Nottingham Forest (adversaire très faible offensivement).</p><p><strong>Maxence Lacroix</strong> (£5.0m) Défenseur Crystal Palace « DefCon magnet », qui bénéficie de la forme défensive de son équipe et de chiffres élevés en contribution.</p><h3>Les pépites</h3><p><strong>Marcos Senesi</strong> (£4.6m) Défenseur titulaire chez Bournemouth, très stable statistiquement, bon calendrier et clean sheet possible.</p><p><strong>Daniel Munoz</strong> (£5.5m) Latéral offensif de Crystal Palace avec grosse activité offensive, fixtures favorables en GW4.</p><p><strong>Joachim Andersen</strong> (£4.5m) Autre défenseur Palace, très fiable et bon en bonus, parfait si budget limité.</p><p><strong>Kiernan Dewsbury-Hall</strong> (£5.0m) Milieu d’Everton, comparé favorablement à Grealish, minutes sûres et capacité de points.</p><p>Bonne semaine à tous...</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

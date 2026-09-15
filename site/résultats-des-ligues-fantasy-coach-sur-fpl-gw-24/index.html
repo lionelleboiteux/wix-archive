@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Résultats des ligues Fantasy Coach sur FPL. GW 24.</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Avec la J25 de Premier League qui commence ce Vendredi,je vous fais un point rapide sur les ligues FPL de fantasy-coach.fr ...."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Résultats des ligues Fantasy Coach sur FPL. GW 24."><figure class="hero"><img src="/media/deb9b2_264fe994d41e4dd9b3c86b83c74cefd1_mv2.jpg" alt=""/><div class="scrim"></div><h1>Résultats des ligues Fantasy Coach sur FPL. GW 24.</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 14 février 2025</p><div class="body"><p>Avec la J25 de Premier League qui commence ce Vendredi,je vous fais un point rapide sur les ligues FPL de <a href="http://fantasy-coach.fr">fantasy-coach.fr</a>. Malheureusement il n’y aura pas de version anglaise de cet article.</p><p>La deadline de la GW25 est Vendredi 14 Février 2025 à 19h30 CET (18h30 GMT).</p><h2>La Ligue Classique (code: gpojm8): </h2><p>La journée avait été lancée par l’énorme carton de Nottingham Forest contre Brighton avec le hat trick du super Kiwi.</p><p>Liverpool pouvait aussi prendre un avantage quasi définitif en rattrapant son match en retard contre Everton. Mais les derbys sont des matchs particuliers….encore plus quand c’est le dernier de l’histoire dans le mythique Goodison Park. Ça n’a pas empêché Mo Salah de réaliser un score monstrueux de 29pts dans des matchs compliqués. Les triple Captainers ont gagné ce tour de jeu.</p><img src="/media/deb9b2_252791d0e35249eda676ceea4e23244e_mv2.jpg" alt=""/><p><strong>Julien Cazenave</strong> grâce à ses 142pts fait un retour tonitruant sur les talons d’ <strong>Eric Trump</strong>. Ce dernier n’ayant joué aucune chip en paye les conséquences. L’avance d’Eric n’est dorénavant que de 3pts. <strong>Kim Arnessen</strong> complète le podium. Lui aussi réalise un score de 142pts. Julien et Kim eux ont pris le risque de jouer leur « Assistant Manager » en sélectionnant Moyes. Bien leur en a pris.</p><p>L’écart dans le top 10 se resserre un poil suite à la performance moyenne d’Eric Trump. Il y a 54pts entre le 1er et le 10e de notre ligue classique.</p><p><strong>Arthur Simmonet</strong>, champion 2021,2022 et 2024, a utilisé son « Assistant Manager » chip mais son équipe a peu performer en général. Il perd 17 places et se retrouve 376e.</p><p><strong>Julien Cazenave</strong>, le vainqueur de la Cup 2024, reste 2e mais il d’est replacé dans la course à la victoire finale après un mois de Janvier moins flamboyant.</p><p><strong>Asare Daniel</strong>, vainqueur de la Winter Cup 2024, chute à la 32e place avec une perte de 17 place lui aussi.</p><p><strong>Michael Akins</strong>, le vainqueur du Survivor 2024, continue sa remontée et gagne 8 places pour se classer 26e. </p><h2>Fantasy Coach’s FPL Survivor (code: gpojm8) </h2><p>Qui dit journée double dit scores énormes…surtout quand un joueur aussi populaire que Salah marque 3 buts, fait une passe décisive et marque 6pts de bonus. Le score minimum à réaliser pour la GW24 est un énorme 90pts. Je prens les paris tout de suite : je doute que ce record soit battu d’ici les 2-3 derniers tours du Survivor.</p><p><strong>Michael</strong> <strong>Akins</strong>, le champion 2024, avec un score de 131pts passe tranquillement ce tour de jeu. Cependant ce score ne le fait même pas rentrer dans le top 50 de la gameweek.</p><p>Le meilleur score de la journée est posté par Konadu Destiny. Lui par contre je ne le vois pas être battu. 162pts, il faudra une performance majuscule de Haaland…si City arrive en demie de Cup (seul moyen pour que les Citizens aient une double gameweek en fin de saison). Konadu atteint la 89e place à cet énorme score.</p><p><strong>Ben Kapindula</strong> est tombé. Depuis de nombreuses journées il échappait plus ou moins facilement à l’élimination. La DGW24 lui aura été fatale.  Le nouveau manager avec le pire classement général encore en course dans le Survivor est <strong>Sam Andoh</strong>. Il est 460e.</p><p>La moyenne de point de la ligue pour la GW23 est de 104pts.</p><p>Le tableau des résultats est à retrouver via ce <a href="https://docs.google.com/spreadsheets/d/1czz_cBZOnYX4w3ZE5iGRX_W12Cac6r8Rorh8S7vHWXY/edit?usp=drivesdk"><u>lien</u></a>.</p><p><u>Les scores de qualification minimum:</u> </p><p><em>GW</em> <em>1</em>: 36pts                               <em>GW 20</em>: 47pts</p><p><em>GW</em> <em>2</em>: 41pts GW 20: 47pts  <em>GW 21</em>: 43pts (1261pts OP)</p><p><em>GW 3</em>: 38pts (159pts OP)     <em>GW 22</em>: 30pts (1320pts OP)</p><p><em>GW 4</em>: 24pts                              <em>GW 23</em>: 49pts (1375pts OP)</p><p><em>GW</em> <em>5</em>: 38pts (275pts OP)     <em>GW 24</em>: 90pts</p><p><em>GW</em> <em>6</em>: 26pts </p><p><em>GW 7</em>: 25pts (428pts OP)</p><p><em>GW 8</em>: 17pts (480pts OP)</p><p><em>GW 9</em>: 39pts (471pts OP)</p><p><em>GW 10</em>: 22pts (527pts OP)</p><p><em>GW 11</em> : 28pts (581pts OP)</p><p><em>GW 12</em>: 28pts (658pts OP)</p><p><em>GW 13</em>: 40pts (754pts OP) </p><p><em>GW 14</em>: 34pts (789pts OP) </p><p><em>GW 15</em>: 30pts (840pts OP) </p><p><em>GW 16:</em> 29pts (887pts OP) </p><p><em>GW 17</em>: 38pts (948pts OP) </p><p><em>GW 18</em>: 40pts (989pts OP) </p><p><em>GW 19</em>: 51pts (1168pts OP) </p><h2>Ligue H2H </h2><img src="/media/deb9b2_07fed651b93a42e18df5d73af63af88d_mv2.jpg" alt=""/><p>Regroupement en tête de notre ligue H2H. 4 managers sont à égalité avec 54pts. Au jeu du meilleur score total sur la saison, c’est <strong>Tom Nettleton</strong> qui gagne et qui prend la 1ere place. Il devance <strong>Abdelhadi Aziz</strong> et <strong>Dmitry Gor</strong> qui forment le reste du podium.</p><p>Avec 112pts de différence, je remporte la victoire avec la plus grande différence de points. Cela me permet d’atteindre la 20e place de la ligue H2H de Fantasy Coach.</p><h2>Ligue FPL Challenge (code 5n6fr5) </h2><img src="/media/deb9b2_f7019b4b7c3a453db94540436e2c33f8_mv2.jpg" alt=""/><p>En GW24 se déroulait le premier challenge de l’évènement « Assistant Manager Series ». Il s’agissait du challenge « The Assistant Manager GW1 ». Il fallait sélectionner 10 joueurs et un entraîneur assistant avec un budget 100M. Le challenge est remporté par <strong>Zakaria El Manyani</strong>. Il devance <strong>Felix Ogunniyi</strong> d’un petit point. Zakaria prend donc aussi la tête de l’évènement. </p><img src="/media/deb9b2_38174d522606443590c107725eb6a86a_mv2.jpg" alt=""/><p>Le podium du classement général de la saison ne change pas. <strong>Michael De</strong> <strong>Salazar</strong> devance toujours <strong>Aled Wilcox</strong> et <strong>Sebastian Przybylowski</strong> dans cet ordre là.</p><p>Je rentre dans le top 20 en gagnant 3 places pour me classer 18e. </p><p><strong>Zakaria El Manyani</strong> qui a gagné l’évènement « Goal Diggers » gagne lui aussi 3 places en gagnant le challenge. Il est 9e dorénavant. </p><p><strong>Zubail Kaweesi</strong>, vainqueur de l’évènement « Festive Fixtures », perd 1 place pour se classer 12e. </p><p>Enfin  <strong>Andrew Priestley</strong> le vainqueur de l’événement « Transfer Window Special » prend la 11e place en progressant de 7 rangs.</p><p>Pour la GW25 le challenge est « The Assistant Manager GW2 ». Bis repetita. Il vous faudra sélectionner 10 joueurs plus 1 entraîneur assistant parmi les coachs de Premier League. Le budget alloué est de 100M.</p><p>Pour petit rappel Arne Slot et Unaï Emery ont 2 matchs comptant pour ce tour de jeu. Autre précision : Fabian Hürzeler contre Chelsea, Ruud Van Nistelrooy contre Arsenal, Kieran McKenna contre Aston Villa, Marco Silva contre Nottingham Forest, Ivan Juric contre Bournemouth, Graham Potter contre Brentford Vitor Pereira et Unaï Emery (encore lui) tous les deux contre Liverpool ont tous des matchs contre des équipes classées 5 places ou plus au dessus de leur équipes respectives. En cas de victoire de ces « Petits Poucets » il y a un bonus de 10pts à la clé (ou 5 points en cas de match nul). </p><p>Bonne GW25. N’oubliez pas que c’est une journée qui commence ce Vendredi.</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

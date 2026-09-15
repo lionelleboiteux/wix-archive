@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Nuremberg mise sur Klose pour se rapprocher</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Nuremberg
+2.Bundesliga"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Nuremberg mise sur Klose pour se rapprocher"><figure class="hero"><img src="/media/3448f3_168aeda17cda4c15be4f46a0e19d9cf5_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Nuremberg mise sur Klose pour se rapprocher</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 2 août 2024</p><div class="body"><img src="/media/3448f3_168aeda17cda4c15be4f46a0e19d9cf5_mv2.jpeg" alt=""/><h2>1. FC Nürnberg</h2><p>L’année dernière, Nuremberg a dû batailler tout au long de la saison pour tenter de retrouver son lustre d’antan. En vain. Dans le coup jusqu’au mois de novembre, la suite est plus compliquée avec une très mauvaise fin de championnat (1v, 1n, 8d). La douzième place est presqu’un trompe l’œil au regard des 64 buts encaissés par la deuxième plus mauvaise défense. Compliqué dans ces conditions de jouer les premiers rôles.</p><p>Remise à plat par les dirigeants et ouverture d’un nouveau cycle du côté du Valznerweiher avec la nomination d’un nouveau directeur sportif <strong>Joti Chatzialexiou</strong>, qui occupe ainsi son premier poste en club après plus de 20 ans de carrière à la DFB où il finit comme directeur sportif de l’équipe nationale. Confronté au départ de <strong>Cristian Fiél</strong>, il prend une décision forte et décide de confier alors le banc de touche à <strong>Miroslav Klose</strong> pour sa première expérience d’entraîneur en Allemagne. Les deux se sont croisés en sélection sous le mandat de Joachim Low et lient donc leur avenir professionnel de court-terme.</p><p>Autre volonté exprimée et revendiquée, celle de faire la part belle à la jeunesse d’un club capable de sortir régulièrement de beaux espoirs. A l’exemple de <strong>Finn Jeltsch</strong>, jeune défenseur central de 17 ans, champion du monde et d’Europe U17 et qui a joué la saison dernière 13 matchs. Ou de <strong>Jens Castrop</strong>, milieu de 21 ans qui a le potentiel pour franchir un nouveau pallier.</p><p>Alors que ses plus belles promesses ont été débauchées par un Eintracht Francfort venu flairer les bonnes affaires (transfert du joyau <strong>Can Uzun</strong>, ses 19 buts et 4 passes pour 11 M€ et de <strong>Nathaniel Brown</strong>), c’est avec les poches pleines que le club de Franconie a répondu par un mercato consistant pour compenser le départ de ses jeunes talents et la mise à l’écart concomitante de ses nombreux indésirables.</p><img src="/media/3448f3_23c28d8269ab43db8683c2873fdb2773_mv2.jpeg" alt=""/><p>Avec une ligne directrice claire et soucieuse de recruter de l’expérience dans chaque ligne pour accompagner les joueurs en devenir, on retient notamment les arrivées de <strong>Robin Knoche</strong>, ex-taulier défensif de l’Union Berlin sous Urs Fischer, le très expérimenté latéral gauche<strong> Danilo Soares</strong> du VfL Bochum, le gardien slovaque <strong>Michal Kukucka</strong> venu bouleverser la hiérarchie dans les cages, la promesse du milieu <strong>Casper Jander</strong> (Duisbourg – lui est à suivre de près), les tchèques <strong>Michal Sevcik</strong> (jeune offensif) et <strong>Ondrej Karafiat</strong> (défenseur central), l’ailier <strong>Florian Pick</strong> venu se ressourcer en 2.Buli, le très jeune attaquant grec <strong>Stefanos Tzimas</strong> (attention gros talent) et <strong>Janni Serra</strong>, avant-centre à la relance.</p><p>Les premiers pas du duo Klose-Chatzialexiou ont apporté une certaine effervescence, tant populaire que médiatique, et seront scrutés de près. Et, dans un environnement où la pression peut être surprenante, il va devoir répondre aux fortes attentes d’une institution qui court après son passé de club traditionnel. En jouant une partie de son développement sur celui de jeunes joueurs, la patience sera de toute façon de mise. Pas forcément une vertu cardinale du football professionnel. Et comme en plus, on est un peu dubitatif sur les qualités d’entraîneur de Klose, on demande à voir.</p><p>Profilé pour finir en milieu de tableau, une place dans la première moitié du classement serait déjà une saison très réussie pour un Nuremberg dont les premières sorties observées pendant la préparation laissent à penser que la marche avant est enclenchée. Reste à savoir sur quelle vitesse.</p><p><strong><em>Pronostic 11</em></strong></p><img src="/media/3448f3_110794b3a0f94468b7b571b55dae7563_mv2.jpeg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J13</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Quelle semaine pour être un Gooner ! Non seulement Arsenal continue de marcher sur la Premier League, mais la démonstration en Ligue des Champions cette semaine a rappelé à toute l'Europe qui est le patron. Pendant ce temps, Liverpool... ah, Liverpool. Une défaite humiliante en milieu de semaine qui prolonge leur &quot;série noire&quot;. Arne Slot commence à avoir très chaud, 12ème au classement derrière Everton, l'ennemi numéro 1."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J13"><figure class="hero"><img src="/media/449182_a1d2cb7631f249cd89802ea485765cc5_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J13</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 27 novembre 2025</p><div class="body"><p>Quelle semaine pour être un Gooner ! Non seulement Arsenal continue de marcher sur la Premier League, mais la démonstration en Ligue des Champions cette semaine a rappelé à toute l'Europe qui est le patron. Pendant ce temps, Liverpool... ah, Liverpool. Une défaite humiliante en milieu de semaine qui prolonge leur &quot;série noire&quot;. Arne Slot commence à avoir très chaud, 12ème au classement derrière Everton, l'ennemi numéro 1.</p><p>Cette J13 s'annonce charnière. Arsenal se déplace chez son daufin temporaire, Chelsea, City reçoit un Leeds qui risque de servir de punching-ball, et Villa a un boulevard à domicile. Pour les managers Fantasy, c'est l'heure de capitaliser sur les équipes qui n'ont pas le moral dans les chaussettes.</p><h2>Le tour d'horizon</h2><p><strong><span style="color:#1a1c1e">Arsenal</span></strong></p><p><span style="color:#1a1c1e">Les invincibles 2.0 ? Après avoir éteint le Bayern, les hommes d'Arteta vont à Stamford Bridge pour le derby. Chelsea a beau avoir Palmer, la défense des Blues ne tiendra pas face à la triplette potentielle Saka-Havertz-Martinelli. Je prédis une victoire 2-1, maîtrisée, confirmant notre suprématie sur Londres (et sur l'Angleterre).</span></p><p><strong><span style="color:#1a1c1e">Manchester City</span></strong></p><p><span style="color:#1a1c1e">Éliminés de la Carabao Cup il y a peu, mais solides en Europe, les Citizens reçoivent Leeds. C'est le genre de match où Haaland se réveille de mauvaise humeur et met un triplé. Leeds va souffrir à l'Etihad. Clean sheet et avalanche de buts en vue.</span></p><p><strong><span style="color:#1a1c1e">Liverpool</span></strong></p><p>La crise couve à Anfield. Après les désillusions récentes, le déplacement à West Ham ressemble à un match de la dernière chance pour Slot. Heureusement pour eux, les Hammers sont accueillants en ce moment. Je vois les Reds stopper l'hémorragie avec un 2-0, histoire de sauver les meubles, mais la confiance est brisée. Alonso serait pressenti pour remplacer Slot... affaire à suivre.</p><p><strong><span style="color:#1a1c1e">Aston Villa</span></strong></p><p><span style="color:#1a1c1e">Les Villans reçoivent Wolverhampton dans un derby des Midlands. Villa sort d'une bonne prestation européenne et affronte des Wolves en perdition. C'est le moment de miser gros sur l'attaque d'Emery.</span></p><p><strong><span style="color:#1a1c1e">Spurs</span></strong></p><p><span style="color:#1a1c1e">Tottenham reçoit Fulham. Après leur défaite logique dans le North London Derby, on s'attendrait à une réaction... mais on parle de Tottenham. Un match nul 1-1 poussif semble être le maximum qu'ils puissent offrir à leurs supporters masochistes.</span></p><h2>Mes Pronos pour la J13 de Premier League:</h2><p><span style="color:#1a1c1e">Sunderland 2 - 1 Bournemouth</span></p><p><span style="color:#1a1c1e">Brentford 2 - 0 Burnley</span></p><p><span style="color:#1a1c1e">Man City 2 - 0 Leeds United</span></p><p><span style="color:#1a1c1e">Everton 1 - 0 Newcastle</span></p><p><span style="color:#1a1c1e">Tottenham 1 - 1 Fulham</span></p><p><span style="color:#1a1c1e">Crystal Palace 2 - 1 Man United</span></p><p><span style="color:#1a1c1e">Aston Villa 2 - 0 Wolverhampton</span></p><p><span style="color:#1a1c1e">Nottingham 0 - 2 Brighton Hove</span></p><p><span style="color:#1a1c1e">West Ham 0 - 2 Liverpool</span></p><p><span style="color:#1a1c1e">Chelsea 1 - 2 Arsenal</span></p><p><span style="color:#1a1c1e">Envoyez nous vos pronos via </span><a href="https://www.google.com/url?sa=E&amp;q=#"><strong><u><span style="color:#2483e2">le jeu des pronos</span></u></strong></a></p><h2>Le Player Picks</h2><h3>Les Indispensables</h3><p><em><span style="color:#1a1c1e">Les valeurs sûres, possédées par tout le monde. Ne pas les avoir, c'est jouer à la roulette russe.</span></em></p><p><strong><span style="color:#1a1c1e">Erling Haaland (£14.9M)</span></strong><span style="color:#1a1c1e"> : Il joue à domicile contre Leeds. Toutes les projections le donnent à plus de 10 points. C'est le capitaine évident (&quot;perma-captain&quot;) de la semaine. Si vous ne l'avez pas, cachez-vous.</span></p><p><strong><span style="color:#1a1c1e">Bukayo Saka (£10.3M)</span></strong><span style="color:#1a1c1e"> : Même à l'extérieur contre Chelsea, il reste incontournable. Il est l'âme d'Arsenal, tire les penaltys, les corners, et Chelsea encaisse toujours au moins un but. Sa forme actuelle est tout simplement injouable.</span></p><p><strong>Igor Thiago (£6.5m)</strong> : Avant-centre de Brentford en grande forme, déjà plusieurs retours offensifs et un superbe match à domicile contre Burnley, puis une série de rencontres favorables où Brentford est fortement recommandé pour du triple-up offensif.</p><p><strong><span style="color:#1a1c1e">Bryan Mbeumo (£8.4M)</span></strong><span style="color:#1a1c1e"> : Malgré le match piège contre Palace (défaite 2-1 pronostiquée pour United), Mbeumo reste l'arme fatale d'Amorim. Palace encaisse des buts, et Mbeumo est impliqué sur 60% des buts de son équipe.</span></p><h3>Les bons tuyaux</h3><p><em><span style="color:#1a1c1e">Ils ont un potentiel énorme sur ce match et un calendrier vert pour la suite. C'est le moment d'investir.</span></em></p><p><strong>Jeremy Doku</strong> (£6.5m) : Ailier de City très créatif, deuxième de toute la ligue pour les occasions créées et très haut pour les touches dans la surface ; bon spot explosif avec Leeds puis d’autres adversaires prenables, même avec le risque de rotation.​</p><p><strong>Kevin Schade</strong> (£7.0m) : Milieu/ailier de Brentford qui multiplie les tirs dans la surface et les retours récents, reçoit Burnley (défense catastrophique à l’extérieur) avec un fort potentiel de premier gros haul FPL.​</p><p><strong>O’Reilly</strong> (£5.0m) : Défenseur bon marché avec un calendrier attractif, combinant probabilité de clean sheets et quelques contributions offensives.​</p><p><strong>Jurrien Timber</strong> (£6.3m) : Latéral/central d’Arsenal profil complet avec bonus potentiels et bonne série de fixtures, ce qui le rend intéressant pour sécuriser des retours sur 3–4 GW.</p><p><strong><span style="color:#1a1c1e">Vitalii Mykolenko (£4.6M)</span></strong><span style="color:#1a1c1e"> : Everton reçoit Newcastle avec un prono de 1-0. Sean Dyche à domicile, c'est souvent synonyme de clean sheet moche mais efficace. Mykolenko monte aussi sur les côtés. Un pari défensif intelligent.</span></p><h3>Les pépites</h3><p><em><span style="color:#1a1c1e">Moins de £6.0M, titulaires et prêts à rapporter gros.</span></em></p><p><strong><span style="color:#1a1c1e">Morgan Rogers (£5.3M)</span></strong><span style="color:#1a1c1e"> : Le milieu d'Aston Villa est la pépite du moment. Titulaire, offensif, et joue contre les Wolves à domicile. C'est la porte d'entrée la moins chère vers l'attaque de Villa.</span></p><p><strong><span style="color:#1a1c1e">Daniel Muñoz (£5.9M)</span></strong><span style="color:#1a1c1e"> : Le défenseur de Palace est une machine à bonus offensifs. Contre un United qui va devoir attaquer, il aura des espaces en contre. Attention, il frôle la barre des 6M, c'est le moment de l'acheter avant qu'il n'augmente.</span></p><p><strong><span style="color:#1a1c1e">Nordi Mukiele (£4.3M)</span></strong><span style="color:#1a1c1e"> : Encore lui ! Sunderland reçoit Bournemouth et on les voit gagner 2-1. Mukiele est toujours titulaire, solide, et permet de libérer du budget pour vos gros bras (Haaland/Salah).</span></p><p><strong><span style="color:#1a1c1e">Lewis Hall (£4.9M)</span></strong><span style="color:#1a1c1e"> : Si vous cherchez un défenseur joueur, Hall à Newcastle commence à s'imposer. Même si le match contre Everton s'annonce fermé, son activité offensive peut payer sur un malentendu.</span></p><p><span style="color:#1a1c1e">Bonne chance à tous pour cette J13...</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

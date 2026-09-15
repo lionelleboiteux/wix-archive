@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J6</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="« On va avoir un match difficile dans un environnement qui pousse fort, face à un adversaire européen.» C Galtier (août 2022) Rentrée =..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J6"><h1 class="title-only">Player Picks, Ligue 1, J6</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 2 septembre 2022</p><div class="body"><p>« On va avoir un match difficile dans un environnement qui pousse fort, face à un adversaire européen.» C Galtier (août 2022)</p><p>Rentrée = retour des devoirs, départ de Caleta-Car (enfin) mais pas d’Aouar: Player Picks de la saison LCDE, épisode 6</p><h2>Les matchs de la journée</h2><h3>Auxerre – Marseille</h3><p>Je sais pas si c’est une bonne ou une mauvaise chose mais en tout cas on prend l’habitude de démarrer nos journées de foot par un match d’Auxerre. Faut croire que les femmes de Paris ont endurci ma carapace car le retour d’Harit, à nouveau en prêt, à nouveau le dernier jour avant la clôture du marché, et seulement parce que l’OM s’est fait recal par Malinovski, ne me fait absolument pas vibrer. Bref la succursale d’Arsenal devrait prolonger sa série aussi sereinement que Dieng sa saison en tribunes</p><p>Score 0-2</p><h3>Lyon – Angers</h3><p>C’est con pour une fois que Lyon a joué au foot et mené – ça arrive quand KTE se met au niveau de son pendant Tete -, il a réussi à se prendre un contre de l’espace (80 m) par l’AJA et tremblé jusqu’au coup de sifflet. Néanmoins l’OL vient d’enchaîner un 3e succès en 4 match à la maison (de là à y voir un lien de cause à effet?) contre des équipes de tocards. Ce serait étonnant qu’un SCO toujours en quête de victoire et avant-dernier inverse cette tendance. Dernier glas pour Baticle ?</p><p>Score 3-0</p><h3>Nantes – Paris SG</h3><p>Dernière répet avant le beau bal, l’ivresse des grands soirs, le doux parfum d’une Champions qui – à voir l’air non rassasié des Ney &amp; Messi au moment de leur remplacement à Toulouse – sera sans l’ombre d’un doute rouge et bleue en mai. On va voir si la Vieille Dame n’est pas en fait une sacrée cougar! Une petite pensée pour coach Kombouaré qui espérait pas moins de 4 recrues les tous derniers jours, n’a eu droit qu’à Ganago et devrait connaître une seconde br*nlée en 1 mois contre Paris</p><p>Score 0-5</p><h3>Montpellier – Lille</h3><p>J’ignore la cause du désamour de Yusuf – à part peut-être la bouffe – et Lille mais je vois aussi mal Ounas le remplacer au pied levé que Cabella (no offense bro) pour Blas. Une petite pensée pour les présentateurs télé qui vont devoir jongler toute la saison de L1 avec les Gomes, André et André Gomes Quoi qu’il en soit il va falloir que ce joli petit monde se déplace à la Mosson chez la 2e attaque de France et de Navarre qui, belle joueure, n’alignera aucun de ses 2 premiers gardiens</p><p>Score 1-2</p><h3>Reims – Lens</h3><p>Au final<em> « Fofana, reste là » </em>et c’est tout le stade du leader de ligue 1 uber eats qui s’embrasa après la réception des Merlus cette semaine et une nouvelle prestation taille patron des Sang-et-Or portés par l’inoxydable Sotoca et la recrue Samed qui a déjà fait oublier le départ de Doucouré à Crystal Palace. C’est dire si on donne peu de gages de la peau de Reims, qui a eu le temps de remplacer sur le gong Touré par Holm mais pas le taulier/tôlier (c’est selon) Faes parti à Leicester</p><p>Score 2-3</p><h3>AC Ajaccio – Lorient</h3><p>La position de lanterne rouge d’Ajaccio au démarrage de septembre n’étonne pas le bon pronostiqueur que vous êtes puisque le petit promu vient d’enchaîner consécutivement Lyon, Lens, Rennes, Lille et surtout surtout l’ogre montpelliérain. Donc ce week-end la venue du FC Lorient, d’un Moffi retrouvé, doit être l’occasion pour l’ACA d’engranger en vue d’un maintien fort hypothétique. Le problème c’est que Pantaloni réclamait des attaquants et qu’il a eu le latéral tricard de Lyon Y Koné</p><p>Score 2-1</p><p>Clermont – Toulouse</p><p>A mon sens l’opposition la plus indécise de ce Player Picks. Même en faisant 6 changements (protocole commotion tu connais), le Clermont Foot 63 n’a pas réussi à venir à bout de l’hermétique arrière garde marseillaise et vient de concéder fort logiquement une seconde défaite ; à l’instar du TFC et son recrutement cosmopolite d’ailleurs. Toutefois, il serait tout de même assez bien venu pour le Tef de ramener qq chose d’Auvergne avant une série d’affrontements costauds en septembre</p><p>Score 1-1</p><h3>Brest – Strasbourg</h3><p>On ne peut pas être surpris par le début de saison poussif (3 points en 5 journées) des Strasbourgeois. Déjà obligés des Allemands à jouer en plein mois d’août c’est pas sport, mais en sus Stephan a perdu 4 de ses 5 titus en défense. Bon ça reste toujours mieux que la défense passoire de Brest, qui en a encore pris 3 à Rennes, d’autant plus qu’Ajorque est finalement tenu à prolonger l’aventure alsacienne et qu’il faudra faire de nouveau étalage de son talent pour plier bagages en janvier
+</p><p>Score 1-2</p><h3>Troyes – Rennes</h3><p>Avant on aimait regarder Troyes se faire poutrer. Aujourd’hui on aime regarder Troyes poutrer. 6 points, une palanquée de buts et un coaching gagnant : Bruno en a fermé des bouches en l’espace d’une petite semaine. Perso ça m’arrange cet échange parce que d’une Laborde + Delort ça réchauffe mon cœur de pailladin et financièrement j’ai quand même posé 51 patates sur Gouiri à MPG que je me suis mis dans le baba sur tout le 1er mois de compet. Pour ces raisons, je vais pas miser sur Rennes</p><p>Score 2-1</p><h3>Nice – Monaco</h3><p>Derby de la Côte d’Azur entre 2 mastodontes du championnat malades en ce début de saison et bloqués dans le ventre mou avec 5 unités seulement aux compteurs. Chez l’ASM, outre l’élimination préjudiciable en barrages de LDC,- et bien que l’arbitrage soit parfois peu favorable aux hommes de Clément – le mal semble profond. Mais ce n’est pas la victoire en trompe-l’œil contre le LOSC (2 pénos, 3 titres cadrés), ni le mercato so british last minute, niçois qui me rend plus optimiste pour les Aiglons</p><p>Score 0-0</p><p>On perd pas les bonnes habitudes et on attend comme chaque semaine <a href="http://www.fantasy-coach.fr/pronostics-ligue-1/">vos petits pronos.</a></p><h2>Players Picks</h2><h3>Les bons tuyaux:</h3><p>Même s’il n’est arrivé qu’hier, à ce prix-là, ça se tente : <strong>B Kamara</strong> (3)</p><p>Ah ouais paraît que je suis <strong>Doué</strong> (3,5) supersub du 6e volet du Player Picks LCDE, je veux rien savoir</p><h3>Les pépites:</h3><p>1 but en 2021, 3 en 3 matchs de 2022 : <strong>J Bamba</strong> (12,2) heureux</p><p>13 points sur 15 possibles et 3 pions encaissés : le roc marseillais <strong>C Mbemba </strong>(13,1)</p><h3>Les incontournables:</h3><p>Justesse, vitesse, hardiesse : <strong>Marco Verratti</strong> (15,8)</p><p>Le Mac Tyer du foot français, le général <strong>Lacazette</strong> (14,8), tête d’affiche du Player Picks LCDE n°6</p><p><em>t34</em></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

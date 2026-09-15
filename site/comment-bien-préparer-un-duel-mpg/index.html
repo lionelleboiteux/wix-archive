@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Comment bien préparer un duel MPG</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Tableau des absences MPG"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Comment bien préparer un duel MPG"><figure class="hero"><img src="/media/f084b3_247d47382cb34909afff7be3ce690790_mv2.png" alt=""/><div class="scrim"></div><h1>Comment bien préparer un duel MPG</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 17 novembre 2020</p><div class="body"><p>Les joueurs MPG les adorent ou les détestent mais ce qui est certain c’est qu’ils ne laissent pas indifférents. Je parle évidemment des duels dans Mon Petit Gazon.</p><p><strong>Personnellement, je fais partie de la première catégorie : j’adore !</strong></p><p>Je participe d’ailleurs à 2 tournois basés sur les duels.</p><p>Le premier regroupe 38 joueurs qui se rencontrent 2 fois tout au long de la saison en match aller-retour. Un système de point basé sur les résultats des matchs ET des confrontations permet d’établir un classement en fin de saison. Un tournoi du &quot;génial&quot; (ou pas) Rémi L.</p><p>Le second regroupe 200 joueurs répartis dans 20 équipes de 10 joueurs, les 20 équipes représentant chacune un club de ligue 1. Le calendrier se cale sur celui du championnat puisque à chaque journée les 10 joueurs d’un club affrontent dans 10 duels les 10 joueurs du club (par exemple en J10, les 10 lyonnais ont rencontré les 10 stéphanois. Particularité, cela se joue sur un match sec et l’équipe qui remporte une majorité des 10 duels, remporte les 3 points. J'en profite pour saluer l'énorme boulot de Lucas O. </p><p>
+Le classement après 10 journées :</p><p>De ces 2 expériences, j’ai pu tirer différents enseignements pour appréhender ce mode de jeu très particulier dans MPG. Je vous propose donc ci-dessous les 4 règles à respecter pour avoir une chance de gagner vos duels :</p><h3>1/ Analyser le calendrier :</h3><p>C’est une évidence mais l’analyse du calendrier est <strong>primordiale</strong>. En effet, et cela concerne tous les championnats, il est plus que conseillé de regarder attentivement les différentes rencontres prévues sur les 2 journées où vont se dérouler les duels. Après 10 journées, les bonnes défenses commencent à être connues donc miser sur les attaquants qui vont les affronter peut être moins intéressant finalement. A l’inverse, des attaquants moins « cotés » mais qui affrontent des défenses « passoires » peut s’avérer très rentable. C’est évidemment le même principe pour les gardiens ;-)</p><h3>2/ Vérifier les joueurs indisponibles :</h3><p>Après avoir regardé le calendrier, cela ne prend que quelques minutes mais <strong>VERIFIEZ LES JOUEURS INDISPONIBLES !</strong> Combien de fois ai-je constaté dans des duels, des compétiteurs qui balancent des grosses mises sur des joueurs suspendus ou d’ores et déjà forfaits ? Donc je vais faire un moment d’autopromo mais chaque semaine nous mettons en ligne un article – mis à jour dès qu’une info est remontée – regroupant l’ensemble des informations, club par club avec les durées d’absence, les suspensions et les incertains à travers un code couleur très simple. Nous rajoutons également le groupe convoqué si le club le publie avant le 1er match de la journée. (ex de la J10 : <a href="https://www.fantasy-coach.fr/ligue1-2020-21-suspensions-blessures-j10-2/">https://www.fantasy-coach.fr/ligue1-2020-21-suspensions-blessures-j10-2/</a>) </p><p>Enfin vous pouvez également aller voir nos excellents confrères (ouai on se la pète un peu façon média professionnel J) de <a href="https://www.tacompo.com/">@faistacompo</a> qui publie (entre autres) les compos probables de ligue 1. Il y a également la chaîne Youtube et Twitch de <a href="https://www.youtube.com/channel/UCd_ExSHLuor9z3QF7k5molQ">@deglingoMPG</a> sur laquelle il présente tous les matchs de la journée chaque vendredi à 16h (ou 17h selon car il le fait depuis l’étranger).</p><p>Au final, vous n'avez aucune excuse si vous vous retrouvez avec la moitié de votre effectif forfait sur une journée pour faire vos compos MPG.</p><h3>3/ L’étude de l’adversaire :</h3><p>Cela n’est pas forcément toujours possible mais quand vous le pouvez, prenez le temps d’analyser votre adversaire.</p><p>Pour cela, il faut que vous partagiez des ligues MPG avec lui ou bien que vous le connaissiez pour savoir comment il joue. Comme un coach qui envoie l’un de ses adjoints pour superviser l’équipe adverses, il n’est pas interdit d’aller examiner – quand vous le pouvez – les T1 de votre adversaire. Les deux éléments à regarder avec attention sont :</p><ol><li><p><strong>La liste des joueurs</strong> qu’il vise et quels sont ceux que vous avez en commun ;</p></li><li><p><strong>Sa façon de miser</strong> (par exemple s’il est plutôt à balancer des 150 sur Mbappe et Neymar ou bien à miser à la cote +3).</p></li></ol><p>A partir de ses éléments, vous pourrez alors adapter vos mises et donc potentiellement prendre le dessus au moment du mercato.</p><h3>4/ Les astuces mercato :</h3><ol><li><p><strong>Le Timing.</strong> Dans les duels, la probabilité que vous ayez des mises identiques étant mathématiquement plus faible à 2 joueurs qu’à 6, 8 ou 10 joueurs, prenez votre temps ! En effet, plus vous prendrez de temps, plus vous aurez les infos pour adapter votre mercato. En revanche, une règle très importante pour moi c’est que cela doit se faire dans la transparence. Le fair-play impose que vous caliez votre mercato avec votre adversaire en amont.</p></li><li><p><strong>Le gardien.</strong> Vous n’allez jouer que 2 matchs ! Donc vous n’avez pas besoin de 2 ou 3 gardiens. <strong>1 seul suffit !</strong> Alors ne gaspillez pas votre budget et investissez sur un gardien avec son remplaçant (voire le numéro 3 seulement si vous voulez encore gratter du budget). Enfin vous n’avez aucune raison de le <strong>surpayer</strong>, la cote suffit sinon vous en prendrez un autre au T2.</p></li><li><p><strong>Pas besoin d’avoir un effectif pléthorique</strong>, notamment sur le plan défensif. Vous n’êtes pas dans un marathon mais dans un sprint. Or si vous avez respecté les règles 1 et 2, vous ne devriez pas avoir besoin de plus de 6 défenseurs, voire 5 auxquels vous ajoutez un défenseur à la cote de 1 ou 2. Cette dernière option vous permettra de dégager encore un peu plus de marge pour les mises sur les joueurs offensifs.</p></li><li><p><strong>La situation Covid.</strong> La situation actuelle est assez particulière et difficile à prévoir. Cependant une chose semble avérée pour le moment : aucun joueur ayant déjà été testé positif au Covid ne l’a été de nouveau plusieurs semaines après. En partant de ce principe, certains joueurs déjà touchés deviennent donc plus intéressants. Vous ne risquez pas de découvrir une fois le mercato fini que votre joueur est forfait cause Covid. A titre d’info par exemple, 5 gardiens ont déjà été testés positifs…</p></li></ol><p>J’aime les duels car ils nécessitent la mise en place d’une stratégie basée sur l’analyse de données disponibles. Et généralement, ceux-qui les préparent le mieux sont souvent récompensés car tout ce travail en amont permet de diminuer, sans évidemment la supprimer, la donnée « chance ».</p><p>Les ligues de 6 joueurs ou plus sont forcément impactés par des éléments que vous ne pouvez pas prévoir comme des longues blessures ou des suspensions. Or dans les duels MPG, celui qui aura su le mieux maîtriser ces données partira forcément avec une longueur d’avance.</p><p>Mais sachez que même avec tout cela, la magie de MPG fait que vous ne pourrez rien faire si votre adversaire vous sort le doublé de Dia et de Bahoken pendant que vos Neymar, Depay et Ben Yedder sont restés muets…</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

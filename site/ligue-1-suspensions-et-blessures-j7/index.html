@@ -1,0 +1,100 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Ligue 1 - Suspensions et Blessures J7</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="(Photo Gwendoline Le Goff/FEP/Icon Sport) Dernière MAJ : Dimanche 09/09/2022 10h00 Les principaux absent-s confirmés :  Gonzales,..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Ligue 1 - Suspensions et Blessures J7"><figure class="hero"><img src="/media/449182_2dd6808951d847239cde9ce74afac7b9_mv2.png" alt=""/><div class="scrim"></div><h1>Ligue 1 - Suspensions et Blessures J7</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 8 septembre 2022</p><div class="body"><p>(Photo Gwendoline Le Goff/FEP/Icon Sport) </p><p><strong>Dernière MAJ : Dimanche 09/09/2022 10h00</strong> </p><p><strong>Les principaux absent-s confirmés : </strong>
+<strong>Gonzales, Mayembo, Cimignani, Jakolis, Sabanovic, Bobichon, Amadou, Jeanvier, Charbonnier, Da Costa, Del Castillo, Mounié, Le Douaron, Gonalons, Zeffane, Diallo, Machado, Saïd, Lihadji, Zhegrova, Cabella, Weah, Boateng, Rongier, Dieng, Volland, Germain, Omlin, Mavididi, Delaye, Pedro Mendes, Fabio, Moutoussamy, Rosario, Schneiderlin, Da Cunha, Ramsey, Atal, Renato Sanches, Foket, Matusiwa, Holm, Omari, Gomis, Doku, Kalimuendo, Prcic, Fila, Nyamsi, Kawashima, Delaine, Lienard, Ratao, Tsingaras, Salmier</strong>  </p><p><strong>Longue absence :</strong>
+<strong>Eneme-Ella</strong>, <strong>Pellenard, Farinez, Bertaud, Sainte-Luce, Sierhuis, Healey, Conte</strong> </p><p><strong>Les dernières décisions de la commission de discipline de la LFP en cliquant sur le lien</strong> :
+<a href="https://www.lfp.fr/Articles/Discipline/2022/09/01/commission-de-discipline-les-decisions-du-1-septembre-2022">1er septembre 2022</a>
+<a href="https://www.lfp.fr/Articles/Discipline/2022/09/07/commission-de-discipline-les-decisions-du-7-septembre-2022">7 septembre 2022</a>  </p><p>Nous avons rajouté une colonne afin de vous indiquer quel club a été mis à jour. &quot;Mer 22h30&quot; signifie que la dernière mise à jour date de Mercredi à 22h30, &quot;Jeu 17h00&quot; = Jeudi à 17h00 et &quot;Ven 14h00&quot; = Vendredi à 14h00. Le but est que vous sachiez quel club a été modifié lors des mises à jour.
+Code couleur :
+Noir : 1ère MàJ / Rouge : 2nde MàJ / Bleu : 3ème MàJ / Violet : 4ème MàJ / Jaune : 5ème MàJ </p><p>Bienvenue sur notre page suspensions et blessures Ligue 1. Cette page sera constamment ré-actualisée avec des informations provenant de sources sûres et vérifiées. </p><img src="/media/449182_2dd6808951d847239cde9ce74afac7b9_mv2.png" alt="Ajaccio"/><img src="/media/449182_41f6576f3df647dbab8a5c46e04eacbf_mv2.png" alt="Angers"/><img src="/media/449182_205eb7965acc420cb1b3f4a7aa7f1954_mv2.png" alt="Auxerre"/><img src="/media/449182_916fea74a4c94f36ad67ea058aa92856_mv2.png" alt="Brest"/><img src="/media/449182_199712cda36b41638e055079efe8a7ec_mv2.png" alt="Clermont Foot"/><img src="/media/449182_8c2d65679bc44e17b0e2546b9926e18c_mv2.png" alt="Lille"/><img src="/media/449182_29ae307624bd4cacb41517a5609fd1ba_mv2.png" alt="Lorient"/><img src="/media/449182_335f684fe3514b709addc12679ebbdd2_mv2.png" alt="Lyon"/><img src="/media/449182_4e257527b48141b4b5c2ba78112502e1_mv2.png" alt="Marseille"/><img src="/media/449182_44d69ab635db406eb5ed87f4c28be5f5_mv2.png" alt="Monaco"/><img src="/media/449182_6afa6d7f5a3e47cba52d23f40da07baa_mv2.png" alt="Montpellier"/><img src="/media/449182_1248381d830b4e91b830bb1c1192dc8d_mv2.png" alt="Nantes"/><img src="/media/449182_c765d7b688e04e36903e7695683dcd5d_mv2.png" alt="Nice"/><img src="/media/449182_953b1dc649b04b36a09dcb0f58714f1e_mv2.png" alt="Paris"/><img src="/media/449182_7bc5e473b42f46ffbd4c9da01ac21818_mv2.png" alt="Reims"/><img src="/media/449182_cbb5ae14645c4ff9a14cf474618765e9_mv2.png" alt="Rennes"/><img src="/media/449182_aceb49f96c6b4e828b54ee0c7770a11e_mv2.png" alt="Strasbourg"/><img src="/media/449182_8f194143c69e45a183a3a7a9987ee24f_mv2.png" alt="Toulouse"/><img src="/media/449182_f59521579e7f4e50987c39a8166eeee7_mv2.png" alt="Troyes"/><p>Tableau de suivi des mises à jour</p><p>Vous trouverez <a href="https://www.fantasy-coach.fr/category/fantasy-ligue1/suspensions-et-blessures-l1/">ici</a> l’ensemble des articles suspensions et blessures pour cette nouvelle saison de Ligue 1. </p><p>N’hésitez pas à nous suivre nous sur Twitter <a href="https://twitter.com/FantasyCoach_FR">@FantasyCoach_FR </a>et <a href="https://twitter.com/MPGLaurent">@MPGLaurent</a> et sur Facebook : <a href="https://www.facebook.com/Fantasy-Coach-824491257591639/">Fantasy Coach</a> </p><p>Pour jouer au <a href="https://www.winamax.fr/landing/landing_leads.php?ldg=jde&amp;banid=37173">Jeu de l’Entraîneur Winamax</a> ou à <a href="https://data.mpg.football/">MonPetitGazon </a> </p><p>Code couleur de la page: </p><p><strong>Rouge : Suspendu</strong> </p><p><strong>Orange : Forfait confirmé</strong> </p><p><strong>Jaune : Incertain</strong> </p><p><strong>Bleu : transfert définitif</strong> </p><p><strong>Vert : Disponible pour le groupe</strong>  </p><h2>Calendrier J7 Lens-TroyesParis-BrestMarseille-LilleStrasbourg-ClermontAjaccio-NiceAngers-MontpellierLorient-NantesToulouse-ReimsRennes-AuxerreMonaco-Lyon  </h2><h2>Ajaccio (reçoit Nice)  JoueurProblèmePosteRetourGonzalezSuspenduMJ8MayemboForfaitDJ8CimignaniForfaitMJ8?AlhadhurHors groupe J5DJ?N'DiayeHors groupe J5AJ?BarettoDans le groupeMJ7 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/ACAjaccio/status/1568664350709239809?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g </p><h2>SCO Angers (reçoit Montpellier)  JoueurProblèmePosteRetourEneme-EllaMénisque - opérationAJ?JakolisAvec la réserveAJ?BobichonAvec la réserveMJ?SabanovicAvec la réserveDJ?AmadouRemise en formeDJ8?BlazicDisponibleDJ7ValeryDisponibleDJ7 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/AngersSCO/status/1568655112704528386?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g </p><h2>Auxerre (va à Rennes) JoueurProblèmePosteRetourPellenardLigaments croisésD2023JeanvierMolletDJ8?CharbonnierFissure au tibiaAJ9?Da CostaForfaitAJ8?CamaraN2 ?DJ?DanoisN2 ?AJ?JubalReprise entrainement vendrediDJ7 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/AJA/status/1568622953817939975 </p><h2>Stade Brestois 29 (va à Paris) JoueurProblèmePosteRetourDel CastilloCuisseAJ9?MounieTalonAJ8?Le DouaronPubisAJ?FadigaDisponibleDJ7 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/SB29/status/1568267995474006016 </p><h2>Clermont Foot (va à Strasbourg)  JoueurProblèmePosteRetourGonalonsSuspenduMJ8DialloForfaitDJ?ZeffaneIschiosDJ9 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/ClermontFoot/status/1568588485543751680?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g </p><h2>RC Lens (reçoit Troyes)  JoueurProblèmePosteRetourMachadoSuspenduDJ9FarinezGenouGFin 2022SaïdCuisseAJ9LouveauMolletDJ?BuksaDisponibleAJ7KakutaDisponibleMJ7Seko FofanaDisponibleMJ7 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/RCLens/status/1567912803041787909?s=20&amp;t=Y0ivpHnLWQndm0cC3QtFPw </p><h2>Lille OSC (va à Marseille) JoueurProblèmePosteRetourLihadjiEcartéAJ?WeahPiedAJ8?ZhegrovaIschiosAJ8?CabellaForfaitMJ8?VirginiusDisponible mais hors groupe J6AJ? </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/losclive/status/1568298188360015872 </p><h2>FC Lorient (reçoit Nantes) JoueurProblèmePosteRetourI. SilvaIncertainDJ8?BoisgardCuisseMJ8?NageraTransfert récentMJ?MannoneDans le groupeGJ7AouchicheDans le groupeMJ7 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/FCLorient/status/1568636989422837763?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g </p><h2>Olympique Lyonnais (va à Monaco) JoueurProblèmePosteRetourBoatengEn repriseDJ8?AouarDans le groupeMJ7 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/OL/status/1568664728565596161?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g </p><h2>Olympique de Marseille (reçoit Lille) JoueurProblèmePosteRetourRongierSuspenduMJ8DiengEcarté ?AJ? </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/OM_Officiel/status/1568565257836052480?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g  </p><h2>AS Monaco (reçoit Monaco) JoueurProblèmePosteRetourVollandChevilleAJ9BoaduPas dans le groupeAJ8?GeubbelsDisponible mais hors groupe J7AJ? </h2><h3>Le Groupe 7 </h3><p>https://twitter.com/AS_Monaco/status/1568653403814875137?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g </p><h2>Montpellier H.S.C. (va à Angers)   JoueurProblèmePosteRetourOmlinSuspenduGJ8GermainSuspenduMJ8BertaudLigaments croisésG2023Sainte-LuceLigaments croisésD2023MavididiEn repriseAJ8?Pedro MendesRechuteDJ10?DelayeDans le groupeAJ7JullienDisponibleDJ7KhazriDisponibleMJ7 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/MontpellierHSC/status/1568622952903581699?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g </p><h2>FC Nantes (va à Lorient) JoueurProblèmePosteRetourFabioSuspenduDJ10TraoreGenouDJ?MoutoussamyIschiosMJ8?MohamedDans le groupeAJ7BlasDans le groupeMJ7SimonDisponibleMJ7MerlinDisponibleMJ7SissokoDisponibleDJ7 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/FCNantes/status/1568660827720372225?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g </p><h2>OGC Nice (va à Ajaccio) JoueurProblèmePosteRetourRosarioSuspenduMJ8SchneiderlinIndésirable ?MJ?Da CunhaEcarté?MJ?RamseyIschiosMJ9?LeminaForfaitMJ8?AtalAdducteursDJ8?BarkleyDisponibleMJ7 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/ogcnice/status/1568620969761062915?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g </p><h2>Paris SG (reçoit Brest) JoueurProblèmePosteRetourIcardiTransféréATurquieRenato SanchesAdducteur droitMJ9 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/PSG_inside/status/1568249284541222912?s=20&amp;t=bsC1Mfipk4EvJQmXJgsCaQ </p><h2>Stade de Reims (va à Toulouse) JoueurProblèmePosteRetourSierhuisForfaitA2023?FoketForfaitDJ9?MatusiwaForfaitMJ9?HolmHors groupeAJ8? </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/reimsvdt/status/1568667827191820289?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g </p><h2>Stade Rennais FC (reçoit Auxerre) JoueurProblèmePosteRetourOmariPubalgieDJ8?GomisEcartéGJ?DokuGêne musculaireMJ9KalimuendoCuisseAJ8? </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/staderennais/status/1568871913136455681?s=20&amp;t=nXnQkSEZLIc6lUF7D6a3bw </p><h2>RC Strasbourg (reçoit Clermont)  JoueurProblèmePosteRetourPrcicSuspenduMJ9FilaPubalgieDJ15?NyamsiHancheDJ8?KawashimaEpauleGJ8?DelainePsoasDJ8?LiénardIschiosMJ8?Pierre-GabrielDans le groupeDJ7KandilDans le groupeMJ7DagbaDans le groupeDJ7SissokoDans le groupeMJ7PerrinDans le groupeDJ7 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/RCSA/status/1568602273554513922?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g </p><h2>Toulouse (reçoit Reims) JoueurProblèmePosteRetourHealeyLig. croisésA2023RataoQuadricepsAJ9TsingarasEntorse chevilleMJ?BegraouiDisponible mais hors groupe J6AJ? </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/MPGLaurent/status/1568633459735920647?s=20&amp;t=naNnfuJSBH6ngtf-PZNF4g </p><h2>Troyes (va à Lens)  JoueurProblèmePosteRetourSalmierSuspenduDJ8BruusGenouDJ?FatahHors groupe J7MJ?N'JoHors groupe J7DJ?MorenoHors groupe J7MJ?PalaversaTransfert récentMJ?ConteDisponibleDJ7 </h2><h3>Le Groupe J7 </h3><p>https://twitter.com/estac_officiel/status/1567913354290937856?s=20&amp;t=1FLSe_5hBMx3xoO0DDLKRw </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

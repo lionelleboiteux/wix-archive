@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J35</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="On approche doucement de la fin de la saison et presque tous les grands points sont en place. On sait déjà que Liverpool a gagné et que Ipswich, Leicester et Southampton sont relégués. Il ne reste que les places Européennes à distribuer, et quelques records à signer..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J35"><figure class="hero"><img src="/media/449182_9780cb5a0054463da8beeffe118972af_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J35</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 1 mai 2025</p><div class="body"><p>On approche doucement de la fin de la saison et presque tous les grands points sont en place. On sait déjà que Liverpool a gagné et que Ipswich, Leicester et Southampton sont relégués. Il ne reste que les places Européennes à distribuer, et quelques records à signer. </p><p>On peut même déjà prédire que Leeds et Burnley seront relégués la saison prochaine, avant même qu'ils aient fini leur saison courante de Championship. Je le disais la semaine dernière la tendance en Premier League depuis déjà trois saisons c'est que les promus sont renvoyés en Championship après une seule saison dans la cour des grands. Tant qu'on y est, on peut aussi prédire que City devrait gagner la Premier League. La dernière fois que Liverpool les a interrompus, ils en ont gagné quatre de suite… </p><h2>Le tour d'horizon</h2><p>Liverpool, officiellement sacré champion, se déplace à Stamford Bridge en quête de maintien de la cadence record. Ce choc des Titans. Devrait offrir à Salah une chance de plus de faire regretter à son ancien employeur de l'avoir laissé partir. </p><p>La semaine aura été difficile pour nos Gunners. Liverpool sacré et un match pas forcément raté mais pas non plus réussi à la maison en Champions League. Arsenal bénéficie d'un calendrier favorable avant le match retour, avec une équipe de Bournemouth qui peine en défense. Malgré la récente défaite 1-0 face au PSG, Arteta est confiant quant à la réaction de ses cadres comme Saka et Saliba, mais on suppose qu'il va vouloir gagner sans que personne ne s'abîme donc je ne vois pas les cadres faire tout le match. </p><p>City vise à gommer son irrégularité avant la fin de saison et reste sur un succès symbolique en FA Cup. Les Wolves ont enchaîné six victoires consécutives mais principalement contre des équipes du bas de tableau. Il pourrait y avoir des étincelles dans cette rencontre. </p><p>Man United a répliqué en demi-finale de l'Europa League le système qu'Arsenal avait utilisé en quart de la Champions League en allant battre - largement - un opposant Espagnol chez eux au match aller pour pouvoir être plus serein lors du retour. De toute façon les Mancuniens sont obligés de gagner s'ils veulent avoir une chance de jouer en C1 la saison prochaine. En Premier League les hommes d'Amorim n'ont toujours pas dépassé la barre symbolique des 40 pts… </p><p>Newcastle, Chelsea et Forest se jouent pour les places restantes pour la Champions League. Forest a perdu trois longueurs dans la course à la C1 en recevant Brentford en J34. J'avais pourtant prévenu que Brentford était redoutable en déplacement cette saison… </p><h2>Mes Pronos pour la J35 de Premier League:</h2><p>Man City 3 - 0 Wolves </p><p>Aston Villa 2 - 1 Fulham </p><p>Leicester City 2 - 0 Southampton </p><p>Everton 2 - 0 Ipswich Town </p><p>Arsenal 2 - 0 Bournemouth </p><p>Brighton 0 - 2 Newcastle </p><p>Brentford 1 - 1 Man United </p><p>West Ham 1 - 1 Tottenham </p><p>Chelsea 0 - 3 Liverpool </p><p>Crystal Palace 1 - 2 Nottm Forest </p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p>Les Evertonians sont à la fête vu qu'ils reçoivent Ipswich. On aura donc <strong>Pickford</strong> (£5.1M), <strong>O'Brien</strong> (£4,5M) et <strong>Ndiaye</strong> (£5.2M) semblent les meilleurs Picks. </p><p>De l'autre côté de la ville, chez les champions-élus <strong>Salah</strong> (£13.8M) est incontournable, <strong>Luis Diaz</strong> (£7.6M) devrait répondre présent également et pour le troisième choix, un défenseur probablement. Perso j'ai <strong>TAA</strong>(£7.2M) mais il faut avoir le budget. </p><p>Chez les Citizens on a les <strong>Gvardiol</strong> (£6.3M) et <strong>Marmoush</strong> (£7.6M) qui sont indiscutables <strong>Savinho</strong> (£6.2M) est moins sûr mais pourrait rapporter gros. </p><p>En opposition directe aux citadins on a à Wolves, <strong>Cunha</strong> (£7M), <strong>Ait-Nouri</strong> (£5M) et <strong>Strand Larsen</strong> (£5.4M) essayeront de causer des misères aux hommes de Pep </p><p>Ceux qui ont du courage joueront des Gunners comme différentiel. <strong>Raya</strong> (£5.6) est quasi sûr de jouer, <strong>Trossard</strong> (£6.7M) devrait faire le match en entier vu qu'on pense qu'il ne sera pas dans le 11 de départ Mercredi au Parc des Princes. Enfin un <strong>Saka</strong> (£10.5M) même s'il ne joue que 60 mins il a le temps de mettre un but.</p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

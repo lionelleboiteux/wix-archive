@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Elversberg en résistance</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Elversberg
+2.Bundesliga"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Elversberg en résistance"><figure class="hero"><img src="/media/3448f3_e70b80505a3746dc8524c10cd7f3bc8f_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Elversberg en résistance</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 2 août 2024</p><div class="body"><img src="/media/3448f3_dd9c7079082e442498deb06c912e45a3_mv2.jpeg" alt=""/><h2>SV 07 Elversberg</h2><p>Promu enthousiasmant, Elversberg s’est offert quelques coups d’éclats dans une saison qui l’aura vu assurer finalement assez tranquillement son maintien en finissant à une confortable onzième place. On retiendra particulièrement la victoire chez Sankt-Pauli après un match abouti, la seule défaite que concédera le champion dans son antre du <strong>Millerntor-Stadion (3-4).</strong></p><p>Cette nouvelle saison est celle de tous les dangers. Déjà parce que traditionnellement celle de la confirmation n’est jamais simple, d’autant plus pour un club encore en Regionalliga Südwest il y a trois ans et qui pourrait à un moment connaître un contre-coup logique à sa croissance vertigineuse.</p><p>Ensuite parce que l’effet de surprise ne jouera plus : si le style de jeu pratiqué, offensif et basé sur la vitesse, a pu surprendre la concurrence de 2.Bundesliga, la seconde partie de saison a été beaucoup plus poussive. Face à une formation bonne à l’extérieur et plus en difficulté à domicile, les adversaires pourraient être tentés de jouer bloc bas afin de limiter les espaces. Au coach <strong>Horst Steffen</strong> de s’adapter et de trouver la parade pour créer de nouveau de l’incertitude chez les autres équipes.</p><p>Enfin et surtout parce que les bonnes performances du SVE ont attiré l’attention et précipité les mutations. Que ce soit la fin de carrière du capitaine <strong>Kevin Conrad</strong>, les départs de <strong>Jannik Rochelt</strong> (Hanovre), <strong>Thore Jacobsen</strong> (1860 Munich) ou <strong>Kevin Koffi </strong>sans compter les prévisibles retours de prêts de <strong>Paul Wanner</strong> (Bayern), <strong>Hugo Vandermersch</strong> (Caen) et <strong>Wahid Faghir</strong> (Stuttgart), il s’agit de neuf départs dont certains déterminants pour l’équilibre du groupe.</p><img src="/media/3448f3_e70b80505a3746dc8524c10cd7f3bc8f_mv2.jpeg" alt=""/><p>Alors que <strong>Semih Sahin</strong> est pisté et pourrait lui aussi quitter la Sarre, l’effectif connaît une cure de rajeunissement autant sous les effets d’un mercato privilégiant l’arrivée de jeunes éléments peu expérimentés que par le non renouvellement des vétérans arrivés en fin de contrat.</p><p>C’est donc une saison piège qui se dessine pour Elversberg qui pourrait avoir besoin de digérer sa folle ascension. Déjà en gagnant en régularité car sur les deux dernières saisons, le SVE a à chaque fois connu sur la seconde partie de championnat une inquiétante baisse de régime. A voir si le club est capable de (re)partir fort. Enfin, serrer une défense qui a encaissé 63 buts (troisième plus mauvaise arrière-garde) serait une bonne idée si le football pétillant venait à manquer de bulle.</p><p>Pour les hommes de Horst Steffen, c’est le moment d’entrer en résistance contre les idées préconçues et d’écrire sa propre histoire, celle avec un happy-end.</p><p><strong><em>Pronostic 17</em></strong></p><img src="/media/3448f3_4d1d46ea5d7648348bdf191c9d98098c_mv2.jpeg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

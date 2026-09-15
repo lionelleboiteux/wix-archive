@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J14</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Player Picks, Premier League, J14"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J14"><figure class="hero"><img src="/media/449182_f613a15deda84786810afb85848f9cef_mv2.avif.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J14</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 3 décembre 2024</p><div class="body"><p><span style="color:#000000">La Premier League presse le pas et les fantasistes vont commencer à devoir augmenter la dose de café pour suivre le train. La 14ème édition du Player Picks est dans les bacs…</span></p><p><span style="color:#000000">Allez, cette fois-ci c'est la bonne pour City, il va falloir sortir du trou. City était la seule équipe du top 10 à perdre la semaine dernière et se retrouve cinquième, derrière Brighton qui a une différence de but supérieure. Non, ce n'est pas ChatGPT qui écrit les articles, et non ceci n'est pas une hallucination. Montrer six doigts aux fans de Liverpool c'est super pour faire le buzz, mais s'il veut en ajouter un septième il va falloir commencer à gagner des matchs. Le Catalan a signé une extension de son contrat c'est donc qu'il a l'intention de rebâtir une équipe. On le voit mal quitter l'Etihad après une saison catastrophique. Il n'est pas impossible qu'il pense faire ce que j'ai fait la semaine dernière, et vendre Haaland pour financer ses transferts. Il est le seul au monde à jouer à Fantasy Premier League grandeur nature. </span></p><p><span style="color:#000000">Pendant ce temps, Liverpool est bien entendu sur un nuage à neuf longueurs d'Arsenal qui, il me semble, n'est devant Chelsea que par ordre alphabétique. À l'ouest de Londres, celui que personne n'attendait c'est Kevin Schade qui apparemment a une dent contre Leicester vu qu'il leur a mis trois buts et assisté le quatrième dans une démolition des Foxes sous les yeux de leur nouveau manager Ruud van Nistelrooy. Ce dernier était bien content de ne prendre les rênes qu'après ce match, même un 0-0 tout naze aura l'air d'un super résultat après cette fessée. Ça tombe bien parce que Leicester joue un West Ham qui lui aussi s'est fait fesser mais par Arsenal eux. Un nul pour eux aussi serait un bon score, dans mon prono j'ai mis 1-1. </span></p><p><span style="color:#000000">Bournemouth n’est pas glamour pour les fantasistes mais en J13 2 records. Evanilson gagne 3 penalties danse un match et Kluivert les transforme tous… un hat trick de penos </span></p><h2>Mes Pronos pour la J14 de Premier League:</h2><p><span style="color:#000000">Ipswich Town 1 - 0 Crystal Palace</span></p><p><span style="color:#000000">Leicester City 1 - 1 West Ham</span></p><p><span style="color:#000000">Southampton 0 - 3 Chelsea</span></p><p><span style="color:#000000">Manchester City 2 - 1 Nottingham Forest</span></p><p><span style="color:#000000">Newcastle 0 - 3 Liverpool</span></p><p><span style="color:#000000">Everton 2 - 2 Wolves</span></p><p><span style="color:#000000">Arsenal 2 - 1 Manchester United</span></p><p><span style="color:#000000">Aston Villa 2 - 1 Brentford</span></p><p><span style="color:#000000">Fulham 1 - 2 Brighton</span></p><p><span style="color:#000000">Bournemouth 1 - 1 Tottenham</span></p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p><span style="color:#000000">Je ne vais pas vous cacher que ma Wildcard de la semaine dernière m'a fait le plus grand bien. Étant descendu à la 853 000ème place du classement après une J12 plutôt nulle, 99 pts en J13 m'ont fait remonter à la 344 000ème place. Je ne passe pas les trois chiffres parce que ma défense a fait un grand total de 1 point. Mon focus pour cette semaine sera donc ma défense. </span></p><p><span style="color:#000000">Mes principes de base pour le moment sont :</span></p><p><span style="color:#000000">- Rester bien loin des Citizens qui n'arrivent à rien en ce moment</span></p><p><span style="color:#000000">- Blindé le milieu de terrain, c'est là que sont les points</span></p><h3>Les intouchables : </h3><p><span style="color:#000000">Les piliers de toutes les équipes restent les mêmes. </span><strong><span style="color:#000000">Salah</span></strong><span style="color:#000000"> (£13.2M), </span><strong><span style="color:#000000">Saka</span></strong><span style="color:#000000"> (£10.3M), </span><strong><span style="color:#000000">Palmer</span></strong><span style="color:#000000"> (£11M), </span><strong><span style="color:#000000">M'Beumo</span></strong><span style="color:#000000"> (£7.8M) et </span><strong><span style="color:#000000">B. Fernandes</span></strong><span style="color:#000000"> (£8.5M) au milieu, </span><strong><span style="color:#000000">Cunha</span></strong><span style="color:#000000"> (£7.1M), </span><strong><span style="color:#000000">Wood</span></strong><span style="color:#000000"> (£6.6M) et </span><strong><span style="color:#000000">Welbeck</span></strong><span style="color:#000000"> (£6M) en attaque. Je vous renvoie à mon </span><a href="https://www.fantasy-coach.fr/post/player-picks-24-25-premier-league-j13"><u><span style="color:#000000">Player Picks de la J13</span></u></a><span style="color:#000000"> il est plein de bons picks.</span></p><h3>Différentiels :</h3><p><strong><span style="color:#000000">Jackson</span></strong><span style="color:#000000"> (£8.1M) Il commence à trouver ses marques en Premier League, 4 buts lors des 6 derniers matches et un bon calendrier jusqu'à mi-janvier.</span></p><p><strong><span style="color:#000000">Evanilson</span></strong><span style="color:#000000"> (£6M) 3 passes décisives* et 3 buts lors des 5 derniers matchs lui aussi chauffe bien…</span></p><p><span style="color:#000000">*les 3 penos dont je parlais plus haut</span></p><p><strong><span style="color:#000000">Schade</span></strong><span style="color:#000000"> (£5.1M) on l'a vu plus haut 3 buts et 1 passe décisive lors du dernier match (seulement 1 passe décisive avant ça). Je pense que le manager va le faire rejouer en avant-centre.</span></p><p><strong><span style="color:#000000">Mac Allister</span></strong><span style="color:#000000"> (£6.2M) Celui-là je vous le mets, et vous m'en direz des nouvelles. Pendant le match contre City, on voyait très bien que Mac Allister et Virgil essayaient de recopier les routines sur corner de Gabriel et Saka. Pour l'instant Virgil n'a pas encore le bon cadrage pour sa tête, mais il a eu 3 grosses occasions (Gabriel les aurait mises) et je pense que d'ici une semaine ou deux, avec un peu plus d'entraînement, ça va rentrer… </span></p><p><span style="color:#000000">La défense :</span></p><p><span style="color:#000000">J'en parlais plus haut, c'est là que je vais utiliser mes 2 transferts libres cette semaine. Je n'ai pas le budget ni pour </span><strong><span style="color:#000000">Van Dijk</span></strong><span style="color:#000000"> (£6.4M), ni pour </span><strong><span style="color:#000000">Gabriel</span></strong><span style="color:#000000"> (£6.2M) j'ai dû me rabattre sur des différentiels défensifs. Dans ma short-list j'avais </span><strong><span style="color:#000000">Mazraoui</span></strong><span style="color:#000000"> (£4.7M), </span><strong><span style="color:#000000">Wan-Bissaka</span></strong><span style="color:#000000"> (£4.5M) et </span><strong><span style="color:#000000">Estupiñán</span></strong><span style="color:#000000"> (£5M). Je vous la fais courte j'ai pris les deux premiers qui rentraient pile dans mon budget.</span></p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

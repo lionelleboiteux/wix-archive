@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J25</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Bonne Saint-Valentin à tous, avant de vous embarquer dans vos plans pour la soirée, n'oubliez pas de valider vos teams, la deadline est..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J25"><figure class="hero"><img src="/media/449182_6f96e2b8faf340f3a22a4aaa32be9548_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J25</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 13 février 2025</p><div class="body"><p>Bonne Saint-Valentin à tous, avant de vous embarquer dans vos plans pour la soirée, n'oubliez pas de valider vos teams, la deadline est aujourd'hui à 19h30 (heure de Paris). Pour ceux qui ont oublié qu'aujourd'hui c'est la Saint-Valentin, je ne peux rien faire pour vous.</p><h2>Stratégies</h2><p>On lève la main ceux qui ont joué leur assistant manager ! … ok ! Maintenant on lève la main ceux qui ont joué leur Triple Capitaine (je présume sur Salah) bon, et maintenant on lève la main ceux qui comme moi n'ont fait ni l'un ni l'autre !</p><p>Donc ceux qui ont Slot comme assistant seront un peu déçus du résultat du Derby mercredi agrémenté d'un carton rouge. Il faut quand même reconnaître que j'avais prédit le nul dans mon Player Picks pour la J24 (si, si tout en bas et le but de Tarkowski aussi…). Ces mêmes fantaisistes seront aussi ravis d'apprendre que Liverpool a une autre double week en J25 et que Slot va probablement leur rapporter une tonne de points. Ceux qui ont raté l'opportunité de donner le triple capitaine à Salah ont donc une chance de se refaire.</p><h2>Le tour d'horizon</h2><p>Liverpool a donc laissé deux points sur la pelouse de son voisin et rival Everton, pour le plus grand plaisir d'Arsenal. Ça aurait en effet dû être une bonne nouvelle, si on n'avait pas appris un peu plus tôt que la saison d'Havertz s'était finie sur une blessure lors de leur petite retraite au soleil. Sans Saka, Jesus, Martinelli et maintenant Havertz, la décision de ne pas signer d'attaquant en janvier doit bien être en travers de la gorge d'Arteta. Il faut voir le bon côté des choses, on va bien voir si d'autres petits prodiges de l'académie de Hale End peuvent venir aider l'équipe des pros.</p><p>City a besoin d'un miracle pour rester en LdC, je pense que la semaine prochaine les Citizens pourront se concentrer sur la Premier League vu que même en FA Cup les dieux sont contre eux, ils tombent contre Plymouth Argyle, ceux-là mêmes qui ont sorti Liverpool au tour précédent.</p><p>Cette journée nous offre deux affiches intéressantes, le 5ème (City) contre le 6ème (Newcastle). City s'est fait allumer par Arsenal en J24 et Newcastle a détruit ces mêmes Gunners en FA Cup. La logique voudrait que Newcastle soit favori mais on ne sait plus à quoi s'attendre de ces Citizens qui ont retrouvé le chemin des filets. Ceci dit, qui ne mettrait pas une pièce sur Isak contre la défense en mousse de City ?</p><p>La deuxième affiche à suivre de près, sera le 13ème (Man United) contre le 14ème (Spurs). Les deux clubs sont bien loin de leurs espérances et ont eu un mercato diamétralement opposé. United s'est séparé de Rashford tandis que les Spurs accueillent Mathys Tel. Les deux ne sont que des prêts pour le moment. Les deux clubs sont en si mauvaise posture en ce moment que je ne vois ni l'un ni l'autre s'en sortir avec tous les points.</p><p>Chelsea contre Brighton c'est exactement la même affiche que la semaine dernière en FA Cup. En Cup les Seagulls avaient pris le pas sur Chelsea mais je pense qu'en Premier League, on devrait voir un renversement du score.</p><h2>Mes Pronos pour la J25 de Premier League:</h2><p>Brighton 1 - 3 Chelsea</p><p>Leicester City 0 - 3 Arsenal</p><p>West Ham 2 - 1 Brentford</p><p>Southampton 0 - 2 Bournemouth</p><p>Aston Villa 2 - 1 Ipswich Town</p><p>Man City 2 - 1 Newcastle</p><p>Fulham 1 - 2 Nottm Forest</p><p>Crystal Palace 1 - 2 Everton</p><p>Liverpool 3 - 0 Wolves</p><p>Tottenham 1 - 1 Man United</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><h3>City</h3><p>Même s'ils perdent la majorité de leurs matches en ce moment, les attaquants de City sont de nouveau Marmoush(£7M), Foden (£9.3M), Haaland (£14.7M).</p><h3>Bournemouth</h3><p>Les Cherries ont des matches relativement faciles jusqu'à la J31 et sans interruption durant la blank week 29. C'est donc vraisemblablement le moment de charger la mule.</p><p>Kluivert (£5.9M), Ouattara (£5.1M) et Semenyo (£5.7M) au milieu, Kerkez (£5M) que j'avais déjà mis dans le Player Picks plus tôt dans la saison voire Huijsen (£4.4M) ou Kepa Arrizabalaga (£4.5M).</p><h3>Arsenal</h3><p>Nwaneri (£4.5M) Trossard (£6.8M) sont quasiment obligés de jouer chaque match pour un petit moment pendant que tous les autres attaquants sont à l'infirmerie.</p><h3>Liverpool</h3><p>Vu que les Reds ont une deuxième double week de suite, une double-double quoi, Salah (£13.7M), Diaz (£7.5M) et Gakpo (£7.6M) me semblent inévitables.</p><h2>Team Raccoon</h2><p>Changements dans mon équipe : Palmer out, Kluivert in</p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

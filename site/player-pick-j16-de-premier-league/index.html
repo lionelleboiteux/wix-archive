@@ -1,0 +1,96 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Pick, J16 de Premier League.</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Prêts pour le Player Pick, J16 de Premier League? Les derniers conseils pour vos choix de joueurs avant la pause Coupe du Monde. La..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Pick, J16 de Premier League."><h1 class="title-only">Player Pick, J16 de Premier League.</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 10 novembre 2022</p><div class="body"><p>Prêts pour le Player Pick, J16 de Premier League? Les derniers conseils pour vos choix de joueurs avant la pause Coupe du Monde. La deadline de cette journée est Samedi 12 Novembre à 12h. Comme lors des 2 dernières journées Manchester City participe au premier match de la journée. Comme pour la J14 et la J15, Haaland est toujours annoncé convalescent par Guardiola et la titularisation de Foden est toujours une énigme. Le compte twitter @Teamnewsandtix est le compte à suivre pour avoir les informations 15 à 20min avant le deadline sur le XI de départ de City.  </p><p>Attention! Gardez en tête que lors des 2 dernières journée le serveur du jeu FPL a crashé: 5min avant la deadline en J14 et 15min avant la deadline de la J15. Vous êtes prévenus. </p><h2>Période de la Coupe du Monde </h2><p>Qatar 2022 se déroule entre la J16 et la J17 de Premier League. Pour absorber les blessures potentielles des mondialistes, la FPL permet de faire des transferts en nombre illimité sans pénalité jusqu'à la deadline de la J17 qui sera lors du Boxing Day. Les prix des joueurs seront gelés à partir du 13 Novembre, donc ne vous pressez pas pour faire vos transferts. Vos joueurs ne perdront ni ne gagneront en valeur pendant les 6 semaines du tournoi. </p><p>Si vous n'utilisez pas votre transfert gratuit en J16 ET que vous ne faites pas de transfert avant le deadline de la J17, vous aurez 2 transferts gratuits pour la J18. Par contre si vous faites le moindre transfert avant la J17 vous n'aurez qu'un transfert gratuit pour la J18. </p><p>Tous les transferts que vous ferez pendant la période du mondial seront décompter dans votre nombre total de transferts de la saison. Ce dernier est un moyen de départager les joueurs à égalité de points en fin de championnat. </p><p>Un conseil donc: laissez votre équipe tranquille pendant la Coupe du Monde. Profitez des matchs et revenez au jeu vers le 10 Décembre. Vous aurez plein de temps pour préparer votre effectif pour attaquer la période post-Qatar 2022.  </p><p>Si vous avez des questions sur la période Coupe du Monde, n'hésitez pas à venir nous demander sur Discord (<a href="https://discord.com/channels/737355915686182943/737442472837513287">https://discord.com/channels/737355915686182943/737442472837513287)</a>. </p><h2>Les matchs de la journée  </h2><h3>Manchester City - Brentford: 4-0 </h3><h3>Bournemouth - Everton: 0-0 </h3><h3>Liverpool - Southampton: 4-1  </h3><h3>Nottingham Forest - Crystal Palace: 1-2 </h3><h3>Tottenham - Leeds: 3-2 </h3><h3>West Ham - Leicester: 0-1 </h3><h3>Newcastle - Chelsea: 4-0  </h3><h3>Wolverhampton - Arsenal: 0-1 </h3><h3>Brighton - Aston Villa: 3-2 </h3><h3>Fulham - Manchester United: 2-2 </h3><h2>Player Picks </h2><p>Pour ce dernier Player Pick pré-Mondial j'ai décidé de le scinder en 2 parties. Dans la première je liste les joueurs incontournables qui sont tous à plus de 25% de possession chez les managers FPL. Dans la 2e j'ai sélectionné un squad de 15 joueurs à moins de 15% de TSB. Une liste faite pour en sélectionner un ou deux pour booster votre classement avant la pause Coupe du Monde. </p><h3>Les incontournables : </h3><p>Dire qu'il faut posséder dans son effectif <strong>Haaland (£12.2M), Salah (£12.7M), Kane (£11.6M), Trippier (£5.9M), Almiron (£5.8M), Cancelo (£7.4M), Martinelli (£6.8M)</strong> et <strong>Ward (£4.1M)</strong> est presque futil puisque l'immense majorité des managers FPL en ont 5 minimum. Haaland Salah et Kane sont des options de capitaine solides pour cette J16. Avoir les 6 autres dans votre effectif vous permet de ne pas décrocher dans les classements.  </p><h3>L'équipe des jolis paris (punts): </h3><h3>Les Gardiens </h3><p>J'ai pris <strong>Ramsdale (£4.9M, 10.7% TSB)</strong> et <strong>Meslier (£4.5M, 2.4%TSB)</strong>. Le portier d'Arsenal fait face à la plus mauvaise attaque du championnat et a donc de grande chance de clean sheet. </p><p>Le jeune Français a un match compliqué mais s'il sort le même match que contre Liverpool, attendez vous à un gros score. Avec un taux de possession aussi faible ça va être tout bonus pour vous.  </p><h3>Les Défenseurs </h3><p>J'attends une cleansheet pour <strong>Akanji (£5M, 1.1% TSB)</strong> et son potentiel offensif sur corner est intéressant. </p><p> <strong>Robertson (£6.7M, 4% TSB)</strong> s'est montré très en forme contre Tottenham. Southampton est dépourvu d'arrière droit de métier et l'Ecossais aura plus d'opportunité que son compère TAA. Le potentiel de clean sheet est là mais c'est probablement le défenseur qui a le plus de chances d'avoir des points offensifs lors de cette journée. </p><p><strong>White (£4.5M, 8.8% TSB)</strong>  a le même potentiel de cleansheet que son gardien. Par contre en plus d'apporter offensivement, le jeu du jeune anglais correspont au système des bonus points. Il a donc des chances de marquer un peu plus de points que ses copains de la défense des Gunners. </p><p><strong>Castagne (£4.7M, 7.7% TSB)</strong> et <strong>Doherty (£4.6M, 0.6%)</strong> ont a peu près le même profil en FPL. L'Irlandais a peut être plus de chance de faire des passes dé, mais le belge de Leicester a de plus grandes chances de cleansheet. Doherty joue à domicile, Castagne à l'extérieur. </p><h3>Les Milieux </h3><p><strong>Maddison (£8.2M, 9.9% TSB)</strong>. Les anglais le voulais dans la sélection qui part au Qatar et ils l'ont. Il porte Leicester depuis le début de la saison et petit à petit, les Foxes redressent la barre au classement. Pour un match même si c'est l'extérieur, je trouve que c'est un bon pari. </p><p><strong>Kulusevski (£8M, 3.9% TSB).</strong> Son entrée a semé la zizanie dans la défense de Liverpool le week-end dernier. Il a sonné la révolte et à fait une passe décisive à Kane. Avec une semaine de plus, il y a de bonnes chances que Conté le fasse joueur plus de minutes et il peut faire mal à Leeds. </p><p><strong>Xhaka (£5.1M, 3.9% TSB). </strong>Le taulier de la Nati n'a jamais été aussi efficace en Premier League. Toujours bien placé aux alentours de la surface de réparation lors des phases offensives, souvent en soutient de Martinelli quand le brésilien part dans ses raids sur le côté gauche, il a marqué 3 buts et fait 3 passes décisives. Comme il est plus haut et que sa défense est plus solide, il a moins besoin de faire de faute lors de la récupération. Sa discipline qui le pénalisait n'est donc plus un frein à son recrutement dans nos équipes FPL. Si vous êtes en manque de budget, c'est une option qui vous permet de profiter du bon parcours d'Arsenal. </p><p><strong>Summerville (£4.4M, 0.6% TSB)</strong> et <strong>Mitoma (£4.9M, 0.1% TSB)</strong>. Ces 2 joueurs petit budget sont à suivre en prévison de la partie post-Coupe du Monde du Championnat. Le jeune néerlandais est en super forme avec 3 buts et 1 passe dé lors de 3 derniers matchs. Il est aussi celui qui a marqué les 2 derniers buts décisifs de son équipe, à chaque fois dans les 10 dernières minutes du match. </p><p>Le japonais lui me plaît beaucoup. Ses dribbles sur le côté gauche et la possibilité de combiner avec Trossard sont de belles armes pour les Seaguls. Cerise sur le gâteau, il a marqué ce Mercredi contre Arsenal en Leaue Cup. Ces 2 joueurs peuvent vous filer des frissons et vous faire bondir dans les classements FPL. </p><h3>Les attaquants </h3><p><strong>Wilson (£7.5M, 11.8% TSB).</strong> Sorti à la mi-temps du dernier match de championnat, il recupérait de son rhume de la semaine dernière. Sélectionné comme doublure de Kane pour le Qatar, l'attaquant des Magpies devrait revenir en pleine forme. Il est souvent blessé, mais quand il joue, l'ancien de Bournemouth est démoniaque. </p><p><strong>Martial (£6.7M, 0.7% TSB).</strong> Comme Wilson, Martial est souvent blessé mais quand il est sur le terain ce n'est pas pour rigoler, la preuve avec un nouveau but en League Cup ce Jeudi. Il a joué 62min contre Villa donc je pense qu'il sera sur le banc. Contre Manchester City ça ne l'avait pas empêché de marquer 2 buts en rentrant à la 59e minute. Possédé par moins de 1% des managers c'est un autre beau pari à tenter.  </p><p><strong>Watkins (£7.1M, 2% TSB).</strong> Depuis le départ de Gerrard, les Villans marquent plus. L'arrivée d'Emery peut relancer l'ancien de Brentford. C'est un des tireurs les plus précis du championnat. Sur les 5 derniers match 59% de ses 12 tirs étaient cadrés. Il ne faudra pas attendre longtemps pour que ces tirs se transforment en buts. </p><p>Pour information cette équipe de 15 joueurs coûte 86.8M soit bien en dessous des 100M de budget. </p><p>Avant la pause pour la Coupe du Monde, nos experts nous dévoilent leurs conseils pour finir sur une bonne note cette première partie de saison FPL. </p><p>Pour rappelle les experts sont: </p><p>Arthur: double vainqueur de la ligue Fantasy Coach lors des 2 dernières saison en battant à chaque fois le record de point. </p><p>Rwano: vainqueur de la Cup fantasy-coach.fr et troisième de la ligue la saison dernière. Comme Arthur il participe régulièrement aux discussions sur le Discord FPL. </p><h3>Arthur </h3><p><strong>Capitaine: Haaland (81% TSB) : </strong>Il n’auras fallu à Haaland seulement 27 minutes contre Fulham pour inscrire 2 buts dont 1 qui a été refusé pour hors-jeu et un penalty. Manchester City reçoit Brentford. C’est le capitaine évidemment encore une fois. </p><p><strong>Pépite: Eze (4.4% TSB) : </strong>Pour cette dernière gameweek avant la coupe du monde mon différentiel sera Eberechi Eze, pas un gros potentiel de points mais plutôt une valeur sûre cette saison. Le créateur de Crystal Palace affronte Nottingham Forrest qui a encaissé déjà 30 buts cette saison (25,57 xGA) c’est la deuxième pire défense du championnat. Crystal Palace devrais réussir à trouver la faille et Eze sera probablement impliqué à la création du but. </p><h3>Rwano </h3><p><strong>Capitaine: Haaland (81% TSB) : </strong>Toujours la grande inconnue. Rentré en pompier de service lors de la dernière journée de championnat face à un Fulham accrocheur et buteur aux nerfs d’acier pour le pénalty de la gagne à la 95ème, le Cyborg est resté sur le banc en EFL Cup. Et comme Pep Guardiola a ajouté un peu d’incertitude quant à sa participation au match de ce week-end….D’où l’importance de bien choisir son vice-capitaine et Mohamed Salah (Liverpool, 31 % TSB) va dynamiter Southampton à Anfield. </p><p><strong>Pépite: Martial (0.7% TSB) : </strong>Pour la dernière avant le coupe du Monde, une vrai risquette pour finir en beauté. Partant du principe que la proximité du tournoi international va impacter les compositions d’équipe, je prends le parti pris d’un vrai pari. Certainement déçu de ne pas être appelé par Deschamps, Anthony Martial est mon choix. Revanchard, c’est un avant-centre talentueux et inconstant. Sa saison actuelle en PL ? Quatre bouts de matchs pour 130 minutes, 2 buts, 2 passes décisives : donc de sacrés ratios. En mode reprise, il a rejoué 25 minutes contre Aston Villa. Pas d’avant-centre de métier à United puisque ce sont le vieux beau Cristiano et le fragile Rashford qui se sont partagés le poste ces derniers temps et les deux sont à un match d’une Coupe du Monde. Enfin, Man U est cinquième et donc toujours dans le coup pour une qualification en Ligue des Champions. Martial va jouer. Et il va marquer. En tout cas, c’est mon pari. </p><p>Bonne chance à tous. </p><p>Pour rejoindre notre 'private league', utilisez le code:
+<strong>Classique : f6xuri</strong>
+ </p><p>Le meilleur moyen de rester au top c’est probablement de nous suivre sur <a href="https://www.facebook.com/Fantasy-Coach-824491257591639/">Facebook,</a> <a href="https://twitter.com/FantasyCoach_FR">Twitter</a> et <a href="https://discord.com/invite/MmcHMmD">Discord</a></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Résultats des ligues Fantasy Coach sur FPL. GW 8-10.</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="(English version follows).  Depuis le dernier article rendant compte des résultats des ligues Fantasy Coach sur FPL, il y a eu 3 journées..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Résultats des ligues Fantasy Coach sur FPL. GW 8-10."><figure class="hero"><img src="/media/deb9b2_315b802533674c95a4d07d44c2053cfb_mv2.jpg" alt=""/><div class="scrim"></div><h1>Résultats des ligues Fantasy Coach sur FPL. GW 8-10.</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 9 novembre 2024</p><div class="body"><p>(English version follows). </p><p>Depuis le dernier article rendant compte des résultats des ligues Fantasy Coach sur FPL, il y a eu 3 journées qui se sont déroulées.</p><p>Cela fait un peu trop long pour s'étendre sur chaque journée individuellement.</p><p>Dans cet article, je vous fait donc un résumé rapide de l'état de nos ligues et compétitions FPL.</p><h2>La Ligue Classique (code: gpojm8): </h2><img src="/media/deb9b2_c8e92e64a60f4fa4bda80ee027f77ae0_mv2.jpg" alt=""/><p>Après un court intermède de Hamza Riffi en tête de la ligue classique au soir de la J8, <strong>Philippe Demaeseneer</strong> a pris le pouvoir en J9 et l'a conservé en GW10. Il est accompagné sur le podium par l'actuel tenant du titre de la Cup Fantasy Coach, <strong>Julien Cazenave</strong>. Ce dernier continue sa bonne saison et devient un candidat au titre final à surveiller. Le 3e est <strong>Joe Julis</strong> qui navigue dans le top 10 depuis un bon moment.</p><p>Le top 10 se tient toujours dans un écart du même ordre qu'en GW 7. Il y a 31pts d'écart entre Philippe DEMAESENEER et <strong>Abdelhadi Aziz</strong> le 10e.</p><p><strong>Arthur Simmonet</strong>, notre triple champion, continue sa remontée progressive. Il gagne 48 places en 3 journées et se classe 287e a la fin de la GW10.</p><p><strong>Sean Gardener</strong>, le vainqueur de la Winter Cup 2023, fait une chute de 33 places qui l’amène à la 453e place. Il confirme qu'il est plus dangereux en coupe qu’en saison régulière.</p><p><strong>Michael Akins</strong>, le vainqueur du Survivor 2024, a énormément souffert en cette fin Octobre. Il dégringole littéralement avec 146 places perdues. À la fin de la GW10, il pointe à la 200e place. </p><h2>Fantasy Coach’s FPL Survivor (code: gpojm8) </h2><p>Avec 2 des pires scores de qualification de la saison lors des 3 dernieres journées, on peut dire que l’on vient de traverser l’une des périodes les plus compliquées à naviguer. La disette de Haaland y est pour beaucoup.</p><p>À la fin de la GW10, après 30 éliminations lors des 3 derniers tour de jeu, il reste 441 managers en course. À partir de la GW11 et lors des gameweeks suivantes jusqu'à la GW20, il y aura 14 éliminés par journée.</p><p><strong>Michael Akins</strong>, le champion 2024, est encore parmis nous...mais çan’a pas été de tout repos. </p><p>Le meilleur score de la GW8 est pour <strong>Dr Sax</strong> (74pts); celui de la GW9 est réalisé par <strong>Sandy Ravage</strong> (89pts); et le meilleur score de la 10e journée appartient à <strong>Lolo Marendela </strong> avec 73pts.</p><p>Suite à la GW10 le manager avec le pire classement général encore en course dans le Survivor est <strong><span style="color:#1f1f1f">Akosua Mourinho</span></strong>. Il est 537e au classement général de la ligue. </p><p>La moyenne de point de la ligue pour la GW8 était de  est de 36.3pts; en GW9 on était à 58.5pts de moyenne; et en GW10 la moyennede point de la ligue atteignait 40.8pts. </p><p>Le tableau des résultats est à retrouver via ces liens:</p><p><a href="https://docs.google.com/spreadsheets/d/1d0prS6t8k8G4kazGh--Y2TXpmMmdQwwsIbVhEuO0UAU/edit?usp=sharing"><u>GW8</u></a></p><p><a href="https://docs.google.com/spreadsheets/d/1N_uAsbBCcroxLyVS85AIwV6kTqD_Ls7UIVbMJh8iVdE/edit?usp=sharing"><u>GW9</u></a></p><p><a href="https://docs.google.com/spreadsheets/d/1rCkzM0qrtGyHzF1GjSSgsjGFw3GN--38Iplva9Ml_kM/edit?usp=sharing"><u>GW10 </u></a></p><p><u>Les scores de qualification minimum:</u> </p><p><em>GW</em> <em>1</em>: 36pts </p><p><em>GW</em> <em>2</em>: 41pts </p><p><em>GW 3</em>: 38pts (159pts OP)</p><p><em>GW 4</em>: 24pts</p><p><em>GW</em> <em>5</em>: 38pts (275pts OP) </p><p><em>GW</em> <em>6</em>: 26pts </p><p><em>GW 7</em>: 25pts (428pts OP)</p><p><em>GW8</em>: 17pts (480pts OP)</p><p><em>GW9</em>: 39pts (471pts OP)</p><p><em>GW10</em>: 22pts (527pts OP)</p><h2>Fantasy Coach's Winter Cup (code: gpojm8)</h2><img src="/media/deb9b2_dba971c16c8b42fa9bc16701166f0204_mv2.jpg" alt=""/><p>Le 1er tour de Winter Cup s'est déroulé lors de la GW10. </p><p>Les résultats de ce 1er tour ainsi que les affiches du 2e tour peuvent être consultés via ce <a href="https://docs.google.com/spreadsheets/d/1-s7XVp4Rsxbr3IyIlY8zuQQXXm_kj4IdoRPNqI3vMpc/edit?usp=sharing"><u>lien</u></a>. </p><p><strong>Sean Gardener </strong>le vainqueur de l’édition 2023 est qualifié. Il rencontrera <strong>Korang Junior</strong> lors du 2e tour.</p><p>Sean est rejoint par <strong>Amin Kammoun </strong>(champion 2017 et 2019) qui jouera contre <strong>Danny Raskino</strong>;  <strong>Raccoon</strong> l’un des pères fondateur  de notre site continue et rencontrera <strong>Jean_Jacques Bellon</strong>; je passe le premier tour et je ferai face à <strong><span style="color:#1f1f1f">D O V L A 😎🍻 ??</span></strong><span style="color:#1f1f1f">; </span><strong>Arthur Simmonet</strong>, champion 2021,2022 et 2024 passe et jouera contre <strong><span style="color:#1f1f1f">Tinashe Mukamba</span></strong><span style="color:#1f1f1f">; </span><strong>Fanou Magoo</strong> (champion 2020) jouera son 2nd tour contre <strong><span style="color:#1f1f1f">Oluwaseun Ayokunle</span></strong><span style="color:#1f1f1f">; </span><strong>Robin</strong> (notre rédacteur de Player Pick Premier League) survie et fera face à <span style="color:#1f1f1f"> </span><strong><span style="color:#1f1f1f">Matt Jonsen</span></strong><span style="color:#1f1f1f">; sans surprise </span><strong>Julien Cazenave</strong> (vainqueur de la Cup 2024)<strong><span style="color:#1f1f1f"> </span></strong><span style="color:#1f1f1f">est qualifié pour le 2e tour et jouera contre  </span><strong><span style="color:#1f1f1f">GHEZ NADIR</span></strong><span style="color:#1f1f1f">; </span><strong>Axel Dancette</strong> (finaliste de la Winter Cup 2023) sera face à <strong><span style="color:#1f1f1f">Ndiaye Superlaye</span></strong><span style="color:#1f1f1f">; enfin  </span><strong><span style="color:#1f1f1f">Philippe DEMAESENEER</span></strong><span style="color:#1f1f1f"> le leader de la ligue sera contre  </span><strong><span style="color:#1f1f1f">O. Olamilekan</span></strong><span style="color:#1f1f1f"> lors du 2e tour.</span></p><p>En revanche l'aventure s'arrête déjà pour <strong>Romain Ferron </strong>(champion 2023),   <strong>Michael Akins</strong> (champion du Survivor 2024); et <strong>Sébastien Goeuriot </strong>(vainqueur France 2023). </p><h2>Ligue H2H </h2><img src="/media/deb9b2_a4fc60bacc5b484bb7cbece547d0d605_mv2.jpg" alt=""/><p>Les leaders de la ligues HéH sont au nombre de 5. Ils affichent un bilan de 8 victoires et 2 défaite au bout de 10 matchs. On retrouve dans l'ordre <span style="color:#37003c">S</span><strong><span style="color:#37003c">hedrach Ehigie</span></strong><span style="color:#37003c">, </span><strong><span style="color:#37003c">Michael de Salazar</span></strong><span style="color:#37003c">, </span><strong><span style="color:#37003c">Dmitry Gor</span></strong><span style="color:#37003c">, </span><strong><span style="color:#37003c">Faloye Oluwaseyi</span></strong><span style="color:#37003c"> et </span><strong><span style="color:#37003c">Kwaku Sammy</span></strong><span style="color:#37003c">.</span></p><h2>Ligue FPL Challenge (code 5n6fr5) </h2><p>De la GW8 à la GW11 se déroule le 3e évènement du FPL Challenge appelé Test Lab.</p><p>Le vainqueur du challenge de la GW8, &quot;Ball Winners&quot; était <strong>Sohil KBM</strong>.</p><p>Le vainqueur du challenge de la GW9, &quot;Plamakers&quot; était <strong><span style="color:#37003c">Michael de Salazar</span></strong><span style="color:#37003c">.</span></p><p><span style="color:#37003c">Enfin le vainqueur du challenge de la GW10, &quot;Foul Play&quot; était </span><strong><span style="color:#37003c">Philippe Moreira-bessa</span></strong><span style="color:#37003c">.</span></p><img src="/media/deb9b2_b71e20d403924b3bbaa87f07558fcfc7_mv2.jpg" alt=""/><img src="/media/deb9b2_96870fdab4a345ed952c577706e2da4d_mv2.jpg" alt=""/><img src="/media/deb9b2_32e95ba8e3ad4d9fa1beb1296f85f650_mv2.jpg" alt=""/><img src="/media/deb9b2_5c38bb26453e4491aae249da990773ea_mv2.jpg" alt=""/><p><strong><span style="color:#37003c">Philippe Moreira-bessa</span></strong><span style="color:#37003c"> prend la tête de l'évènement &quot;Test Lab&quot; avant de le dernier </span><a href="http://challenge.it"><span style="color:#37003c">challenge.</span></a></p><img src="/media/deb9b2_e71943d973bf4883b3c2dc617cbaa58a_mv2.jpg" alt=""/><p><strong><span style="color:#37003c">Anp S</span></strong><span style="color:#37003c"> à la faveur de l'évènement &quot;Test Lab&quot; a pris la tête de la lige FPL Challenge de Fantasy Coach. Il devance </span><strong><span style="color:#37003c">Philippe Moreira-bessa</span></strong><span style="color:#37003c"> et </span><strong><span style="color:#37003c">Faris Mifzal</span></strong><span style="color:#37003c"> qui ont eux aussi dépassé </span><strong>Jesukorede Adelowokan</strong> l'ancien leader.</p><p>La J11 sera le théatre du dernier challenge de l'évènement &quot;Test Lab&quot;. Celui ci est nommé &quot;Accuracy&quot;. Avec un budget illimité, il faudra choisir 5 joueurs. En plus des points classiques du jeu FPL, chaque tir cadré par un joueur rapportera 3pts.</p><p>Bonne chance à vous pour la GW11. Cette gameweek sera uivie par la dernière trêve internationale; Après c'est le meilleur moment de la saison avec la période des fête et le Boxing Day.</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

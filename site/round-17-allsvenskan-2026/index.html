@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Round 17 – Allsvenskan 2026</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Tout savoir sur la journée 17 du championnat Allsvenskan 2026 et conseils pour la fantasy"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Round 17 – Allsvenskan 2026"><figure class="hero"><img src="/media/3448f3_1706e376314f4188a50a8f6a536c38bc_mv2.png" alt=""/><div class="scrim"></div><h1>Round 17 – Allsvenskan 2026</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 12 août 2026</p><div class="body"><h2>Tops</h2><p>Après onze matchs sans victoire (4n, 7d) et cinq matchs sans marquer, <strong>Degerfors</strong> a enfin brisé le signe indien en retrouvant le chemin de la victoire. Et pour ne rien gâcher, c’est arrivé à Malmö (1-2). Mention spéciale pour son attaquant <strong>Dijan Vukojević</strong> qui a ouvert son compteur buts sur un doublé dont un lob bien senti de plus de soixante mètres. Le maintien passera par de nouveaux buts de son avant-centre.</p><img src="/media/3448f3_bd2f120bb90d43ea923742253d274e2d_mv2.jpg" alt=""/><p>Épatant succès de <strong>Västerås SK </strong>qui se reprend et surprend Djurgården (1-0) après avoir pris un cinglant 6-0 la semaine dernière à… Djurgården. Le promu grimpe à la sixième place. Reste à gérer la situation de son attaquant vedette Mikkel Ladefoged (9 buts, 2 passes) qui refuse de s'entraîner pour forcer son départ vers l’étranger. On dit que Lincoln City, promu en Championship, serait intéressé par l’avant-centre danois sous contrat jusqu’en 2028.</p><p>Vainqueur de Kalmar (3-2) avec de nouveau un <strong>Sam Larsson</strong> à qui l’air du pays réussit décidément bien (3 Buts, 1 passe en 4 matchs), l’<strong>IFK Göteborg</strong> signe une deuxième victoire consécutive et continue de prendre les points qu’il faut pour s’extirper du fond du classement. Battu par la Gantoise en Ligue Conference (0-1), le match retour de jeudi en Belgique pourrait toutefois peser dans les jambes dimanche à Degerfors, forcément revanchard après le pénalty généreusement sifflé il y a deux journées et requinqué par sa victoire.</p><h2>Flops</h2><p>Capable de relancer Degerfors pourtant au fond du trou, <strong>Malmö</strong> retombe dans ses travers. Définitivement, le MFF est cette saison encore une équipe très moyenne.</p><p>Défait à domicile par Elfsborg (0-1), <strong>Mjällby</strong> continue sa chute : le champion sortant n’a pas gagné depuis huit matchs (4n, 4d) et pointe aujourd’hui à la treizième place soit la première équipe non relégable. Glissade.</p><p>Son avant-centre écossais Robbie Ure (15 buts, 2 passes) transféré à Séville pour 9,2 M€, <strong>Sirius </strong>a laissé échapper la victoire devant Brommapojkarna (2-2) après avoir pourtant mené deux buts à rien en 23 minutes. Comme un avertissement (presque) sans frais pour le leader qui conserve douze points d’avance sur son dauphin, à quatorze matchs de la fin. Recruté du côté du PSV Eindhoven pour préparer l'après Ure, Jesper Uneken pourrait bien être propulsé bien plus tôt que prévu sur le devant de la scène. Mais est-il prêt ? On disait que seul le mercato pouvait faire perdre à Sirius le gain de son probable premier titre de champion de Suède et bien, s’en rapproche-t-on ?</p><h2>FANTASY</h2><p>Nouvelle semaine européenne pour les représentant de l’Allsvenskan. Éliminé du troisième tour des qualifications pour la Ligue des champions par le Slovan Bratislava (2-0), Mjällby bascule en Conference League. Alors que jeudi, Hammarby face à Rakow et l'IFK Göteborg à la Gantoise tenteront de continuer leurs parcours en qualifications de la Conference League. Et comme, on possède plusieurs de ces équipes engagées sur les fronts européens, on privilégiera d’autres formations pour répartir les risques.</p><p>J’ai 1 free transferts et 0 en banque.</p><p><strong>OR : 4 720</strong></p><p>1062 points</p><p>Trois rounds consécutifs que l’on dégringole, avec près de 1300 places perdues. Autant dire que notre saison prend une mauvaise tournure. De retour de vacances, on va s’atteler à regarder de près le calendrier (et les dgw 19 et 21) pour jouer nos 3 chips et remonter au classement.</p><p>Avec le transfert de <strong>Ure (Sirius, 8,9)</strong> parti à Séville, on se concentre sur la ligne d’attaque car il nous faut opérer une vente en milieu de semaine, histoire de monétiser son acquisition à 8,5.</p><p>Aussi, la première réaction est de se tourner vers son coéquipier <strong>Bjerkebo (Sirius, 9,5)</strong> qui est assurément le joueur qu’il vous faut. Ailier (12 buts, 5 passes), il a été replacé avant-centre contre BP et a marqué un but dans cette position. Problème, dans le jeu, il est classé comme milieu de terrain et coûte plus cher : ce qui vous obligera à au moins deux mouvements pour le rentrer s’il n’est pas déjà des vôtres.</p><p>Aussi, sur une logique de poste pour poste, c’est <strong>Abraham (Hammarby, 10,3)</strong> qui est le choix naturel. Mais, comme il est déjà dans notre effectif, on doit regarder ailleurs.</p><p>Une option low-cost mérite alors toute notre attention : <strong>Christoffersson (Örgryte, 5,9)</strong> qui pour sa première année dans l’élite suédoise en est à 8 buts dont 4 sur les deux derniers matchs. Déjà auteur de 18 buts la saison dernière en Superettan, il s’avancera prochainement vers deux des plus mauvaises défenses du championnat (Halmstads, Göteborg) après avoir croisé le fer à BP dont la défense n’a rien d’une citadelle (26 buts encaissés soit 1,62 but par match). Et comme cet avant-centre né en 1999 a un profil à maturité lente, on en fait notre choix numéro un pour remplacer Ure. Un transfert qui a aussi le mérite de nous redonner une certaine souplesse financière.</p><p>Autre option privilégiée par les managers, <strong>Lien (Djurgården, 9,7)</strong> qui a l’avantage de doubler au round 19. Irrégulier, il facture quand même 10 buts et 2 passes. Comme on a déjà <strong>Hegland (Djurgården, 9,7) </strong>au milieu, on fait l’impasse.</p><p>Celui qui nous bottait déjà bien lors d’un billet précédent et qui a depuis confirmé, c’est <strong>Larsson (Göteborg, 8,6)</strong>. Possédé par seulement 2,9 % des managers, celui qui est passé par les Pays-Bas et la Turquie a les pénaltys et nous fait fortes impressions depuis son retour en Suède. Pour se différencier, c’est un choix fort.</p><p>Sinon, certains pourraient envisager <strong>Bergström (Mjällby, 6,2)</strong> : moins cher, libéré du spectre de la Ligue des Champions et avec deux doubles au programme (rounds 19 et 21), il a un profil de puissant différenciant. Mais, il blank au round 18, son calendrier n’a rien d’évident (Sirius, Djurgården, Häcken) et il n’a marqué que 5 buts depuis le début de la saison (d’ailleurs son record, c’est 9 buts en 2021). Et quitte à jouer les divergents en attaque, on préfère <strong>Vukojevic (Degerfors, 6)</strong> qui a somptueusement ouvert son compteur but le week-end dernier.</p><p>En défense, <strong>Tenho (Djurgården, 9,7</strong> ) est suspendu pour accumulation de cartons jaunes et manquera donc le derby lors de la réception de l’AIK Stockholm. Et comme <strong>Yeboah (IFK Göteborg, 5,4)</strong> a démarré sur le banc contre Kalmar, notre défense ne rassure pas. Mais, les trois défenseurs restant au sein de notre effectif sont titulaires de leur équipe et feront l’affaire. Au milieu et dans les cages, heureusement, tout le monde est sur le pont et disponible.</p><img src="/media/3448f3_93628b497935444a8501e7a523e2d121_mv2.png" alt=""/><p>Voilà pour cette semaine, bonne chance et à bientôt !</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

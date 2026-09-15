@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J6</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Après des matches d'Europa League ou de Carabao Cup sans grand intérêt, la Premier League reprend ses droits. On attend de voir si Palace peut reproduire l'exploit du Community Shield et battre Liverpool pour la première fois cette saison de Premier League. Est-ce que les Gunners arriveront à battre Newcastle, une équipe qui leur a donné énormément de fil à retordre la saison dernière ? Combien de buts est-ce que Haaland va mettre à Burnley cette fois-ci ?"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J6"><figure class="hero"><img src="/media/449182_e6caaba9af164f248c6b62cd72a97fd4_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J6</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 25 septembre 2025</p><div class="body"><p>Après des matches d'Europa League ou de Carabao Cup sans grand intérêt, la Premier League reprend ses droits. On attend de voir si Palace peut reproduire l'exploit du Community Shield et battre Liverpool pour la première fois cette saison de Premier League. Est-ce que les Gunners arriveront à battre Newcastle, une équipe qui leur a donné énormément de fil à retordre la saison dernière ? Combien de buts est-ce que Haaland va mettre à Burnley cette fois-ci ?</p><h2>Le tour d'horizon</h2><h3>Liverpool</h3><p>Liverpool a dominé le derby de la Mersey en s’imposant avec autorité, consolidant sa place de leader et affichant une force collective remarquable. La gestion des rotations en Ligue des champions reste impeccable, avec un groupe très soudé et performant. Les joueurs majeurs comme Salah et Robertson confirment leur statut, et le mental affiché lors des fins de match est impressionnant.</p><h3>Arsenal</h3><p>Arsenal a montré du caractère face à City : menés au score, les Gunners ont arraché un point grâce à Martinelli, confirmant la capacité de l’équipe à lutter contre les gros du championnat. Une victoire contre les Magpies ferait du bien vu que la saison derrière les Gunners ont perdu 3 des 4 rencontre contre les Magpies.</p><h3>Manchester City</h3><p>City a connu une semaine frustrante avec le nul contre Arsenal à domicile, où l’équipe n’a pas su convertir sa domination en victoire. L’arrivée de Donnarumma amène du sang neuf dans l’effectif, et l’équipe doit retrouver de la régularité en Ligue des champions et en Premier League. Un Match contre Burnley peut amener un gros score</p><h3>Manchester United</h3><p>Les Red Devils se sont relancés en battant Chelsea à domicile (2-1), malgré une nouvelle expulsion de Casemiro. Amorim commence à stabiliser le collectif, mais la discipline reste un axe de travail. United doit enchainer pour retrouver une dynamique positive.</p><h3>Chelsea</h3><p>Chelsea poursuit sa série de déceptions avec une défaite à Old Trafford, où les décisions arbitrales n’ont pas aidé. Les nouveaux renforts n’ont pas encore trouvé leur rythme, et l’équipe peine à concrétiser au milieu d’un collectif encore en construction. </p><h3>Bournemouth</h3><p>Après trois victoires consécutives, les Cherries ont été freinés par Newcastle (0-0) dans un match pauvre en occasions. Bournemouth confirme sa bonne organisation défensive mais doit retrouver de l’efficacité offensive, surtout face aux équipes du haut de tableau. Leur position dans le top 4 reste méritée.</p><h3>Tottenham</h3><p>Les Spurs décrochent un point sur le terrain de Brighton après un match animé (2-2) où Romero et Richarlison ont permis d’égaliser en fin de match. La prestation montre un esprit collectif solide malgré quelques trous d’air défensif.</p><h2>Mes Pronos pour la J6 de Premier League:</h2><p>Brentford 1 - 2 Man United</p><p>Crystal Palace 1 - 3 Liverpool</p><p>Chelsea 2 - 0 Brighton Hove</p><p>Leeds United 1 - 2 Bournemouth</p><p>Man City 2 - 0 Burnley</p><p>Nottingham 1 - 1 Sunderland</p><p>Tottenham 2 - 1 Wolverhampton</p><p>Aston Villa 1 - 1 Fulham</p><p>Newcastle 0 - 2 Arsenal</p><p>Everton 2 - 0 West Ham</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><h3>Les Indispensables</h3><p><strong>Erling Haaland </strong>(14.3M) Immanquable en FPL, meilleur buteur du championnat, fixture très favorable face à Burnley et ultra populaire pour le role de capitaine, voire meme Triple capitain !.</p><p><strong>João Pedro</strong> (7.8M) Titulaire à Chelsea ces dernières semaines, bons fixtures (Brighton + Newcastle), impliqué sur tous les coups de pied arrêtés offensifs.</p><p><strong>Phil Foden</strong> (8.0M) / <strong>Jérémy Doku</strong> (6.4M) Pour faire le plein de citadins ils sont titulaires indiscutables, très efficace dernièrement et avec des fixtures abordables.</p><p><strong>Cristian Romero</strong> (5.1M) Défenseur central de Tottenham, fixture favorable à domicile, très bon niveau défensif, et menace sur corner.</p><h3>Les bons tuyaux</h3><p><strong>Ilman Ndiaye</strong> (6.5M) Titulaire, sur pénalties pour Everton, 3 retours offensifs sur les 4 derniers matches, calendrier très abordable.</p><p><strong>Mohammed Kudus</strong> (6.6M) En pleine forme au milieu de terrain, contre des clubs du bas de tableau, son volume de tirs augmente et il joue haut sur le terrain.</p><p><strong>James Tarkowski</strong> (5.5M) Défenseur d’Everton, joue West Ham (l’équipe la plus faible sur set-pieces) puis Fulham, fort potentiel de clean sheet et bonus.</p><p><strong>Chris Wood</strong> (7.6M) Attaquant de Forest, avec matches faciles sur les trois prochains GW (Sunderland puis Fulham notamment), bon rendement de buts et minutes. Il s'est reposé pendant le match d'Europa League donc il devrait être frais</p><h3>Les pépites</h3><p><strong>Tijjani Reijnders</strong> (5.6M) Titulaire indiscutable à Manchester City, seul joueur à avoir joué toutes les minutes depuis la GW1 et fixture favorable.</p><p><strong>Joachim Andersen </strong>(4.7M) Clean sheets fréquents, fixtures très accessibles et choix solide dans la rotation.</p><p><strong>David Raya</strong> (5.5M) Gardien d’Arsenal, fixture solide défensivement et bon potentiel de clean sheets, aussi choisi par beaucoup de managers.</p><p><strong>Matty Cash</strong> (4.6M) Latéral offensif d’Aston Villa, beaucoup d’implication offensive malgré un prix contenu, joue Fulham et Burnley sur les 3 prochaines GW.</p><p>Bonne semaine à tous...</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,101 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Ligue 1 - Suspensions et Blessures J18</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Photo : LE tweet de Kylian Mbappe Bienvenue sur notre page suspensions et blessures Ligue 1. Cette page sera constamment ré-actualisée..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Ligue 1 - Suspensions et Blessures J18"><figure class="hero"><img src="/media/f084b3_8b51997d1d49415c9efd862aecd99432_mv2.png" alt=""/><div class="scrim"></div><h1>Ligue 1 - Suspensions et Blessures J18</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 9 janvier 2023</p><div class="body"><p>Photo : LE tweet de Kylian Mbappe </p><p>Bienvenue sur notre page suspensions et blessures Ligue 1. Cette page sera constamment ré-actualisée avec des informations provenant de sources sûres et vérifiées.</p><p><strong><span style="color:#0693e3">Dernière MAJ : Mercredi 11 janvier 2023 - 14h00</span></strong></p><p><strong>Les principaux absents confirmés : </strong>
+<strong>Kone, Coutateur, Hamouma, Touzghar, Cimignani, Del Castillo, Cardona, </strong><strong><span style="color:#ef1606">Kamden</span></strong><strong><span style="color:#cf2e2e">,</span></strong><strong> Gonalons, </strong><strong><span style="color:#ef1606">Abdul Samed</span></strong><strong>, Buksa, Bamba, Fonte, Martin, Gudmundsson, Lihadji, </strong><strong><span style="color:#1e73be">Loric</span></strong><strong>, Laporte, Le Bris, Matsima, </strong><strong><span style="color:#ef1606">Laaziri</span></strong><strong>, Aouar, Henrique, </strong><strong><span style="color:#ef1606">Bailly</span></strong><strong>, </strong><strong><span style="color:#ef1606">Nuno Tavares</span></strong><strong>, Payet, Clauss, Volland, </strong><strong><span style="color:#1e73be">Souquet</span></strong><strong>, </strong><strong><span style="color:#ef1606">Moutoussamy</span></strong><strong>, Pallois, Bulka, Schneiderlin, Da Cunha, Atal, Viti, Bryan, Ilie, </strong><strong><span style="color:#ef1606">Hakimi</span></strong><strong>, Kimpembe, Verratti, Renato Sanches, Mbappe, Nuno Mendes, Gomis, Xeka, Desler, Agoume, Odobert</strong>
+</p><p><strong>Longue absence :</strong>
+<strong>Diony, Eneme-Ella</strong>, <strong>Cabot, Farinez, Mvogo, Harit, Bertaud, Sainte-Luce, Terrier, Santamaria, Healey</strong></p><p><strong>Les dernières décisions de la commission de discipline de la LFP en cliquant sur le lien</strong> :
+<a href="https://www.lfp.fr/Articles/Discipline/2022/12/20/commission-de-discipline-les-decisions-du-30-decembre-2022"><u>30 décembre 2022</u></a> 
+<a href="https://www.lfp.fr/Articles/Discipline/2023/01/03/commission-de-discipline-les-decisions-du-4-janvier-2023"><u>4 janvier 2023</u></a> </p><p>Nous avons rajouté une colonne afin de vous indiquer quel club a été mis à jour. &quot;Mer 22h30&quot; signifie que la dernière mise à jour date de Mercredi à 22h30, &quot;Jeu 17h00&quot; = Jeudi à 17h00 et &quot;Ven 14h00&quot; = Vendredi à 14h00. Le but est que vous sachiez quel club a été modifié lors des mises à jour.
+Code couleur :
+Noir : 1ère MàJ / <span style="color:#ef1606">Rouge : 2nde MàJ</span> / <span style="color:#1e73be">Bleu : 3ème MàJ</span> / <span style="color:#eb0ff6">Violet : 4ème MàJ</span> / <span style="color:#f6f816">Jaune : 5ème MàJ</span></p><p>OKVous trouverez <a href="https://www.fantasy-coach.fr/category/fantasy-ligue1/suspensions-et-blessures-l1/">ici</a> l’ensemble des articles suspensions et blessures pour cette nouvelle saison de Ligue 1.</p><p>N’hésitez pas à nous suivre nous sur Twitter <a href="https://twitter.com/FantasyCoach_FR">@FantasyCoach_FR </a>et <a href="https://twitter.com/MPGLaurent">@MPGLaurent</a> et sur Facebook : <a href="https://www.facebook.com/Fantasy-Coach-824491257591639/">Fantasy Coach</a></p><p>Pour jouer au <a href="https://www.winamax.fr/landing/landing_leads.php?ldg=jde&amp;banid=37173">Jeu de l’Entraîneur Winamax</a> ou à <a href="https://data.mpg.football/">MonPetitGazon </a></p><p>Code couleur de la page:</p><p><strong>Rouge</strong><strong> : Suspendu</strong></p><p><strong>Orange</strong><strong> : Forfait confirmé</strong></p><p><strong>Jaune</strong><strong> : Incertain</strong></p><p><strong>Bleu </strong><strong>: transfert définitif</strong></p><p><strong>Vert</strong><strong> : Disponible pour le groupe</strong></p><h2>Calendrier J18</h2><h2>Ajaccio #ACA (reçoit Reims) </h2><p>Le Groupe J18</p><h2>Angers #SCO (va à Paris) </h2><p>Le Groupe J18</p><h2>Auxerre #AJA (reçoit Toulouse)  </h2><p>Le Groupe J18</p><h2>Brest #SB29 (reçoit Lille) </h2><p>Le Groupe J18</p><h2>Clermont #CF63 (reçoit Rennes) </h2><p>Le Groupe J18</p><h2>Lens #RCL (va à Strasbourg) </h2><p>Le Groupe J18</p><h2>Lille #LOSC (va à Brest) </h2><p>Le Groupe J18</p><h2>Lorient #FCL (reçoit Monaco) </h2><p>Le Groupe J18</p><h2>Lyon #OL (va à Nantes) </h2><p>Le Groupe J18</p><h2>Marseille #OM (va à Troyes) </h2><p>Le Groupe J18</p><h2>Monaco #ASM (va à Lorient) </h2><p>Le Groupe J18</p><h2>Montpellier #MHSC (va à Nice) </h2><p>Le Groupe J18</p><h2>Nantes #FCN (reçoit Lyon) </h2><p>Le Groupe J18</p><h2>Nice #OGCN (reçoit Montpellier) </h2><p>Le Groupe J18</p><h2>Paris #PSG (reçoit Angers) </h2><p>Le Groupe J18</p><h2>Reims #SDR (va à Ajaccio) </h2><p>Le Groupe J18</p><h2>Rennes #SRFC (reçoit Clermont) </h2><p>Le Groupe J18</p><h2>Strasbourg #RCSA (reçoit Lens) </h2><p>Le Groupe J18</p><h2>Toulouse #TFC (va à Auxerre) </h2><p>Le Groupe J18</p><h2>Troyes #ESTAC (reçoit Marseille) </h2><p>Le Groupe J18</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

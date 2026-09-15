@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, 8 èmes de finale, CDM 2022 </title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Après une absence lors de la J3 des phases de poules, notre player picks Coupe du monde 2022 est de retour pour les huitièmes de finale...."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, 8 èmes de finale, CDM 2022 "><figure class="hero"><img src="/media/251b8f_6cb3da6c103345619f98875a87a1b802_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, 8 èmes de finale, CDM 2022 </h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 2 décembre 2022</p><div class="body"><p>Après une absence lors de la J3 des phases de poules, notre player picks Coupe du monde 2022 est de retour pour les huitièmes de finale. Vu que ça s’enchaine vite et qu’il y a seulement quelques heures pour composer nos équipes, je vais à l’essentiel en ne rédigeant pas mes analyses des matchs et le résumé de cette phase de poules, l’essentiel c’est que vous ayez les picks pour vos teams. </p><p>Pour rappel voici le lien permettant de rejoindre notre ligue Fantasy Coach sur le jeu : </p><p><a href="https://play.fifa.com/fantasy-classic/join-league/BW16IVLM"><u>Rejoindre notre ligue Fantasy Coach.fr.</u></a> </p><h2>Les matchs de la journée</h2><p><strong>Pays-Bas 1-0 Etats-Unis</strong></p><p><strong>Argentine 2-0 Australie</strong></p><p><strong>France 2-0 Pologne</strong></p><p><strong>Angleterre 1-1 Sénégal</strong></p><p><strong>Japon 1-1 Croatie</strong></p><p><strong>Brésil 3-0 Corée du sud</strong></p><p><strong>Espagne 1-0 Maroc</strong></p><p><strong>Portugal 2-1 Suisse</strong></p><p><strong><u>Player Picks</u></strong><strong> </strong></p><p>Pour ces huitièmes de finale, le jeu nous autorise à refaire entièrement notre équipe et on peut désormais sélectionner quatre joueurs d’une même nation si on en a envie. Il faut faire cependant attention à sélectionner des joueurs qui ont de fortes chances d’aller loin dans la compétition car on aura uniquement le droit à quatre transferts entre les huitièmes de finale et les quarts de finale. </p><h2>Gardiens </h2><p>Au poste de gardien, <strong>Emiliano Martinez ($5.5M) </strong>me semble être la meilleure option face à une attaque australienne que je ne vois pas en mesure de réaliser l’exploit de marquer de nouveau avec un aussi faible volume offensif.</p><p><strong>Alisson ($6.0M) </strong>est le second choix, le Brésil est assez solide défensivement depuis le début du mondial et les coréens malgré leur volonté seront surement trop limités pour mettre en danger cette arrière-garde auriverde. </p><p>Ensuite, <strong>Lloris ($6.0M) </strong>et <strong>Noppert ($4.5M) </strong>me semblent être au même niveau, ils jouent face à des adversaires à la portée de leur équipe mais les attaques polonaises et américaines sont tout de mêmes plus fournies que celle de l’Australie et de la Corée du sud. </p><p>Enfin, <strong>Unai Simon ($5.5M) </strong>et <strong>Pickford ($5.5M) </strong>sont également jouables, c’est plus risqué mais si vous voulez vous différencier ce sont les deux hommes à tenter. </p><h2>Défenseurs </h2><p>En défense, je m’acharne avec <strong>Dumfries ($6.0M) </strong>qui pour le moment ne s’est pas montré décisif, il aura des occasions de se projeter face à des américains joueurs et il pourrait bien lancer son mondial. </p><p>Impossible de ne pas citer <strong>Théo Hernandez ($5.0M)</strong>, il réalise un superbe mondial pour le moment, sa connexion avec Mbappe est excellente et il aura encore de nombreuses opportunités d’être à l’offensive face à une Pologne très défensive.  </p><p>Je vois bien les brésiliens réaliser un clean sheet, en ce sens Alex <strong>Sandro ($5.0M) </strong>et <strong>Marquinhos ($5.5M) </strong>restent les meilleurs picks, le premier monte davantage tandis que le second peut marquer sur coups de pieds arrêtés, à vous de faire votre choix. </p><p>Coté argentin, <strong>Acuna ($4.5M) </strong>semble s’être imposé comme un titulaire aux yeux de Scaloni et comme il monte souvent c’est un très bon pick, le seul inconvénient c’est qu’il sort en cours de match. Si vous voulez être certain que votre joueur joue 90 minutes, <strong>Otamendi ($5.0M) </strong>est une bonne option de rechange. </p><p><strong>Jordi Alba ($6.0M) </strong>est lui la meilleure option espagnole, il en est déjà à deux passes décisives et voudra enchainer face au Maroc. Côté portugais c’est <strong>Joao Cancelo ($6.0M) </strong>qui est indispensable si vous croyez à une qualification des hommes de Santos, il se projette tout de même moins qu’avec Manchester City. </p><p>Enfin, <strong>Van Dijk ($6.0M) </strong>est une bonne alternative à Dumfries car il peut marquer sur coups de pieds arrêtés, <strong>Sosa ($3.5M) </strong>peut être un bon complément pour soulager votre budget, si vous croyez aux hommes de Southgate, <strong>Trippier ($5.0M)</strong> est la valeur sure défensive de l’équipe. </p><h2>Milieux </h2><p>Difficile de trouver des milieux rentables sur le jeu, cependant <strong>Bruno Fernandes ($9.5M)</strong> est en feu depuis le début de ce mondial avec deux buts et deux passes décisives en deux matchs, il sera l’un des hommes clés des portugais face à la Suisse. </p><p><strong>Rabiot ($6.5M) </strong>est lui aussi très performant lors de cette Coupe du monde, face à une équipe polonaise où ses projections offensives seront surement les bienvenues, il pourrait de nouveau être déterminant. </p><p>Très libre sur le terrain, <strong>De Jong ($8.5M) </strong>est l’un des meilleurs milieux du jeu, que ce soit à la passe ou bien à la finition, je le vois bien se montrer décisif de nouveau ce samedi face aux Etats-Unis. Si vous voulez une autre option, il y a toujours <strong>Bergwijn ($7.0M) </strong>mais je ne suis pas du tout certain qu’il démarre le match en tant que titulaire et il n’est clairement pas en forme pour le moment. </p><p>Côté argentin, incertitude autour de <strong>Di Maria ($8.5M) </strong>qui pourrait ne pas débuter, du coup les deux options jouables sont <strong>Fernandez ($6.0M)</strong> et <strong>Mac Allister ($7.0M) </strong>qui se sont imposés comme des titulaires après leurs deux très bons derniers matchs respectifs. </p><p>Pour ce qui est des anglais, toujours beaucoup d’incertitudes autour de la composition d’équipe de Southgate, si je ne devais vous recommander qu’un seul joueur ce serait <strong>Saka ($8.0M) </strong>qui était en feu lors de la J1 avec deux buts et qui a été mis au repos en J3. </p><p>Enfin, côté brésilien difficile de joueur un milieu de terrain mais <strong>Casemiro ($6.0M)</strong> buteur en J2 et <strong>Lucas Paqueta ($7.0M) </strong>sont les deux picks jouables, <strong>Modric ($8.5M)</strong> reste une option côté croate surtout lors des matchs à élimination directe tandis que <strong>Gavi ($7.0M)</strong>, <strong>Olmo ($8.0M)</strong> et <strong>Asensio ($8.5M) </strong>sont tous les trois intéressants côté espagnol. </p><h2>Attaquants </h2><p><strong>Mbappe ($11.5M) </strong>est le meilleur buteur du jeu et ne pas l’avoir dans son équipe pour les huitièmes de finale serait une grave erreur, il veut battre des records et voudra porter la France vers les quarts de finale ce dimanche. </p><p><strong>Messi ($10.5M) </strong>n’est clairement pas dans sa meilleure forme lors de ce mondial mais il en est tout de même à deux buts et une passe décisive en trois matchs, face à l’Australie il aura l’occasion de briller. </p><p><strong>Gakpo ($7.0M) </strong>est l’une des révélations de ce mondial, il a marqué lors de chacun des trois premiers matchs des oranges et voudra poursuivre cette superbe série face aux Etats-Unis. Si vous voulez prendre un risque il y a également <strong>Depay ($8.5M) </strong>à ce poste mais il est clairement moins en jambes. </p><p>Côté brésilien, <strong>Richarlison ($7.5M) </strong>est l’incontournable après son doublé lors de la J1, il a été mis au repos lors de la J3 et voudra de nouveau marquer face aux coréens. <strong>Vinicius ($10.5M) </strong>est la seconde meilleure option côté brésilien, il est plus cher mais crée beaucoup de différences offensives depuis le début de ce mondial. </p><p>Impossible de ne pas citer <strong>Cristiano Ronaldo ($10.0M)</strong> dans cette partie, il n’est pas en grande forme avec seulement un but en trois matchs mais il voudra tout comme Messi briser sa malédiction en phase finale de Coupe du monde. </p><p>Ensuite, <strong>Kane ($11.0M)</strong> et <strong>Morata ($8.0M) </strong>sont deux picks différentiels, le premier a déjà réalisé trois passes décisives mais peine à marquer tandis que le second est en grande forme puisqu’il a déjà marqué trois fois en trois matchs. Leurs adversaires me semblent cependant plus compliqués à affronter que ceux des autres joueurs cités plus haut, attention aussi à Morata car il n’est pas certain de débuter titulaire. </p><p>Enfin, <strong>Giroud ($7.5M) </strong>et <strong>Griezmann ($8.5M) </strong>peuvent être de bonnes alternatives à Mbappe voire des compléments si vous voulez jouer deux attaquants français, <strong>Alvarez ($6.5M) </strong>a marqué lors du dernier match et voudra enchainer, <strong>Rashford ($7.5M) </strong>est en feu avec trois buts déjà et pourrait bien être titularisé par Southgate tandis que <strong>Joao Felix ($8.0M)</strong> est une belle alternative à Cristiano Ronaldo. </p><p>Voici donc pour le player picks des huitièmes de finale de cette Coupe du monde complètement folle pour le moment, il ne me reste plus qu’à vous souhaiter de bons matchs et on se retrouve pour les quarts de finale ! </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

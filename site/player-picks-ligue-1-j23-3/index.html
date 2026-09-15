@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J23</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Player Picks, Ligue 1, J23"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J23"><figure class="hero"><img src="/media/a73c0f_34c2aa9d33594a86ac8f1e85d76032da_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Ligue 1, J23</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 20 février 2026</p><div class="body"><p> « <em>Absolument rien n’est fait au hasard. Tout est ordonné. Ce n’est pas une MJC l’Olympique de Marseille</em>.<em> </em>» P Longoria (février 2026)</p><p>De Pablo (encore), de québlo (for sure) mais pas de hublot: Player Picks de la saison LCDE, épisode 23</p><h2>Les matchs de la journée</h2><h3>Brest – Marseille</h3><p>Et on démarre en fanfare à 20h45 – heure de Rennes et cette info revêt toute son importance puisque c’est justement de là que nous vient le néo licencié / embauché coach marseillais – cette J23 par un vrai duel de port! Cette semaine, McCourt a sifflé la fin de la récré, l’OM tient un coach et un objectif partagé avec son ex / actuel (ouais faut s’accrocher pour suivre, Marseille c’est House of Cards un peu) DS : continuer à faire encore un peu de moulaga. Pour ce faire, rien de mieux que de se qualifier – la suite dira que c’est pour pas sortir des poules mais bon tu connais – pour la LDC et ça passe notamment par un résultat à Francis le Blé à tenir, une fois n’est pas coutume, jusqu’au bout du temps additionnel</p><p><strong><span style="color:#084EBD">Score 1-2</span></strong></p><h3>Lens – Monaco</h3><p>On passe ensuite à un Cyril Roolico qu’on imagine volontiers d’autant plus détendu que le spécialiste historique des exclusions en France et en Navarre puisqu'il se déroulera sans Golovin qui, comme ton tonton dans ses grandes heures, a réussi à prendre 2 gros rouges d’affilé et sans transpirer en l’espace de 3 j ! 20 points d’écart soit tout un monde sépare actuellement Lensois et Monégasques mais, allez savoir pourquoi, j’ai envie de croire au renouveau asémite, à sa solidité défensive retrouvée et à son attaque bien pourvue qui devra composer face à une défense lensoise affaiblie mais qui a repris la place de leader au PSG la semaine dernière à 20 m du Parc des Princes. Sait-on jamais</p><p><strong><span style="color:#084EBD">Score 3-0</span></strong></p><h3>Toulouse – Paris FC</h3><p>Venons-en ensuite à un duel capital entre la capitale occitane et la capitale de France. D’ailleurs, je sais même pas laquelle m’a donné le plus envie de chialer : la capitale occitane qui a réussi à se faire taper par le Havre Atlethic Football Club – c’est vrai que dire le HAC c’est plus court – en supériorité numérique pendant quoisiment tout le match ou la capitale de France qui s’est pris une manita par l’équipe B du RC Lens. Quoi qu’il en soit, on invite Gilli à ne pas forcément reconduire la même compo avec les qq gars qui ont accepté de rejoindre ce Paris pendant la pause hivernale et de profiter de l’opportunité de ce déplacement au Stadium pour engranger en vue du maintien puisque le Tef fait du sur-place</p><p><strong><span style="color:#084EBD">Score 1-0</span></strong></p><h3>Paris SG – Metz</h3><p>Poursuivons par le duel des opposés entre le futur vainqueur du championnat et la future cuillère en bois du championnat. Rien de nouveau sous… la tempête : le Paris Saint Germain empile les expected goals, les pénos ratés et les possessions stériles, le FC Metz empile les défaites, les bulles et surtout pas les points. Vous imaginez qu’en une grosse semaine, Paris a perdu à Rennes et gagner à Marseille alors que Marseille avait battu Rennes juste avant. A ‘ment donné je suis chroniqueur de foot à succès, pas devin ! Pour cette journée, heureusement que nul doute n’est permis donc je vais pas vous parler plus longtemps de technico-tactique : les Parisiens vont destroncher les Messins et puis voilà</p><p><strong><span style="color:#084EBD">Score 5-0</span></strong></p><h3>Auxerre – Rennes</h3><p>On enchaîne – et c’est tant pis pour Kool Shen – par le match entre un club qui a réussi à marquer (ça me fume) pas 1, pas 2 mais bien 3 buts en un seul match et un autre club qui vit quand même mieux depuis qu’Habib Beye a eu le mérite de lancer l’entraineur de la réserve à sa place sur le banc. Si l’AJA, barragiste à l’aune de la J23, bien portée par ses renforts du mercato, s’est donnée un tout petit peu d’air sur la zone rouge, la réception du stade rennais s’annonce d’un tout autre acabit, le tout pour la grande première d’un Haise qu’on sent libéré de son sacerdoce niçois. Pour la compo comme pour le résultat, on peut s’attendre à tout mais ce sera sans doute serré ! Et c’est pas pour me déplaire</p><p><strong><span style="color:#084EBD">Score 0-0</span></strong></p><h3>Angers – Lille</h3><p>Passons maintenant à une rencontre placée sous le signe de l’amour et pas n’importe lequel : l’amour à la québécoise et plus précisément : l’amour de Céline Dion pour son mari René. C’est rigolo la farmers league quand on y pense (et pas seulement quand on regarde Nantes défendre) : Lyon est 3e avec l’ex coach de Lille, Marseille est 4e avec l’ex coach de Rennes, Lille est 5e avec l’ex coach de Lyon et Rennes est 6e avec l’ex coach de Lens. Aussi, vu le contexte récent et la crise de résultat des attaquants lillois (qui viennent de rejoindre la liste rouge des espèces menacées d’extinction d’après des sources proches du dossier), je commencerais à me faire du soucis si j’étais Genesio. Duel étriqué en perspective à Angers</p><p><strong><span style="color:#084EBD">Score 1-1</span></strong></p><h3>Nice – Lorient</h3><p>On bouge ensuite du côté de Nissa la bella – comme quoi y a vraiment des blazes qui claquent et des réalités qui déchantent – sans doute un peu moins sexy depuis que l’indispensable Elye Wahi depuis janvier s’est pété. Ça me fracasse de l’écrire mais force est donc de constater que ces Merlus, venus du Morbihan pour jouer les troubles fête au milieu de Strasbourg, Monaco et autre Toulouse, vont clairement pas se faire sur les mollets à la vue d’une attaque incarnée par Kevin Carlos et partent, posons les termes comme disaient les Romains en Gaule narbonnaise, favoris de cette confrontation à l’Allianz Riviera. Je vous épargne mes salades grecques / niçoises (c’est le zga) : match prolifique sur la Côte d’Azur</p><p><strong><span style="color:#084EBD">Score 2-2</span></strong></p><h3>Nantes – Le Havre</h3><p>Dans le même temps, une rencontre éclatée au sol chassant l’autre le dimanche après-midi, on aura également le droit à une rencontre qui aurait pué la L2 si les Normands n’avaient pas foutu les Ligériens (hé oui c’est comme ça qu’on dit) à 12 longueurs sans doute déjà fatales, à la grâce d’un Issa Soumaré sorti de la cave, entre 2 villes qui aimeraient être en Bretagne mais qui vivent à sa périphérie. J’ai une dernière stat effrayante qui finira de convaincre les plus sceptiques – et en même temps (poke patron) j’ai toujours préféré les vraies convaincues aux fausses sceptiques – mais sachez que Kantari est actuellement sur des temps de passage inférieurs à un certain Domenech sur le banc canari. Go le club doyen</p><p><strong><span style="color:#084EBD">Score 1-2</span></strong></p><h3>Strasbourg – Lyon</h3><p>Et on boucle cette journée par l’affiche de la journée – et c’est pas dommage qu’il nous faille patienter tout le week-end jusqu’à la clôture du dimanche soir pour assister à une rencontre qui ait un minimum de gueule – entre le roi des remontadas et le roi des clean-sheets. Je vous le donne Emile : la dernière fois que l’OL avançait à ce rythme-là – cf 13 victoires consécutives – on était en 2006, Zizou n’avait encore encastré personne et Robin n’était pas né mais les Lyonnais des Juninho, Malouda et consorts avaient tout simplement fini champions de France. Si la méfiance reste de mise lorsque l’on joue un Racing imprévisible, cela devrait le faire pour les Gones. Aussi vrai que j’aime pas le boulghour</p><p><strong><span style="color:#084EBD">Score 1-2</span></strong></p><h2>Players Picks</h2><p><strong>Nos compositions probables des 18 équipes de Ligue 1 sont disponibles comme chaque semaine : </strong></p><p><a href="https://www.fantasy-coach.fr/compos-probables"><strong><u>Nos compositions probables</u></strong></a></p><p><strong>La liste des absents et des suspendus est également à jour :</strong></p><p><a href="https://www.fantasy-coach.fr/indisponibles-dnp"><strong><u>Les absents et les suspendus</u></strong></a></p><p><strong>Enfin, n’hésitez pas à nous suivre sur X pour avoir les dernières informations concernant les absents et les suspendus : </strong></p><p><a href="https://x.com/FantasyCoach_FR"><strong><u>Nous suivre sur X</u></strong></a></p><h2>Les incontournables</h2><ul><li><h3>Paris :</h3></li></ul><p>=&gt;  Tauliers : Hakimi (14.6), Doué (15.5)</p><p>=&gt;  Gars sûrs : Pacho (14.2), Safonov (12.1), Barcola (15.5)</p><p>=&gt;  Supersubs : Dro F (7.9), Mbaye (8.5)</p><h3>Lens :</h3><p>=&gt;  Tauliers: Udol (16.6), Thomasson (15.6)</p><p>=&gt;  Gars sûrs : Risser (16.7), Edouard (15.4)</p><p>=&gt;  Supersubs : Saint Maximin (13.4), Fofana (8.3)</p><p>=&gt; Pépites : Celik (5.6)</p><h2>Les jouables</h2><ul><li><h3>Rennes :</h3></li></ul><p>=&gt; Tauliers : Samba (12.5), Merlin (12.7)</p><p>=&gt;  Gars sûrs : Brassier (12), Lepaul (13.8)</p><p>=&gt;  Supersubs : Embolo (11.8), Blas (12.6)</p><ul><li><h3>Toulouse :</h3></li></ul><p>=&gt; Tauliers : Gboho (11.9)</p><p>=&gt;  Gars sûrs : Cresswell (13.8), Restes (12.4), Donnum (11.1)</p><p>=&gt;  Supersubs : Vignolo (3), Russell-Rowe (9.8)</p><p>=&gt; Pépites : Methalie (7.4), Diop (6.1)</p><ul><li><h3>Marseille :</h3></li></ul><p>=&gt;  Tauliers: Greenwood (13.8)</p><p>=&gt;  Gars sûrs : Rulli (12.4), Emerson (14), Aguerd (12.7)</p><p>=&gt;  Supersubs : Aubameyang (13.8), Nadir (9)</p><h2>Les paris </h2><ul><li><h3> Lyon :</h3></li></ul><p>=&gt; Tauliers: Sulc (17.1), Endrick (14.4)</p><p>=&gt;  Gars sûrs : Greif (16.7), Abner (15), Tolisso (14.6)</p><p>=&gt;  Supersubs : Himbert (3), Yaremchuk (10.9)</p><p>Bonne composition d’équipe à tous et à la semaine prochaine pour la J24 !!! </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

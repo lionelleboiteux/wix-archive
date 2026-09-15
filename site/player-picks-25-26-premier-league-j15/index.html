@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J15</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Pendant ce temps, c'est la soupe à la grimace chez nos rivaux londoniens. Chelsea s'est fait humilier par Leeds (3-1), et Tottenham... ah, Tottenham. Un nul 2-2 à Newcastle qui ne sert à rien..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J15"><figure class="hero"><img src="/media/449182_95029a4ed8684e3e89e9a0e4ea7e1ea0_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J15</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 4 décembre 2025</p><div class="body"><p>Quelle journée mes amis, quelle journée ! Alors que Manchester City décidait de jouer au water-polo contre Fulham (5-4 !), Arsenal a rappelé à tout le monde ce qu'est une défense en maîtrisant Brentford 2-0. Une clean sheet, des buts, pas de frayeur : le travail de pro.</p><p>Pendant ce temps, c'est la soupe à la grimace chez nos rivaux londoniens. Chelsea s'est fait humilier par Leeds (3-1), et Tottenham... ah, Tottenham. Un nul 2-2 à Newcastle qui ne sert à rien. Notons aussi l'exploit de Sunderland qui accroche Liverpool (1-1), prouvant que ce promu est le poil à gratter officiel de la saison.</p><p>La J15 arrive très vite au boulot...</p><h2>Le tour d'horizon</h2><h3>Aston Villa vs Arsenal</h3><p>Villa sort d'un match dingue contre Brighton (victoire 4-3). Leur attaque est en feu, mais leur défense est une passoire. Ça tombe bien pour Arsenal qui aura besoin de ça car trois de ses quatre défenseurs centraux sont à l'infirmerie. Heureusement, Ødegaard est de retour et son duo avec Saka monte en régime, ce qui va probablement évincer Eze. Je vois les Gunners gagner 2-1 à Villa Park dans un match difficile.</p><h3>Man City vs Sunderland</h3><p>City vient d'encaisser 4 buts contre Fulham. 4 buts ! Guardiola a dû perdre ses derniers cheveux. Ils reçoivent Sunderland, l'équipe qui vient de frustrer Liverpool. Attention, match piège par excellence, mais l'attaque de City est trop puissante à domicile. Victoire 2-1, sans clean sheet.</p><h3>Brighton vs West Ham</h3><p>Brighton a perdu 3-4 mais a montré une force offensive incroyable. Ils reçoivent West Ham, qui a péniblement fait nul contre United. Les Hammers vont souffrir face à la vitesse des Seagulls. Je prédis un 3-0 net. Si vous n'avez pas d'attaquants de Brighton, c'est une faute professionnelle.</p><h3>Tottenham vs Brentford</h3><p>Les Spurs reçoivent Brentford. Tottenham reste sur un nul frustrant, Brentford vient de perdre contre nous mais a montré de belles choses. Vu la fébrilité défensive des hommes de Postecoglou, je vois Brentford créer la surprise et gagner 2-1. </p><h3>Leeds vs Liverpool</h3><p>Leeds est euphorique après avoir battu Chelsea. Liverpool doute après le nul contre Sunderland. Isak retourne affronter une équipe en pleine bourre. Je vois tout de même les Reds s'imposer 2-1 à l'expérience, mais ce ne sera pas une promenade de santé.</p><h2>Mes Pronos pour la J15 de Premier League:</h2><p>Aston Villa 1 - 2 Arsenal</p><p>Bournemouth 2 - 1 Chelsea</p><p>Everton 2 - 1 Nottingham</p><p>Man City 2 - 1 Sunderland</p><p>Newcastle 2 - 0 Burnley</p><p>Tottenham 1 - 2 Brentford</p><p>Leeds United 1 - 2 Liverpool</p><p>Brighton Hove 3 - 0 West Ham</p><p>Fulham 1 - 2 Crystal Palace</p><p>Wolverhampton 0 - 2 Man United</p><p><span style="color:#1a1c1e">Envoyez nous vos pronos via </span><a href="https://www.google.com/url?sa=E&amp;q=#"><strong><u><span style="color:#2483e2">le jeu des pronos</span></u></strong></a></p><h2>Le Player Picks</h2><h3>Les Indispensables</h3><p><strong>Erling Haaland (£14.9m)</strong> : Attaquant premium en pleine forme, avec les meilleures probabilités de but ou passe décisive en GW15 face à Sunderland à domicile, plus d’excellents matches à venir.​</p><p><strong>Phil Foden (£8.2m)</strong> : Titulaire très impliqué dans l’attaque de City, combinant forme, minutes solides et une série de fixtures favorables débutant par Sunderland à domicile.​</p><p><strong>Cole Palmer (£10.3m)</strong> : Leader offensif de Chelsea, probable retour dans le XI contre Bournemouth puis un calendrier globalement correct où il reste sur penalties et une grosse implication dans le jeu.​</p><p><strong>Bruno Fernandes (£9.0m)</strong> : Toujours au cœur du jeu de Manchester United, avec un volume de tirs et de passes clés élevé avant une sequence de matchs jouables, dont Wolves en GW15.​</p><h3>Les bons tuyaux</h3><p><strong>Nick Woltemade (£7.4m)</strong> : Avant-centre de Newcastle avec de fortes chances d’implication offensive contre Burnley à domicile, puis un calendrier globalement favorable pour l’attaque des Magpies.​</p><p><strong>Anthony Gordon (£7.2m)</strong> : Autre atout offensif de Newcastle, très bien classé en probabilités de retour face à Burnley et souvent décisif dès que Newcastle domine.​</p><p><strong>Harvey Barnes (£6.4m)</strong> : Option explosive de Newcastle si titulaire, avec de bonnes cotes d’attaque et la possibilité de gros score contre une défense de Burnley friable.​</p><p><strong>Yankuba Minteh (£6.3m)</strong> : Milieu offensif de Brighton en forme, bénéficiant d’un bon match contre West Ham puis d’un calendrier intéressant pour multiplier les retours.​</p><p><strong>Danny Welbeck (£6.6m)</strong> : Avant-centre de Brighton, bien placé dans les probabilités de but/passe contre West Ham et capable de profiter d’un calendrier offensivement favorable.</p><h3>Les pépites</h3><p><strong>Dewsbury-Hall (£4.9m)</strong> : Milieu offensif bon marché avec des minutes solides, en hausse de popularité et capable de gratter des retours grâce à un rôle avancé et des coups de pied arrêtés.​</p><p><strong>Sels (£4.7m)</strong> : Gardien intéressant pour une structure à deux portiers bon marché, avec un bon rapport qualité/prix et des matches où les clean sheets restent jouables.​</p><p><strong>Dubravka (£4m)</strong> : Autre option de gardien à bas prix, profitant de la solidité défensive de son équipe et d’un calendrier qui offre des opportunités de points.​</p><p><strong>Muñoz (£6.0m)</strong> : Défenseur offensif listé à un prix encore accessible, combinant potentiel de clean sheet et menace offensive dans une équipe bien organisée défensivement.</p><p><span style="color:#1a1c1e">Bonne chance à tous pour cette J15...</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

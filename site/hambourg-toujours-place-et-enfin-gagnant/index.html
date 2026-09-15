@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Hambourg, toujours placé et enfin gagnant ?</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Hambourg
+2.Bundesliga"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Hambourg, toujours placé et enfin gagnant ?"><figure class="hero"><img src="/media/3448f3_7ef527885d5b4cb9abe4c6e20f483140_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Hambourg, toujours placé et enfin gagnant ?</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 12 août 2024</p><div class="body"><img src="/media/3448f3_4231f54b5fd742128198edc1042e11fe_mv2.webp" alt=""/><h2>Hamburger SV</h2><p>Encore passé à côté de son sujet en finissant quatrième, la place du con, Hambourg est de nouveau resté à quai. Sans atteindre le podium et pire en voyant le petit voisin honni de Sankt Pauli accoster à l’étage supérieur tout en raflant le titre de champion. Presque une humiliation locale et vraie nouvelle désillusion.</p><p>Pourtant bien partis, les Rothosen ont calé de manière surprenante en concédant deux défaites consécutives chez les promus (Elversberg et Osnabrück) et ont commencé à inquiéter sur leur capacité réelle à accrocher la promotion tant attendue. Après trois défaites consécutives à domicile contre de bonnes équipes du championnat (Paderborn, Karlsruhe, Hanovre), les dirigeants ont enfin décidé d’agir et ont débarqué en février le controversé coach <strong>Tim Walter</strong> arrivé au club à l’été 2021 pour le remplacer par le non moins controversé <strong>Steffen Baumgart</strong> (avec un intermède de <strong>Merlin Polzin</strong> pour un match nul à Rostock). Sans effet miracle pour atteindre les objectifs fixés.</p><img src="/media/3448f3_1409030cfa664085a006b8852867e521_mv2.jpeg" alt=""/><p>Et toujours sur leur lancée, les dirigeants ont (enfin) remercié <strong>Jonas Boldt</strong>, aux manettes durant cinq saisons pour le bilan que l’on connaît, pour le remplacer par <strong>Stefan Kuntz</strong> en tant que nouveau directeur sportif. C’est donc le choix d’un profil plus terrain que business qui est fait pour entamer un nouveau cycle et enfin retrouver la Bundesliga.</p><p>Cet été, seulement deux joueurs majeurs sont partis : le latéral droit <strong>Ignace Van der Brempt</strong> retourné au RB Salzbourg et le milieu <strong>Laszlo Benes</strong> à l’Union Berlin. En réponse, Hambourg a fait venir le latéral droit <strong>Silvan Hefti</strong> (Genoa), le défenseur central <strong>Dennis Hadžikadunić</strong> (Rostov, prêt étendu), le milieu <strong>Łukasz Poręba</strong> (Lens, transfert définitif), l’offensif <strong>Adam Karabec</strong> (Sparta Prague, prêt) et le transfert phare de l’avant-centre <strong>Davie Selke</strong> (Cologne). Le défenseur central <strong>Mario Vuskovic</strong>, suspendu pour dopage, pourrait redevenir éligible plus vite que prévu et pourra être considéré comme une vraie recrue.</p><p>Si la venue de Selke permet de former le duo d’attaque à priori le plus menaçant de la 2.Buli, il permet aussi de se prémunir d’une Glatzel dépendance (22 buts, 4 passes). On attendra de juger sur pièce, déjà parce que les deux profils sont un peu trop similaire à notre goût même si aligner deux grands steaks dans l’axe peut certes être un casse-tête défensif pour l’adversaire mais aussi une source de problèmes en terme d’animation et d’organisation notamment à la perte du ballon. Et surtout parce que Selke ne m’a jamais emballé comme avant-centre.</p><img src="/media/3448f3_7ef527885d5b4cb9abe4c6e20f483140_mv2.jpeg" alt=""/><p>Plutôt adepte d’un pressing haut, Steffen Baumgart dispose pour installer son jeu d’un effectif large, de qualité où tous les postes sont à minima triplés. Outre un large éventail pour s’adapter, il devrait largement avoir les moyens de résoudre les questions défensives d’une arrière-garde en progrès mais pas encore au niveau des meilleurs la saison dernière (44 buts encaissés) et de résoudre la problématique du trop grand nombre de points abandonnés à l’extérieur (5v, 7n, 5d). Toutefois, la perte de Benes est probablement sous-estimée et aucune des recrues ne présente le même profil que le Slovène (13 buts, 11 passes).</p><p>Taillé pour évoluer avec les meilleurs clubs allemands, six saisons pourtant que le HSV rumine en 2.Bundesliga, deux fois troisième et quatre fois quatrième sur les six dernières années pour être précis. C’est dire si les attentes sont fortes. Forcément.</p><p>Prétendant déclaré à la montée, cette année semble être la bonne année pour Hambourg qui fait office de favori pour une des deux premières places et donc un des deux tickets pour une accession directe. Sa victoire à Cologne en ouverture du championnat est venue confirmer cette impression. Pourtant, on les pronostique troisième autant par provocation que tradition. Et on en arrive presque à espérer se tromper...</p><p><strong><em>Pronostic 3</em></strong></p><img src="/media/3448f3_8c11bb066b3a403ea626f209887a13ce_mv2.jpeg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

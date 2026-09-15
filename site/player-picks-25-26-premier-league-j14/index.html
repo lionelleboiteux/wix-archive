@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J14</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Je préfère ne pas trop parler du week-end dernier. Faire match nul contre Chelsea alors qu'ils ont joué à 10 pendant une heure... c'est frustrant. On a laissé deux points en route, et évidemment, Manchester City ne s'est pas fait prier pour en profiter et revenir souffler dans notre nuque. L'intégration d'Eze se passe bien, mais il va falloir être plus tueur..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J14"><figure class="hero"><img src="/media/449182_fe50a5466ca645edaaf8959d96dfcb2a_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J14</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 1 décembre 2025</p><div class="body"><p>Je préfère ne pas trop parler du week-end dernier. Faire match nul contre Chelsea alors qu'ils ont joué à 10 pendant une heure... c'est frustrant. On a laissé deux points en route, et évidemment, Manchester City ne s'est pas fait prier pour en profiter et revenir souffler dans notre nuque. L'intégration d'Eze se passe bien, mais il va falloir être plus tueur.</p><p>Pendant ce temps, Liverpool (avec son arme fatale Isak) et Manchester United ont gagné leurs matchs respectifs en J13, calmant un peu la tempête. Mais attention aux pièges de la J14 : Arsenal doit se racheter face aux Abeilles, City voyage à Londres, et Newcastle s'apprête à accueillir Tottenham pour ce qui ressemble à une future boucherie...</p><h2>Le tour d'horizon</h2><p><strong>Arsenal</strong></p><p>Après la frustration de Stamford Bridge, la réception de Brentford est une obligation de victoire. Arteta a dû remonter les bretelles. On s'attend à une réaction d'orgueil. <strong>Eze</strong>, qui commence à trouver ses aises devrait avoir beaucoup de liberté face au bloc de Brentford. Victoire 2-0 attendue.</p><p><strong>Manchester City</strong></p><p>Ils ont fait le boulot pendant qu'on patinait. City se déplace à Fulham. Les Cottagers sont solides, mais City a retrouvé cette efficacité clinique. Haaland reste la menace ultime. Une victoire maîtrisée 2-0 semble écrite pour les Skyblues.</p><p><strong>Newcastle vs Tottenham</strong></p><p>Newcastle reçoit les Spurs. Même si Isak est parti à Liverpool, les Magpies ont trouvé en Woltemade un point d'ancrage intéressant, et Barnes est en feu. Tottenham continue d'être &quot;Spursy&quot; et d'offrir des boulevards. À St James' Park, je vois Newcastle écraser Tottenham 3-0. </p><p><strong>Liverpool &amp; Sunderland</strong></p><p>Liverpool a gagné la semaine dernière grâce à Isak, oui. Mais ils reçoivent Sunderland. Les Black Cats sont la surprise absolue de la saison. Je vais tenter un coup de poker ici : malgré la présence du Suédois en attaque, je vois le piège parfait se refermer sur les Reds. La défense de Sunderland est héroïque. Une victoire 2-0 de Sunderland à Anfield est mon prono fou. Slot risque d'être frustré.</p><p><strong>Manchester United</strong></p><p>L'effet Amorim se confirme. Après leur victoire rassurante, ils reçoivent West Ham. Mbeumo et Bruno Fernandes combinent de mieux en mieux. Old Trafford devrait assister à une victoire confortable 2-0.</p><h2>Mes Pronos pour la J14 de Premier League:</h2><p>Bournemouth 2 - 1 Everton</p><p>Fulham 0 - 2 Man City</p><p>Newcastle 3 - 0 Tottenham</p><p>Brighton Hove 2 - 1 Aston Villa</p><p>Arsenal 2 - 0 Brentford</p><p>Burnley 0 - 2 Crystal Palace</p><p>Wolverhampton 0 - 1 Nottingham</p><p>Liverpool 0 - 2 Sunderland</p><p>Leeds United 1 - 1 Chelsea</p><p>Man United 2 - 0 West Ham</p><p>Envoyez nous vos pronos via <a href="https://www.google.com/url?sa=E&amp;q=#"><strong><u>le jeu des pronos</u></strong></a></p><h2>Le Player Picks</h2><h3>Les Indispensables</h3><p><strong>Erling Haaland (£14.9M)</strong> : City doit gagner pour nous mettre la pression. Fulham va résister, mais le Cyborg finit toujours par marquer. C'est le capitaine le plus sûr (&quot;safe pick&quot;) de la semaine.</p><p><strong>Bukayo Saka (£10.1M)</strong> : Il doit se rattraper du nul contre Chelsea. À l'Emirates, contre Brentford, il est le patron. Avec l'arrivée d'Eze qui attire les défenseurs, Saka a parfois plus d'espace sur son côté droit.</p><p><strong>Bruno Fernandes (£8.9M)</strong> : Manchester United reçoit West Ham. Bruno est le cœur créatif, tire les penaltys et semble avoir retrouvé sa joie de jouer avec Mbeumo devant lui. Face à des Hammers passifs, le <em>clean sheet</em> + retour offensif est probable (1 point de CS + buts/assists).</p><p><strong>Jean‑Philippe Mateta (£8.1m)</strong> : Cinq buts sur les six dernières GW, énorme nombre de « big chances » et un déplacement à Burnley, défense parmi les pires pour xGC et occasions concédées.</p><h3>Les bons tuyaux</h3><p><strong>Eberechi Eze (£7.8M)</strong> : Listé milieu à Arsenal. Il joue très haut, percute, et Brentford va souffrir de sa technique. Il est moins possédé que Saka, ce qui en fait un excellent &quot;différentiel&quot; pour grimper au classement.</p><p><strong>Nick Woltemade (£7.4M)</strong> : Le géant de Newcastle remplace numériquement Isak en pointe. Face à la défense suicide de Tottenham, sa taille et son jeu de remise vont faire mal. Un but de la tête semble écrit.</p><p><strong>Bruno Guimarães (£6.7m)</strong> : A enchaîné les returns (buts, passes, points défensifs) et a trois doubles‑chiffres de suite à domicile, avec deux matches à St James’ Park qui peuvent encore rapporter gros.​</p><p><strong>Rayan Cherki (£6.4m)</strong> : En grande forme depuis son retour, impliqué dans une grande proportion des buts de City quand il joue, avec Fulham puis Sunderland qui offrent un contexte idéal pour des gros points.​</p><h3>Les pépites</h3><p><strong>Nordi Mukiele (£4.2M)</strong> : Si mon prono fou (Liverpool 0 - 2 Sunderland) passe, Mukiele est le joueur de la semaine. Il neutralise Isak et repart avec le <em>clean sheet</em> et les 3 points de bonus. Pour le prix, ça se tente sur le banc.</p><p><strong>Lewis Hall (£5.2M)</strong> : Le latéral de Newcastle s'est imposé. Face à Tottenham, il y aura des espaces énormes en contre-attaque. Potentiel de passe décisive élevé.</p><p><strong>Morgan Rogers (£6.9M)</strong> : Aston Villa joue Brighton. Ça va être un match ouvert (2-1 pour Brighton). Rogers reste la solution la moins chère pour avoir un joueur offensif dans ce match.</p><p><strong>André Onana (£4.8M)</strong> : United reçoit West Ham. Les Hammers ont du mal à l'extérieur. Un <em>clean sheet</em> à 5.1M, c'est bon à prendre.</p><p><strong>Pedro Neto (£7.2m)</strong> : Parmi les meilleurs milieux budget pour les occasions créées et l’implication offensive, bon en contre‑attaque et utile pour compléter un milieu premium.​</p><p>Bonne chance à tous...</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

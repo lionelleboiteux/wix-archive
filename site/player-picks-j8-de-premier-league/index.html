@@ -1,0 +1,96 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, J8 de Premier League</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Après une pause la semaine passée liée au décès de la reine Elizabeth II (puisse elle reposait en paix) auquel la Premier League a..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, J8 de Premier League"><h1 class="title-only">Player Picks, J8 de Premier League</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 16 septembre 2022</p><div class="body"><p>Après une pause la semaine passée liée au décès de la reine Elizabeth II (puisse elle reposait en paix) auquel la Premier League a souhaité rendre hommage, le championnat anglais est de retour ce week-end avant la trêve mais se voit tout de même démuni de trois matchs. <strong>Chelsea, Liverpool, Manchester United, Leeds, Brighton</strong> et <strong>Crystal Palace</strong> n’auront ainsi pas de matchs ce week-end et cela va bien entendu bouleverser nos plans au moment de composer nos équipes pour cette J8. </p><p>Plusieurs stratégies sont envisageables, la première consiste à utiliser la Wild-Card qui nous est attribuée jusqu’à la J16 pour refaire notre équipe à neuf. C’est surement cette option qui sera la plus utilisée ce week-end car les clubs impactés par les reports étaient très présents dans les équipes des joueurs FPL, notamment Liverpool, Brighton et Chelsea. L’utilisation du Free Hit pour attendre la fin de la trêve internationale et la J9 pour utiliser la Wild-Card est également une option mais cela vous prive du Free Hit qui pourrait être intéressant plus tard dans la saison. Enfin, vous pouvez également faire le dos rond si vous avez assez de joueurs pour limiter la casse ce week-end avant une potentielle Wild-Card en J9. Trois options donc, difficile de dire qu’elle est la meilleure car cela dépend des équipes de chacun, quoi qu’il en soit il y aura surement d’importantes différences sur le jeu dans les semaines à venir ! </p><p>Je vous invite vivement à rejoindre le discord Fantasy Coach pour discuter du jeu avec des joueurs expérimentés qui ont tous obtenu de bons classements sur le jeu ces dernières années : </p><p><a href="https://discord.gg/dBv5QCft">Rejoindre le Discord FPL Fantasy Coach.</a> </p><p><strong>Aston Villa 1-1 Southampton</strong> </p><p><strong>Nottingham Forest 1-2 Fulham</strong> </p><p><strong>Wolves 1-3 Manchester City</strong> </p><p><strong>Newcastle 2-0 Bournemouth</strong> </p><p><strong>Tottenham 3-1 Leicester</strong> </p><p><strong>Brentford 1-2 Arsenal</strong> </p><p><strong>Everton 1-1 West Ham</strong> </p><p>On attend comme chaque semaine <a href="http://www.fantasy-coach.fr/pronostics-prem/">vos petits pronos.</a> </p><h2>Player Picks </h2><p>A la vue des nombreuses options expliquées plus haut, j’ai décidé de présenter des joueurs qui seront utiles pour ce week-end mais également pour les journées à venir (hormis Maddison). <strong>Manchester City</strong> est clairement incontournable au vue de leur forme actuelle, <strong>Arsenal </strong>a un calendrier qui se complique ce qui les rend plus difficiles à jouer. Pour le reste ce sont <strong>Newcastle, Fulham, Leicester</strong> et <strong>West Ham</strong> qui semblent avoir des calendriers abordables dans les journées à venir et qui font partie des équipes jouant pour cette J8 ce qui les rend assez intéressants. </p><h3>Les incontournables  </h3><p><strong>Haaland (£12,0M), (79,9% TSB) : </strong>Il n’y a pas vraiment de mots pour décrire le début de saison du cyborg, il a encore inscrit un but exceptionnel contre Dortmund ce mercredi en Ligue des Champions et voudra conforter sa place de leader au classement des buteurs ce week-end (10 buts en 6 matchs). </p><p><strong>Kane (£11,4M), (18,4% TSB) : </strong>Le fer de lance de l’attaque des Spurs devrait pouvoir scorer pas mal de points fantasy face à la pire défense du championnat et relancer des Spurs qui restent sur une défaite inquiétante du coté de Lisbonne cette semaine. </p><p><strong>De Bruyne (£12,2M), (29,5% TSB) : </strong>Comme tout les milieux de City, il faut faire attention à la Pep roulette mais KDB est en grande forme en ce début de saison (1 but et 4 passes décisives en 6 matchs). Avec Haaland devant lui, il dispose d’un buteur d’exception pour convertir ses offrandes, en plus il reste sur un quadruplé la saison passée du côté de Molineux, bis repetita ? </p><p><strong>Cancelo (£7,1M), (50,2% TSB) : </strong>Après un début de saison peu rémunérateur en points fantasy, Cancelo s’est réveillé lors de la J5 pour retrouver ses standards de la saison passée. Il vient de délivrer une passe décisive géniale pour Haaland cette semaine et voudra se montrer de nouveau décisif offensivement pour cette J8, le joueur à absolument intégrer à vos défenses.  </p><h3>Les bons tuyaux  </h3><p><strong>Bernardo Silva (£7,0M), (12,4% TSB) : </strong>Comme pour KDB il faut faire attention à la Pep roulette concernant Bernardo Silva. Il peut représenter une belle option différentielle au belge car il est détenu par moins de joueurs FPL et joue tout de même un grand nombre de minutes ces derniers temps. </p><p><strong>Pope (£5,1M), (16,2% TSB) : </strong>Newcastle dispose d’un calendrier favorable lors des prochaines journées (Bournemouth, Fulham, Brentford), le portier des Magpies devrait avoir les moyens de réaliser un ou des cleans sheets lors de ses trois prochains matchs. </p><p><strong>Trippier (£5,3M), (40,5% TSB) : </strong>La réflexion est globalement la même que pour Pope a la différence que Trippier est un joueur de champ capable de marquer notamment sur coups de pieds arrêtés. Il est détenu par un grand nombre de joueurs et ne pas l’avoir dans votre équipe pourrait vous faire perdre gros en cas de bonnes performances. </p><p><strong>Mitrovic (£6,9M), (28,5% TSB) : </strong>Le buteur serbe est tout simplement en feu en ce début de saison avec déjà 6 buts inscrits en autant de journées. Plus performant sur le jeu que Jésus notamment, il s’impose comme le remplaçant de ce dernier dans nos lignes d’attaque au vue du calendrier des Gunners qui se complique mais également de celui des Cottagers qui se simplifie.  </p><h3>Les pépites  </h3><p><strong>Maddison (£7,9M), (3,8% TSB) : </strong>Leicester va mal en ce début de saison c’est un fait, cependant le calendrier des Foxes va se simplifier à partir de la J9 (Nottingham Forest, Bournemouth et Crystal Palace). C’est surtout un bon pick en préparation de la J9 si vous jouez votre Wild-Card, dans les autres cas, il a peu de chance de vous rapportez des points ce week-end contre les Spurs de Conte. </p><p><strong>Emerson (£4,0M), (1,8% TSB) : </strong>Avec un prix très abordable et une place de titulaire qui lui semble promise dans les semaines à venir, Emerson s’impose comme un bon choix pour compléter vos défenses à moindre coût. </p><p><strong>Richarlison (£8,5M), (0,9% TSB) : </strong>Celui qui a marqué deux fois contre Marseille il y a 10 jours n’a pas su trouver la faille tout comme ses partenaires cette semaine en terre Portugaise. Il voudra marquer son premier but avec les Spurs en championnat ce week-end et la proie semble idéale. </p><p><strong>Bowen (£8,1M), (3,5% TSB) : </strong>L’un des meilleurs joueurs de la saison passée sur le jeu n’a toujours pas marqué ni délivré de passes décisives cette saison. West Ham a un calendrier qui s’allège et le faible taux de détention de Bowen peut en faire un différentiel puissant s’il retrouve sa forme de l’an dernier.  </p><h3>Les Experts FPL </h3><p>Comme chaque semaine, les conseils des experts FPL pour le choix du capitaine et de leur pépite de la journée, cette semaine :  </p><p><strong>Rwano :</strong> Vainqueur de la Cup fantasy-coach.fr et troisième de la ligue la saison dernière. Comme Arthur, il participe régulièrement aux discussions sur le Discord FPL. </p><h3>Rwano </h3><p><strong>Capitaine, Haaland (£12,0M), (79,9% TSB) : </strong>Les défenses de Premier League n’y arrivant pas, il aura fallu un deuil royal pour réussir à stopper une fois le Cyborg dans ses curées hebdomadaires. La boucherie devrait donc reprendre ce week-end, même si les Wolves sont réputés pour leur solidité défensive (d’ailleurs, c’est la meilleure défense du championnat avec 4 buts encaissés). Si vous avez encore un doute, regardez le but inscrit mercredi soir en Champions contre le Borussia Dortmund, qui lui réserve pourtant un marquage individuel serré car en tant qu’ancien club, ils connaissaient la valeur du bonhomme… </p><p><strong>Pépite, Richarlison (£8,5M), (0,9% TSB) : </strong>Solide troisième à un point du leader, Tottenham accueille un Leicester en perdition, dernier avec 16 buts encaissés (avant-dernière défense). Si Harry Kane a un super profil de capitaine (les Foxes sont sa victime préférée), l’attaquant brésilien Richarlison devrait vous offrir un bon retour offensif. Surtout qu’il n’a pas encore marqué en championnat sous ses nouvelles couleurs. Le seul bémol tient dans la défaite 2-0 en Ligue des Champions face au Sporting Lisbonne (2 buts encaissés dans le temps additionnel) : ce qui a dû mettre le coach Conte en rogne et qui pourrait donc appuyer sur le bouton rotation (mais je pense que Son serait davantage concerné par un passage sur le banc au coup d’envoi). </p><p>Bonne chance à tous. </p><p>Pour rejoindre notre 'private league', utilisez le code:
+<strong>Classique : f6xuri</strong>
+   </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

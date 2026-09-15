@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J5</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Enorme semaine pour nos amis de Premier League. Un Merseyside Derby, un City qui enchaîne les grosses victoires rend visite à Arsenal qui s'en est bien sorti en Espagne et un choc entre un Chelsea cinquième qui s'est fait démolir contre le Bayern et United qui pointe à la quatorzième place de Premier League, heureusement qu'ils ne sont pas en Europe. Voyons un peu ce que cette journée nous offre."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J5"><figure class="hero"><img src="/media/449182_288449f040c748b692b3cdb76fe57392_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J5</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 18 septembre 2025</p><div class="body"><p>Enorme semaine pour nos amis de Premier League. Un Merseyside Derby, un City qui enchaîne les grosses victoires rend visite à Arsenal qui s'en est bien sorti en Espagne et un choc entre un Chelsea cinquième qui s'est fait démolir contre le Bayern et United qui pointe à la quatorzième place de Premier League, heureusement qu'ils ne sont pas en Europe. Voyons un peu ce que cette journée nous offre.</p><h2>Le tour d'horizon</h2><h3>Liverpool</h3><p>Liverpool a maintenu son record parfait en saison avec une victoire arrachée 1-0 contre Burnley à Turf Moor. Les Reds ont souffert pendant 95 minutes face à une défense bien organisée avant que Mohamed Salah ne marque un penalty dans le temps additionnel pour offrir les trois points. Cette victoire maintient Liverpool en tête du championnat avec 12 points sur 12 possibles après 4 journées. En Ligue des champions, les hommes d’Arne Slot ont parfaitement lancé leur campagne en battant l’Atlético Madrid 3-2 dans un match spectaculaire à Anfield. Cette victoire tardive confirme la force mentale du groupe et installe Liverpool comme l’un des grands prétendants européens dès la première journée.</p><h3>Arsenal</h3><p>Arsenal a livré une performance dominante avec une victoire 3-0 contre Nottingham Forest à l’Emirates. Martín Zubimendi s’est illustré avec un doublé tandis que Viktor Gyökeres a ajouté le troisième but. En Ligue des Champions, les Gunners ont brillamment débuté avec une victoire 2-0 à Bilbao grâce à leurs remplaçants Martinelli et Trossard. Une excellente semaine qui confirme leurs ambitions titre.</p><h3>Manchester City</h3><p>Manchester City a retrouvé sa forme avec une victoire éclatante 3-0 dans le derby de Manchester. Erling Haaland a été exceptionnel avec un doublé, tandis que Phil Foden a marqué son retour en forme avec le premier but. Cette performance rappelle la classe mondiale de l’équipe de Pep Guardiola et les place de nouveau parmi les favoris pour le titre.</p><h3>Manchester United</h3><p>Manchester United traverse une crise majeure après la lourde défaite 3-0 contre City. Avec seulement 4 points en 4 matchs, c’est leur pire début de saison depuis 33 ans. Ruben Amorim fait face à une pression énorme avec un taux de victoires de seulement 25,8% en Premier League. Les performances individuelles et collectives sont préoccupantes.</p><h3>Chelsea</h3><p>Chelsea a vécu une semaine mitigée avec un match nul frustrant 2-2 contre Brentford en Premier League. Malgré une avance 2-1, ils ont encaissé un égalisateur tardif qui leur a coûté deux points précieux. En Ligue des Champions, ils ont subi une défaite 3-1 contre le Bayern Munich, montrant qu’il reste du travail à faire pour rivaliser au plus haut niveau européen.</p><h3>Bournemouth</h3><p>Bournemouth a connu une excellente semaine avec une victoire convaincante 2-1 contre Brighton au Vitality Stadium. Cette victoire représente le troisième succès consécutif de Bournemouth et leur meilleur début de saison en Premier League avec 9 points en 4 matchs. Les Cherries se hissent ainsi à la 3e place du classement</p><h3>Tottenham</h3><p>Tottenham a connu une excellente semaine avec une victoire éclatante 3-0 contre West Ham au London Stadium. Lucas Bergvall s’est particulièrement distingué avec un but et une passe décisive. En Ligue des Champions, les Spurs ont débuté par une victoire 1-0 contre Villarreal grâce à un but contre son camp précoce. Thomas Frank a fait des débuts prometteurs dans les deux compétitions.</p><h2>Mes Pronos pour la J5 de Premier League:</h2><p>Liverpool 2 - 1 Everton</p><p>Brighton Hove 2 - 1 Tottenham</p><p>Burnley 1 - 0 Nottingham</p><p>West Ham 0 - 2 Crystal Palace</p><p>Wolverhampton 1 - 1 Leeds United</p><p>Man United 1 - 2 Chelsea</p><p>Fulham 1 - 2 Brentford</p><p>Bournemouth 1 - 2 Newcastle</p><p>Sunderland 1 - 2 Aston Villa</p><p>Arsenal 2 - 1 Man City</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><h3>Les Indispensables</h3><p><strong>Mohamed Salah</strong> (14.5M) Meilleur atout offensif de Liverpool, en forme avec but au dernier match et bon historique à domicile. Liverpool a des matches abordables et Salah est le joueur le plus fiable pour des buts et passes décisives.</p><p><strong>Erling Haaland</strong> (14.1M) Principal buteur de Manchester City, impliqué dans 5 buts cette saison, malgré un match complexe face à Arsenal. Son potentiel reste énorme.</p><p><strong>Joao Pedro</strong> (7.8M) Forme excellente avec 5 retours offensifs sur 3 matchs récents, Chelsea a des matchs favorables et un bon calendrier prolongé à partir de GW9.</p><p><strong>Virgil van Dijk</strong> (6.1M) Défenseur clé de Liverpool avec deux clean sheets consécutives, très solide défensivement et source d’extras (buts sur coups de pied arrêtés). </p><p><strong>Xavi Simons</strong> (7.0M) Milieu créatif de Tottenham, bénéficie d’un calendrier abordable et d’une équipe qui concède beaucoup d’occasions sur son aile. Potentiel en passes décisives et buts.</p><h3>Les bons tuyaux</h3><p><strong>Chris Wood</strong> (7.6M) Attaquant de Nottingham Forest avec matchs favorables (Burnley puis Sunderland), buteur récurrent pour son équipe.</p><p><strong>Mohammed Kudus</strong> (6.6M) Milieu de Spurs, créatif avec bon potentiel offensif malgré des difficultés défensives adverses.</p><p><strong>Kaoru Mitoma</strong> (6.4M) Milieu/attaquant de Brighton, efficace sur les ailes avec bon volume de tirs.</p><p><strong>Antony Semenyo</strong> (7.5M) Attaquant de Bournemouth en bonne forme, face à Newcastle lessivé par un match contre le Barça en Ligue des Champions.</p><h3>Les pépites</h3><p><strong>Yeremy Pino</strong> (6.0M) Milieu de Crystal Palace, une option à prendre en compte, déjà impliqué dans des occasions franches.</p><p><strong>Joachim Andersen</strong> (4.5M) Défenseur de Fulham, avantageux pour clean sheets et attaques sur coup de pied arrêté.</p><p><strong>Emmanuel Agbadou</strong> (4.5M) Défenseur de Wolverhampton, avec des adversaires exploitables.</p><p><strong>Martin Dubravka</strong> (4.0M) Gardien de Nottingham Forest, possible source de clean sheets sur les prochains matchs.</p><p>Bonne semaine à tous...</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

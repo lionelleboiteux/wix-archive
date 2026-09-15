@@ -1,0 +1,96 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Bundesliga, j1</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Player Picks
+Bundesliga
+j1"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Bundesliga, j1"><figure class="hero"><img src="/media/3448f3_2f3d1d48c12c4e5ab6695b861c0d20b3_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Player Picks, Bundesliga, j1</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 23 août 2024</p><div class="body"><p>Nouvelle saison, nouveau format pour cet exercice 2024-2025. Encore en rodage.</p><h2>LES MATCHS DE LA JOURNÉE</h2><h2>Borussia Mönchengladbach - Bayer 04 Leverkusen</h2><p>Comme de coutume, le champion sortant ouvre le bal. Au quasi complet et le moral gonflé à bloc par le gain d’un nouveau titre avec la victoire en Supercoupe d’Allemagne, Leverkusen devrait facilement croquer son voisin Mönchengladbach qui pourra jauger à cette occasion de la solidité de son milieu de terrain, qui est à priori sa meilleure ligne.</p><p><strong><em>Pronostic 0-2</em></strong></p><h2>RB Leipzig - VfL Bochum 1848</h2><p>Pour démarrer le nouvel exercice, Rose devrait aligner un onze uniquement composé de joueurs déjà présents la saison dernière. Histoire d’assurer le coup. Alors que Bochum se présentera avec le même onze que celui qui a déjà mordu la poussière en Pokal chez une 2Buli. Trop d’écart entre les deux formations pour ne pas imaginer le RBL s’imposer confortablement à domicile.</p><p><strong><em>Pronostic 3-0</em></strong></p><h2>TSG Hoffenheim - Holstein Kiel</h2><p>Malgré une défense axiale new look (Drexler-Stach-Akpoguma), le TSG aura fière allure et voudra s’imposer pour lancer une saison déjà sous tension extra-sportive avec des tribunes attendues hostiles. Pour Kiel, il s’agira d’assurer un minimum pour un baptême du feu en Bundesliga. Opposition possiblement accrochée.</p><p><strong><em>Pronostic 2-1</em></strong></p><h2>SC Freiburg - VfB Stuttgart</h2><p>La réception du VfB actuel n’a rien d’un cadeau pour le premier match de l’ère post Streich qui est aussi et surtout le baptême du feu pour son successeur Julian Schuster. Une des affiches de cette première journée. Stuttgart vainqueur.</p><p><strong><em>Pronostic 1-2</em></strong></p><h2>FC Augsburg - SV Werder Bremen</h2><p>Augsbourg et sa nouvelle défense au révélateur d’un Werder dans la continuité de la saison précédente. Ballotage favorable pour l’équipe qui reçoit.</p><p><strong><em>Pronostic 2-2</em></strong></p><h2>1. FSV Mainz 05 - 1. FC Union Berlin</h2><p>Match de Bo.</p><p>Bo Svensson commence son aventure berlinoise en revenant dans le club où il s’est construit en tant qu’entraîneur pendant plus de dix ans. Un match où les deux équipes devraient beaucoup courir. Entre deux équipes poussives en Pokal, léger avantage aux Mainzers de Bo Henriksen : dommage que les attaquants du FC Union ne sachent finalement que très peu jouer au ballon parce qu’il y a certainement un coup à faire.</p><p><strong><em>Pronostic 1-0</em></strong></p><h2>Borussia Dortmund - Eintracht Frankfurt</h2><p>L’affiche de la journée. On doute que le BVB soit déjà en place. Quoique. La bataille du milieu promet. Dortmund favori mais pour le fun, c’est l’Eintracht qui en sort avec le smile sur un contre dévastateur. Si vous n’aimez pas les risquettes, faut la jouer classique avec victoire du gros qui évolue à domicile.</p><p><strong><em>Pronostic 1-1</em></strong></p><img src="/media/3448f3_2f3d1d48c12c4e5ab6695b861c0d20b3_mv2.jpeg" alt=""/><h2>VfL Wolfsburg - FC Bayern München</h2><p>Beaucoup d’incertitudes sur la composition des Loups (Lacroix en partance pour Palace, Arnold incertain) qui vont devoir aligner leur défense centrale en bois. Et face à un Bayern même en rodage, ça devrait faire mal. Surtout avec un finisseur de la trempe de Kane.</p><p><strong><em>Pronostic 0-4</em></strong></p><p><strong>FC St. Pauli - 1. FC Heidenheim 1846</strong></p><p>Les Pirates vont attaquer et Heidenheim a montré que sa défense sait tenir le choc. Un match qui pourrait être spectaculaire avec deux équipes qui s’ouvrent pour forcer la décision.</p><p><strong><em>Pronostic 3-2</em></strong></p><p><strong><u>NOUVELLES RÈGLES BULI FANTASY</u></strong> </p><p>Pour cette nouvelle saison, <strong>les règles du jeu fantasy Bundesliga changent même si les</strong> <strong>grandes lignes du jeu restent identiques.</strong></p><p>15 joueurs (2GK, 5D, 5M, 3A)</p><p>150 M de budget</p><p>7 organisations autorisées : 3-5-2, 3-4-3, 4-4-2, 4-3-3, 4-5-1, 5-3-2 ou 5-4-1</p><p>Ton équipe est verrouillée dès le début de la journée de championnat donc souvent le vendredi soir à 20h30</p><p>Toujours 3 joueurs stars (un défenseur, un milieu et un attaquant, à choisir parmi ton effectif) dont les points font x1,5</p><p>On valide une équipe et le meilleur onze est pris en compte automatiquement dans la limite du respect tactique initialement choisi et verrouillé au début de la journée concernée (3-5-2, 3-4-3, 4-4-2, 4-3-3, 4-5-1, 5-3-2 ou 5-4-1 )</p><p>Toujours 5 transferts entre 2 journées</p><p>Transferts illimités sur les fenêtres de trêve internationale, c’est à dire</p><p>•  entre journée 2 et journée 3,</p><p>•  entre journée 6 et journée 7,</p><p>•  entre journée 10 et journée 11,</p><p>•  entre journée 15 et journée 16,</p><p>•  et entre journée 26 et journée 27.</p><p><strong>Les principales nouveautés</strong></p><p>3 joueurs maxi par équipe</p><p>Un nouveau système de scoring (selon une nouvelle grille ci-dessous)</p><img src="/media/3448f3_5ce6290310724c0ba0329e8d8b58d397_mv2.jpeg" alt=""/><p>Fluctuation du prix des joueurs (fin des promotions)</p><p><strong>Et surtout, le jeu n’est plus accessible sur ordinateur : il n’est plus accessible que via l’application.</strong></p><p>Ce qui ne nous plaît pas du tout. Une décision qui tue le game.</p><p><strong>Calendrier</strong></p><p>début le 23/08 à 20h30</p><p><strong>Œil de Rwano</strong></p><p>La nette augmentation des prix des meilleurs actifs (qui sonne la fin des teams all stars) et la nouvelle limite fixée pour composer son effectif (3 joueurs maxi de la même équipe) devraient valoriser d’une part la connaissance des talents émergents à bas coût (car ils permettront de dégager des financements pour les premiums) et d’autre part accentuer l’importance du calendrier.</p><p>La grande inconnue réside dans le nouveau référentiel de scoring, il y aura des profils de joueurs vainqueurs et d’autres perdants. A priori, on se dirige sur une notation privilégiant les tempéraments offensifs (un latéral qui centre plutôt qu’un défenseur central). A confirmer.</p><p>On devrait donc sortir des modèles dominants où tous les managers fantasy avaient la saison dernière les même effectifs et qui empêchaient de faire des différences, même si les 5 transferts hebdomadaires permettent en deux-trois journées de copier les tendances dominantes.</p><p>Enfin, le gros point noir selon moi est la fin du jeu sur ordinateur. L’application ne me convainc pas du tout. Et, ça c’est mon côté old school.</p><p>Bonne saison pour celles et ceux qui continuent...</p><h2>PLAYER PICKS</h2><p>Les deux premières journées vont servir de tour de chauffe pour appréhender d'une part la nouvelle grille de scoring et surtout les compositions des 18 équipes.</p><p>Ci-dessous, et selon Opta, le <strong>calendrier des 5 premières journées scannées en terme de difficulté</strong> :</p><p>Wolfsbourg calendrier compliqué, RB Leipzig calendrier à priori favorable...</p><img src="/media/3448f3_504394929816464f8ccbf34f825c5444_mv2.jpeg" alt=""/><p>Dans l’idéal, il faudrait démarrer en 442 pour bénéficier au maximum du banc. Vu les prix, pas simple. En gras, mon équipe actuelle qui sera modifiée juste avant l’heure limite, une fois la composition de Leverkusen connue (vendredi vers 19h30). Je pars sur un <strong>343</strong> faisant la part belle aux buteurs.</p><h2>Gardiens</h2><p><strong>LABROVIC 5 FCA, à domicile, face au Werder, ça se tente</strong></p><p><span style="color:#1C1C1C">Müller 5 SCF, titulaire, Atubolu ayant été opéré d’une appendicectomie. Mais la réception de Stuttgart s’annonce quand même bien délicate</span></p><p><span style="color:#1C1C1C">Meyer 5 BVB pourrait faire l’intérim de Kobel incertain (dos). Comme d’habitude.</span></p><h2>Défenseurs</h2><p><span style="color:#1C1C1C">Grimaldo 20 B04, un peu cher quand même, a démarré sur le banc en Supercoupe, même titulaire ne jouera pas les 90’</span></p><p><strong><span style="color:#1C1C1C">RAUM 15 RBL, incontournable</span></strong></p><p><strong><span style="color:#1C1C1C">HINCAPIE 11 B04, il me faut un défenseur de Leverkusen, il devrait commencer</span></strong></p><p><strong><span style="color:#1C1C1C">CACI 10 M05, joueur de couloir qui fait des points fantasy des deux côtés</span></strong></p><p><strong><span style="color:#1C1C1C">TREU 8 STP, joueur de couloir</span></strong></p><p><span style="color:#1C1C1C">Drexler 6 TSG, titulaire tant que les recrues (tchèques ?) ne viennent pas encore renforcer la défense centrale dépeuplée</span></p><p><strong><span style="color:#1C1C1C">ROSENFELDER 4 SCF, titulaire</span></strong></p><h2>Milieux</h2><p><strong><span style="color:#1C1C1C">WIRTZ 20 B04, on aura la composition avant la dead line, ne pas le prendre permet d’up grader d’autres spots, il reste toutefois le joueur le plus talentueux du championnat</span></strong></p><p><strong><span style="color:#1C1C1C">SIMONS 17 RBL, joueur fantasy par excellence, il polarise les phases offensives de son équipe</span></strong></p><p><span style="color:#1C1C1C">Meier 9 FCA, a la confiance de son coach et est un joueur offensif</span></p><p>Engels 8 FCA, s’il n’est pas transféré au Celtic Glasgow en cette fin de semaine, devrait être titulaire, un de nos chouchous</p><p>Maloney 8 HDH, valeur sûre, pourrait être concerné par la rotation post Coupe d’Europe</p><p><strong>WANNER 8 STP, pépite à suivre cette saison</strong></p><p>Schäfer 7 FCU, titulaire</p><p>Metcalfe 7 STP, titulaire et prend les CPA</p><p>Khedira 7 FCU, titulaire</p><p>Nebel 6 M05, a fait forte impression en préparation, pas forcément titulaire, il jouera</p><p>Holtby 6 KSV, peut-il encaisser le rythme car c’est un excellent joueur de ballon</p><p><strong>WAGNER 5 STP, titulaire et bon manieur de ballon, à ce prix-là on fonce</strong></p><p>Kerber 4 HDH, pas cher et bon joueur, dans la rotation d’une semaine de Coupe d’Europe</p><p>Micheler 4 TSG, milieu défensif qui rentrera en fin de match pour verrouiller si le score est acquis</p><p><strong>BAMBA 1 BOC, joker rentrant en fin de match, pour boucler un budget</strong></p><h2>Attaquants</h2><p><strong>KANE 20 FCB, forcément</strong></p><p><strong>OPENDA 15 RBL (ou Sesko 14 RBL, en fonction du budget), les deux sont en forme et évoluent à domicile</strong></p><p><strong>BURKARDT 10 M05, fer de lance offensif, talentueux et calendrier favorable</strong></p><p>Eggestein 7 STP, titulaire</p><p>Bulter 7 TSG, pourrait jouer second attaquant dans le 352, sans certitude</p><p>Moerstedt 4 TSG, avant-centre qui rentrera au relais, verra son temps de jeu diminué si Tabakovic arrive du Hertha Berlin</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J13</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Player Picks, Premier League, J13"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J13"><figure class="hero"><img src="/media/449182_e8375e0816c541f5a890029963ad8f76_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J13</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 28 novembre 2024</p><div class="body"><p>La J13 de Premier League vous portera-t-elle bonheur ? En tout cas avec ce Player Picks on va tout faire pour que ça se passe le mieux possible…</p><p>J'en connais un qui passe déjà une très mauvaise semaine et qui risque de s'empirer, c'est Pep. Les six derniers matches de City se résument en cinq défaites consécutives et un nul en LdC mardi contre Feyenoord (3-3 alors que les Citadins menaient 3-0). La dernière chose dont il a besoin c'est de tomber sur un Liverpool impérial qui domine l'Europe entière et la Premier League de 8 pts. Pire encore, suivant comment le reste des matches se combine, City pourrait bien finir le week-end à la 5ème place du classement. Du jamais vu sous Guardiola.</p><p>Si, comme je le prévois plus bas, Liverpool venait à battre City à Anfield, les Reds auraient 11 pts d'avance avant le calendrier hivernal. Si Slot arrive aussi à convaincre Salah et Van Dijk de prolonger ne serait-ce que d'un an leur contrat, LFC sera hyper-favori pour gagner la Premier League et est en bonne voie pour faire quelque chose en LdC aussi. S'il gagne le championnat dès sa première saison, les artistes vont commencer à travailler sur la statue de Slot qui va devenir une légende vivante sur les rives de la Mersey. Avec des si on mettrait Liverpool en bouteille, il faut tout de même battre les Citadins et c'est moins rare que les années précédentes, mais c'est toujours un beau challenge. </p><p>Depuis le retour d'Odegaard, Arsenal va beaucoup mieux. Cette semaine ils ont deux belles victoires 3-0 et 1-5, et je pense qu'ils vont aussi largement gagner à West Ham ce week-end. Sur le côté droit la triplette Timber-Saka-Odegaard fait des ravages et, on le verra plus bas je vais miser sur eux pour le moment. </p><p>Amorim n'aura pas eu le départ qu'il espérait. Un nul tout nul contre Ipswich, et un raid de son ancien employeur Sporting CP est déjà mentionné dans la presse anglaise. Le fait qu'il avait promis de ne pas le faire aussi d'ailleurs. On le verra plus bas, il y a tout de même des joueurs qui tirent leur épingle du jeu et qui valent la peine pour les fantasistes.</p><h2>Mes Pronos pour la J13 de Premier League:</h2><p>Brighton 2 - 0 Southampton</p><p>Wolves 2 - 1 Bournemouth</p><p>Crystal Palace 1 - 2 Newcastle</p><p>Nottingham Forest 2 - 0 Ipswich Town</p><p>Brentford 2 - 0 Leicester City</p><p>West Ham 0 - 3 Arsenal</p><p>Chelsea 1 - 1 Aston Villa</p><p>Tottenham 2 - 0 Fulham</p><p>Manchester United 2 - 0 Everton</p><p>Liverpool 1 - 0 Manchester City</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p>Cette semaine un Player Picks au format un peu différent. J'ai décidé d'enfin vendre Haaland, et je me retrouve donc avec une tonne de cash dans les mains pour renforcer toutes les autres positions. J'ai donc activé ma Wildcard et je vous donne une liste des joueurs que j'ai considérés et ceux que j'ai pris (au moment de la publication… je serais peut-être forcé de faire des changements de dernière minute) #WildcardActivée</p><p>Voici comment j'ai mis à jour ma Team :</p><h3>Les intouchables : </h3><p><strong>Salah</strong> (£13.1M) : Le King ne peut être inquiété jusqu'à ce qu'il se blesse ou quitte Liverpool.</p><p><strong>Palmer</strong> (£10.9M) : Le Magicien reste.</p><p><strong>Wood</strong> (£6.6M), <strong>Welbeck</strong> (£6M) et <strong>Veltman</strong> (£4.6M) : Excellent rapport qualité/prix, ils restent pour l'instant.</p><p><strong>Taylor</strong> (£3.9M) : C'est mon bouche-trou, il est condamné à rester sur le banc et prendre le moins de place possible dans mon budget.</p><h3>Attaquants : </h3><p>Il va falloir remplacer le Cyborg, pour cela j'ai 3 propositions :</p><p><strong>Watkins</strong> (£9M), <strong>Jackson</strong> (£8M) et <strong>Cunha</strong> (£7M). J'ai pris ce dernier pour deux raisons. 1) c'est le moins cher des trois et 2) Il est en super forme avec un bon calendrier devant lui. Si tout va bien il sera titulaire dans ma Team jusqu'à mi-janvier avant d'attaquer une série Chelsea-Arsenal-Villa-Liverpool qui fait un peu peur.</p><p>Un Joker aurait été <strong>Joao Pedro</strong> (£5.6M) J'ai déjà Welbeck.</p><h3>Milieux :</h3><p>N'ayant gardé que 2 milieux (Salah et Palmer) il m'en faut donc 3 nouveaux.</p><p>J'ai pris <strong>Odegaard</strong> (£8.2M), <strong>Saka</strong> (£10.2M) et <strong>Rashford</strong> (£6.9M). Les deux Gunners ne devraient pas être une surprise vu que je l'avais annoncé plus haut. Quand ils jouent ensemble ils sont en feu et je m'attends donc à une belle série de buts où l'un marque sur une passe décisive de l'autre. Rashford est un peu plus risqué mais il a joué pour le premier match d'Amorim et il a marqué. En plus il joue attaquant mais est listé comme milieu. </p><p>Les autres options étaient : </p><p><strong>Luis Diaz</strong> (£7.6M) Souvent dans les bons coups à LFC mais l'effectif tourne bien et on n'est pas sûr qu'il joue toutes les semaines.</p><p><strong>Maddison</strong> (£7.6M) après avoir mis City à genoux je pense qu'il va rester dans le 11 des Spurs. Ses coéquipiers <strong>Johnson</strong> (£6.7) et <strong>Kulusevski</strong> (£6.3M).</p><p><strong>Mitoma</strong> (£6.4M) Il a une très bonne entente avec Joao Pedro et les Seagulls cartonnent en ce moment.</p><p><strong>MBeumo</strong> (£7.9M) En fait il était dans ma Team je l'ai sacrifié pour Saka (sans regrets).</p><p><strong>Martinelli</strong> (£6.9M) Il profite moins du retour d'Odegaard que Saka et est moins efficace que l'Anglais. </p><h3>Défenseurs :</h3><p>Je l'ai dit plus haut, je garde Taylor parce qu'il est pas cher et j'ai gardé Veltman parce qu'il a un assez bon rapport points/prix. Vous l'aurez compris pour moi en défense le budget est serré. </p><p>J'ai rajouté <strong>Timber</strong> (£5.5M) un petit différentiel vu que <strong>Gabriel</strong> (£6.2M) est bien plus populaire mais je compte sur l'entente avec Odegaard et Saka pour récupérer des passes décisives. Il me semble aussi que les défenses de Premier League ont maintenant compris qu'il fallait marquer le Brésilien sur corner… </p><p>Un peu dans la même réflexion j'ai mis <strong>Aït-Nouri</strong> (£4.8) dans l'espoir de passes décisives pour Cunha.</p><p><strong>Yoro</strong> (£4.3M) c'est un petit pari sur l'avenir en espérant qu'il rentre assez tôt dans le 11 de Manchester United. Pour l'instant, il tiendra compagnie à Taylor sur le banc.</p><p>À part <strong>Gabriel</strong> (£6.2M) il y avait aussi en lice :</p><p><strong>Gvardiol</strong> (£6.3M) vu l'état de la défense des Citadins sans Rodri ce n'est pas le moment.</p><p><strong>Aina</strong> (£4.8M) La seule raison d'avoir Yoro au lieu du Forestier sont les £0.4M de différence, il n'est pas impossible qu'il rentre dans ma team au cours des prochains transferts.</p><p><strong>Murillo</strong> (£4.6M) ditto.</p><p><strong>Digne</strong> (£4.7M) La forme d'Aston Villa est un peu en dents de scie mais pour certains matches il vaut le coup.</p><h3>Gardiens :</h3><p><strong>Sels</strong> (£4.7M) Je l'ai et je le garde. </p><p><strong>Fabianski</strong> (£4.1M) Un des rare gardien qui joue et qui rentre dans mon budget.</p><img src="/media/449182_3bb3756fc44c4b80ad4d59c5cfa86a90_mv2.png" alt="Ma Team pour la J13 de Premier League"/><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

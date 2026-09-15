@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Fantasy Coach FPL Survivor GW36</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="(You can find the english version in the 2nd half of the article.) Nous y sommes!! La J36 de Premier League a permis de déterminer les 4..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Fantasy Coach FPL Survivor GW36"><figure class="hero"><img src="/media/deb9b2_a24d29261c6b4fc6b6c15ccd672cb6a0_mv2.png" alt=""/><div class="scrim"></div><h1>Fantasy Coach FPL Survivor GW36</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 8 mai 2024</p><div class="body"><img src="/media/deb9b2_a24d29261c6b4fc6b6c15ccd672cb6a0_mv2.png" alt=""/><p>(<em>You can find the english version in the 2nd half of the article</em>.)</p><p>Nous y sommes!! La J36 de Premier League a permis de déterminer les 4 finalistes de ce premier Survivor organisé par notre site <a href="http://fantasy-coach.fr"><u>fantasy-coach.fr</u></a><u>. </u></p><p>La qualification s'est jouée jusqu’au dernier match de la journée, Crystal Palace - Manchester United, avec l’absence de Bruno Fernandes et l’activation des auto-subs. Amin notre champion de la ligue classique 2017 et 2019 rate la finale pour 1pt. À égalité de point avec Pierre Monin après les 9 matchs du week-end, ils étaient en pole pour arracher la dernière place qualificative en cas d'absence du capitaine Mancunien. Celle-ci étant actée un peu plus d'1h avant le match, la qualification se jouait donc aux auto-sub. </p><p>Amin paliait automatiquement l’absence de Fernandes avec Gordon et ses 6pts, et celle de son autre joueur de  United, Maguire, par Porro et ses 0pt. Pierre,lui, voyait son Fernandes remplacé par Son et ses 7pts.</p><p> Le penalty raté de Isak (qui aurait pu apporter une assist en plus à Gordon) et la fin de match trop relax de Liverpool auront coûté cher à notre ancien champion. </p><p>Les 4 qualifiés pour la finale sont Sabri Bouhaddi, Prince Oware, Michael Akins et Pierre Monin. On a donc droit à une mini CAN pour ce dernier tour de Survivor avec la Tunisie, le Ghana et le Nigeria représentés. </p><p>Michael Akins (Ghana), 5e de notre ligue, 34871e au général. Il a fait un parcours assez économe avec 8 pénalités de transfert prises jusqu'à cette GW36. Il lui reste le Bench Boost (BB) à jouer, ce qu’il fera lors de la dernière journée double de la saison qui se déroule lors de la finale en GW37. </p><p>Pierre Monin (Canada), 13e de notre ligue, 56538e au général, 3 fois dans le top 100K, 1x dans le top 10K. Il a pris 10 pénalités de transfert. Lui aussi possède son BB qui sera sûrement joué pendant la finale. </p><p>Prince Oware (Nigeria), 22e de notre ligue, 123517e au général.C’est celui des finalistes qui a pris le moins de pénalités de transfert avec seulement 5. Il lui reste son BB et son Triple Captain (TC). Difficile de penser que Prince fasse autre chose que BB en J37 et TC en J38. </p><p>Sabri Bouhaddi (Tunisie), 46e de notre ligue, 319882e au général, 2 fois dans le top 100K. Il a pris 8 pénalités de transfert pendant la saison. Il lui reste seulement le TC. Le jouera-t-il en GW37? On le saura Samedi en début d'après-midi. </p><p>Bonne chance à nos 4 finalistes. La deadline pour la GW37 est ce Samedi 11 Mai 2024 à 12h CET (11.00am BST).</p><p>Les détails des résultats sont à retrouver via ces liens:</p><p><a href="https://docs.google.com/spreadsheets/d/1NPB5ykE7GHCLJddHUFcNtmdvM-sfPaAbIPhnTlFgoA0/edit?usp=drivesdk"><u>https://docs.google.com/spreadsheets/d/1NPB5ykE7GHCLJddHUFcNtmdvM-sfPaAbIPhnTlFgoA0/edit?usp=drivesdk</u></a></p><p>Here we are!! The 4 finalists of this first Survivor organized by our site <a href="http://fantasy-coach.fr">fantasy-coach.fr</a> are known. The qualification went to the wire and it was decided on the last match of GW36, Crystal Palace - Manchester United, with the absence of Bruno Fernandes and the activation of the auto-subs. </p><p>Amin, our 2017 and 2019 classic league champion, misses the final by 1pt. Tied on points with Pierre Monin after the weekend matches, the pair of them were on pole to snatch the last qualifying spot if the Mancunian captain was not showing. The absence of Fernandes was confirmed a little over an hour before the match. Qualification was then depending on their bench order. </p><p>Amin automatically compensated for the absence of Fernandes with Gordon and his 6pts. His other United player, Maguire, confirmed out before the start of the gameweek, was replaced by Porro and his 0pts. </p><p> Pierre saw his Fernandes replaced by Son and his 7pts.</p><p>Isak's missed penalty (which could have provided Gordon with a 2nd assist) and Liverpool's overly relaxed end to the match costed our former champion dearly. </p><p>The 4 managers qualified for the final are Sabri Bouhaddi, Prince Oware, Michael Akins and Pierre Monin. We are treated to a sort mini AFCON for this last round of Survivor with Tunisia, Ghana and Nigeria represented. </p><p>Michael Akins (Ghana), 5th in our league, 34871st overall. With 8 hits, he had a fairly soft approach for his transfers. He still has the Bench Boost (BB) to play. GW37 is the last double gameweek of the season so there is a good chance Micheal will play its BB this weekend. </p><p>Pierre Monin (Canada), 13th in our league, 56538th overall, 3 top 100K finishes, 1 top 10K finish. He took 10 hits so far and he also has his BB left. Pierre will surely activate it for the DGW37. </p><p>Prince Oware (Nigeria), 22nd in our league, 123517th overall. He is the finalists who took the fewest hits during the season with only 5. He still has his BB and his Triple Captain (TC). It's hard to think that Prince will do anything other than BB in GW37 and TC in GW38. </p><p>Sabri Bouhaddi (Tunisia), 46th in our league, 319882nd overall, 2 top 100K finishes. He took 8 hits during the season. He still has his TC. Will he play it in GW37? We will find out on Saturday at the beginning of the afternoon. </p><p>Good luck to our 4 finalists. The deadline for GW37 is this Saturday 11th May 2024 at 12h CET (11.00am BST).</p><p>The results can be seen in the link above.</p><p>Scores minimum par journée / Safety scores per Game Week</p><p><u>GW1:</u> 49pts</p><p><u>GW2:</u> 24pts</p><p><u>GW3:</u> 28pts</p><p><u>GW4:</u> 53pts</p><p><u>GW5:</u> 27pts</p><p><u>GW6:</u> 48pts</p><p><u>GW7:</u> 29pts</p><p><u>GW8:</u> 28pts</p><p><u>GW9:</u> 51pts</p><p><u>GW10:</u> 47pts</p><p><u>GW11:</u> 16pts</p><p><u>GW12:</u> 44pts</p><p><u>GW13:</u> 32pts</p><p><u>GW14:</u> 41pts</p><p><u>GW15:</u> 24pts</p><p><u>GW16:</u> 23pts</p><p><u>GW17:</u> 32pts</p><p><u>GW18:</u> 25pts</p><p><u>GW19:</u> 26pts</p><p><u>GW20:</u> 48pts</p><p><u>GW21:</u> 32pts </p><p><u>GW22:</u> 34pts</p><p><u>GW23:</u> 47pts</p><p><u>GW24:</u> 43pts</p><p><u>GW25:</u> 59pts </p><p><u>GW26:</u> 38pts</p><p><u>GW27:</u> 61pts</p><p><u>GW28</u>: 37pts</p><p><u>GW29:</u> 10pts</p><p><u>GW30:</u> 46pts</p><p><u>GW31:</u> 49pts</p><p><u>GW32:</u> 54pts avec un score total minimum de 1786pts</p><p><u>GW33:</u> 65pts avec un score total minimum de 2034pts</p><p><u>GW34:</u> 92pts</p><p><u>GW35:</u> 71pts</p><p><u>GW36:</u> 107pts </p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

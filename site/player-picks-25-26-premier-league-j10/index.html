@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J10</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="🎃 Trick or treats? La Premier League nous offre un peu des deux. Treats: Arsenal signe le record de clean sheets (6) en un mois, Sunderland, le promu qui ne compte que deux défaites en ce début de saison toutes compétitions confondues. Tricks: Liverpool qui perd six matchs domestiques consécutifs et descend de la première à la septième place. Dans cette journée, Arsenal et United ont des matches abordables tandis que Spurs, Chelsea, City, Bournemouth, Liverpool, Villa, Everton et Sunderland..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J10"><figure class="hero"><img src="/media/449182_47fc5c0749be417a877fe743d6661faa_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J10</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 30 octobre 2025</p><div class="body"><p>🎃 Trick or treats? La Premier League nous offre un peu des deux. Treats: Arsenal signe le record de clean sheets (6) en un mois, Sunderland, le promu qui ne compte que deux défaites en ce début de saison toutes compétitions confondues. Tricks: Liverpool qui perd six matchs domestiques consécutifs et descend de la première à la septième place. Dans cette journée, Arsenal et United ont des matches abordables tandis que Spurs, Chelsea, City, Bournemouth, Liverpool, Villa, Everton et Sunderland jouent les uns contre les autres dans des matches difficiles à pronostiquer. On va quand même le faire...</p><h2>Le tour d'horizon</h2><h3>Arsenal</h3><p>Arsenal poursuit sa belle série : victoire un peu juste mais suffisante 1-0 en Premier League contre Palace grâce à un but d'Eze contre son ancien club lors de la J9, puis qualification pour les quarts de Carabao Cup aux dépens de Brighton, avec le jeune Max Dowman titulaire à seulement 15 ans. La dynamique collective et la jeunesse font parler d’elles.</p><h3>Manchester United</h3><p>Bryan Mbeumo a brillé pour United ce mois-ci, impliqué dans 4 buts lors des 3 victoires consécutives qui propulsent le club à la 4ème place. Son doublé lors du 4-2 face à Brighton fait de lui un candidat fort au joueur du mois.​</p><h3>Manchester City</h3><p>City a subi une défaite surprise en Premier League lors de la Gameweek 9 face à Aston Villa, mais s’est ressaisi en Carabao Cup en battant Swansea 3-1 à l’extérieur. Guardiola continue d’alterner les cadres et les jeunes, gardant City en lice dans toutes les compétitions. Erling Haaland poursuit son rythme exceptionnel avec 3 buts en octobre, portant son total à 11 réalisations, loin devant ses poursuivants. Il a notamment offert la 250e victoire à Guardiola. Absent lors de la Carabao Cup pour cause de 'coup', il devrait jouer en Premier League ce week-end.</p><h3>Liverpool</h3><p>Semaine morose pour Liverpool : lourde défaite 0-3 à Anfield contre Crystal Palace en Carabao Cup, portant à six le nombre de revers sur les sept derniers matches. Les blessures et la baisse de régime de l’effectif inquiètent alors que la pression monte sur Arne Slot.</p><h3>Chelsea</h3><p>Chelsea voit Malo Gusto convoité par la Juventus pour renforcer leur défense lors du prochain mercato.​ Moises Caicedo vient d’être sélectionné pour le but du mois d’octobre. Les supporters peuvent voter sur le site officiel des Blues.​</p><h3>Brentford</h3><p>Igor Thiago poursuit sur sa lancée avec 2 buts ce mois-ci, se plaçant juste derrière Haaland au classement du Soulier d’Or. Il a contribué à la victoire 3-2 contre Liverpool.​</p><h3>Sunderland</h3><p>Nordi Mukiele, nouvelle recrue, a marqué lors de la victoire contre Wolves et s’impose comme atout défensif, tout en dynamisant leur attaque avec ses longues touches.​</p><h3>Bournemouth</h3><p>Junior Kroupi, jeune français de 19 ans, fait sensation avec 3 buts lors de ses deux premiers matchs, propulsant les Cherries en haut du classement.​</p><h3>Les Promus (Burnley, Sunderland, Leeds)</h3><p>Les clubs promus, qui étaient favoris pour la redescente, surprennent par leurs bons résultats et sont analysés comme les outsiders de ce début de saison. Sunderland (4ème) crée la surprise tandis que Leeds (15ème) et Burnley (16ème) ont deux fois plus de points que le premier relégable (Forrest qui faisait la surprise la saison dernière).</p><h2>Mes Pronos pour la J10 de Premier League:</h2><p>Brighton Hove 1 - 1 Leeds United</p><p>Crystal Palace 2 - 0 Brentford</p><p>Burnley 0 - 2 Arsenal</p><p>Fulham 2 - 1 Wolverhampton</p><p>Nottingham 0 - 2 Man United</p><p>Tottenham 1 - 1 Chelsea</p><p>Liverpool 1 - 1 Aston Villa</p><p>West Ham 0 - 2 Newcastle</p><p>Man City 2 - 1 Bournemouth</p><p>Sunderland 1 - 1 Everton</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><h3>Les Indispensables</h3><p><strong>Erling Haaland</strong> (£14.7M) : Toujours la principale menace offensive de Man City, avec des fixtures favorables et une forme constante. Il reste incontournable en attaque.​</p><p><strong>Bukayo Saka</strong> (£10.0M) : Arsenal enchaîne les matches abordables, Saka multiplie les tirs et passes clés ces dernières semaines — magique et régulier.​</p><p><strong>Gabriel Magalhaes</strong> (£6.4M) : Pilier de la défense d’Arsenal, qui dispose de clean sheets prévus et d’une grosse présence sur coups de pied arrêtés.​</p><p><strong>Bryan Mbeumo</strong> (£8.1M) : Joue quasiment tout, est au cœur du jeu offensif de United et bénéficie de fixtures favorables face à des équipes friables.​</p><h3>Les bons tuyaux</h3><p><strong>Nick Woltemade</strong> (£7.5M) : Newcastle affronte des défenses perméables, Woltemade reste le principal buteur avec de très bonnes stats d’expected goals.​</p><p><strong>Ismaila Sarr</strong> (£6.5M) : Crystal Palace domine en xG et ont la meilleure série de fixtures du moment, Sarr devient le créateur principal de l’équipe.​</p><p><strong>JP Mateta</strong> (£6.5M) : Deuxième derrière Haaland en stats offensives, il affronte Brentford puis des adversaires à sa portée et sort d’un hat-trick en GW8.​</p><p><strong>Bruno Guimarães</strong> (£6.5M) : Milieu qui prend énormément de tirs et monte en puissance, Newcastle marque beaucoup, matches idéal pour cartonner.​</p><p><strong>Minteh</strong> (£6.0M) : Brighton reçoit Leeds, défense fragile à l’extérieur, Minteh peut profiter d’une confrontation directe avantageuse.​</p><p><strong>Daniel Muñoz</strong> (£5.7M) : Défenseur Crystal Palace qui monte, enchaîne les bonus et a une série favorable de matches à venir, bon potentiel de points.​</p><p><strong>Guehi</strong> (£4.9M) : Défenseur Palace sous les radars, fixtures parfaites pour clean sheet, peut rapporter plus que son prix ne le laisse penser.​</p><p><strong>Semenyo</strong> (£8.0M) : Milieu Bournemouth, dynamique et très impliqué dans le jeu offensif — fixtures en hausse, peu possédé.​</p><p><strong>Robin Roefs</strong> (£4.7M) : Gardien Sunderland, super rapport qualité/prix et profite d’une période favorable selon les experts.​</p><p><strong>Rayan Timber</strong> (£6.0M) : Arsenal, défenseur très recommandé pour ses retours offensifs et clean sheets, peu possédé.​</p><h3>Les pépites</h3><p><strong>Nordi Mukiele</strong> (£4.1M) : Défenseur Sunderland souvent titulaire, fixtures très accessibles et faible ownership, idéal à ce tarif.​</p><p><strong>Joshua Acheampong</strong> (£3.9M) : Défenseur Chelsea, qui peut rapporter lors des matches faciles à venir, prix plancher.​</p><p><strong>King</strong> (£4.5M) : Milieu Fulham, bon ticket offensif pour moins de 6M, commence à enchaîner les titularisations.​</p><p><strong>Ryan Truffert</strong> (£4.5M) : Défenseur Bournemouth, fixtures abordables et activité offensive intéressante, idéal pour compléter ta rotation.​</p><p>Il ne me reste plus qu'à vous souhaiter une bonne semaine....  </p><p>🦝</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

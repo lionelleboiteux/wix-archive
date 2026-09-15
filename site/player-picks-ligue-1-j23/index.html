@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J23</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="« On se rapproche doucement de choses un peu meilleures. Mais c’est dur, c’est loin, c’est long. » D Digard (février 2023) Un mistral..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J23"><h1 class="title-only">Player Picks, Ligue 1, J23</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 9 février 2023</p><div class="body"><p><em> « </em>On se rapproche doucement de choses un peu meilleures. Mais c’est dur, c’est loin, c’est long.<em> » D Digard (février 2023)</em></p><p><em>Un mistral gagnant, un duel de perdants et poutrage allemand: Player Picks de la saison LCDE,épisode 23</em></p><h2>Les matchs de la journée</h2><h3> Nice – AC Ajaccio</h3><p><em>Ça me fumerait que l’OGC Nice chute à domicile contre l’avant-avant dernier de la classe, seule formation qui n’a pas un seul attaquant un peu d’équerre, alors que les Aiglons viennent de taper coup-sur-coup ceux qui se fait de mieux actuellement dans l’Hexagone ; à savoir Lille, Lens et Marseille 2 fois (au Vel et en recrutant Moffi) Donc on va aligner, sur les 4 coins du terrain, des Niçois dans notre effectif sans prendre trop de risques de moins-value</em></p><p><strong><em><span style="color:#1e73be">Score 3-0</span></em></strong></p><h3> Monaco – Paris SG</h3><p><em>A contrario de l’AC Ajaccio, Monaco, équipe la plus prolifique d’Europe, peut compter sur pléthore d’avants-centre. Attention donc pour le PSG, défait piteusement en CDF, avant de se farcir pour la 3e fois en 4 éditions de LDC Munich(omouk), à ce déplacement sur le Rocher où l’ASM – qui aura également le plaisir d’affronter un club allemand dans 10j –  vient de passer Rennes au compteur à la faveur d’une série de 23 points engrangés depuis la reprise.</em></p><p><strong><em><span style="color:#1e73be">Score 0-0</span></em></strong></p><h3> Clermont – Marseille</h3><p><em> Ça fête une victoire en 8e de CDF alors que ça va se faire manger au classement et que ça voit jamais l’Europe en février (seum) Autant vous dire qu’après la venue à Montpied de Monaco, pliée en un petit quart d’heure par les Asémites (0-2), l’objectif des Auvergnats sera, pour la réception de l’OM, de pas sombrer aussi vite que la semaine passée même si l’issue de la rencontre semble inéluctable. Rien, ou presque (poke OGCN), ne semble endiguer la furia phocéenne</em></p><p><strong><em><span style="color:#1e73be">Score 0-3</span></em></strong></p><h3> Toulouse – Rennes</h3><p><em>Avant Rennes carburait à domicile et patinait à l’extérieur. Maintenant il patine aussi à domicile. Allez faire des pronostics derrière ! La faute à un nombre de blessés nombreux, une défense passoire et une attaque amputée d’un certain Martin Terrier. À Fantasy Coach pourtant, y a pas consensus à propos de ce match. Le Tef joue mieux que le Stade mais postule plutôt au statut profil d’équipe de coupe. Donc la raison m’amène à m’avancer sur un nul </em></p><p><strong><em><span style="color:#1e73be">Score 1-1</span></em></strong></p><h3>Lille – Strasbourg</h3><p><em>Tu demandes des renforts et ton président signe Costil. Faut pas s’étonner que ça brasse derrière entre Letang et Fonseca ! Mais, comme lâcher une perle après un bon cassoulet, c’est dommage de le faire en public. Il manque tellement de monde à Strasbourg que je sais même pas si Le Scornet choisit des joueurs ou des numéros pour coucher sa compo. C’est dire si je vois mal le Racing se payer un LOSC qui vient de mettre fin à l’invincibilité rennaise au Roazhon</em></p><p><strong><em><span style="color:#1e73be">Score 4-1</span></em></strong></p><h3> Reims – Troyes</h3><p><em>Ah quand le karma frappe dans le foot, il tarde peu généralement et cogne fort. Still, beau joueur pour le coup, est revenu de la ville rose avec 3 buts dans la gueule et une élimination par une équipe qu’il prétendait « fracasser ». Ça m’arrangerait particulièrement que la pire défense de France et de Navarre prenne une valise à Delaune dans le derby de... – pécores de banlieue de Paris ? – et reprenne ses bonnes habitudes d’ascenseur L1/L2</em></p><p><strong><em><span style="color:#1e73be">Score 2-1</span></em></strong></p><h3> Montpellier – Brest</h3><p><em>Je sais pas ce qui me troue le plus le c*l : qu’on ait offert au RCSA un 1er succès à domicile en supériorité numérique ou que l’on fasse revenir Der Zak (notre ancien coach) juste avant de jouer le Stade brestois (son ancien club) à égalité au compteur. Quoi qu’il en soit, Brest semble avoir barricadé ses cages – invaincu sous Roy avec 2 buts encaissés en 5 matchs – sans nécessité réelle car le MHSC n’a pas été capable de cadrer un tir à la Meinau en J22</em></p><p><strong><em><span style="color:#1e73be">Score 0-1</span></em></strong></p><h3> Angers – Auxerre</h3><p><em>Depuis quand on a des matchs de L2 le dimanche aprem ? Un match nul et une belle prestation en coupe, et c’est déjà un peu la fête à Angers. De même pour Auxerre qui se satisfait d’avoir accroché Reims après avoir failli remonter Monaco. Rira bien qui rira plus en mai. J’aimerais bien dire malheur aux vaincus mais ces 2 formations semblent inexorablement condamnées. Entre le dernier et l’avant-dernier, la peste et le choléra, je vais miser sur le SCO</em></p><p><strong><em><span style="color:#1e73be">Score 2-1</span></em></strong></p><h3>Nantes – Lorient</h3><p><em>On enchaîne avec une formation qui peut se targuer d’avoir 2 gardiens top niveau. Les Canaris ont drôlement bien fait de carburer comptablement dernièrement car si on s’amuse à regarder le calendrier nantais sur les prochaines semaines c’est que du top 10 de L1 et, accessoirement, la Juve. Ça commence ce dimanche aprem, dans un enieme derby breton qui n’en porte pas le nom, par la venue d’un FC Lorient qui a réussi l’exploit de se faire accrocher par Angers</em></p><p><strong><em><span style="color:#1e73be">Score 0-0</span></em></strong></p><h3> Lyon – Lens</h3><p><em>Jamais j’aurais pensé qu’il suffirait de recruter Lovren pour guérir l’OL. Après Lille en coupe, Lyon reçoit dimanche en championnat un autre consanguin du Nord qui, affaibli par les blessures, a lâché 7 points en 7j de ligue 1 uber eats et sent le souffle chaud de Monaco derrière la nu...que. Ça me fait marrer que l’on se remette à rêver d’Europe à Lyon pour autant. Malgré cette mauvaise passe, le Racing la verra l’an prochain alors que l’OL la jouera à la playstation</em></p><p><strong><em><span style="color:#1e73be">Score 1-2</span></em></strong></p><p>N'hésitez pas à rejoindre le DiscordLigue1 si vous souhaitez échanger sur LCDE et sur la Ligue1 de manière générale:<a href="https://discord.gg/wRk9zMeU"><u>Rejoindre le Discord Ligue 1</u></a></p><p>On perd pas les bonnes habitudes et on attend comme chaque semaine<a href="http://www.fantasy-coach.fr/pronostics-ligue-1/">vos petits pronos.</a> </p><h2>Players Picks</h2><h3>Les bons tuyaux:</h3><p><em>Ischios Gusto = titu </em><strong><em><span style="color:#1e73be">Kumbedi</span></em></strong><strong><em> </em></strong><em>(7,3)</em></p><p><em>Un arrière droit de dépannage peut en cacher un autre : </em><strong><em><span style="color:#1e73be">D Spence</span></em></strong><em> (5,6)</em></p><h3>Les pépites:</h3><p><em>Faire la passe à Balogun ou envoyer une grosse praline à 30 mètres. C’est le plan </em><strong><em><span style="color:#1e73be">Marshall Munesti</span></em></strong><strong><em> </em></strong><em>(11,4)</em></p><p><em>Il a joué le titre avec l’Inter l’an passé, il joue le maintien avec Auxerre cette année. Je me rends pas bien compte à quel point la carrière d’</em><strong><em><span style="color:#1e73be">I Radu</span></em></strong><em> (6,3) progresse</em></p><h3>Les incontournables:</h3><p><em>Un supersub ishish pour ce 23e volet du Player Picks LCDE : le néo marseillais </em><strong><em><span style="color:#1e73be">Ounahi</span></em></strong><em><span style="color:#1e73be"> </span></em><em>(5,7)</em></p><p><em>Arrivé pour reformer la paire avec Delort, il réforme la paire avec Moffi. Mais il occupe seul la tête d’affiche du Player Picks LCDEn°23 </em><strong><em><span style="color:#1e73be">G Laborde</span></em></strong><strong><em> </em></strong><em>(15,9)</em></p><p><em> </em>t34</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

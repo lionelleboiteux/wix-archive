@@ -1,0 +1,96 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J18</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Joyeux Noël à tous les managers Fantasy ! J'espère que le Père Noël vous a apporté des flèches vertes, parce que la Premier League, elle, ne fait pas de cadeaux. La J17 a confirmé la montée en puissance terrifiante de Manchester City (3-0 contre West Ham, merci Haaland et Cherki) et la solidité &quot;héroïque&quot; d'Arsenal qui a su gratter un 1-0 précieux à Everton. On ne retiendra pas la manière, on retiendra les 3 points. 
+
+Mais pas le temps de digérer la dinde, la J18 démarre pour le Boxing Day..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J18"><figure class="hero"><img src="/media/449182_529340b2f23e462ea5fe1754329c9bcc_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J18</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 25 décembre 2025</p><div class="body"><p>Joyeux Noël à tous les managers Fantasy ! J'espère que le Père Noël vous a apporté des flèches vertes, parce que la Premier League, elle, ne fait pas de cadeaux. La J17 a confirmé la montée en puissance terrifiante de Manchester City (3-0 contre West Ham, merci Haaland et Cherki) et la solidité &quot;héroïque&quot; d'Arsenal qui a su gratter un 1-0 précieux à Everton. On ne retiendra pas la manière, on retiendra les 3 points. </p><p>Mais pas le temps de digérer la dinde, la J18 démarre pour le Boxing Day. C'est le moment le plus intense de la saison. Les rotations guettent, et les matchs s'enchaînent. City va à Forest pour écraser la concurrence, Arsenal reçoit les mouettes de Brighton, et Palace attend Tottenham pour, on l'espère, prolonger la magie de Noël.</p><h2>Le tour d'horizon</h2><p><strong><span style="color:#1a1c1e">Arsenal</span></strong></p><p>Les Gunners reçoivent Brighton. Les Seagulls sont toujours difficiles à manœuvrer (0-0 solide contre Sunderland), mais à l'Emirates pour le Boxing Day, l'ambiance sera spéciale. Saka et Ødegaard devront être patients, mais je vois Arsenal s'imposer 2-1 dans un match technique. Pas de clean sheet attendu, mais des points offensifs, oui.</p><p><strong>Manchester City</strong></p><p>Direction Nottingham Forest. Forest vient de perdre contre Fulham, et City marche sur l'eau. Avec un Haaland reposé et affamé, et un Foden en état de grâce, je ne vois pas comment Forest peut résister. Le prono est sans appel : 0-3. Si vous n'avez pas le capitaine sur Haaland, vous jouez avec le feu.</p><p><strong>Liverpool</strong></p><p>Les Reds reçoivent Wolverhampton. Après avoir battu les Spurs, la confiance est là.  Wolves vient de perdre contre Brentford et semble à bout de souffle. Victoire 2-0, propre.</p><p><strong>Spurs</strong></p><p>Tottenham se déplace à Crystal Palace pour un derby londonien. Palace vient de se faire étriller par Leeds (4-1) et doit réagir. Je vois bien les Eagles, poussés par Selhurst Park, surprendre des Spurs fragiles. Une défaite 2-1 de Tottenham serait la cerise sur mon pudding.</p><p><strong>Manchester United vs Newcastle</strong></p><p>Le feu d'artifice de la journée ? United (qui sort d'une défaite frustrante à Villa) reçoit Newcastle (accroché par Sunderland). Deux équipes qui attaquent mieux qu'elles ne défendent. On annonce un 2-2 spectaculaire. </p><h2>Mes Pronos pour la J18 de Premier League:</h2><p>Man United 2 - 2 Newcastle</p><p>Nottingham 0 - 3 Man City</p><p>Arsenal 2 - 1 Brighton Hove</p><p>Brentford 2 - 1 Bournemouth</p><p>Burnley 0 - 1 Everton</p><p>Liverpool 2 - 0 Wolverhampton</p><p>West Ham 1 - 1 Fulham</p><p>Chelsea 2 - 2 Aston Villa</p><p>Sunderland 2 - 1 Leeds United</p><p>Crystal Palace 2 - 1 Tottenham</p><p><span style="color:#1a1c1e">Envoyez nous vos pronos via </span><a href="https://www.google.com/url?sa=E&amp;q=#"><strong><u><span style="color:#2483e2">le jeu des pronos</span></u></strong></a></p><h2>Le Player Picks</h2><h3>Les Indispensables</h3><p><strong>Erling Haaland </strong>(15.1m) – Toujours le capitaine par défaut, avec encore un bon calendrier et un volume de tirs/xG qui reste au-dessus de tous les autres attaquants.</p><p>​</p><p><strong>Hugo Ekitike</strong> (Liverpool) (8.9m) – 5 buts et 35 points sur les 3 dernières J, titulaire en pointe pour Liverpool contre une défense de Wolves qui a encaissé 37 buts, clairement le deuxième gros capitaine de la J18.</p><p>​</p><p><strong>Phil Foden</strong> (9.0m) – Conserve sa place dans les Scout Picks GW18, avec un rôle très avancé et de très bons chiffres offensifs, plus un run de matches encore favorable derrière.</p><p>​</p><p><strong>Matheus Cunha</strong> (8.0m) – Potentiel remplaçant premium en milieu, sur penalties, “nailed” et en bonne forme, avec des fixtures corrects (Newcastle notamment) sur les prochaines J.</p><p>​</p><p><strong>Declan Rice </strong>(7.2m) – Mis en avant comme option milieu solide et populaire, impliqué dans le jeu offensif et les coups de pied arrêtés d’Arsenal, avec une série de matches très attractive.</p><h3>Les bons tuyaux</h3><p><strong>Morgan Rogers</strong>  (7.2m) – A déjà fait 15 points dans 3 de ses 6 derniers matches, Villa gagne 11 de ses 12 derniers matches de championnat et il reste très bien placé pour une nouvelle grosse haul.</p><p>​</p><p><strong>Keane Lewis‑Potter</strong> (4.8m) – Sort d’un 21 points (doublé + bonus) en J17, ultra en forme, et reste une option explosive à très faible prix pour ceux qui veulent surfer sur la hot streak.</p><p>​</p><p><strong>Jeremie Frimpong</strong> (6.0m) – Défenseur ultra offensif, recommandé comme “wildcard defender” pour Wolves à domicile, une équipe en série de 10 défaites et seulement 4 buts marqués.</p><p>​</p><p><strong>Jordan Pickford</strong> (5.5m) – Everton défend bien et il offre un combo clean sheets + sauvegardes + bonus intéressant sur les prochaines J.</p><h3>Les pépites</h3><p><strong>O’Reilly</strong> (5.3m) – Garde sa place dans les picks J18, 1 but et 3 passes déjà, très bonne projection de clean sheets + stats offensives, parfait défenseur value pour profiter de la défense de City.</p><p>​</p><p><strong>Caoimhín Kelleher</strong> (4.5m) – Gardien auteur d’un double‑digit haul en J17, Liverpool est en progrès défensif, et son prix le rend très intéressant si Alisson reste indisponible.</p><p>​</p><p><strong>Dominic Calvert‑Lewin</strong> (5.8m) – Cité comme attaquant budget en forme, avec une bonne dynamique personnelle et une fixture abordable contre Sunderland, très bon pari pour 1–3 J.</p><p>Joyeux Noël à tous, profitez bien du football....</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

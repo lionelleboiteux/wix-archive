@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J14</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="« On a été complètement ouverts. » C Galtier (octobre 2022) Retour des « Tudor démission », 2e de Champions pour un pion et ligues Europa..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J14"><h1 class="title-only">Player Picks, Ligue 1, J14</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 3 novembre 2022</p><div class="body"><p>« On a été complètement ouverts. » C Galtier (octobre 2022)</p><p>Retour des « Tudor démission », 2e de Champions pour un pion et ligues Europa (et Conference) sous tension: Player Picks de la saison LCDE, épisode 14</p><h2>Les matchs de la journée</h2><h3>Troyes – Auxerre</h3><p><em>« Je n’ai confiance qu’en mon desert eagle et en Pélissier pour éviter la L2 »</em> disait un philosophe français qui m’est cher, Kaaris. Après 4 jours seulement sur le banc, une combinaison victorieuse travaillée à l’entraînement et (déjà) un succès on ne peut que lui donner raison. S’il n’a pas empêché une nouvelle expulsion de l’incorrigible Mbaye, le nouveau coach auxerrois a permis à l’AJA de sortir de la zone de relégation et de renouer avec un succès qui lui échappé depuis 8 tentatives. A confirmer</p><p>Score 2-1</p><h3>AC Ajaccio – Strasbourg</h3><p>Bon faut croire que le match d’ouverture de cette 14e journée n’était pas suffisamment pourri pour qu’on capte que notre championnat était bien pété puisqu’on enchaîne avec une équipe déjà en ligue 2 et une qui maintient le suspens à la faveur du pied gauche de Gameiro. Il apparaît toutefois peu probable, au vu de la gueule de l’attaque ajaccienne, pour le Racing que ce déplacement se termine à nouveau par une remontada à 2-2 mais pas de là à envisager un succès à l’extérieur</p><p>Score 2-0</p><h3>Angers – Lens</h3><p><em>« On a des possibilités de marquer à tous les matchs » </em>nous confiait Baticle. Alors je sais pas si le manager angevin voit les mêmes matchs et stats de buts marqués que nous mais, avant de démarrer la tournée des grands ducs consanguins (Lens et Lille vous l’aurez deviné), il s’agirait de les sortir de son chapeau de magicien car à l’heure actuelle le SCO vient de connaître une 5e fessée consécutive et végète en queue de peloton au 20e rang. Attention tout de même à la correction</p><p>Score 0-3</p><h3>Lorient – Paris SG</h3><p>C’était la 1ere fois de l’histoire de la LDC que 2 clubs finissaient 1er avec même nombre de points, de buts marqués et encaissés. Pourquoi ça me surprend pas que ce soit Paris? Pour autant seule équipe d’Europe encore invaincue cette saison, le PSG, meilleure défense de France et de Navarre – qui, après Bordeaux, a pris 3 buts à la maison par une nouvelle formation condamnée à la descente – se rend chez le 3e lorientais pas verni dernièrement pour un match qui s’annonce haletant</p><p>Score 2-2</p><h3>Toulouse – Monaco</h3><p>Vu le précédent marseillais et l’échec estival des Monégasques à Eindhoven, on parlera pas de « match de l’année » (qualif ou élimination) mais l’enjeu est terrible pour l’ASM – et particulièrement pour les Ben Yedder, Fofana et Badiashile – avant d’affronter une Étoile Rouge de Belgrade en feu et à une semaine de la liste des Bleus. Autant vous dire qu’à part Wissam pour des raisons sentimentales évidentes avec la ville rose, tout le monde se tape sur le Rocher du match de Toulouse</p><p>Score 3-3</p><h3>Clermont – Montpellier </h3><p>J’ai pas tellement envie de vous dire que je viens d’une ville du Sud de la France aux petites mœurs mais honnêtement cette année – record de défaites et record de buts encaissés toute ligue nationale confondue – j’en viens carrément à me demander qui ne nous ait pas encore passé dessus ? Quand on a pris Savanier, j’ai rien dit. Quand on a pris Maoussa, j’ai rien dit. Quand on a pris Saint-Luce, j’ai rien dit. Par contre, si on prend Blaquart comme coach vous allez m’entendre les copains</p><p>Score 1-1</p><h3>Nice – Brest</h3><p>On poursuit avec un autre club azuréen à la peine en championnat dernièrement et en péril européen ce jeudi (qualif ou élimination à l’issue de la soirée) puisque l’OGC Nice est dans la même position que l’OM ; à savoir à la traîne en L1 et au destin européen à suspens car tout est possible à l’heure où je vous parle pour le printemps continental aiglon. Un but (sublime) d’un mec qui devait sortir, un autre dévié dans son propre camp, un gardien (pour une fois) salvateur: la baraka niçoise ne va pas durer</p><p>Score 0-0</p><h3>Reims – Nantes</h3><p>Force est de constater que sur les bords de l’Erdre, hors relégation malheureuse (et surprenante) à l’issue du présent exercice, le FC Nantes a d’ores et déjà réussi son année post-coupe de France puisqu’elle sera au rendez-vous printanier des joutes européennes. Mais dans la mesure où les Champenois ont retrouvé un semblant de solidité défensive (3 clean-sheet en 4 matchs) et les Canaris n’ont pas gagné un seul déplacement en 7 mois, mon prono va, comme moi à l’apéro, en Champagne</p><p>Score 2-0</p><h3>Lille – Rennes</h3><p>Vous avez tenu jusqu’ici et vous en êtes récompensés car deux belles équipes joueuses s’affrontent ce dimanche aprem avec d’un côté le carré magique made in France Terrier – Gouiri – Kalimuendo – Bourigeaud et de l’autre le trident francophone Bamba – Cabella – Ounas; auquel il faut ajouter le joueur avec le plus d’expected goals du monde je pense Jonathan David. Si l’avantage penche pour Rennes, 3e et venant de signer son record d’invincibilité, Lille rendra, à domicile, coup pour coup</p><p>Score 1-2</p><h3>Marseille – Lyon</h3><p>Contre-éclair, coaching sourd et malheureux plus 25 millions de recettes envolées en 20 secondes pour Marseille = maux de crâne de l’espace pour le peuple phocéen et l’indice UEFA pour la France (de De Gaulle.) Toujours mieux que l’OL – non européen on se lassera jamais de le dire – sur le plan financier mais pas sur le plan comptable puisque l’OM a pris 1 point sur douze avant cet olympico que Lyon aborde après 2 victoires coup-sur-coup et avec un Boateng en jambe et libre de surcroît</p><p>Score 1-1</p><p>On perd pas les bonnes habitudes et on attend comme chaque semaine <a href="http://www.fantasy-coach.fr/pronostics-ligue-1/">vos petits pronos.</a></p><h2>Players Picks</h2><h3>Les bons tuyaux:</h3><p>Je me permets de mettre 2 gardiens dans un même Player Picks mais, contre le FC Nantes et à domicile, ça sent très bon le clean-sheet pour <strong>Diouf</strong> (5,8)</p><p>À combien la côte <strong>Cardona</strong> (8,3) buteur à l’Allianz Riviera ?</p><h3>Les pépites:</h3><p>Né à Noisy, lancé par Antonetti et, avant le Racing, tournée des clubs pourris: <strong>W Saïd</strong> (10,2) supersub du 14e volet du Player Picks LCDE</p><p>Ailier gauche mais droitier, blessé mais prolongé, Kosovar mais Suédois de nationalité : le rémois <strong>A Zeneli</strong> (9,2)</p><h3>Les incontournables:</h3><p>Ça me fume de l’écrire mais la meilleure recrue lyonnaise de la saison s’appelle <strong>N Tagliafico </strong>(15,5)</p><p>Et on finit, en dansant, avec <strong>Samba</strong> (16) do Bollaert, Player Picks LCDE n°14</p><p><em>t34</em></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J20</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="« On va gagner la coupe de France. » public du Stadium (janvier 2023) De drogue en tribunes, de Folarin Balogun mais pas de Vincent..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J20"><figure class="hero"><img src="/media/a73c0f_29995bcf2a4f404eac394aed90f380aa_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Ligue 1, J20</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 26 janvier 2023</p><div class="body"><p><em>« </em>On va gagner la coupe de France. <em>» public du Stadium (janvier 2023)</em></p><p><em>De drogue en tribunes, de Folarin Balogun mais pas de Vincent Labrune : Player Picks de la saison LCDE, épisode 20</em></p><h2>Les matchs de la journée</h2><h3>Lorient – Rennes</h3><p><em>On reprend nos bonnes petites affaires ligue 1, après la coupe-ure de France (et de Navarre je tiens à le préciser), avec un derby breton entre 2 clubs (bretons évidemment sinon ça serait pas un derby breton) qui animent particulièrement le présent mercato et reste, à l’issue de la phase aller, en embuscade derrière le wagon de Theate. Avantage logique à l’ogre du PSG rennais qui se déplace chez son petit voisin lorientais en panne depuis quelques mois au Moustoir</em></p><p><strong><em><span style="color:#1e73be">Score 0-2</span></em></strong></p><h3>Troyes – Lens</h3><p><em>Alors que démarre une période chargée en déplacement pour Lens, avant Troyes, c’est déjà 3 – points qui séparent le dauphin du Paris-Saint-Germain, à la faveur d’une série de 10 sorties sans perdre. Je suis assez étonné par cet ESTAC (pas sur le niveau de jeu inexistant rassurez-vous) inhabituellement calme – sans doute soulagé de la prolongation d’Odobert – pour une période de transferts bien que 1er non relégable. Bref on va aligner du Lensois sur toutes les lignes sur LCDE</em></p><p><strong><em><span style="color:#1e73be">Score 1-3</span></em></strong></p><h3>Marseille – Monaco</h3><p><em>On récapitule : Marseille a voulu recruter Moffi à Lorient pour l'empêcher de signer à Nice car Nice a rejeté Dieng cet été mais ne va pas signer Moffi qui va aller à Nice et va perdre Dieng qui va aller à Lorient. Où quand la L1 ressemble un peu à une cour de maternelle. Résultat des comptes, l’équipe la plus en forme d’Europe (ça me fume), l’OM ne doit plus recruter un mais deux avants-centre. Je me méfierais de l’ASM qui a l’habitude de finir fort et a bien démarré cette année</em></p><p><strong><em><span style="color:#1e73be">Score 3-3</span></em></strong></p><h3>Nice – Lille</h3><p><em>Derby des extrêmes climatiques mais de voisins d’ambition dans le projet, le jeu et les places d’honneur de ligue 1 uber eats. Alors je sais pas si on pourra voir à temps à l’Allianz Riviera la doublette Bayo/David face à celle Moffi/Laborde mais ce duel est malgré tout ô combien alléchant sur le papier. À savoir également si Inéos s’intéressera véritablement à ce genre de matchs de bouseux made in farmers league quand on a le grand Manchester United dans le viseur</em></p><p><strong><em><span style="color:#1e73be">Score 2-2</span></em></strong></p><h3>Auxerre – Montpellier</h3><p><em>On enchaîne – tant pis pour Kool Shen – avec une opposition de défenses  éclatées qui ont, en sus, pour similarité d’avoir perdu leur gardien dans l’intervalle hivernal. Mention spéciale, bien évidemment, pour le club du Sud cher à mon cœur qui a la particularité d’avoir connu le plu la défaite en Europe l’an passé et s’apprête à aligner ce week-end un 5e gardien titulaire bien connu de la maison. Amis du football champagne et du plaisir, passez votre tour</em></p><p><strong><em><span style="color:#1e73be">Score 1-1</span></em></strong></p><h3>Clermont – Nantes</h3><p><em>Autant j’ai rien contre le fait d’être viril en 2023, autant aller au bras de fer pour signer à Nantes c’est pas forcément le genre de causes que je soutiens. Pour jouer le maintien en championnat mais la coupe d’Europe face à la Juve, les Canaris ne lorgnent plus des pépites belges qu’on voit jamais mais des anciens Montpelliérains. Par ailleurs, tenant du titre et qualifié aux pénos en CDF, le FC Nantes se caractérise par une imperméabilité défensive à confirmer à Montpied</em></p><p><strong><em><span style="color:#1e73be">Score 0-1</span></em></strong></p><h3>Strasbourg – Toulouse</h3><p><em>On poursuit avec le derby de la saucisse que ne verront pas les anciens héros de la Meinau – Ajorque, Thomasson, Pierre Gabriel (lol) – mais des anciens Villans – Guilbert et Sanson – que l'on espère plus inspirés à domicile où le Racing chasse toujours une victoire cette saison. Je vais pas m’attarder sur le recrutement du FC Cosmopilitan de Toulouse qui vient d’enregistrer un autre illustre inconnu portant à 17 le nombre de nationalités différentes chez les Violets.</em></p><p><strong><em><span style="color:#1e73be">Score 1-1</span></em></strong></p><h3>Brest – Angers</h3><p><em>On va pas faire de politique içi mais le foot est vachement à l’image des préoccupations de la société : là où les clubs anglais récupèrent à coup de gros sous des Ouattara et des Gusto, nous on se paluche des Remy et des Lala. Quand je dis « on » c’est Brest évidemment. Je pense pas que le record de défaites en 1ère division sera égalé par nos amis angevins ce week-end à le Blé mais Brest, 1er relégable, devrait profiter de l’occaz de rester accrocher au maintien</em></p><p><strong><em>Score 0-0</em></strong></p><h3>AC Ajaccio – Lyon</h3><p><em>Si l’un de vous se sentait l’âme littéraire, vous pourriez faire tabac en pondant un bouquin « le mercato lyonnais pour les Nuls » tant la stratégie du board gone est absolument illisible. Y a tellement de remue-ménage à la tête et dans le vestiaire de l’OL – j’évoque pas les abrutis en tribunes – que même l’équipe bis d’une ACA complètement décimée et aux fraises depuis son retour à l'échelon d'élite du football français pourrait poser difficultés aux hommes de Lolo White</em></p><p><strong><em><span style="color:#1e73be">Score 0-1</span></em></strong></p><h3>Paris SG – Reims</h3><p><em>On boucle la J20 avec un derby clinquant entre la ville de la royauté (Mbappé) et celle des sacres des rois de France. Pour autant, la hype du moment penche clairement côté champenois puisque le SR vient d’enchaîner un 13e match sans défaite là où le PSG perdait 2 fois – contre (ça me fume de le reconnaître) 2 de ses concurrents directs au titre –  et se faisait payer en parallèle 10 millions de patates pour affronter la formation de Rudi Garcia dans un désert.</em></p><p><strong><em><span style="color:#1e73be">Score 2-1</span></em></strong></p><p><em>On perd pas les bonnes habitudes et on attend comme chaque semaine </em><a href="http://www.fantasy-coach.fr/pronostics-ligue-1/"><em>vos petits pronos.</em></a></p><h2>Players Picks</h2><h3>Les bons tuyaux:</h3><p><em>Entre les partants, blessés ou suspendus, on se retrouve avec des titus à 3 comme </em><strong><em><span style="color:#1e73be">Tchato</span></em></strong><em>. Profitez-en les soldes se terminent dans quelques jours et la L1 dans quelques mois pour le MHSC</em></p><p><em>Allez pour la 2e démarque, on vous brade un second défenseur : le Lyonnais </em><strong><em><span style="color:#1e73be">Kumbedi </span></em></strong><em>(5,8) pour suppléer le partant Gusto</em></p><h3>Les pépites:</h3><p><em>Le seul potable pour un certain Robinours : </em><strong><em><span style="color:#1e73be">W Saïd</span></em></strong><em> (11,7) est le supersub du 20e volet du Player Picks LCDE</em></p><p><em>Le seul Lyonnais qui croit encore gagner un trophée cette année : </em><strong><em><span style="color:#1e73be">A Lopes</span></em></strong><em> (12,2)</em></p><h3>Les incontournables:</h3><p><em>Il bombarde en montagne, il y va donc </em><strong><em><span style="color:#1e73be">franco-au-wski</span></em></strong><em> (15,9)</em>
+</p><p><strong><em><span style="color:#1e73be">Ludovic Blas</span></em></strong><em> (13,2) est la tête d’affiche duPlayer Picks LCDE n°20</em></p><p><em>t34</em></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

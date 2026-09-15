@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J28</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Liverpool a déjà fait de la place sur l'étagère à trophée pour y mettre la coupe de la Premier League pour cette saison, mais le jeu des..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J28"><figure class="hero"><img src="/media/449182_6428c24c91b944ed886ce641c9bdf262_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J28</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 6 mars 2025</p><div class="body"><p>Liverpool a déjà fait de la place sur l'étagère à trophée pour y mettre la coupe de la Premier League pour cette saison, mais le jeu des fantaisistes continue et il y a plein de points à marquer encore…</p><h2>Le tour d'horizon</h2><p>Un Man Utd-Arsenal qui était, fut un temps, le match le plus explosif de la Premier League va cette semaine se jouer entre un Man Utd sorti des coupes domestiques ne jouant plus que le maintien en Premier League et l'Europa cup et les Gunners qui sont sans leurs quatre premiers choix d'attaquants. Pendant le match de LdC contre le PSV, Arteta a fini par remplacer Merino (un milieu) par Tierney (un défenseur) en attaque.</p><p>Forrest contre City nous offre le 3ème contre le 4ème avec l'hôte un petit point devant le quadruple champion en titre. Le plus gros problème de cette version de City c'est l'irrégularité des résultats. Ils semblent incapables d'aligner 3 victoires consécutives et ils ont battu les Spurs en J27 et le terrible Plymouth Argyle en coupe... C'est pour ça que j'ai mis Forest gagnant dans mes pronos.</p><p>Liverpool devrait faire tourner son effectif contre la lanterne rouge de la Premier League pour garder ses atouts frais et dispo pour le match retour contre le PSG, donc attention à qui vous avez sur le banc. On n'a pas vu un grand Liverpool au Parc, mais un petit 0-1 qui va très bien à Slot avant de recevoir le perpétuel gagnant de la L1 à Anfield.</p><p>Je termine le tour d'horizon (du top 6) par Chelsea et Newcastle qui ont chacun un match très gagnable contre Leicester et West Ham respectivement.</p><h2>Mes Pronos pour la J28 de Premier League:</h2><p>Nottm Forest 2 - 1 Man City </p><p>Liverpool 4 - 0 Southampton </p><p>Crystal Palace 2 - 1 Ipswich Town </p><p>Brighton 2 - 1 Fulham </p><p>Brentford 2 - 1 Aston Villa </p><p>Wolves 0 - 2 Everton </p><p>Tottenham 1 - 2 Bournemouth </p><p>Chelsea 2 - 1 Leicester City </p><p>Man United 0 - 1 Arsenal </p><p>West Ham 0 - 2 Newcastle</p><h2>Le Player Picks</h2><p><strong>Nketiah</strong> (£5.9M) L'ancien Gunner devrait avoir une place dans le 11 de départ pour Palace après la blessure de Mateta. Il reste sur 2 buts en 2 matches et a de grandes chances de continuer sa série contre un Ipswich qui coule en ce moment. En J30 ce sera Southampton qui là aussi présage des buts. Le seul bémol c'est qu'il n'a pas de match en J29.</p><p><strong>Neto</strong> (£6.2M) 2 buts et 2 assists en 4 matches et voilà que Neto arrive dans le Player Picks. L'avantage aussi c'est que Madueke et Jackson sont indisponibles donc il devrait avoir plein de temps de jeu pour faire monter ses stats. Il a aussi un match en J29 qui pourrait être un plus si ce n'était pas contre les Gunners.</p><p><strong>Beto</strong> (£5M) On change la première lettre et on continue. 5 buts en 5 matches il reste le buteur le plus en forme de la Premier League</p><p><strong>Bowen</strong> (£7.4M) en parlant de forme, lui retrouve un peu la forme qui l'avait fait rejoindre l'équipe d'Angleterre la saison dernière. West Ham a un calendrier correct jusqu'à la fin de la saison et un match en J29</p><h3>Différentiel Arsenal: </h3><p>On a vu que les quatre attaquants d'Arsenal sont tous à l'infirmerie pour un bon bout de temps. La Gunnersphere espérait qu'Arteta signe un attaquant pendant le mercato, bon… un agent libre, non plus ! Le tacticien Catalan a eu une bien meilleure idée. S'inspirant du Total Football (totaalvoetbal) de l'AJAX et de la Hollande de Cruyff des années 70 il met un peu n'importe qui en attaque en espérant que ça marche. Des fois ça marche, comme contre Leicester où Merino met deux buts, des fois ça marche pas, comme contre West Ham ou Forest et personne ne marque, et des fois ça fait un résultat spectaculaire comme contre le PSV où quasi tout le monde a mis un but. Là où ça devient intéressant pour les fantaisistes c'est que n'importe quel joueur encore valide d'Arsenal peut se retrouver en attaque, voire avant-centre. Pour les plus joueurs <strong>Calafiori</strong> (£5.8M), <strong>Tierney</strong> (£4.3M), <strong>White</strong> (£6.1M) ou <strong>Zinchenko</strong> (£4.8M) peuvent être de très bons investissements, ils ne sont pas à l'abri de signer une CS et avec un peu de chance une assist ou même un but. Les valeurs sûres (plus ou moins) restent <strong>Odegaard</strong> (£8.2M), <strong>Nwaneri</strong> (£4.6M) et <strong>Trossard</strong> (£6.8M) qui animent le tout.</p><h3>Assistant manager</h3><p><strong><span style="color:#222222">Graham Potter</span></strong> si West Ham parvient à battre Newcastle à la maison il peut faire un max de points. Il a aussi une série de matches interessants.</p><p><strong><span style="color:#222222">Ange Postecoglou</span></strong> <span style="color:#000000">La liste des blessés se résorbe et un miracle pourrait se produire contre Brighton.</span></p><p>Pour un choix un peu plus traditionnel sans le Table bonus il y a toujours <strong>Slot</strong> et <strong>Moyes</strong> </p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

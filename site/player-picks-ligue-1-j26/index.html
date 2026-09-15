@@ -1,0 +1,98 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Ligue 1, J26</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="« Dans quelques semaines, ils m’acclameront. » A Delort (février 2023) De huis clos, de Nuno mais pas de pied-beau: Player Picks de la..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Ligue 1, J26"><figure class="hero"><img src="/media/a73c0f_5c5923dcfc364484b5051d31733f40df_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Ligue 1, J26</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 2 mars 2023</p><div class="body"><p> « <em>Dans quelques semaines, ils m’acclameront.</em> » A Delort (février 2023)</p><p>De huis clos, de Nuno mais pas de pied-beau: Player Picks de la saison LCDE,épisode 26</p><h2>Les matchs de la journée </h2><h3>Nice – Auxerre</h3><p>6 recrues d’entrée, un seul tir cadré et 3 points de la besace en plus face à Lorient après ceux glanés à Lyon et revoilà l’AJA de retour d’entre les morts (ou presque.) Après, on va pas se mentir, je pense vraiment pas que l’homme, toujours intérimaire sur le banc des Aiglons, qui a tapé un Lens jusqu’alors invincible à Bollaert, l’OM au Vel et l’ASM par 3 buts sur le Rocher se mette à trembler du fessier par la réception de la fine équipe à Pelissier en Cote d’Azur</p><p><strong><span style="color:#1e73be">Score 2-0</span></strong></p><h3>Lens – Lille</h3><p>Se faire s*cer, c’est pas tromper. Dominer n’est pas gagner. Sinon le Racing Club de Lens caracolerait largement en tête de la ligue des talents ! Des attaquants en feu, des remplaçants plus vicelards que des tauliers de district et un entraîneur suspendu mais aux idées  bien ficelées et voilà Lille, pour les mêmes raisons qui faisaient il y a peu la grande force de Lens, favori de ce derby du Nord chez son voisin lensois en panne de points et de confiance</p><p><strong><span style="color:#1e73be">Score 0-1</span></strong></p><h3>Paris SG – Nantes</h3><p> C’est quand même pas de bol pour l’ex-Niçois, Caennais, Montpelliérain et Toulousain d’ouvrir son compteur but avec son nouveau club dans un stade à huis clos après s’être fait conspuer par ses propres spectateurs. Ce sera probablement – je le souhaite à notre coefficient UEFA en tout cas – plus le cas en 2024 mais nous assisterons samedi soir en prime time à un derby de champions de France qui devra sonner comme une dernière répet avant le choc contre le Bayern pour Paris</p><p><strong><span style="color:#1e73be">Score 3-1</span></strong></p><h3> Troyes – Monaco</h3><p>Alors que l’ESTAC avait la possibilité d’enfoncer définitivement l’AJA, il a eu la bonne idée de la relancer avecun 5e revers de rang et de se priver dans le même temps de Mama Baldé. L’ASM a pu se reposer et n’a donc plus d’excuses M Clement pour ne pas aller chiper la place de dauphin aux Marseillais avant un déplacement de tous les dangers dans l’antre du Stade Rennais également en embuscade. Allez manita des coéquipiers d’Embolo pourquoi pas</p><p><strong><span style="color:#1e73be">Score 0-5</span></strong></p><h3>Reims – AC Ajaccio</h3><p>On enchaîne – et c’est tant pis pour Kool Shen – avec un club qui vient de signer 17 sorties en championnat sans concéder la moindre défaite et végète – et c’est tant pis pour Lacazette – au 10e rang de la ligue des talents. Autant vous dire que le Stade de Reims est grandissime favori, à Delaune, de ce match qui l’opposera à une ACA dont la victoire, méritée, à Troyes n’est qu’une accalmie dans une mer tourmentée (ouais je suis issue d’une famille de pêcheurs)</p><p><strong><span style="color:#1e73be">Score 3-0</span></strong></p><h3>Toulouse – Clermont</h3><p>Autre équipe qui verra les demies, pas comme Paris et pas Marseille (j’aime le sadomasochisme), le TFC. L’avantage quand tu joues la lanterne rouge de ligue 2 en coupe c’est que tu peux bien soigner tes stats de meilleure attaque d’Europe en 2023. Et ce qui tombe bien, c’est que Toulouse peut continuer à surfer sur cette belle dynamique avec la réception d’un CF63 qui ne triomphe plus depuis 6 journées et marque aussi souvent que je m’endors sobre. C’est dire</p><p><strong><span style="color:#1e73be">Score 4-1</span></strong></p><h3>Montpellier – Angers</h3><p>Alors qu’en mars vous vous préparez tranquillement à accueillir les giboulées et le changement d’heure, le MHSC lui se prépare à faire la tournée des popotes les plus éclatées de France et de Navarre. Aussi, avant l’AJA et Clermont, les Palladins reçoivent logiquement la lanterne rouge scoïste pour lancer, j’espère, notre série à 9 points sur le mois à venir synonyme, j’ose à peine l’écrire, de maintien inespéré – côté Montpellier tant Angers est condamné</p><p><strong><span style="color:#1e73be">Score 2-1</span></strong></p><h3>Strasbourg – Brest</h3><p>Quand l’extrême gauche rencontre l’extrême droite, en général ça fait des étincelles (poke Marine, poke JL). Pas dit pour autant que cette opposition entre le 18e et le 15e soit aussi séduisante car le Racing voit le gruppetto revenir a seulement une encablure (vocabulaire marin de circonstances lorsqu’il est sujet de Brest) et que le SB29 est tout pété en déplacement. Comment Chelsea pourrait avoir envie d’acheter un club qui a gagné 4 matchs cette saison en L1 sérieux ?</p><p><strong><span style="color:#1e73be">Score 1-0</span></strong></p><h3>Lyon – Lorient</h3><p>Et dire que le pire Lyon depuis 10 ans peut encore rêver d’accrocher dans 2 matchs un premier trophée...depuis 10 ans et redorer le blason français – comme il l’a toujours fait, et ça me coûte de le dire, sur la scène européenne – en 2024. Sans attaquant sur 2 pattes, ou presque, Jeffinho, Lacazette et Barcola étant incertains, cet OL malade peut finir à 4 pattes après la réception d’un Lorient malade également mais pas à court d’idée</p><p><strong><span style="color:#1e73be">Score 2-2</span></strong></p><h3>Rennes – Marseille</h3><p>Après Carquefou, Quevilly, Andrézieux et autre Canet-en-Roussillon, Marseille s’est fait sortir sans coup férir d’une coupe de France qui lui tendait les bras après l’exploit contre Paris au tour précédent. Ainsi attention pour l’OM de ne pas tout perdre en l’espace d’une semaine puisque le Stade Rennais, s’il venait à triompher, au Roazhon Park dimanche en clôture, reviendrait à pas moins de 3 longueurs de la formation phocéenne </p><p><strong><span style="color:#1e73be">Score 0-0</span></strong></p><p>N'hésitezpasàrejoindreleDiscordLigue1sivoussouhaitezéchangersurLCDEetsurlaLigue1demanièregénérale:<a href="https://discord.gg/wRk9zMeU"><u>Rejoindre le Discord Ligue 1</u></a>
+</p><p>Onperdpaslesbonneshabitudesetonattendcommechaquesemaine<a href="http://www.fantasy-coach.fr/pronostics-ligue-1/">vos petits pronos.</a> </p><h2>Players Picks</h2><h3>Les bons tuyaux:</h3><p>Plus jeune titu à démarrer un match de LDC et nommé pour la pépite de février <strong><span style="color:#1e73be">Zaire Emery</span></strong> (5) 
+</p><p>Si tu mets pas <strong><span style="color:#1e73be">Téji</span></strong> (11,3), t’as rien compris</p><h3>Les pépites:</h3><p>Un des rares défenseurs formés à Paris (FC) à jouer à Paris (SG) : <strong><span style="color:#1e73be">N Mukiele</span></strong><span style="color:#1e73be"> </span>(15,7)
+</p><p>Il est de retour, pour vous jouer un mauvais tour : le toulousain <strong><span style="color:#1e73be">Ratao</span></strong> (12,8)</p><h3>Les incontournables:</h3><p>Passement de jambes, crochet à gauche centre à droite :<strong><span style="color:#1e73be"> Caio Henrique </span></strong>(15,4)
+</p><p>Nice → Leicester → Leeds → City. Encore un qui aurait eu une plus jolie carrière en sens inverse : <strong><span style="color:#1e73be">K Schmeichel </span></strong>(17,4 au repos) est la tête d’affiche du Player Picks LCDE n°26</p><p> t34</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

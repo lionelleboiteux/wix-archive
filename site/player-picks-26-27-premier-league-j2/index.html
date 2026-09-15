@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J2</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Après une première journée déjà pleine de surprises, la Premier League poursuit son chemin ce week-end. Manchester City et Chelsea vont tenter de poursuivre sur leur belle lancée avec des adversaires abordables, Arsenal va faire face à son premier gros test de la saison en se déplaçant sur la pelouse d’Aston Villa, et Manchester United fait face à un autre promu pour se relancer après sa défaite à Hull. Liverpool et Tottenham seront également en quête d’une première victoire..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J2"><figure class="hero"><img src="/media/449182_84708b7780bc4a04b246291474e4bb48_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J2</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 27 août 2026</p><div class="body"><p>Après une première journée déjà pleine de surprises, la Premier League poursuit son chemin ce week-end. Manchester City et Chelsea vont tenter de poursuivre sur leur belle lancée avec des adversaires abordables, Arsenal va faire face à son premier gros test de la saison en se déplaçant sur la pelouse d’Aston Villa, et Manchester United fait face à un autre promu pour se relancer après sa défaite à Hull. Liverpool et Tottenham seront également en quête d’une première victoire, alors que Coventry peut espérer en faire de même en accueillant les Tigers.</p><h2>Les matches de Premier League J2</h2><h3>Crystal Palace-Manchester City</h3><p>Vainqueur difficile sur sa pelouse face à Bournemouth, Manchester City fait cette fois-ci face à un adversaire plus abordable. Crystal Palace a perdu à Everton et devrait faire partie des équipes les plus en difficulté cette saison malgré la présence de Pierre Sage sur son banc. Les Mancuniens devraient s’imposer une fois de plus et continuer sur leur lancée en ce début de saison.</p><p><strong>Prono : Crystal Palace 0-3 Manchester City</strong></p><p><strong>Players Pick </strong>: Jean-Philippe Mateta, Daichi Kamada, Adam Wharton, Erling Haaland, Rayan Cherki, Antoine Semenyo</p><h3>Liverpool-Nottingham Forest</h3><p>Tenu en échec à Newcastle, le Liverpool d’Andoni Iraola va tenter de changer cela dès samedi à Anfield. Nottingham Forest semble toujours aussi fragile que la saison dernière et a perdu sur sa pelouse contre Leeds pour lancer ce nouvel exercice. Sur son terrain, Liverpool devrait parvenir à s’imposer sans trop de problème pour lancer sa saison et décrocher une première victoire.</p><p><strong>Prono : Liverpool 2-0 Nottingham Forest</strong></p><p><strong>Players Pick </strong>: Dominik Szoboszlai, Alexander Isak, Cody Gakpo, Igor Jesus, Morgan Gibbs-White, Liam Delap</p><h3>Coventry-Hull</h3><p>Les deux promus ont connu des fortunes opposées pour leur retour dans l’élite. Lourdement défait sur la pelouse d’Arsenal, Coventry va tenter de lancer sa saison sur sa pelouse. Mais en face, Hull City a réalisé un sacré tour de force à domicile en battant Manchester United, et pourrait réussir à s’appuyer sur la confiance engrangée grâce à ce succès pour enchaîner.</p><p><strong>Prono : Coventry 1-2 Hull</strong></p><p><strong>Players Pick </strong>: Ellis Simms, Matt Grimes, Louma Tchaouna, Mohamed Belloumi, Oli McBurnie, Nobel Mendy</p><h3>Bournemouth-Everton</h3><p>Bournemouth s’est incliné face à Manchester City pour lancer sa saison, mais continue de faire forte impression dans la lignée de sa saison dernière. Les Cherries devraient pourtant avoir fort à faire face à Everton, vainqueur pour lancer le nouvel exercice, et qui semble faire partie des équipes à suivre cette année. Les Toffees pourraient bien réaliser un coup au Vitality Stadium.</p><p><strong>Prono : Bournemouth 1-2 Everton</strong></p><p><strong>Players Pick </strong>: Evanilson, Justin Kluivert, Marcus Tavernier, Thierno Barry, Iliman Ndiaye, Kiernan Dewsbury-Hall</p><h3>Tottenham-Newcastle</h3><p>Pour Tottenham, cette rencontre paraît déjà essentielle pour la suite. Face à une autre équipe en reconstruction, mais qui a largement moins investi cet été, les Spurs visent un premier succès après la claque prise à Brentford. Fort d’un match nul acquis face à Liverpool, les Magpies se sont rassurés et devraient continuer à en tirer profit, même si une victoire semble encore un peu lointaine.</p><p><strong>Prono : Tottenham 1-1 Newcastle</strong></p><p><strong>Players Pick </strong>: Richarlison, Sandro Tonali, Mathys Tel, Anthony Elanga, Harvey Barnes, Sean Steur</p><p>Envoyez nous vos pronos via <a href="https://pronos.fantasy-coach.fr/"><u>le jeu des pronos</u></a></p><h3>Chelsea-Brighton </h3><p><span style="color:#000000">1</span><span style="color:#000000">ère</span><span style="color:#000000"> réussie pour X. Alonso lors du déplacement à Fulham avec un collectif solide et un trio Rogers/Palmer/Pedro qui a donné le tournis à la défense adverse, néanmoins les absences de M. Caicedo et Palestra tout deux des titulaires indiscutables pour plusieurs semaines mettront les blues à rude épreuve face à une équipe de Brighton toujours difficile à jouer et qui sort d’une victoire nette le weekend dernier, en l’absence de Hinshelwood blessé de dernière minute mais qui pourra compter sur des valeurs sûrs comme G. Rutter, L. Dunk,  P. Gross ou encore M. De Cuypers. </span></p><p><span style="color:#000000">Brighton a remporté les 4 dernières confrontations face aux blues. </span></p><p><strong><span style="color:#000000">Prono</span></strong><span style="color:#000000"> : Chelsea 2 – 1  Brighton</span></p><p><strong><span style="color:#000000">Players Picks :</span></strong><span style="color:#000000"> J. Pedro, C. Palmer, M. Rogers, P. Gross, L. Dunk, M. De Cuypers, G. Rutter, D. Gomez, B. Verbruggen</span></p><h3>Sunderland-Fulham</h3><p><span style="color:#000000">Surpris sur la pelouse du promu Ipswich le weekend dernier, les Black Cats retrouvent leur forteresse contre Fulham qui malgré une défaite trop souvent en retard a perdu mais a montré de belles choses contre Chelsea notamment offensivement avec l’impact immédiat de la recrue G. Garcia. </span></p><p><strong><span style="color:#000000">Prono : </span></strong><span style="color:#000000">Sunderland 4 – 2 Fulham </span></p><p><strong><span style="color:#000000">Players Picks : </span></strong><span style="color:#000000">B. Brobbey, E. Le Fée, N. Angulo, T. Hume, R. Roefs, D. Ballard, G. Garcia, O. Bobb, J. King</span></p><h3>Leeds United-Brenford </h3><p><span style="color:#000000">Victorieux en fin de match sur un coup-franc d’A. Stach, Leeds United à une nouvelle fois montrée cette solidité défensive qui leur a permis de se maintenir la saison dernière, face à eux une équipe en feu, Brenford qui est sur 9 buts lors de leurs 2 derniers matchs avec un succès probant face à Tottenham (3-0) malgré un I. Thiago peu inspiré. </span></p><p><span style="color:#000000">Brenford n’a plus gagné à Ellen Road depuis 2015</span></p><p><strong><span style="color:#000000">Prono : </span></strong><span style="color:#000000">Leeds 1 -1 Brenford </span></p><p><strong><span style="color:#000000">Players Picks :</span></strong><span style="color:#000000"> H. Wilson, D. Calvert-Lewin, T. Muhamedovic, J. Justin, I. Thiago, K. Schade, M. Sangaré, D. Ouattara </span></p><h3>Manchester United-Ipswich Town</h3><p><span style="color:#000000">Défait dans un match où ils auront dominé de bout en bout sans trouver la solution, les mancuniens se savent sous pression et devront rectifier le tir face à un autre promu qui quant à lui a su être réaliste pour gagner son 1</span><span style="color:#000000">er</span><span style="color:#000000"> match de la saison face à Sunderland et espère surfer sur cette dynamique. </span></p><p><strong><span style="color:#000000">Prono : </span></strong><span style="color:#000000">Manchester United 3 – 0 Ipswich Town </span></p><p><strong><span style="color:#000000">Players Picks :</span></strong><span style="color:#000000"> B. Fernandes, B. Mbeumo, M. Cunha, H. McGuire, Emersonn, D. Maeda, J. Enciso, L. Davis </span></p><h3>Aston Villa-Arsenal </h3><p><span style="color:#000000">Humiliée lors de son 1</span><span style="color:#000000">er</span><span style="color:#000000"> match, l’équipe de U. Emery devrait en plus faire sans son attaquant historique O. Watkins en route pour l’Arabie Saoudite, son remplaçant T. Abraham et un milieu affaiblie après le rouge de J. Gomes et un E. Konsa qui a signé pour Arsenal.  </span></p><p><span style="color:#000000">Les Gunners quant à eux abordent ce match sereinement après sa victoire maîtrisée contre Coventry, et compte enchaîner un 2</span><span style="color:#000000">nd</span><span style="color:#000000"> succès pour garder la tête du championnat. </span></p><p><strong><span style="color:#000000">Prono </span></strong><span style="color:#000000">: Aston Villa 1 – 3 Arsenal </span></p><p><strong><span style="color:#000000">Players Picks :</span></strong><span style="color:#000000"> E. Buendia, M. Cash, B. Saka, K. Havertz, C. Tzolis, D. Rice, M. Odegaard, Gabriel, D. Raya, R. Calafiori</span></p><p>On oublie pas <a href="https://pronos.fantasy-coach.fr/"><u>le jeu des pronos</u></a></p><p>Bonne chance à tous</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

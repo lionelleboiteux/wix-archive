@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Résultats des ligues Fantasy Coach sur FPL. GW 30-36.</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="On fait un rapide point sur les compétitions Fantasy Coach sur le jeu FPL. Il reste 2 journées pour la saison 2024-2025. En GW37 sont..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Résultats des ligues Fantasy Coach sur FPL. GW 30-36."><figure class="hero"><img src="/media/deb9b2_feccb5ef780b48b2b8b0ab7ac5b439a2_mv2.jpg" alt=""/><div class="scrim"></div><h1>Résultats des ligues Fantasy Coach sur FPL. GW 30-36.</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 16 mai 2025</p><div class="body"><p>On fait un rapide point sur les compétitions Fantasy Coach sur le jeu FPL. Il reste 2 journées pour la saison 2024-2025. En GW37 sont programées la finale du Survivor et les demies-finales de la Cup. La ligue classique et la ligue Challenge sont quasiment jouées. A moins d’un effondrement des leaders ce sera difficile pour les poursuivants de les rattraper.  </p><p>La deadline de la GW37 est ce Vendredi 16 Mai 2025 à 19h00 CET (18h00 BST).</p><h2>La Ligue Classique (code: gpojm8): </h2><img src="/media/deb9b2_397096f2660c4b86ac112db48f5b38fd_mv2.jpg" alt=""/><p><strong>n douglas </strong>a pris le pouvoir en GW32 et depuis il a mis plus de 20pt entre lui et son dauphin. Avec 22pts d'avance à l'aube de la 37e joournée de Premier League, <strong>Valentin Brahier</strong> (2e) et <strong>Wan Fayhsal</strong> (3e) devront espérer un gros coup de moins bien du leader pour se faire couronner.</p><p>L’écart dans le top 10 est désormais de 72pts.</p><p><strong>Arthur Simmonet</strong>, champion 2021, 2022 et 2024, sait depuis longtemps qu'il a perdu son titre. Il prépare la saison prochaine avec entrain puisqu'il a progressé de 116 places en 7 journées. Il est 212e et se rapproche à 9pts du top 200 de la ligue.</p><p><strong>Julien Cazenave</strong>, le vainqueur de la Cup 2024, à l'inverse est en train de rater sa fin de saison. Il glisse de 2 places et sort du podium qu'il a trusté pendant la majorité des 10 derniers mois. Il est 4e à 10pts de Wan.</p><p><strong>Asare Daniel</strong>, vainqueur de la Winter Cup 2024, s'est repris depuis la GW29. Il gagne 7 places, occupe le 25e rang du classement général et il est en course pour remporter une 2e coupe lors de la même saison.</p><p><strong>Michael Akins</strong>, le vainqueur du Survivor 2024, lui aussi a perdu son titre, mais il n'a pas laché au classement de la ligue classique. Il gagne 14 places pour se classer 16e.</p><h2>Fantasy Coach’s FPL Survivor (code: gpojm8) </h2><p>En 7 journées les éliminations du Survivor n'ont cessé d'augmenter. 22 managers éliminés en GW30, 23 en GW31, 24 lors des GW32 et 33, 25 en GW34, 13 en GW35 et 8 en GW36.</p><p><strong>Michael</strong> <strong>Akins</strong>, le champion 2024, s'est débrouillé comme un chef. Il n'a chuté que lors de la GW35 où il a raté le cut de seulement 2pts.</p><p>Les meilleurs scores lors des 7 dernières journées ont été réalisés de la J25 est réalisé par mes soins avec 119pts. Celui de la GW26 est réalisé par:</p><p><strong>Raccoon</strong>, l'un des piliers de Fantasy Coach, avec 75pts en GW30. Il sera éliminé en GW34.</p><p><strong>Eric Teh </strong>avec 76pts en GW31. Il sera aussi éliminé en GW34.</p><p><strong>Ajisafe Seyi</strong> avec 104pts en GW32. Il sera éliminé la journée suivante.</p><p><strong>Valentin Brahier </strong>avec 93pts en GW33. C'est l'un des survivants qui participera à la finale en GW37. Comme il est le mieux classé des 4 derniers managers, il est d'office favoris de cette finale.</p><p><strong>Mordyn Doubell</strong> avec 100pts en GW34. Il subira l'élimination dès la journée suivante.</p><p><strong>Valentin Brahier</strong> fait aussi le meilleur score de la GW35 avec 63pts.</p><p><strong>Wan Fayhsal </strong>réalise le meilleur score de la dernière journée avec 76pts. Il arrive en finale comme le principal rival de Valentin.</p><p><strong>Raphaël Mallard</strong> qui a longtemps résisté à l'élimination nous a quitté en GW32.</p><p>Au bout de 36 journées de compétition, les 4 finalistes du Survivor 2025 sont connu. <strong>Valentin Brahier, Wan Fayhsal, Abdelhadi Aziz</strong> et <strong>Talha Saeed</strong> se disputeront le titre lors de la GW37. Cette saison Talha est le moins bien classé de ce quatuor. Il est quand même seulement 29e de la ligue classique.</p><p>Les moyennes de points de la ligue entre la GW30 et la GW36 sont:</p><p>48.4pts (GW30)</p><p>38.6pts (GW31)</p><p>65.5pts (GW32)</p><p>61.2pts (GW33)</p><p>56.6pts (GW34)</p><p>44.4pts (GW35)</p><p>46.4pts (GW36)</p><p>Le tableau des résultats est à retrouver via ces liens:</p><p>Pour la <a href="https://docs.google.com/spreadsheets/d/1g8UuxUmB40NzUUTOmy1cVIhpg0TLuP5vCgzDsoNVk_c/edit?usp=drivesdk"><u>GW30</u></a>.</p><p>Pour la <a href="https://docs.google.com/spreadsheets/d/1SQwJGdk2uAoyb2V6SzEX6q8sf7Iy3Bap9RHA-jX-ftw/edit?usp=drivesdk"><u>GW31</u></a>.</p><p>Pour la <a href="https://docs.google.com/spreadsheets/d/1ipQDbgfSkzLqapQdkDAIoGeQfvSlIkZHxHNN_laPeuc/edit?usp=drivesdk"><u>GW32</u></a>.</p><p>Pour la <a href="https://docs.google.com/spreadsheets/d/1yHWZ2eday9QhaLIIm2PgGLuv9VHR8ROwUkM4vKoV2tY/edit?usp=drivesdk"><u>GW33</u></a>.</p><p>Pour la <a href="https://docs.google.com/spreadsheets/d/1k0fS-2v0QoV0n8iTwOnVhEWubZ2IiLmzURt5sAJLQns/edit?usp=drivesdk"><u>GW34</u></a>.</p><p>Pour la <a href="https://docs.google.com/spreadsheets/d/1w2tifLFldvcu0EMK6B-GiYRgpwruxYrsVdcPhuetosU/edit?usp=drivesdk"><u>GW35</u></a>.</p><p>Pour la <a href="https://docs.google.com/spreadsheets/d/1lq6opbv4Ytsn58mayvgnkF30Gw4xhiPgwCxAwYxzApg/edit?usp=drivesdk"><u>GW36</u></a>.</p><p><u>Les scores de qualification minimum:</u> </p><p><em>GW</em> <em>1</em>: 36pts					<em>GW 20</em>: 47pts</p><p><em>GW</em> <em>2</em>: 41pts GW 20: 47pts		<em>GW 21</em>: 43pts (1261pts OP)</p><p><em>GW 3</em>: 38pts (159pts OP)		<em>GW 22</em>: 30pts (1320pts OP)</p><p><em>GW 4</em>: 24pts					<em>GW 23</em>: 49pts (1375pts OP)</p><p><em>GW</em> <em>5</em>: 38pts (275pts OP)		<em>GW 24</em>: 90pts</p><p><em>GW</em> <em>6</em>: 26pts					<em>GW 25</em>: 68pts (1730pts OP)</p><p><em>GW 7</em>: 25pts (428pts OP)		<em>GW 26</em>: 61pts (1695pts OP)</p><p><em>GW 8</em>: 17pts (480pts OP)		<em>GW 27:</em> 45pts (1753pts OP)</p><p><em>GW 9</em>: 39pts (471pts OP)		<em>GW 28:</em> 51pts</p><p><em>GW 10</em>: 22pts (527pts OP)		<em>GW 29:</em> 32pts (1791pts OP)</p><p><em>GW 11</em> : 28pts (581pts OP)		<em>GW 30:</em> 41pts (1843pts OP)</p><p><em>GW 12</em>: 28pts (658pts OP)		<em>GW 31:</em> 30pts (1945pts OP)</p><p><em>GW 13</em>: 40pts (754pts OP) 		<em>GW 32:</em> 70pts</p><p><em>GW 14</em>: 34pts (789pts OP) 		<em>GW 33:</em> 64pts (2143pts OP)</p><p><em>GW 15</em>: 30pts (840pts OP) 		<em>GW 34:</em> 77pts</p><p><em>GW 16:</em> 29pts (887pts OP) 		<em>GW 35:</em> 49pts</p><p><em>GW 17</em>: 38pts (948pts OP) 		<em>GW 36:</em> 64pts</p><p><em>GW 18</em>: 40pts (989pts OP) </p><p><em>GW 19</em>: 51pts (1168pts OP) </p><h2>Ligue H2H </h2><img src="/media/deb9b2_b36f2dc93f154cc8b6176b01a1747fdf_mv2.jpg" alt=""/><p><strong>Tom Nettleton </strong>ne doit plus gagner qu'un match pour être assuré de gagner la ligue H2H. Avec 3 points d'avance sur <strong>Abdelhadi Aziz</strong> et <strong>Nicolas Pluchon</strong>, et un score total largement à son avantage, Tom n'a plus qu'un succès à assurer pour être champion.</p><h2>Fantasy Coach's FPL Cup (code gpojm8)</h2><p><strong>Asare Daniel </strong>avait remporté brillement la Winter Cup en Décembre dernier. Il montre qu'il est un spécialiste de coupe puisqu'il atteint la demie-finale de la FPL Cup de Fantasy Coach. Il a l'expérience avec lui donc. Mais il va affronter le dauphin de la ligue classique <strong>Valentin Brahier</strong>. Valentin peut réaliser un véritable exploit et gagner les 3 titres de fin de saison (ligue, Survivor et FPL Cup). On se prépare donc à assister à une demie explosive.</p><p>L'autre demie-finale opposera <strong>Gio Alarcon </strong>à <strong>Amr Azzam</strong>. Gio a déjà connu les joies du top 1K deux fois. Il est aussi 45e du classement de la ligue classique, 82 places devant Amr. Ce dernier part donc largement outsider. </p><h2>Ligue FPL Challenge (code 5n6fr5) </h2><p>Les challenges des gameweeks 30 à 36 ont été remportés par:</p><p><strong>Sebastian Przybylowski</strong> (GW30 &quot;Fortified Front&quot;, GW34 &quot;Nottingham Forest v. Brentford&quot;, et GW36 &quot;Liverpool <a href="http://v.Ar"><u>v.Ar</u></a>senal&quot;).</p><img src="/media/deb9b2_b3b5e85bf19b427d87764f3f3f45f15e_mv2.jpg" alt=""/><img src="/media/deb9b2_8efc1da844eb49cfb58daf6d5ab34042_mv2.jpg" alt=""/><img src="/media/deb9b2_dc3b6f66353948dfa8e8efd33712d68f_mv2.jpg" alt=""/><p><strong>Oluwaseun Ayokunle</strong> (GW31 &quot;Park The Bus&quot;).</p><img src="/media/deb9b2_b7a6e28856bc462d8e817ddd5c310c6c_mv2.jpg" alt=""/><p><strong>Luke Pierce </strong> et <strong>Matthieu Moreira-Bessa </strong>(GW32 &quot;All-Rounder&quot;).</p><img src="/media/deb9b2_1dda0e57a91e4a33a3212240c5c5cb56_mv2.jpg" alt=""/><p><strong>Sylvester Eguaomoh </strong>(GW33 &quot;West London Derby).</p><img src="/media/deb9b2_942fea0f7091437fbb60e27d9e849344_mv2.jpg" alt=""/><p><strong>Martian Man</strong> (GW35 &quot;Brighton v. Newcastle&quot;).</p><img src="/media/deb9b2_fb1caf82b740455b995e9df853b39018_mv2.jpg" alt=""/><img src="/media/deb9b2_f9170525ded347b0b4c2f6f2b7d06370_mv2.jpg" alt=""/><p>L'évènement &quot;7-A-Side&quot; qui se déroulé entre la GW29 et la GW32 a été remporté par <strong>Whvy Romadhona</strong>.</p><img src="/media/deb9b2_571beb52268d439e98a1391d71e8862c_mv2.jpg" alt=""/><p>L'évxènement &quot;Race for Europe&quot; est assez largement mené par la star <strong>Sebastain Przybylowski</strong>.</p><img src="/media/deb9b2_f58214eac1a94479a786eded790fb72b_mv2.jpg" alt=""/><p><strong>Sebastian Przybylowski</strong>, en partie grâce à sa fin de saison canon, remportera sêrement la première édition de la ligue FPL challenge de Fantasy Coach. Il a 36pts d'avance sur <strong>Michael De</strong> <strong>Salazar </strong>à 2 challenges de la fin. <strong>Aled Wilcox</strong>, sur la dernière marche du podium, est encore plus loin.</p><p>En 7 journées j'ai perdu 7 places.<span style="color:#0D2123"> Je me retrouve 24e en ayant raté complètement le challenge de la GW35.</span></p><p><strong>Zakaria El Manyani</strong> qui a gagné l’évènement « Goal Diggers » m'imite et se classe 17e.</p><p><strong>Zubail Kaweesi</strong>, vainqueur de l’évènement « Festive Fixtures », gagne 5 places et se classe 6e.</p><p><strong>Andrew Priestley</strong> le vainqueur de l’événement « Transfer Window Special » gagne 2 places pour atteindre le 7e rang de la ligue.</p><p><strong>Luke Pierce</strong> le vainqueur de l'évenement &quot;Assistant Manager series&quot; est 10e du classement général.</p><p>Whvy Romadhona le vainqueur de l'évènement &quot;7-A-Side&quot;, prend la 25e place de la ligue FPL Challenge. </p><p>En GW37 se déroulera le dernier challenge de l'évènement &quot;Race for Europe&quot;. Ce sera &quot;Arsenal v. Newcastle&quot;. Il vous faudra sélectionner 5 joueurs avec un budget illimité. Les Gunners et les Magpies verront leurs points doublés.  </p><p>Bonne chance pour cette avant dernière gameweek de la saison. J'essaierai de vous tenir au courant, via nos comptes X et BlueSky, du déroulement de la finale du Survivor 2025. Je ferai aussi un point régulier sur les demies-finales de la FPL <u>Cup.</u></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

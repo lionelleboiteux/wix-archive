@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Clap de fin pour Nagelsmann</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Clap de fin pour Julian Nagelsmann au FC Bayern, Thomas Tuchel en approche."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Clap de fin pour Nagelsmann"><figure class="hero"><img src="/media/3448f3_d44384e910c44f27a7bb37eeb0d5d55f_mv2.jpeg" alt=""/><div class="scrim"></div><h1>Clap de fin pour Nagelsmann</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 24 mars 2023</p><div class="body"><p>Championnat à nul autre pareil, son club phare le FC Bayern Munich  a profité de la trêve internationale pour mettre fin au contrat de son entraîneur principal.</p><p>Julian Nagelsmann débarqué, Thomas Tuchel est en approche.</p><p>Le choc du 1er avril prochain n'en devient que plus épicé puisque Tuchel, ex-entraîneur du Borussia, est parti en très mauvais termes des Marsupiaux. Les retrouvailles s'annoncent mémorables.</p><p>Trop arrogant et surtout trop prétentieux à vouloir incarner seul ce club si puissant, le Julian, qui a appris la nouvelle pendant qu'il était au ski en Autriche alors que son équipe s'entraînait, va pouvoir méditer sur le pouvoir des anciens dans un vestiaire. Probablement, une donnée aussi importante que celle qui consiste à maîtriser tactiquement n'importe quel adversaire rencontré. En tout cas pour qui veut manager un club aussi séduisant que le FC Bayern.</p><p>Je me demande si le Juju n'a pas été un pion dans une lutte de pouvoir inhérente à un club aussi important que peut l'être le Bayern. Certainement pas un enfant de chœur mais pas responsable de tous les maux bavarois. </p><p>A l'image de sa reprise en main musclée du vestiaire bavarois, qui de toute façon n'a pu se faire qu'avec l'accord de sa direction, elle-même également en mode charge médiatique XXL contre un Neuer, devenu aussi subitement dérangeant que skieur soudainement hors piste au yeux de son employeur .</p><p>Son management ne tenant pas suffisamment compte des hommes, de la gestion de leur ego et de leurs histoires communes : ainsi, Nagelsmann a éjecté sans ménagement l'ex-entraîneur des gardiens Tapalovic pendant l'absence de Neuer pour signer quelques jours plus tard son pote Rechner, directement débauché d'Hoffenheim où ils avaient travaillé ensemble mais surtout il a sous estimé le poids d'un Müller qui a publiquement dit tout le bien qu'il pensait d'un Tapalovic. Révélant les fractures ouvertes d'un vestiaire où seul Kimmich, parmi les tauliers, semblait rouler pour le Mozart du coaching.  Le brassard au bras pouvant peut-être aussi expliquer cette fidélité pas vraiment désintéressée.</p><p>Puis, Müller renvoyé sur le banc un peu plus souvent que d'habitude n'a plus rien dit. En tout cas, médiatiquement. Curieux maintenant d'entendre sa déclaration quant au départ de son désormais ex-entraîneur. A goûter sans modération, comme une mousse à l'Oktoberfest.</p><p>Enfin, un dernier tacle appuyé mais avec les deux pieds non décollés du sol, à l'encontre de Brazzo, l'emblématique directeur sportif et en même temps membre du board bavarois. </p><p>Prolongé contractuellement lors de la première partie de saison, de manière beaucoup trop hâtive selon moi, Hasan Salihamidzic est la probable clef de bonne compréhension de ce qui se joue en coulisses. S'il a été un fidèle coéquipier d'Oliver Kahn, désormais président du directoire du club numéro un d'Allemagne, il est surtout responsable de recrutements  devenus aussi dispendieux qu'insuffisants par rapport aux exigences sportives du Bayern. Récemment, ses luttes de pouvoir incessantes pour contrôler la gestion sportive et technique du club avaient déjà conduit au départ en 2021 de l'entraîneur précédent Hansi Flick, coach pourtant auréolé d'un remarquable sextuplé historique en 2020 après avoir joué les pompiers de service (Championnat, Coupe nationale, Ligue des Champions, Supercoupe de l'UEFA, Supercoupe nationale, Mondial des clubs). Un entraîneur qui ne voulait plus collaborer avec le Brazzo avec qui, et de notoriété publique, les relations étaient plus que difficiles.</p><p> Déjà.</p><p>Le duo Kahn-Salihamidzic recrutant alors pour 25 millions d'euros son successeur : Julian Nagelsmann.</p><p>Il est vrai que l'argent achète beaucoup de choses, et le Bayern est un club riche.</p><p>Pas sûr toutefois que le volcanique Tüchel soit un béni oui-oui. Le FC Hollywood a encore de beaux jours devant lui. Pour notre plus grand plaisir.</p><p> A suivre.</p><img src="/media/3448f3_d44384e910c44f27a7bb37eeb0d5d55f_mv2.jpeg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

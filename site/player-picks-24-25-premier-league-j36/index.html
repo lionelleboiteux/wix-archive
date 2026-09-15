@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J36</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="La J36 de Premier League déboule ce weekend et il y a du croustillant. Certes le champion et les relégués sont connus, mais la lutte pour..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J36"><figure class="hero"><img src="/media/449182_06a0d08ab78d4afdbc57ff4e687459f4_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J36</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 9 mai 2025</p><div class="body"><p>La J36 de Premier League déboule ce weekend et il y a du croustillant. Certes le champion et les relégués sont connus, mais la lutte pour la Champions League est à son paroxysme. Liverpool reçoit Arsenal et Newcastle reçoit Chelsea dans deux matchs au sommet qui sont sûrs d'avoir un impact sur le classement final.</p><h2>Le tour d'horizon</h2><p>Ça commence à sentir le soufre chez nos amis les Gunners. Depuis la célèbre victoire contre le Real, rien ne va plus… Une seule petite victoire contre un Ipswich relégué, un nul et surtout trois défaites d'affilée. Avec encore trois matchs à venir et donc 9 points toujours en jeu, mathématiquement les gunners pourraient se retrouver septième de Premier League et pas assurer de jouer la Champions League la saison prochaine. </p><p>La dernière chose dont les hommes d'Arteta ont besoin maintenant c'est d'aller à Anfield pour jouer contre le champion et leur faire une garde d'honneur. Surtout que les Reds ont perdu contre Chelsea en J35, ils voudront faire une belle fête pour leurs fans à Anfield. J'ai un mauvais pressentiment sur ce match… </p><p>Chelsea qui pour l'instant pointe à la 5ème place se déplace cette fois-ci à Newcastle qui est juste au-dessus, à égalité de points, à égalité en différence de buts mais avec plus de buts marqués (même si forcément ils ont aussi plus de buts encaissés, par définition)… on est à un cheveu de différence surtout que Chelsea a l'avantage alphabétique si on devait en arriver là. Pour moi Les Magpies auront l'avantage de jouer à la maison et devraient donc se rapprocher du trio de tête. Tout ça risque bien d'être encore plus serré la semaine prochaine. </p><h2>Mes Pronos pour la J36 de Premier League:</h2><p>Southampton 0 - 4 Man City</p><p>Fulham 2 - 1 Everton</p><p>Wolves 2 - 0 Brighton</p><p>Ipswich Town 0 - 3 Brentford</p><p>Bournemouth 1 - 2 Aston Villa</p><p>Newcastle 2 - 1 Chelsea</p><p>Man United 1 - 1 West Ham</p><p>Nottm Forest 2 - 0 Leicester City</p><p>Tottenham 0 - 1 Crystal Palace</p><p>Liverpool 1 - 1 Arsenal</p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p>J'ose à peine les mettre dans ce Player Picks parce qu'ils me déçoivent à chaque fois que je les mets, mais les Citadins semblent faire une bonne fin de saison et vont même être un concurrent très sérieux pour la place de Dauphin. On met en avant <strong>Marmoush</strong> (£7.6M), <strong>KdB</strong> (£9.5M), <strong>Gvardiol</strong> (£6.4M) et pour les plus aventureux <strong>Haaland</strong> (£14.8M) qui n'est pas encore rentré sur le terrain après sa blessure mais était sur le banc en J35… 10 mins contre les Saints devraient suffire pour mettre 2 buts au Cyborg… </p><p>Brentford joue Ipswich cette semaine, puis Fulham puis Wolves pour finir la saison. Je pense qu'il serait judicieux de prendre quelques Bees dans vos Teams <strong>Wissa</strong> (£6.7M), <strong>Mbeumo</strong> (£8.2M) voire même <strong>Schade</strong> (£5.1M) dans cet ordre me semblent les meilleurs picks. </p><p><strong>Watkins</strong> (£8.9M) devrait avoir un boulevard maintenant que Rashford est blessé, surtout avec un match à la maison contre Bournemouth. Je pense qu'il aura à cœur de faire une belle perf avec le mercato qui commence à frémir doucement en arrière plan. </p><h2>Assistant Manager</h2><p>Si vous n'avez toujours pas joué votre assistant Manager, ce n'est plus le moment de faire le malin, on met <strong>Pep</strong> et on se relaxe.</p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Cologne, l’équipe à battre</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="Cologne
+2.Bundesliga"/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Cologne, l’équipe à battre"><figure class="hero"><img src="/media/3448f3_e2130f58ce1a4c7da4e1714044c5fb65_mv2.webp" alt=""/><div class="scrim"></div><h1>Cologne, l’équipe à battre</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 12 août 2024</p><div class="body"><img src="/media/3448f3_e2130f58ce1a4c7da4e1714044c5fb65_mv2.webp" alt=""/><h2>1. FC Köln</h2><p>Relégué de Bundesliga et encore interdit de recrutement jusqu’au 1er janvier prochain, Cologne s’apprête à vivre une saison compliquée à l’étage inférieur. De celle qui marque un club.</p><p>En finissant avant-dernier (27 points à 6 points du barragiste avec un pauvre bilan de 5v, 12n, 17), le FC Cologne a logiquement mis fin à une triste saison où même le changement d’entraîneur (<strong>Timo Schultz</strong> remplaçant <strong>Steffen Baumgart</strong>) n’a eu aucun effet positif sur une équipe d’une rare faiblesse offensive (28 buts en 34 matchs, plus mauvaise attaque) et incapable de gagner suffisamment pour se sauver de la noyade (3 petites victoires en 2024).</p><p>Dans ce crash quasi industriel pour un club jouant encore la Coupe d’Europe la saison précédente suite à sa belle septième place obtenue en Bundesliga lors de l’exercice 2021-2022, un seul homme surnage de ce marasme sportif : l’impayable <strong>Christian Keller</strong>, directeur général des sports de son état.</p><p>Car si l’autrichien<strong> Gerhard Struber</strong>, passé notamment par la galaxie Red Bull, est le nouvel entraîneur puisque le fusible Schultz a été bien gentiment invité à aller voir ailleurs, monsieur le directeur lui est toujours en poste. Pas vraiment submergé par les remords et la prise de responsabilités alors qu’il est directement responsable du transfert mis en cause par les instances, directement en charge des dernières campagnes de recrutement bien foireuses et directement en charge du choix des entraîneurs. A part ça tout va bien pour ce brave homme, tant qu’il sera dans les parages, difficile de croire que les choses iront réellement mieux. Sauf à mettre un cierge à la Cathédrale.</p><img src="/media/3448f3_fc150f850e80409bba7815cbbdd51aa0_mv2.jpeg" alt=""/><p>Alors que l’on pouvait craindre une hémorragie de départs au niveau de l’effectif, seuls quelques éléments sont partis : Jeff Chabot à Stuttgart (vraie perte), <strong>Davie Selke</strong> à Hambourg (pour renforcer la concurrence, sympa), <strong>Benno Schmitz</strong> en fin de contrat aux Grasshoppers Zurich (en bout de course, il avait perdu sa place, <strong>Faride Alidou</strong> à l’Eintracht Francfort (un retour de prêt) et l’espoir <strong>Justin Diehl</strong> également à Stuttgart (il avait la direction sportive dans le nez et ne voulait pas prolonger donc longtemps borduré et envoyé en réserve, difficile pour lui de rester alors qu’il était en fin de contrat).</p><p>Heureusement, le centre de formation reste de qualité et certains retours de prêt viennent améliorer l’équipe : <strong>Jonas Urbig</strong> que l’on présente comme un espoir national au poste de gardien de but (malgré sa boulette fatale en ouverture contre le HSV) et <strong>Tim Lemperle</strong> qui a pu se développer à Greuther Fürth (6 buts et 5 passes) apporteront une expérience réelle de la 2.Bundesliga à un effectif qui reste sur le papier le meilleur de la division.</p><img src="/media/3448f3_6926576471754510bdf499c39367efa1_mv2.jpeg" alt=""/><p>Car avec <strong>Timo Hübers</strong> (défenseur central désigné nouveau capitaine), <strong>Max Finkgräfe</strong> (révélation au poste de latéral gauche), les milieux <strong>Dejan Ljubicic</strong>, <strong>Eric Martel</strong> et <strong>Florian Kainz</strong> ainsi que les attaquants <strong>Luca Waldschmidt</strong> et <strong>Mark Uth</strong>, Gerhard Struber garde à sa disposition quelques bons joueurs de football à même de former une ossature intéressante. L’objectif assigné est la montée. Un impératif autant sportif que économique pour un club qui devrait évoluer au premier niveau du football professionnel allemand.</p><p>Attention aux blocs bas qui ne manqueront pas de se présenter à une équipe qui était en panne offensive et créative la saison dernière. Sans compter les impondérables comme les blessures qui ont déjà frappé comme Kainz (cheville), Finkgräfe (genou, opération, date de retour inconnue) ou <strong>Jacob Christensen</strong> (saison finie, ligament croisé).</p><p>Malgré une campagne de préparation excellente (5v, 1n), la défaite inaugurale enregistrée à domicile face à Hambourg, un concurrent direct à la montée, est venue rappeler toute la difficulté qu’il y aura à mâter l’adversité de ce championnat. Et j’ai comme dans l’idée que mon nouvel ami sous-estime grandement le niveau de cette Zweite Bundesliga. Dommage pour l’Effzeh, ce grand club qui mérite le meilleur.</p><p><strong><em>Pronostic 1er</em></strong></p><img src="/media/3448f3_661e04f7e3e7441e972d5844bff0262d_mv2.jpeg" alt=""/></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

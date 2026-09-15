@@ -1,0 +1,96 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Pick, J12 de Premier League.</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="L'apothéose Liverpool-Manchester City permet de nous projeter illico sur le Player Pick, J12 de Premier League. En l'absence des Sky..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Pick, J12 de Premier League."><h1 class="title-only">Player Pick, J12 de Premier League.</h1><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 17 octobre 2022</p><div class="body"><p>L'apothéose Liverpool-Manchester City permet de nous projeter illico sur le Player Pick, J12 de Premier League. En l'absence des Sky Blues et d'Arsenal, qui constituent les équipes qui fournissent une bonne partie des effectifs FPL, les managers qui ont préparé cette journée amputée vont pouvoir faire des écarts. </p><p>Le seul choc de Titans de ce milieu de semaine est l'affrontement entre les Red Devils et les Spurs. Ces derniers pourraient faire un rapproché sur leurs rivaux du Nord de Londres et les mettre sous pression. A bien y regarder c'est probablement le seul enjeux de cette J12. Liverpool devra aussi confirmer son exploit de dimanche soir. La réception de Hammers convalescents est une bonne opportunité de continuer l'opération résurecction entamée à Glasgow. </p><p>Avec ce court intermède, je vous invite à vous rendre sur notre Discord (<a href="https://discord.com/channels/737355915686182943/737442472837513287">https://discord.com/channels/737355915686182943/737442472837513287)</a> pour discuter de votre stratégie pour naviguer les écueils de cette journée tronquée. </p><h2>Les matchs de la journée  </h2><h3>Brighton - Nottingham Forest: 3-0 </h3><h3>Crystal Palace - Wolverhampton: 1-0 </h3><h3>Bournemouth - Southampton: 1-1  </h3><h3>Brentford - Chelsea: 0-3 </h3><h3>Liverpool - West Ham: 2-2 </h3><h3>Newcastle - Everton: 1-0 </h3><h3>Manchester United - Tottenham: 1-2 </h3><h3>Fulham - Aston Villa: 1-0  </h3><h3>Leicester - Leeds: 2-3 </h3><h2>Player Picks </h2><p>Les petits malins qui ont gardé leur Wild Card jusqu'ici vont pouvoir subir cette J12 en sachant qu'ils vont attaquer comme des morts de faim les 4 journées d'ici à la coupe du Monde. Un &quot;confort&quot; que les autres managers aurainet bien aimé avoir. Après il ne faut pas trop paniquer. Les journées de milieu de semaine sont souvent compliquées pour tout le monde. Les créateurs de contenus FPL qui sévicent sur les différentes plateformes s'attendent à une journée avec peu de points. Mais en faisant un pari avisé sur LE joueur qui va faire le seul gros score, les progrès dans les classements peuvent être exceptionnel. Ce sera encore plus vertigineux si ce joueur est votre capitaine. Donc réfléchissez bien lors de vos transferts et lors du choix si important de votre capitaine. </p><h3>Les incontournables : </h3><p><strong>Toney (£7.3M).</strong> Les fans des 3 Lions réclament à corps et à cri à Southgate d'emmener le buteur des Bees au Qatar (en doublure d'un de nos autres incontournables). Avec 6 buts lors des 5 dernières journées, 44% des buts de son équipe, les pénalties et l'assurance de joueur 90min à chaque match, Toney est l'archétype de l'incontournable. </p><p><strong>Salah (£12.7M)</strong>. La forme est temporaire, le talent est éternel. En souffrance depuis la double défaite face au Sénégal de Mané en début d'année, le petit pharaon est en train de revenir sur le devant de la scène. C'était très attendu par les managers FPL car s'il redevient le Salah du début de saison dernière, les choix du capitanat pourraient être plus différenciants que depuis le début de saison où Haaland écrase tout.Toujours très performant dans les xG (expected goals), son compteur but ne reflète pas encore ce qui est attendu de lui. Son but vaiqueur contre City et son recentrage tactique va beaucoup aidé l'égyptien. </p><p><strong>Kane (£11.4M).</strong> Il marque à chaque journée. Certe les Spurs ne développent pas un jeu sexy et spectaculaire. Ils font dans l'efficace. Avec la machine à marquer qu'est Kane l'efficacité est toujours au RDV.   </p><p><strong>Mitrovic (£6.7M).</strong> Comme Kane et Toney, le Serbe est assuré de joué 90min, il tire les pénalties et c'est le point focal de l'attaque de son équipe. Contre un Villa catastrophique, Mitro est vraiment un pick intéressant. </p><h3>Les bons tuyaux : </h3><p><strong>Trippier (£5.6M)</strong>. Il a fêté sa dernière clean sheet avec les managers FPL sur Twitter (<a href="https://twitter.com/trippier2/status/1581670746350571521">https://twitter.com/trippier2/status/1581670746350571521</a>). Au delà de cet aspect, le défenseur des Magpies soigne ses xGI's (expected goal involvments). Entre la J6 et la J11 il a créé 17 chances dont 3 grosses occasion (meilleur défénseur de PL sur ces stats...et de très loin) et son xGI est plus du double de son poursuivant. Il est largement au dessu de tous.  </p><p><strong>Zaha (£7.5M)</strong>. Troll en chef de la FPL, c'est quand on a tous besoin de lui, que l'Ivoirien décide d'être discret. Son seul attrait est qu'il tire les pénalties des Eagles...et ces derniers temps les arbitres sont généreux. Zaha est toujours un pick compliqué à cerner et il faut une certaine chance pour le posséder quand il fait ses gros scores. </p><p><strong>Trossard (£6.9M).</strong> Un match contre la plus mauvaise équipe du championnat, un prix relativement abordable font de Trossard une des stars FPL de cette J12. Difficile de lui faire confiance après 2 matchs anonymes suivant son chef d'oeuvre liverpuldien. Contre une équipe qui concède énormément d'occasion et avec le public de l'Amex Stadium à fond derrière les Seaguls, il y a quand même beaucoup de chance pour que les points FPL se matérialisent. </p><p><strong>Mount (£7.7M).</strong> Le jeune anglais a démarré tous les matchs (Premier League et Champions League confondues) depuis l'arrivée de Potter pour 2 buts et 2 passes dé en championnat. Mount fait souvent ses points sur une courte période avant de rester muet pendant de longues périodes. C'est peut être le dernier match de son hot streak automnale. Il constitue donc un pari intéressant pour ceux qui utilisent leur Wild Card en J13 et qui pourront se débarraser facilement du meneur des Blues. </p><h3>Les pépites </h3><p><strong>Rodrigo (£6.3M, 6.3% TSB) / Bamford (£7.2M, 0.4% TSB).</strong> C'est compliqué pour Leeds en ce moment mais avec les 2 prochains matchs contre Leicester et Fulham, les 2 attaquants pourraient revenir au premier plan et se rappeler à nos bons souvenirs. Ces pick représentent plus un voeu pieux qu'autre chose mais sur une journée tronquée comme la J12, sur un malentendu ça peut marcher. </p><p><strong>Solanke (£5.8M, 3.2% TSB).</strong> Comme pour Mount, cette J12 représente peut être le dernier match de la bonne période de l'ancien Reds. Avec 3 passes dé et un but lors des 2 derniers match, Solanke représente un bon differential à moindre coût. Les Cherries sont dans une meilleure phase depuis le changement d'entraîneur. <strong>Billing (£5.3M, 1.5% TSB)</strong> profite aussi de ce changement qui apporte une touche plus offensive à Bournemouth (3 buts et une passe dé lors des 5 derniers matchs). Après ces joueurs ne sont pas simples à intégrer dans des lignes FWD et MID qui sont déjà bien fournies. </p><p><strong>Guéhi (£4.3M, 3.1% TSB) / Andersen (£4.5M, 3.1% TSB).</strong> Contre la pire attaque du championnat, la défense des Eagles devrait être plutôt tranquille. Peu de choses différencient les 2 centraux donc selon le budget que vous voulez consacrer faites votre choix. Adersen pose peut être plus de menaces sur les corners offensifs. </p><p><strong>Kepa (£4.4M, 1.8% TSB).</strong> Sous Potter la défense de Chelsea est un champs de mine. Seul Kepa le keeper semble être une constante dans les compos de l'entraîneur anglais. Impressionnant contre Villa (spécialement son triple arrêt), le jeune espagnol pourrait revenir en haut de l'affiche grâce à son jeu au pied qui est bien supérieur à Mendy. Potter demandant de repartir proprement de derrière cette qualité peut permettre à Arrizabalaga de conforter sa place de numéro un. </p><p>Avec l'absence des joueurs d'Arsenal et nos experts pouvaient se permettre d'être inventifs dans leurs conseils de capitanat et de pépite. Sans se concerter ils nous donnent exactement les mêmes noms. Peut être un signe que ces 2 noms peuvent être les héros de la J12. </p><p>Pour rappelle les experts sont: </p><p>Arthur: double vainqueur de la ligue Fantasy Coach lors des 2 dernières saison en battant à chaque fois le record de point. </p><p>Rwano: vainqueur de la Cup fantasy-coach.fr et troisième de la ligue la saison dernière. Comme Arthur il participe régulièrement aux discussions sur le Discord FPL. </p><h3>Arthur </h3><p><strong>Capitaine: Salah (31% TSB) : </strong>Pas de Haaland cette GW, on va enfin pouvoir faire des différences avec notre choix du capitaine. Ce sera Salah pour moi malgré sa méforme en championnat on espère qu’il se retrouve après sa bonne performance en ligue des champions et son match contre City. Liverpool reçoit West-Ham. Mount/Aubameyang sont également une bonne option contre Brentford. </p><p><strong>Pépite: Wilson (2.7% TSB) : </strong>Une équipe de Newcastle qui tourne très bien. Il affronte un Everton qui a du mal défensivement (17,16 xGA : 2e pire du championnat devant Fulham). Et il est le tireur de penalty. </p><h3>Rwano </h3><p><strong>Capitaine: Salah (31% TSB) : </strong>Critiqué ces derniers temps pour ses mauvaises performances, à l’image de son équipe de Liverpool, Mohamed Salah a été brillant dans sa mise au point : mercredi triplé le plus rapide dans l'histoire de la Ligue des Champions (en 6 minutes et 12 secondes) et dimanche unique buteur dans le duel au sommet face à un Manchester City, qui a mordu la poussière pour la première fois de la saison en PL. Le Pharaon voudra boucler mercredi soir une belle semaine dans son jardin d’Anfield face à un West-Ham convalescent après un mauvais début de saison et qui n’est toujours pas un foudre de guerre en déplacement (1v, 1n, 3d). </p><p><strong>Pépite: Wilson (2.7% TSB) : </strong>Revenu de blessure depuis trois matchs, son retour coïncide avec les 2 derniers feux d’artifice administrés par Newcastle tant à domicile (5-1 Brentford) qu’à l’extérieur (Fulham 1-4). Avec de beaux objectifs collectifs (actuel 6ème à un point de l’Europe) et individuels (il vise un billet pour la Coupe du Monde), cet avant-centre expérimenté sera assurément dans les bons coups face à une équipe d’Everton peu pétillante (2v, 4n, 4d). </p><p>Bonne chance à tous. </p><p>Pour rejoindre notre 'private league', utilisez le code:
+<strong>Classique : f6xuri</strong>
+ </p><p>Le meilleur moyen de rester au top c’est probablement de nous suivre sur <a href="https://www.facebook.com/Fantasy-Coach-824491257591639/">Facebook,</a> <a href="https://twitter.com/FantasyCoach_FR">Twitter</a> et <a href="https://discord.com/invite/MmcHMmD">Discord</a></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

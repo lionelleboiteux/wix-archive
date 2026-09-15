@@ -1,0 +1,96 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J19</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="La Premier League ne s'arrête jamais, pas même pour le réveillon ! Alors que nous pensions avoir tout vu dans cette saison 2025-2026, le destin a décidé de jouer un mauvais tour aux managers Fantasy : Alexander Isak est blessé. C'est la panique à bord. Liverpool, qui a prouvé sur les deux dernières journées de Premier League qu'il pouvait gagner sans Salah (parti à la CAN), se retrouve maintenant sans son attaquant suédois vedette.
+
+Mais ne laissons pas les blessures gâcher la fête..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J19"><figure class="hero"><img src="/media/449182_d0480272cc904d3fab053ba0bb20d62d_mv2.webp" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J19</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 29 décembre 2025</p><div class="body"><p>La Premier League ne s'arrête jamais, pas même pour le réveillon ! Alors que nous pensions avoir tout vu dans cette saison 2025-2026, le destin a décidé de jouer un mauvais tour aux managers Fantasy : Alexander Isak est blessé. C'est la panique à bord. Liverpool, qui a prouvé sur les deux dernières journées de Premier League qu'il pouvait gagner sans Salah (parti à la CAN), se retrouve maintenant sans son attaquant suédois vedette.</p><p>Mais ne laissons pas les blessures gâcher la fête. Cette J19 est cruciale pour le classement de la Premier League. Arsenal reçoit Aston Villa pour une revanche explosive à l'Emirates, City se déplace dans le froid de Sunderland, et – mon cadeau de fin d'année préféré – Tottenham se rend à Brentford. Si mes prédictions sont justes, les Spurs vont finir l'année comme ils l'ont commencée : en nous faisant rire.</p><p>Voici tout ce qu'il faut savoir pour bien finir l'année sur votre application de Fantasy Premier League.</p><h2>Le tour d'horizon</h2><p><strong>Arsenal vs Aston Villa</strong></p><p>Le choc de la journée. Arsenal doit battre Villa pour rester maître de la Premier League. On se souvient de l'aller, mais à domicile, les Gunners sont intraitables. Saka, notre talisman, sera la clé. Villa est dangereux, mais je pronostique un 2-1 pour Arsenal. 3 points sous le sapin, c'est tout ce qu'on demande pour continuer de rêver au titre.</p><p><strong>Liverpool vs Leeds</strong></p><p>C'est le gros sujet de discussion en Premier League : comment Liverpool va faire sans Salah et sans Isak ? Heureusement pour eux, ils reçoivent Leeds. Malgré les absences, les Reds restent favoris face à une défense qui prend l'eau. Ekitiké, le dernier des Mohicans,  devrait logiquement jouer. Je vois une victoire 2-0, prouvant que l'effectif de Liverpool a de la ressource pour jouer le haut de tableau de la Premier League.</p><p><strong>Brentford vs Tottenham</strong></p><p>Les Spurs à l'extérieur... une tragédie en plusieurs actes. Ils vont chez les Bees de Brentford, une équipe solide du milieu de tableau de Premier League. Vu la fébrilité défensive de Tottenham, je vois Brentford les punir sèchement. Victoire 2-0 pour les locaux. </p><p><strong>Sunderland vs Man City</strong></p><p>City se déplace chez le promu qui a surpris tout le monde en Premier League cette saison. Sunderland défend bien, mais City doit gagner pour coller aux basques d'Arsenal. Ce sera un match fermé, tactique, débloqué par l'inévitable Haaland. Un petit 0-1 suffira au bonheur de Guardiola.</p><p><strong>Man United vs Wolverhampton</strong></p><p>Sans Mbeumo (CAN), United s'en remet à Bruno Fernandes. Face à des Wolves inoffensifs, les Red Devils devraient sécuriser une victoire 2-0. Un match parfait pour rassurer les fans et grimper au classement de la Premier League.</p><h2>Mes Pronos pour la J19 de Premier League:</h2><p>Burnley 0 - 2 Newcastle</p><p>Chelsea 2 - 1 Bournemouth</p><p>Nottingham 1 - 1 Everton</p><p>West Ham 1 - 2 Brighton Hove</p><p>Arsenal 2 - 1 Aston Villa</p><p>Man United 2 - 0 Wolverhampton</p><p>Crystal Palace 2 - 1 Fulham</p><p>Liverpool 2 - 0 Leeds United</p><p>Sunderland 0 - 1 Man City</p><p>Brentford 2 - 0 Tottenham</p><p><span style="color:#1a1c1e">Envoyez nous vos pronos via </span><a href="https://www.google.com/url?sa=E&amp;q=#"><strong><u><span style="color:#2483e2">le jeu des pronos</span></u></strong></a></p><h2>Le Player Picks</h2><h3>Les Indispensables</h3><p><strong>Erling Haaland (15.1m)</strong></p><p>Avant-centre numéro un en xG et tirs, City a encore une bonne série de matches et il reste le capitaine le plus sûr pour la majorité des managers.</p><p>​</p><p><strong>Matheus Cunha (8.1m)</strong></p><p>Milieu/attaquant central de United, ultra “nailed” avec Bruno absent et Mbeumo à la CAN, il domine les stats offensives sur les 4 dernières J (tirs, xG, xGI) et affronte Wolves, lanterne rouge en attaque.</p><p>​</p><p><strong>Cole Palmer (≈10.4m)</strong></p><p>Playmaker total des Blues, sur penalties, avec déjà plusieurs doubles chiffres et un déplacement à Ipswich qui n’a quasiment pas de clean sheets cette saison.</p><p>​</p><p><strong>Rayan Cherki (6.7m)</strong></p><p>Milieu créatif de City, parmi les plus transférés avant J19, avec un xGI très élevé sur les dernières J et un calendrier qui reste vert sur 3–4 journées.</p><p>​</p><p><strong>Virgil van Dijk (5.9m)</strong></p><p>Patron d’une défense de Liverpool qui retrouve de la solidité, bon mix de probabilité de clean sheet et de menace sur coups de pied arrêtés.</p><h3>Les bons tuyaux</h3><p><strong>Anthony Gordon (7.4m)</strong></p><p>Newcastle entre dans un run Burnley (A), Palace (H), Leeds (H), Wolves (A), Gordon a de très bons chiffres d’xG + xA et un rôle clé à gauche de l’attaque.</p><p>​</p><p><strong>Ollie Watkins (8.5m) </strong></p><p>Reste l’attaquant clé d’Aston Villa, avec un temps de jeu quasi garanti, penalties possibles et des chiffres constants en xG/xGI sur la saison, ce qui le rend idéal comme pick à gros potentiel sur 3–4</p><p>​</p><p><strong>Patrick Lammens (5.0m)</strong></p><p>Gardien avec un excellent match à domicile contre Wolves, équipe dernière en buts et xG, ce qui lui donne un gros potentiel de clean sheet + saves.</p><p>​</p><p><strong>Lewis Hall (5.2m)</strong></p><p>Latéral de Newcastle, profite du run très favorable et offre des retours potentiels aux deux bouts du terrain, idéal si tu veux couvrir la défense des Magpies.</p><p>​</p><p><strong>Dominic Calvert‑Lewin (5.8m)</strong></p><p>En forme sur les dernières J (tir volume, xGI en hausse), avec un calendrier où il affronte plusieurs défenses fragiles, bon pari pour un haul sur 2–3 matches.</p><h3>Les pépites</h3><p><strong>Patrick Dorgu (4.1m)</strong></p><p>Défenseur ultra bon marché, parfois utilisé hors de position sur l’aile, sort d’un gros haul et reste une excellente option courte durée avec Wolves (H) puis bon calendrier.</p><p>​</p><p><strong>Nathan Collins (4.9m)</strong></p><p>Défenseur bon marché, régulièrement cité comme “quietly brilliant” la saison dernière, avec un volume correct de clean sheets et un rôle bien assuré dans la défense de Brentford, ce qui en fait un pick stable à bas prix.</p><p>​</p><p><strong>Thierno Barry (5.7m)</strong></p><p>Attaquant FPL sous la barre des 6.0m présenté comme une bonne association avec Everton si le temps de jeu est au rendez‑vous, intéressant comme pari offensif budget dans un rôle de numéro 9</p><p>​</p><p><strong>Keane Lewis‑Potter (4.9m)</strong></p><p>Ailier titulaire à prix dérisoire, cité dans les watchlists pour GW19, capable de gros retours sur une courte série quand Brentford tourne bien devant.</p><p>​</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

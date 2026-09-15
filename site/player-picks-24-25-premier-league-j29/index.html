@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J29</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="La bonne affaire de la J28 c'est bien entendu Forest qui l'a fait en battant les Citadins. Certes , battre City n'est pas l'exploit..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J29"><figure class="hero"><img src="/media/449182_cda560dfb37d4ba08ab0ef1551f1d361_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J29</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 13 mars 2025</p><div class="body"><h2>Le tour d'horizon</h2><p><span style="color:#000000">Liverpool ne joue pas cette semaine, les hommes de Slot jouent la finale de la coupe de la Ligue, la Carabao Cup qui est le dernier match à intérêt des Reds. Ils se sont fait sortir de la Cup par Argyle, de la LdC par le PSG et on déjà gagné la Premier League… ou tout comme. Vous me direz, la Carabao Cup c'est une maigre consolation quand on vient de se faire sortir de la LdC au penalties, et vous aurez raison, mais le calendrier tombe comme ça. </span></p><p><span style="color:#000000">Pour Newcastle, l'opposition en finale de la Carabao cup, ce petit match de 120 minutes mardi soir de Liverpool pendant que eux étaient devant la télé à prendre des notes sur les appels de balles de Dembélé était du pain béni et Isak et sa bande vont tout tenter pour rendre la semaine des Reds encore plus noire. </span></p><p><span style="color:#000000">Arsenal n'a pas réussi à se défaire de Man U en J28, et c'est un peu dommage. À ce moment de la Premier League, avec 15 points de retard sur Liverpool, même les supporters les moins objectifs, et je doit en faire partie, commencent à se dire qu'encore une fois Arsenal va finir sur la seconde place du podium. C'est un bel effort, mais il va falloir faire quelque chose pour grimper sur la plus haute marche bientôt. </span></p><p><span style="color:#000000">Une autre équipe qui n'est pas au niveau souhaité c'est Chelsea qui s'est inscrit à la 4eme place de la Premier League grâce à une victoire difficile contre un Leicester nul à pleurer. Ce qui compte c'est le résultat me dira Maresca, mais il n'y a pas de quoi se vanter. Surtout que c'est plus dû à la victoire de Forest contre City qu'a leur propre résultat, mais ça on y arrive juste après. Les deux Clubs Londoniens les mieux classés se rencontrent ce weekend ayant chacun assuré leur passage au prochain tour de leur coupe d'Europe respective. </span></p><p><span style="color:#000000">La bonne affaire de la J28 c'est bien entendu Forest qui l'a fait en battant les Citadins. Certes cette saison, battre City n'est pas l'exploit que c'était les saisons précédentes, mais qui aurait prédit ce résultat ? Moi ? dans mon papier de la semaine dernière ? ah oui… City redescend donc à la 5eme place. Si en plus ils finissent par prendre cette sanction qui leur pend au nez ils risquent de commencer la prochaine saison à -70pts. Ça ferait deux saisons avec City pas dans le coups, est-ce que Pep aura assez de peps pour continuer… on verra.</span></p><p><span style="color:#000000">Fulham qui reçoit Tottenham nous offre un second derby Londonien. Les Spurs auront le match d'hier dans les pattes avant d'aller sur la pelouse de Fulham qui compte quand même quelques anciens Gunners dans leurs rangs. J'ai mis 1-1 dans les pronos mais je n'y crois pas trop.</span></p><h2>Mes Pronos pour la J29 de Premier League:</h2><p><span style="color:#000000">Everton 2 - 0 West Ham</span></p><p><span style="color:#000000">Southampton 0 - 1 Wolves</span></p><p><span style="color:#000000">Ipswich Town 0 - 2 Nottm Forest</span></p><p><span style="color:#000000">Man City 2 - 0 Brighton</span></p><p><span style="color:#000000">Bournemouth 2 - 1 Brentford</span></p><p><span style="color:#000000">Arsenal 2 - 1 Chelsea</span></p><p><span style="color:#000000">Fulham 1 - 1 Tottenham</span></p><p><span style="color:#000000">Leicester City 0 - 1 Man United</span></p><p><span style="color:#0d2123">Envoyez nous vos pronos via </span><a href="https://www.fantasy-coach.fr/pronos-prem"><u>le jeu des pronos</u></a></p><h2>Le Player Picks</h2><p><span style="color:#000000">Donc pas de match pour Villa, Palace, Liverpool et Newcastle. Certains d'entre vous vont jouer leur Free Hit d'autre ont vu venir le coups et manoeuvrer leus equipe pour avoir suffisamment de joueurs actif en J29. </span></p><p><span style="color:#000000">Dans les deux cas de figures, mais surtout si vous jouez le Free Hit, Il faudra penser aux Citadins. Pour le memes raison qui m'ont fait prédire une défaite la semaine derniere, l'inconsistance de City pourrait bien nous sortir un gros score. </span><strong><span style="color:#000000">Haaland</span></strong><span style="color:#000000"> (£14.7M), </span><strong><span style="color:#000000">Marmoush</span></strong><span style="color:#000000"> (£7.2M), </span><strong><span style="color:#000000">Savinho</span></strong><span style="color:#000000"> (£6.2M) et </span><strong><span style="color:#000000">Gvardiol</span></strong><span style="color:#000000"> (£5.9M) sont les tetes de gondoles. </span></p><p><span style="color:#000000">Les Wolves jouent les Saints et donc sont aussi très intéressants. </span><strong><span style="color:#000000">Ait-Nouri</span></strong><span style="color:#000000"> (£4.8M) et </span><strong><span style="color:#000000">Strand Larsen</span></strong><span style="color:#000000"> (£5.2M) sont les Picks logiques. </span></p><p><span style="color:#000000">Forrest devrait continuer dans sa lancée en battant un Ipswitch quasi relegué deja. </span><strong><span style="color:#000000">Aina</span></strong><span style="color:#000000"> (£5.3M), </span><strong><span style="color:#000000">Gibbs-White</span></strong><span style="color:#000000"> (£6.5M) et bien entendu </span><strong><span style="color:#000000">Wood</span></strong><span style="color:#000000"> (£7.3M) sont les premiers choix.</span></p><h3>Assistant manager </h3><p><span style="color:#000000">C'est pas vraiment la meilleure semaine pour sortir votre Assistant manager, il vaudrait mieux attendre d'avoire la double semaine 32 dans le lot. Si vraiment vous insistez, les 2 meilleures options sont </span></p><p><strong><span style="color:#000000">Potter</span></strong><span style="color:#000000"> à West Ham et </span><strong><span style="color:#000000">Pereira</span></strong><span style="color:#000000"> à Wolves. Les deux ont une serie de trois matches qui sont plutot gagnable. Le twist c'est qu'ils jouent l'un contre l'autre en J30…</span></p><p><span style="color:#000000">Voilà, c'est ce que j'en pense, si vous pensez pouvoir faire mieux, envoyez-nous un petit message… Sur ce, bonne journée à tous !</span></p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>

@@ -1,0 +1,96 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Player Picks, Premier League, J17</title><link rel="icon" type="image/png" href="/assets/favicon.png"/><style>
+:root{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0b0c;--fg:#f2f2f3;--muted:#9a9aa2;--card-bg:#1c1c1f}}
+/* Homepage/league/category listings match pronos's own pages — always
+   light, regardless of device preference. Only the article page itself
+   (page()'s own forceLight=false) still follows prefers-color-scheme. */
+body.force-light{--bg:#fff;--fg:#16181c;--muted:#6b7280;--card-bg:#f4f4f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+/* fc-nav's own injected CSS (fc-shared/nav.js) gives .site-banner a
+   margin:0 -1rem bleed, assuming a host page with padding:0 1rem it's
+   cancelling out — pronos/DNP/compos all have that. This page's body has
+   none (padding lives on the inner content blocks instead, deliberately,
+   so it stays untouched), so left as-is the bleed would push the banner
+   past the viewport edge and cause horizontal scroll. This selector is
+   more specific than nav.js's own .site-banner rule, so it wins regardless
+   of which <style> tag the cascade sees second. */
+body>fc-nav.site-banner{margin:0 0 1.5rem}
+main{max-width:680px;margin:0 auto}
+.hero{position:relative;margin:0;background:#000}
+.hero img{display:block;width:100%;max-height:70vh;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.1) 60%,transparent)}
+.hero h1{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.5rem 1.25rem;color:#fff;
+  font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+h1.title-only{padding:2rem 1.25rem 0;font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;line-height:1.2}
+.meta{padding:1rem 1.25rem 0;margin:0;color:var(--muted);font-size:.95rem}
+.meta .author{color:var(--fg);font-weight:600}
+.meta .sep{margin:0 .4em}
+.author-name{display:inline-flex;align-items:center}
+.author-avatar{width:1.4em;height:1.4em;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:.35em}
+.author-avatar-placeholder{display:inline-flex;align-items:center;justify-content:center;
+  background:var(--card-bg);color:var(--muted);font-size:.75em;font-weight:700}
+.body{padding:1.25rem 1.25rem 3rem;font-size:1.08rem}
+.body img{max-width:100%;height:auto;border-radius:8px;margin:.5rem 0}
+/* The "Légende" paragraph style (BodyEditor.tsx) — a caption line, usually
+   right under an inserted image. small is inline by default; block here
+   so it reads as its own line rather than running into the next paragraph. */
+.body small{display:block;margin:-.25rem 0 1rem;font-size:.85rem;color:var(--muted);font-style:italic}
+h2.section-title{max-width:900px;margin:1.5rem auto .25rem;padding:0 1rem;font-size:1.15rem}
+.listing-intro{max-width:900px;margin:1rem auto 0;padding:0 1rem;color:var(--muted);font-size:.95rem}
+ul.articles{list-style:none;margin:0;padding:1rem;display:grid;gap:1rem;max-width:900px;margin-inline:auto}
+.article-card{background:var(--card-bg);border-radius:12px;overflow:hidden}
+.article-card a{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;text-decoration:none}
+.article-card-text{flex:1 1 auto;min-width:0}
+.article-card-title{margin:0 0 .3rem;font-size:1rem;font-weight:700;line-height:1.35}
+.article-card-byline{margin:0;color:var(--muted);font-size:.85rem}
+.article-card-cover{flex:none;width:76px;height:76px;object-fit:cover;border-radius:10px}
+/* Teaser (ComposePage.tsx's "Teaser" field) — desktop only, per the request
+   it was scoped to: a narrow card has no spare width for a third column
+   next to the title/byline and the cover thumbnail. */
+.article-card-teaser{display:none}
+@media (min-width:640px){
+  .article-card-text{flex:0 1 260px}
+  .article-card-teaser{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    overflow:hidden;flex:1 1 auto;min-width:0;margin:0;color:var(--muted);font-style:italic;font-size:.9rem}
+}
+p.empty{padding:2rem;color:var(--muted)}
+/* Same specificity fight as the .site-banner bleed fix above: nav.js's own
+   injected stylesheet carries ".site-nav a{text-decoration:none;font-weight:600}",
+   equal specificity to a single-class selector here and loaded after this
+   page's own <style>, so a tied selector loses on source order. Confirmed
+   directly against the live page (2026-09-08): the class was landing
+   correctly, but the underline/bold never rendered until this selector
+   carried one more element than nav.js's own. */
+fc-nav .fc-nav-current-league>a{text-decoration:underline;text-underline-offset:.25em;font-weight:800}
+</style><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/nav.js" defer></script><script src="https://cdn.jsdelivr.net/gh/lionelleboiteux/fc-shared@main/ads.js" async></script><meta name="description" content="On reprend son souffle ? La J16 a été un véritable feu d'artifice. Entre le match de water-polo à Old Trafford (4-4 entre United et Bournemouth !), la victoire historique de Sunderland dans le derby contre Newcastle (1-0), et la démonstration de City à Palace (0-3), il y avait de quoi faire une crise cardiaque devant son application Fantasy.
+
+Côté Arsenal, on a assuré l'essentiel avec une victoire 2-1 contre les Wolves, tandis que Tottenham a lourdement chuté à Nottingham (3-0)..."/><meta name="robots" content="index, follow"/></head><body><fc-nav current="arsene"></fc-nav><main data-article-title="Player Picks, Premier League, J17"><figure class="hero"><img src="/media/449182_185a37c4a65a4797a51dca663044c8e1_mv2.jpg" alt=""/><div class="scrim"></div><h1>Player Picks, Premier League, J17</h1></figure><p class="meta"><span class="author">Fantasy Coach — archive Wix</span><span class="sep">·</span>Publié le 18 décembre 2025</p><div class="body"><p>On reprend son souffle ? La J16 a été un véritable feu d'artifice. Entre le match de water-polo à Old Trafford (4-4 entre United et Bournemouth !), la victoire historique de Sunderland dans le derby contre Newcastle (1-0), et la démonstration de City à Palace (0-3), il y avait de quoi faire une crise cardiaque devant son application Fantasy.</p><p>Côté Arsenal, on a assuré l'essentiel avec une victoire 2-1 contre les Wolves, tandis que Tottenham a lourdement chuté à Nottingham (3-0). Pas de moquerie aujourd'hui, juste un constat : la Premier League est impitoyable.</p><p>La J17 arrive avant la dinde de Noël, et c'est le moment de capitaliser. City semble intouchable et reçoit West Ham, Arsenal voyage chez des Toffees en difficulté, et Villa accueille United pour un match qui promet des étincelles. Regardons ça de plus près.</p><h2>Le tour d'horizon</h2><h3>Manchester City vs West Ham</h3><p>City est redevenu une machine de guerre. Après avoir balayé Palace, ils reçoivent West Ham qui vient d'en encaisser 3 à domicile contre Villa. Avec le trio Foden-Haaland-Cherki qui tourne à plein régime, je vois mal comment les Hammers pourraient résister. Un 3-0 sec est attendu. C'est le match à cibler pour vos points cette semaine.</p><h3>Everton vs Arsenal</h3><p>Les Gunners se déplacent à Goodison Park. Everton a perdu contre Chelsea, et Arsenal a besoin de confirmer sa solidité. Ce ne sera pas le match le plus spectaculaire de l'année, mais Arsenal sait voyager et gérer ces rencontres pièges. Un 0-2 professionnel, piloté par un Ødegaard en forme, semble le scénario le plus crédible.</p><h3>Tottenham vs Liverpool</h3><p>Le choc de la journée. Tottenham doit se racheter après la déroute à Forest, mais Liverpool arrive en confiance après sa victoire contre Brighton. Les Reds semblent avoir retrouvé une assise défensive (Alisson est monstrueux). Même si les Spurs jouent à domicile, la dynamique penche vers les hommes d'Arne Slot. Victoire 1-2 pour les visiteurs.</p><h3>Aston Villa vs Man United</h3><p>Villa a gagné un match fou contre West Ham (3-2), United a fait un nul fou contre Bournemouth (4-4). Conclusion ? Il y aura des buts. Villa Park est une forteresse et je vois les Villans s'imposer 2-1 dans un match ouvert.</p><h2>Mes Pronos pour la J17 de Premier League:</h2><p>Newcastle 2 - 1 Chelsea</p><p>Bournemouth 2 - 0 Burnley</p><p>Brighton Hove 2 - 1 Sunderland</p><p>Man City 3 - 0 West Ham</p><p>Wolverhampton 0 - 2 Brentford</p><p>Tottenham 1 - 2 Liverpool</p><p>Everton 0 - 2 Arsenal</p><p>Leeds United 1 - 2 Crystal Palace</p><p>Aston Villa 2 - 1 Man United</p><p>Fulham 1 - 1 Nottingham</p><p><span style="color:#1a1c1e">Envoyez nous vos pronos via </span><a href="https://www.google.com/url?sa=E&amp;q=#"><strong><u><span style="color:#2483e2">le jeu des pronos</span></u></strong></a></p><h2>Le Player Picks</h2><h3>Les Indispensables</h3><p><strong>Erling Haaland (£13.9M)</strong> : Le roi est de retour au sommet. Au cœur d'une attaque de City qui enchaîne les buts, il a un calendrier en or : West Ham (H), Forest (A), Sunderland (H). C'est le capitaine quasi automatique pour cette fin d'année.</p><p><strong>Phil Foden (£8.8M)</strong> : En feu avec plusieurs scores à deux chiffres récemment. Il est titulaire indiscutable dans un City redevenu productif. Son entente avec Haaland et Cherki est létale. Indispensable vu sa forme.</p><p><strong>Rayan Cherki (£8.0M)</strong> : L'adaptation express. Il est devenu le créateur majeur de City en l'absence de Doku. Avec plusieurs passes décisives récentes et des matchs abordables à venir, c'est une porte d'entrée &quot;luxe&quot; vers l'attaque des Skyblues.</p><p><strong>Martin Ødegaard (£8.6M)</strong> : Le métronome d'Arsenal. Impliqué sur tous les coups de pied arrêtés et à la baguette du jeu, il offre une fiabilité rare. Contre Everton, il sera la clé pour déverrouiller le bloc bas.</p><p>Thiago (£8.5M) : L'attaquant de Brentford est très possédé, et pour cause. Il a un excellent calendrier offensif (Wolves cette semaine). Idéal à combiner avec vos premiums de City pour équilibrer l'attaque.</p><h3>Les bons tuyaux</h3><p><strong>Antoine Semenyo (£7.5M) :</strong> Il a été énorme contre United. Bournemouth reçoit Burnley, la défense idéale à cibler. Ses stats de tirs et de création sont excellentes. C'est le moment de surfer sur sa vague.</p><p><strong>Hugo Ekitike (£8.6M)</strong> : La résurrection ! Deux doublés consécutifs en Premier League pour l'attaquant de Newcastle. Il profite parfaitement de la gestion d'Isak (et de son transfert à Liverpool ?). Newcastle reçoit Chelsea, et Ekitike est en pleine confiance.</p><p><strong>Harry Wilson (£6.9M)</strong> : Il sort d'un match à 16 points (1 but, 2 assists) contre Burnley. Fulham affronte Forest. Wilson est en &quot;hot streak&quot;, et à ce prix-là, c'est un milieu de terrain très tentant.</p><p><strong>Matheus Nunes (£7.7M)</strong> : Le pari risqué de City. Très faible possession (&quot;ownership&quot;), mais son temps de jeu augmente. Dans le contexte d'un City dominateur face à West Ham, il peut exploser et être le différentiel qui vous fait gagner votre mini-ligue.</p><h3>Les pépites</h3><p><strong>Nico O’Reilly (£5.3M)</strong> : Un défenseur de City à ce prix ? Oui. Il a un xGI (implication sur les buts attendus) intéressant et une forte probabilité de clean sheet contre West Ham. Excellent &quot;value pick&quot;.</p><p><strong>Alisson Becker (£5.4M)</strong> : Le gardien de Liverpool est descendu à un prix très bas pour un premium. Il est capable d'enchaîner clean sheets et points d'arrêts. Un choix &quot;sous le radar&quot; très solide face à une attaque des Spurs qui doute.</p><p><strong>Malo Gusto (£4.9M)</strong> : Le latéral de Chelsea reste une menace offensive constante avec ses centres. Son prix est attractif et il permet d'avoir un pied dans la défense des Blues sans se ruiner.</p><p><strong>Kenny Tete (£4.6M)</strong> : Le défenseur de Fulham est un différentiel intéressant. Il apporte quelques menaces offensives et Fulham est solide à domicile. Bon potentiel pour combiner clean sheet et bonus.</p><p>Bonne chance à tous pour cette J17 ! N'oubliez pas que le Boxing Day approche, gérez bien votre banc !</p></div></main><script>(function(){
+  var league = document.body.dataset.currentLeague;
+  if (!league) return;
+  var norm = function(s){ return s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(); };
+  var target = norm(league);
+  var mark = function(){
+    var nav = document.querySelector('fc-nav');
+    if (!nav) return false;
+    var links = nav.querySelectorAll('.nav-item > a');
+    var found = false;
+    links.forEach(function(a){
+      if (norm(a.textContent) === target) {
+        var item = a.closest('.nav-item');
+        if (item) item.classList.add('fc-nav-current-league');
+        found = true;
+      }
+    });
+    return found;
+  };
+  if (mark()) return;
+  var attempts = 0;
+  var poll = setInterval(function(){
+    attempts += 1;
+    if (mark() || attempts > 30) clearInterval(poll);
+  }, 100);
+})();</script></body></html>
